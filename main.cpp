@@ -5,7 +5,7 @@
 //#include <bridge.hpp>
 
 //#include <bindigs/qt/list.hpp>
-#include "wrappers/list.hpp"
+#include "wrappers/controller.hpp"
 #include "sovereignty.hpp"
 
 int main(int argc, char* argv[])
@@ -14,7 +14,10 @@ int main(int argc, char* argv[])
 
     using namespace crudpp;
 
-    list<sovereignty> l{};
+    controller<sovereignty>::m_list.appendItems();
+    qDebug() << controller<sovereignty>::m_list.size();
+
+    controller<sovereignty> c{};
 
 //    qDebug() << "Device supports OpenSSL: " << QSslSocket::supportsSsl();
 

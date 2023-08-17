@@ -3,21 +3,28 @@
 #include <QObject>
 
 #include <wobjectdefs.h>
-#include <wobjectimpl.h>
 
-#include "model.hpp"
 #include "list.hpp"
 
 namespace crudpp
 {
 template <typename T>
-struct controller final : QObject
+class controller final : QObject
 {
     W_OBJECT(controller)
 
-    static list<model<T>> list{new list<model<T>>{}}
-}
+public:
+    explicit controller()
+        : QObject{}
+    {}
 
-W_OBJECT_IMPL(controller<T>, template <typename T>);
+    static list<T> m_list;
+};
+
+template <typename T>
+list<T> controller<T>::m_list{new list<T>};
 
 } // namespace crudpp
+
+#include <wobjectimpl.h>
+W_OBJECT_IMPL(crudpp::controller<T>, template <typename T>);

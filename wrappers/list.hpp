@@ -4,7 +4,6 @@
 #include <QJsonObject>
 
 #include <wobjectdefs.h>
-#include <wobjectimpl.h>
 
 #include "model.hpp"
 
@@ -158,6 +157,7 @@ private:
     std::vector<Type> m_items{};
 };
 
-W_OBJECT_IMPL(list<T>, template <typename T>);
-
 } // namespace crudpp
+
+#include <wobjectimpl.h>
+W_OBJECT_IMPL(crudpp::list<T>, template <typename T>);

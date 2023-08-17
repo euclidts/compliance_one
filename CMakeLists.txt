@@ -39,6 +39,8 @@ set(CLIENT_SOURCES
     wrappers/model.hpp
     wrappers/utils.hpp
     wrappers/controller.hpp
+    interface/bridge.hpp
+    interface/net_manager.hpp
 )
 
 option(VERDIGRIS_PATH "Path to the verdigris repository" ${CMAKE_CURRENT_SOURCE_DIR})
