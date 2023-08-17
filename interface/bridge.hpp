@@ -2,9 +2,9 @@
 
 #include <QObject>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 
 #include <wobjectdefs.h>
-#include "../wrappers/controller.hpp"
 
 #include "net_manager.hpp"
 
@@ -17,7 +17,11 @@ class bridge final : public QObject
     W_OBJECT(bridge)
 
 public:
-    static bridge& instance();
+    static bridge& instance()
+    {
+        static bridge instance;
+        return instance;
+    }
     void init() { engine = new QQmlApplicationEngine{}; }
 
     template <typename ...Types>
@@ -83,20 +87,37 @@ public:
     void logout() const
     W_SIGNAL(logout)
 
-    float getDownloadProgress() const;
-    void setDownloadProgress(float newDownloadProgress);
+    void loaded() const
+    W_SIGNAL(loaded)
+
+    float getDownloadProgress() const { return downloadProgress; }
+    void setDownloadProgress(float newDownloadProgress)
+    {
+        downloadProgress = newDownloadProgress;
+        emit downloadProgressChanged();
+    }
     void downloadProgressChanged()
     W_SIGNAL(downloadProgressChanged);
 
     W_PROPERTY(float, downloadProgress READ getDownloadProgress WRITE setDownloadProgress NOTIFY downloadProgressChanged)
 
+    QQmlApplicationEngine* engine;
+
 private:
     bridge() {};
 
     QObject* qmlObject;
-    QQmlApplicationEngine* engine;
 
-    void changePwd(const char* key, const QJsonObject& json) const;
+    float downloadProgress{-1.f};
+
+    void changePwd(const char* key, const QJsonObject& json) const
+    {
+        net_manager::instance().putToKey(key,
+            QJsonDocument(json).toJson(),
+            [this] (const QJsonObject& rep)
+            { emit loaded(); },
+            "changePwd error");
+    }
 };
 
 } // namespace crudpp

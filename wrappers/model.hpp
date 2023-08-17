@@ -16,7 +16,7 @@ struct model final
 {
     static const constexpr auto table() { return T::table(); }
 
-    explicit model(const QJsonValue& json);
+    model(const QJsonObject& json) { read(json); }
     model() = default;
 
     static QHash<int, QByteArray> roleNames()

@@ -2,6 +2,7 @@
 
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QJsonDocument>
 
 #include <wobjectdefs.h>
 
@@ -15,11 +16,13 @@ class list final : public QObject
     W_OBJECT(list)
 
 public:
-    list(QObject* parent = nullptr) {};
+    list(QObject* parent = nullptr)
+        : QObject{parent}
+    {}
 
     using Type = model<T>;
 
-    static const constexpr auto table() { return model<Type>::table(); };
+    static const constexpr auto table() { return Type::table(); }
 
     int size() const { return m_items.size(); }
 
@@ -123,7 +126,7 @@ public:
 
         if (!array.empty())
             for (const auto& json : array)
-                m_items.emplace_back(Type{json});
+                m_items.emplace_back(Type{json.isObject()});
 
         emit postItemsAppended();
         emit loaded();
@@ -138,6 +141,16 @@ public:
 
         emit postItemsAppended();
         emit loaded();
+    }
+
+    void read(const QByteArray& bytes)
+    {
+        const auto doc{QJsonDocument::fromJson(bytes)};
+
+        if (doc.isArray())
+            read(doc.array());
+        else
+            read(doc.object());
     }
 
     void write(QJsonArray& arr)

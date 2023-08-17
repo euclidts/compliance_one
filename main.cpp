@@ -1,8 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
-//#include <netManager.hpp>
-//#include <bridge.hpp>
+#include "interface/net_manager.hpp"
+#include "interface/bridge.hpp"
 
 //#include <bindigs/qt/list.hpp>
 #include "wrappers/controller.hpp"
@@ -13,11 +13,6 @@ int main(int argc, char* argv[])
     QGuiApplication app(argc, argv);
 
     using namespace crudpp;
-
-    controller<sovereignty>::m_list.appendItems();
-    qDebug() << controller<sovereignty>::m_list.size();
-
-    controller<sovereignty> c{};
 
 //    qDebug() << "Device supports OpenSSL: " << QSslSocket::supportsSsl();
 
@@ -34,29 +29,30 @@ int main(int argc, char* argv[])
 
 //    using namespace Interface;
 
-//    bridge::instance().init();
+    bridge::instance().init();
 
-//    netManager::instance().init(host,
-//                                "auth",
-//                                "format=json&jsconfig=TreatEnumAsInteger");
+    net_manager::instance().init(host);
 
 //    client::instance().init();
 
-//    // qml engine
-//    const QUrl url(QStringLiteral("qrc:/ui/main.qml"));
-//    QObject::connect(bridge::instance().engine,
-//        &QQmlApplicationEngine::objectCreated,
-//        &app,
-//        [url]
-//        (QObject* obj, const QUrl &objUrl)
-//        {
-//            if (!obj && url == objUrl)
-//                QCoreApplication::exit(-1);
-//            else
-//                bridge::instance().setQmlObject(obj);
-//        }, Qt::QueuedConnection);
+    // qml engine
+    const QUrl url(QStringLiteral("main.qml"));
+    QObject::connect(bridge::instance().engine,
+        &QQmlApplicationEngine::objectCreated,
+        &app,
+        [url]
+        (QObject* obj, const QUrl &objUrl)
+        {
+            if (!obj && url == objUrl)
+                QCoreApplication::exit(-1);
+            else
+                bridge::instance().setQmlObject(obj);
+        }, Qt::QueuedConnection);
 
-//    bridge::instance().engine->load(url);
+    bridge::instance().engine->load(url);
+
+    controller<sovereignty> c{};
+    c.get();
 
     return app.exec();
 }
