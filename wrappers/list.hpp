@@ -26,7 +26,7 @@ public:
 
     int size() const { return m_items.size(); }
 
-    Type& item_at(int index) const { return m_items[index]; }
+    Type& item_at(int index) { return m_items[index]; }
 
     QVector<Type> items() const
     {
@@ -126,7 +126,7 @@ public:
 
         if (!array.empty())
             for (const auto& json : array)
-                m_items.emplace_back(Type{json.isObject()});
+                m_items.emplace_back(Type{json.toObject()});
 
         emit postItemsAppended();
         emit loaded();

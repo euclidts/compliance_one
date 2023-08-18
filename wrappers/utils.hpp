@@ -25,11 +25,19 @@ T from_qt(const QVariant& v)
 template <typename T>
 T from_qt(const QVariant& v)
     requires std::is_enum_v<T>
-{ return v.toInt(); }
+{ return T(v.toInt()); }
 
 template <typename T>
 T from_qt(const QVariant& v)
     requires std::is_same_v<T, std::string>
 { return v.toString().toStdString(); }
+
+template <typename T>
+std::string make_uri()
+{
+    std::string s{'Q'};
+    s += T::table();
+    return s;
+}
 
 }; // namespace crudpp

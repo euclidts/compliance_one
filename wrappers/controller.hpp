@@ -18,11 +18,9 @@ public:
     explicit controller()
         : QObject{}
     {
-    }
+        const auto uri{make_uri<T>()};
 
-    void registerToQml() const
-    {
-        qmlRegisterUncreatableType<T>(T::table(), 1, 0, T::table(), "");
+        qmlRegisterUncreatableType<T>(uri.c_str(), 1, 0, uri.c_str(), "");
         bridge::instance().context()->setContextProperty(T::table(), &m_list);
     }
 

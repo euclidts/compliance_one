@@ -6,6 +6,7 @@
 
 #include <wobjectdefs.h>
 
+#include "../wrappers/list_model.hpp"
 #include "net_manager.hpp"
 
 class QQmlContext;
@@ -22,12 +23,11 @@ public:
         static bridge instance;
         return instance;
     }
-    void init() { engine = new QQmlApplicationEngine{}; }
 
     template <typename ...Types>
     void registerQml()
     {
-        (qmlRegisterType<Types>(Types::table(), 1, 0, Types::table()), ...);
+        (registerSingleQml<Types>(), ...);
     }
 
     bridge(bridge const&) = delete;
@@ -101,7 +101,7 @@ public:
 
     W_PROPERTY(float, downloadProgress READ getDownloadProgress WRITE setDownloadProgress NOTIFY downloadProgressChanged)
 
-    QQmlApplicationEngine* engine;
+    QQmlApplicationEngine* engine{new QQmlApplicationEngine{}};
 
 private:
     bridge() {};
@@ -117,6 +117,15 @@ private:
             [this] (const QJsonObject& rep)
             { emit loaded(); },
             "changePwd error");
+    }
+
+    template <typename T>
+    void registerSingleQml()
+    {
+        const auto uri{make_uri<T>()};
+        const auto qmlName{uri + "ListModel"};
+
+        qmlRegisterType<list_model<T>>(uri.c_str(), 1, 0, qmlName.c_str());
     }
 };
 

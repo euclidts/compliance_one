@@ -41,6 +41,7 @@ set(CLIENT_SOURCES
     wrappers/controller.hpp
     interface/bridge.hpp
     interface/net_manager.hpp
+    compliance_one.qrc
 )
 
 option(VERDIGRIS_PATH "Path to the verdigris repository" ${CMAKE_CURRENT_SOURCE_DIR})
@@ -48,8 +49,7 @@ include_directories(${VERDIGRIS_PATH}/src)
 
 qt_add_executable(${PROJECT_NAME}
     MANUAL_FINALIZATION
-    ${CLIENT_SOURCES}
-    wrappers/controller.hpp)
+    ${CLIENT_SOURCES})
 
 target_compile_definitions(${PROJECT_NAME}
     PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)

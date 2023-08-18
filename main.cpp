@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
 
     using namespace crudpp;
 
-//    qDebug() << "Device supports OpenSSL: " << QSslSocket::supportsSsl();
+    qDebug() << "Device supports OpenSSL: " << QSslSocket::supportsSsl();
 
     QString host{"http://127.0.0.0:8080"};
 
@@ -26,17 +26,15 @@ int main(int argc, char* argv[])
         }
 
     qDebug() << "Host :" << host;
-
-//    using namespace Interface;
-
-    bridge::instance().init();
-
     net_manager::instance().init(host);
 
+    bridge::instance().registerQml<sovereignty>();
 //    client::instance().init();
 
+    controller<sovereignty> c{};
+
     // qml engine
-    const QUrl url(QStringLiteral("main.qml"));
+    const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(bridge::instance().engine,
         &QQmlApplicationEngine::objectCreated,
         &app,
@@ -51,7 +49,6 @@ int main(int argc, char* argv[])
 
     bridge::instance().engine->load(url);
 
-    controller<sovereignty> c{};
     c.get();
 
     return app.exec();
