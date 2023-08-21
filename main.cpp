@@ -34,7 +34,7 @@ int main(int argc, char* argv[])
     controller<sovereignty> c{};
 
     // qml engine
-    const QUrl url(QStringLiteral("qrc:/main.qml"));
+    const QUrl url(QStringLiteral("qrc:/ui/main.qml"));
     QObject::connect(bridge::instance().engine,
         &QQmlApplicationEngine::objectCreated,
         &app,

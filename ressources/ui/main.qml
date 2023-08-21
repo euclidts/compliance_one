@@ -12,11 +12,11 @@ ApplicationWindow {
     title: "Compliance One"
     width: 1024
     height: 768
+    color: "#83919f"
 
-//    Material.theme: settingsDrawer.theme.checked ? Material.Light : Material.Dark
-    Material.theme: Material.Dark
-    Material.primary: "#3aaa35"
-    Material.accent: "#3aaa35"
+    Material.theme: settingsDrawer.theme.checked ? Material.Light : Material.Dark
+    Material.primary: "#bfe8ff"
+    Material.accent: "#4183a8"
 
     font.pixelSize: 16
 
@@ -29,9 +29,9 @@ ApplicationWindow {
             busyDialog.close()
         }
         else {
-            onExceptionAction(qsTr("Erreur d'authentification"),
+            onExceptionAction(qsTr("Authentication"),
                     error === "Host requires authentication" ?
-                        qsTr("Mot de passe ou identifiant incorrect, essayez de nouveau ou contactez Viage pour recevoir un nouveau mot de passe")
+                        qsTr("Incorect username or password")
                       : error,
                     function() { logginDialog.open() })
         }
@@ -52,19 +52,21 @@ ApplicationWindow {
         onException(prefix, error)
     }
 
-//    ExceptionDialog { id: exceptionDialog }
+    ExceptionDialog { id: exceptionDialog }
 
-//    LoggInDialog { id: logginDialog }
+    LoggInDialog { id: logginDialog }
 
 //    UrlProvider { id: urlProvider }
 
-//    SettingsDrawer { id: settingsDrawer }
+    SettingsDrawer { id: settingsDrawer }
 
-//    BusyDialog { id: busyDialog }
+    BusyDialog { id: busyDialog }
 
-//    StackLayout {
-//        id: rootStack
-//        anchors.fill: parent
+//    Component.onCompleted: logginDialog.open()
+
+    StackLayout {
+        id: rootStack
+        anchors.fill: parent
 //        currentIndex: 3
 
 //        onCurrentIndexChanged: topBar.searchBar.text = ""
@@ -73,17 +75,17 @@ ApplicationWindow {
 //            id: accountsPages
 
             ListView {
-                anchors.fill: parent
-                leftMargin: 6
-                rightMargin: 6
-                topMargin: 3
-                bottomMargin: 3
+//                leftMargin: 6
+//                rightMargin: 6
+//                topMargin: 3
+//                bottomMargin: 3
                 spacing: 6
                 clip: true
                 boundsBehavior: Flickable.StopAtBounds
 
                 model : QsovereigntyListModel { list: sovereignty }
-                delegate: Text { text: name }
+//                delegate: Text{ text: name }
+                delegate: QsovereigntyDelegate {}
             }
 //            ListView {
 //                Layout.fillWidth: true
@@ -118,7 +120,7 @@ ApplicationWindow {
 //        }
 
 //        CalculatorPage { id: calculatorPage }
-//    }
+    }
 
 //    header: TopBar { id: topBar }
 //    footer: BottomBar { id: bottomBar }

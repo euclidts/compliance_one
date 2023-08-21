@@ -20,9 +20,9 @@ struct sovereignty
 
     enum ranks
     {
-        high,
+        low,
         mid,
-        low
+        high
     };
 
     struct ranking
@@ -43,13 +43,13 @@ struct sovereignty
     {
         static const constexpr auto c_name() { return "transparency"; };
         static const constexpr auto name() { return "Transparency International"; };
-        int8_t value{0};
+        int8_t value{5};
     } transparency;
 
     struct world_bank
     {
         static const constexpr auto c_name() { return "world_bank"; };
         static const constexpr auto name() { return "World Bank"; };
-        int8_t value{0};
+        int8_t value{5};
     } world_bank;
 };

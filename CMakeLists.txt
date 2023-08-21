@@ -41,7 +41,7 @@ set(CLIENT_SOURCES
     wrappers/controller.hpp
     interface/bridge.hpp
     interface/net_manager.hpp
-    compliance_one.qrc
+    ressources/compliance_one.qrc
 )
 
 option(VERDIGRIS_PATH "Path to the verdigris repository" ${CMAKE_CURRENT_SOURCE_DIR})
