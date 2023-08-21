@@ -33,6 +33,9 @@ public:
         return QVector<Type>(m_items.begin(), m_items.end());
     }
 
+    void validate(const QModelIndex& index)
+    W_SIGNAL(validate, index)
+
     void preItemsAppended(int number = 1)
     W_SIGNAL(preItemsAppended, number)
     void postItemsAppended()
@@ -43,7 +46,7 @@ public:
         emit preItemsAppended(number);
 
         for (int i = 0; i < number; i++)
-            m_items.push_back(Type{});
+            m_items.emplace_back(Type{});
 
         emit postItemsAppended();
     }

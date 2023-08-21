@@ -76,7 +76,7 @@ struct model final
                                        if constexpr (!is_primary_key<decltype(f), T>)
                                            if (!dirtyFlag_[i]) return;
 
-                                       obj[f.c_name()] = f.value;
+                                       obj[f.c_name()] = to_qt(f.value);
                                    });
     }
 

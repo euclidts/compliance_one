@@ -162,7 +162,7 @@ public:
     }
 
     void putToKey(const char* key,
-                  const QByteArray& data,
+                  const QByteArray&& data,
                   const std::function<void (const QJsonObject &)> &callback,
                   const QString& errorPrefix = "",
                   const std::function<void ()>& errorCallback = [](){},

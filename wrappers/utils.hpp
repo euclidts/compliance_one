@@ -5,14 +5,14 @@
 namespace crudpp
 {
 template <typename T>
-QVariant to_qt(T v)
+T to_qt(T v)
     requires std::is_integral_v<T>
-{ return QVariant{v}; }
+{ return v; }
 
 template <typename T>
-QVariant to_qt(T v)
+int to_qt(T v)
     requires std::is_enum_v<T>
-{ return QVariant{v}; }
+{ return (int)v; }
 
 QString to_qt(const std::string& s)
 { return QString::fromStdString(s); }

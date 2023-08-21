@@ -83,6 +83,10 @@ public:
                     this, [=](int first, int last)
                     { beginRemoveRows(QModelIndex(), first, last); });
 
+            connect(m_list, &list<T>::preItemsRemoved,
+                    this, [=](int first, int last)
+                    { beginRemoveRows(QModelIndex(), first, last); });
+
             connect(m_list, &list<T>::postItemsRemoved,
                     this, [=]()
                     { endRemoveRows(); });

@@ -14,47 +14,31 @@ ItemDelegate {
     required property var model
 
     contentItem: GridLayout {
-        columns: 3
+        columns: portrait ? 2 : 4
 
         LabeledTextField {
             name: qsTr("Name")
             textOf: root.model.name
             onEdit: (txt) => { root.model.name = txt }
             placeHolder: qsTr("* Mandatory")
-            Layout.columnSpan: 3
+            Layout.columnSpan: 4
         }
 
-        GridLayout {
-            Layout.topMargin: 6
-            columns: 2
+        EnumChooser {
+            name: qsTr("Internal Ranking")
+            model: ["Low", "Medium", "High"]
+            enumOf: root.model.ranking
+            onEdit: (index) => { root.model.ranking = index }
+        }
 
-            Label {
-                text: qsTr("Internal Ranking")
-                font.italic: true
-            }
-
-            Label {
-                text: qsTr("FATF")
-                font.italic: true
-            }
-
-            ComboBox {
-                Layout.minimumWidth: 160
-                 model: ["Low", "Medium", "High"]
-                 Component.onCompleted: currentIndex = root.model.ranking
-                 onActivated: root.model.ranking = currentIndex
-            }
-
-            ComboBox {
-                Layout.minimumWidth: 160
-                model: ["Low", "Medium", "High"]
-                Component.onCompleted: currentIndex = root.model.fatf
-                onActivated: root.model.fatf = currentIndex
-            }
+        EnumChooser {
+            name: qsTr("FATF")
+            model: ["Low", "Medium", "High"]
+            enumOf: root.model.fatf
+            onEdit: (index) => { root.model.fatf = index }
         }
 
         IntChooser {
-            Layout.topMargin: 6
             name: qsTr("Transparency International")
             minimum: 1
             maximum: 10
@@ -63,7 +47,6 @@ ItemDelegate {
         }
 
         IntChooser {
-            Layout.topMargin: 6
             name: qsTr("World Bank")
             minimum: 1
             maximum: 10
@@ -90,11 +73,11 @@ ItemDelegate {
         }
     }
 
-//    onClicked: {
-//        bridge.accountId = model.id
-//        bridge.accountState = model.state
-//        accountsPages.loadItem()
-//    }
+    //    onClicked: {
+    //        bridge.accountId = model.id
+    //        bridge.accountState = model.state
+    //        accountsPages.loadItem()
+    //    }
 
     background: Rectangle {
         implicitHeight: Material.delegateHeight - 4
