@@ -26,10 +26,10 @@ public:
         connect(m_list,
                 &list<T>::validate,
                 this,
-                [this] (const QModelIndex& index)
+                [this] (int row)
                 {
                     QJsonObject obj{};
-                    auto& item{m_list->item_at(index.row())};
+                    auto& item{m_list->item_at(row)};
                     item.write(obj);
 
                     net_manager::instance().putToKey(T::table(),

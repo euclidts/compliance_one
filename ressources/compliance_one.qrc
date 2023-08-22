@@ -1,0 +1,29 @@
+<RCC>
+    <qresource prefix="/">
+        <file>ui/main.qml</file>
+        <file>ui/SettingsDrawer.qml</file>
+        <file>ui/PwdField.qml</file>
+        <file>ui/MaterialButton.qml</file>
+        <file>ui/LoggInDialog.qml</file>
+        <file>ui/FlickableRect.qml</file>
+        <file>ui/FlickableItem.qml</file>
+        <file>ui/ExceptionDialog.qml</file>
+        <file>ui/BusyDialog.qml</file>
+        <file>ui/BackgroundRect.qml</file>
+        <file>icons/sun.svg</file>
+        <file>icons/square.svg</file>
+        <file>icons/moon.svg</file>
+        <file>icons/eye.svg</file>
+        <file>icons/eye-slash.svg</file>
+        <file>icons/door-open.svg</file>
+        <file>icons/check-square.svg</file>
+        <file>icons/arrow-right.svg</file>
+        <file>icons/arrow-left.svg</file>
+        <file>icons/C1_logov1.svg</file>
+        <file>ui/QsovereigntyDelegate.qml</file>
+        <file>ui/LabeledTextField.qml</file>
+        <file>ui/IntChooser.qml</file>
+        <file>icons/trash-alt.svg</file>
+        <file>ui/EnumChooser.qml</file>
+    </qresource>
+</RCC>

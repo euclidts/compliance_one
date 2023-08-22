@@ -33,8 +33,8 @@ public:
         return QVector<Type>(m_items.begin(), m_items.end());
     }
 
-    void validate(const QModelIndex& index)
-    W_SIGNAL(validate, index)
+    void validate(int row)
+    W_SIGNAL(validate, row)
 
     void preItemsAppended(int number = 1)
     W_SIGNAL(preItemsAppended, number)

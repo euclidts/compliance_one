@@ -58,15 +58,20 @@ ItemDelegate {
             icon.source: "qrc:/icons/check-square.svg"
             ToolTip.visible: hovered
             ToolTip.text: qsTr("Validate")
-            //                onClicked: onExceptionAction(ToolTip.text,
-            //                                         qsTr("Le dossier selectionné serra supprimé définitivement"),
-            //                                         () => { accounts.remove(model.id) }, true)
+            onClicked: sovereignty.validate(root.model.index)
+        }
+
+        Item {
+            Layout.fillWidth: true
+            visible: !portrait
+            Layout.columnSpan: portrait ? 1 : 2
         }
 
         RoundButton {
             icon.source: "qrc:/icons/trash-alt.svg"
             ToolTip.visible: hovered
             ToolTip.text: qsTr("Delete")
+            Layout.alignment: Qt.AlignRight
             //                onClicked: onExceptionAction(ToolTip.text,
             //                                         qsTr("Le dossier selectionné serra supprimé définitivement"),
             //                                         () => { accounts.remove(model.id) }, true)
