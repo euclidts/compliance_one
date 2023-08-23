@@ -4,6 +4,7 @@
 
 #include <wobjectdefs.h>
 
+#include <crudpp/utils.hpp>
 #include "../interface/bridge.hpp"
 #include "list.hpp"
 
@@ -32,11 +33,31 @@ public:
                     auto& item{m_list->item_at(row)};
                     item.write(obj);
 
-                    net_manager::instance().putToKey(T::table(),
-                        QJsonDocument{obj}.toJson(),
-                        [](const QJsonObject& rep)
-                        {},
-                        "Validate error");
+                    // update if primary key is written
+                    if (obj.contains(to_qt(get_primary_key_name<T>())))
+                    {
+                        // skip if nothing needs updating
+                        if (obj.size() == 1) return;
+
+                        std::string key{T::table()};
+                        key += '/';
+                        key += std::to_string((item.get_aggregate().*T::primary_key()).value);
+
+                        net_manager::instance().putToKey(key.c_str(),
+                            QJsonDocument{obj}.toJson(),
+                            [&item](const QJsonObject& rep)
+                            { item.reset_flags(); },
+                            "Validate error");
+                    }
+                    else // insert otherwise
+                    {
+                        net_manager::instance().postToKey(T::table(),
+                            QJsonDocument{obj}.toJson(),
+                            [&item](const QJsonObject& rep)
+                            { item.read(rep); },
+                            "Add error");
+
+                    }
                 });
 
 //        this->connect(m_list,

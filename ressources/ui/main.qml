@@ -74,19 +74,26 @@ ApplicationWindow {
 //        StackLayout {
 //            id: accountsPages
 
+//        ColumnLayout {
+//            Layout.fillHeight: true
+//            Layout.fillWidth: true
+//            spacing: 6
+
             ListView {
-//                leftMargin: 6
-//                rightMargin: 6
-//                topMargin: 3
-//                bottomMargin: 3
                 spacing: 6
+//                Layout.fillWidth: true
                 clip: true
                 boundsBehavior: Flickable.StopAtBounds
-
                 model : QsovereigntyListModel { list: sovereignty }
-//                delegate: Text{ text: name }
                 delegate: QsovereigntyDelegate {}
             }
+
+//            RoundButton {
+//                Layout.fillWidth: true
+//                icon.source: "qrc:/icons/plus.svg"
+//                onClicked: sovereinty.appendItems(1)
+//            }
+//        }
 //            ListView {
 //                Layout.fillWidth: true
 //                model: accountModel
@@ -124,4 +131,9 @@ ApplicationWindow {
 
 //    header: TopBar { id: topBar }
 //    footer: BottomBar { id: bottomBar }
+    footer: RoundButton {
+                Layout.fillWidth: true
+                icon.source: "qrc:/icons/plus.svg"
+                onClicked: sovereignty.appendItems(1)
+            }
 }

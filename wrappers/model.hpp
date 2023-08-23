@@ -4,7 +4,7 @@
 #include "qnamespace.h"
 
 #include <boost/pfr/core.hpp>
-#include <concepts/required.hpp>
+#include <crudpp/required.hpp>
 
 #include "utils.hpp"
 #include "../visitors/json_reader.hpp"
@@ -28,7 +28,7 @@ struct model final
 
         boost::pfr::for_each_field(T{},
                                    [](const r_c_name auto& f, size_t i)
-                                   { rn[i + Qt::UserRole] = f.c_name(); });
+                                   {  rn[i + Qt::UserRole] = f.c_name(); });
         return rn;
     }
 
@@ -42,6 +42,10 @@ struct model final
         boost::pfr::for_each_field(aggregate,
                                    [&v, role](const auto& f, size_t i)
                                    {
+                                       // prevent from manually setting primary key
+                                       if constexpr (is_primary_key<decltype(f), T>)
+                                           return;
+
                                        if (role - Qt::UserRole == i)
                                            v = to_qt(f.value);
                                    });
@@ -55,8 +59,13 @@ struct model final
                                    {
                                        if (role - Qt::UserRole == i)
                                        {
-                                           f.value = from_qt<decltype(f.value)>(v);
-                                           dirtyFlag_[i] = true;
+                                           const auto new_val{from_qt<decltype(f.value)>(v)};
+
+                                           if (f.value != new_val)
+                                           {
+                                               f.value = new_val;
+                                               dirtyFlag_[i] = true;
+                                           }
                                        }
                                    });
     }
@@ -65,6 +74,7 @@ struct model final
     void read(const QJsonObject& obj)
     {
         boost::pfr::for_each_field(aggregate, crudpp::visitor::json_reader{.json = obj});
+        reset_flags();
     }
 
     void write(QJsonObject& obj)
@@ -72,18 +82,36 @@ struct model final
         boost::pfr::for_each_field(aggregate,
                                    [&obj, this](const r_c_name auto& f, size_t i)
                                    {
-                                       // skip values that have not been updated, unless it is a primary key
-                                       if constexpr (!is_primary_key<decltype(f), T>)
+                                       if constexpr (is_primary_key<decltype(f), T>)
+                                       {
+                                           // skip primary key for insert
+                                           // ie. when it's flag is true (default)
+                                           if (dirtyFlag_[i]) return;
+                                       }
+                                       else
+                                       {
+                                           // skip non primary key values that have not been updated
                                            if (!dirtyFlag_[i]) return;
+                                       }
 
                                        obj[f.c_name()] = to_qt(f.value);
                                    });
     }
 
+    // set all flags to false
+    void reset_flags()
+    {
+        for (bool& v : dirtyFlag_)
+            if (v) v = false;
+
+    }
+
     T& get_aggregate() { return aggregate; };
 
 private:
-    bool dirtyFlag_[boost::pfr::tuple_size<T>::value] = { false };
+
+    // all true by default to set all fields upon insert
+    bool dirtyFlag_[boost::pfr::tuple_size<T>::value] = { true };
     T aggregate{};
 };
 

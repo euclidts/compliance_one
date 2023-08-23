@@ -25,5 +25,6 @@
         <file>ui/IntChooser.qml</file>
         <file>icons/trash-alt.svg</file>
         <file>ui/EnumChooser.qml</file>
+        <file>icons/plus.svg</file>
     </qresource>
 </RCC>

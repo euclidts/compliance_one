@@ -28,6 +28,7 @@ int main(int argc, char* argv[])
     qDebug() << "Host :" << host;
     net_manager::instance().init(host);
 
+    bridge::instance().init();
     bridge::instance().registerQml<sovereignty>();
 //    client::instance().init();
 

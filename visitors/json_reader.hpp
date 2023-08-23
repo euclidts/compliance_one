@@ -2,7 +2,7 @@
 
 #include <QJsonObject>
 
-#include <concepts/required.hpp>
+#include <crudpp/required.hpp>
 
 namespace crudpp
 {

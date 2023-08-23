@@ -24,11 +24,21 @@ public:
         return instance;
     }
 
-    template <typename ...Types>
-    void registerQml()
+    void init()
     {
-        (registerSingleQml<Types>(), ...);
+        connect(&net_manager::instance(),
+                &net_manager::loggedIn,
+                this,
+                &bridge::onLogin);
+
+        connect(&net_manager::instance(),
+                &net_manager::replyError,
+                this,
+                &bridge::onException);
     }
+
+    template <typename ...Types>
+    void registerQml() { (registerSingleQml<Types>(), ...); }
 
     bridge(bridge const&) = delete;
     void operator = (bridge const&) = delete;

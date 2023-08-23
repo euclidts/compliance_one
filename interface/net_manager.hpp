@@ -213,9 +213,21 @@ private:
                      const std::function<void (const QByteArray &)> &callback)
     {
         connect(reply, &QNetworkReply::finished,
-                [reply, callback]()
+                [reply, callback, this]()
                 {
-                    callback(reply->readAll());
+                    if (reply->error() == QNetworkReply::NoError)
+                        callback(reply->readAll());
+                    else
+                    {
+                        const auto json{QJsonDocument::fromJson(reply->readAll()).object()};
+                        QString error_str{};
+
+                        if (json.contains("error") && json["error"].isString())
+                            error_str = json["error"].toString();
+
+                        emit replyError(reply->errorString(), error_str);
+                    }
+
                     reply->deleteLater();
                 });
     }
@@ -230,19 +242,19 @@ private:
                 [reply, callback, errorPrefix, errorCallback, this]()
                 {
                     const auto json{QJsonDocument::fromJson(reply->readAll()).object()};
-                    if (json.contains("success"))
-                    {
-                        if (json["success"].toBool())
+                    if (reply->error() == QNetworkReply::NoError)
                             callback(json);
-                        else
-                        {
-                            emit replyError(errorPrefix, json["errorMessage"].toString());
-                            errorCallback();
-                        }
-                    }
                     else
                     {
-                        emit replyError(errorPrefix);
+                        QString error_str{reply->errorString()};
+
+                        if (json.contains("error") && json["error"].isString())
+                        {
+                            error_str += '\n';
+                            error_str += json["error"].toString();
+                        }
+
+                        emit replyError(errorPrefix, error_str);
                         errorCallback();
                     }
 
