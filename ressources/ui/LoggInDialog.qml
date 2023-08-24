@@ -35,7 +35,7 @@ Dialog {
         TextField {
             id: usernNameField
             Layout.fillWidth: true
-            placeholderText: qsTr("Nom d'utilisateur")
+            placeholderText: qsTr("Username")
             onAccepted: passwordField.text !== "" ? validate()
                                                    : passwordField.fieldFocus = true
             Component.onCompleted: focus = true
@@ -52,7 +52,7 @@ Dialog {
         RoundButton {
             id: validationButton
             icon.source: "qrc:/icons/door-open.svg"
-            text: qsTr("Valider")
+            text: qsTr("Logg in")
             Layout.fillWidth: true
             font.capitalization: Font.MixedCase
             font.bold: true

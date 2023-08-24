@@ -62,38 +62,70 @@ ApplicationWindow {
 
     BusyDialog { id: busyDialog }
 
-//    Component.onCompleted: logginDialog.open()
+    Component.onCompleted: logginDialog.open()
 
     StackLayout {
         id: rootStack
         anchors.fill: parent
-//        currentIndex: 3
+        currentIndex: bottomBar.currentIndex
 
 //        onCurrentIndexChanged: topBar.searchBar.text = ""
 
 //        StackLayout {
 //            id: accountsPages
 
-//        ColumnLayout {
-//            Layout.fillHeight: true
-//            Layout.fillWidth: true
-//            spacing: 6
+        GridLayout {
+            columns: 3
+            columnSpacing: 12
+            rowSpacing: 12
+            Layout.maximumHeight: parent.height / 2
 
-            ListView {
-                spacing: 6
-//                Layout.fillWidth: true
-                clip: true
-                boundsBehavior: Flickable.StopAtBounds
-                model : QsovereigntyListModel { list: sovereignty }
-                delegate: QsovereigntyDelegate {}
+            Button {
+                Layout.topMargin: parent.implicitHeight /2
+                Layout.leftMargin: 12
+                icon.source: "qrc:/icons/users.svg"
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignVCenter
+                icon.height: implicitHeight
+                icon.width: implicitWidth
             }
 
-//            RoundButton {
-//                Layout.fillWidth: true
-//                icon.source: "qrc:/icons/plus.svg"
-//                onClicked: sovereinty.appendItems(1)
-//            }
-//        }
+            Button {
+                Layout.topMargin: parent.implicitHeight /2
+                icon.source: "qrc:/icons/industry.svg"
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignVCenter
+                icon.height: implicitHeight
+                icon.width: implicitWidth
+            }
+
+            Button {
+                Layout.topMargin: parent.implicitHeight /2
+                Layout.rightMargin: 12
+                icon.source: "qrc:/icons/ship.svg"
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignVCenter
+                icon.height: implicitHeight
+                icon.width: implicitWidth
+            }
+        }
+
+        ListView {
+            spacing: 6
+            clip: true
+            boundsBehavior: Flickable.StopAtBounds
+            model : QsovereigntyListModel { list: sovereignty }
+            delegate: QsovereigntyDelegate {}
+            footer: RoundButton {
+                        Layout.fillWidth: true
+                        icon.source: "qrc:/icons/plus.svg"
+                        onClicked: sovereignty.appendItem()
+                        highlighted: true
+                    }
+        }
 //            ListView {
 //                Layout.fillWidth: true
 //                model: accountModel
@@ -129,11 +161,41 @@ ApplicationWindow {
 //        CalculatorPage { id: calculatorPage }
     }
 
+    header: RowLayout {
+        height: 48
+
+        TextField {
+            id: search
+            implicitHeight: 38
+            Layout.margins: 6
+            Layout.fillWidth: true
+            placeholderText: qsTr("Search")
+            rightPadding: Material.textFieldHorizontalPadding + 50
+
+            Button {
+                id: magnifyingGlass
+                flat: true
+                icon.source: search.text == "" ? "qrc:/icons/search.svg" : "qrc:/icons/times-circle.svg"
+                onClicked: search.clear()
+                x: parent.width - width
+                y: parent.y - 12
+            }
+        }
+    }
 //    header: TopBar { id: topBar }
 //    footer: BottomBar { id: bottomBar }
-    footer: RoundButton {
-                Layout.fillWidth: true
-                icon.source: "qrc:/icons/plus.svg"
-                onClicked: sovereignty.appendItems(1)
+    footer: RowLayout {
+        height: 48
+
+        TabBar {
+            id: bottomBar
+            Layout.fillWidth: true
+            TabButton {
+                text: "Home"
             }
+            TabButton {
+                text: "Sovereignty"
+            }
+        }
+    }
 }

@@ -55,10 +55,10 @@ ItemDelegate {
         }
 
         RoundButton {
-            icon.source: "qrc:/icons/check-square.svg"
+            icon.source: "qrc:/icons/floppy-disk.svg"
             ToolTip.visible: hovered
-            ToolTip.text: qsTr("Validate")
-            onClicked: sovereignty.validate(root.model.index)
+            ToolTip.text: qsTr("Save")
+            onClicked: sovereignty.save(root.model.index)
         }
 
         Item {
@@ -77,12 +77,6 @@ ItemDelegate {
                                          () => { sovereignty.remove(root.model.index) }, true)
         }
     }
-
-    //    onClicked: {
-    //        bridge.accountId = model.id
-    //        bridge.accountState = model.state
-    //        accountsPages.loadItem()
-    //    }
 
     background: Rectangle {
         implicitHeight: Material.delegateHeight - 4

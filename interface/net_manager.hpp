@@ -269,8 +269,11 @@ private:
 
                         if (json.contains("error") && json["error"].isString())
                         {
-                            error_str += '\n';
-                            error_str += json["error"].toString();
+                            if (const auto str{json["error"].toString()}; !str.isEmpty())
+                            {
+                                error_str += '\n';
+                                error_str += str;
+                            }
                         }
 
                         emit replyError(errorPrefix, error_str);

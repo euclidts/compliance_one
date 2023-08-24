@@ -4,7 +4,9 @@
 #include "qnamespace.h"
 
 #include <boost/pfr/core.hpp>
+
 #include <crudpp/required.hpp>
+#include <crudpp/utils.hpp>
 
 #include "utils.hpp"
 #include "../visitors/json_reader.hpp"
@@ -28,7 +30,7 @@ struct model final
 
         boost::pfr::for_each_field(T{},
                                    [](const r_c_name auto& f, size_t i)
-                                   {  rn[i + Qt::UserRole] = f.c_name(); });
+                                   { rn[i + Qt::UserRole] = f.c_name(); });
         return rn;
     }
 
@@ -106,6 +108,13 @@ struct model final
 
     }
 
+    // check if the item was inserted in the database
+    // ie. if it's primary key is not flagged
+    bool inserted()
+    {
+        return !dirtyFlag_[primary_key_index];
+    }
+
     T& get_aggregate() { return aggregate; };
 
 private:
@@ -113,6 +122,11 @@ private:
     // all true by default to set all fields upon insert
     bool dirtyFlag_[boost::pfr::tuple_size<T>::value] = { true };
     T aggregate{};
+
+    static const size_t primary_key_index;
 };
+
+template <typename T>
+const size_t model<T>::primary_key_index{get_primary_key_index<T>()};
 
 } // namespace crudpp

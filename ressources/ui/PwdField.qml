@@ -9,7 +9,7 @@ RowLayout {
 
     property var onFieldAccepted
     property alias fieldFocus: field.focus
-    property string placeholder: qsTr("Mot de passe")
+    property string placeholder: qsTr("Password")
     property alias text: field.text
 
     TextField {

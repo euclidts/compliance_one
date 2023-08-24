@@ -33,8 +33,8 @@ public:
         return QVector<Type>(m_items.begin(), m_items.end());
     }
 
-    void validate(int row)
-    W_SIGNAL(validate, row)
+    void save(int row)
+    W_SIGNAL(save, row)
 
     void preItemsAppended(int number = 1)
     W_SIGNAL(preItemsAppended, number)
@@ -51,6 +51,14 @@ public:
         emit postItemsAppended();
     }
     W_SLOT(appendItems, (int))
+
+    void appendItem()
+    {
+        emit preItemsAppended(1);
+        m_items.emplace_back(Type{});
+        emit postItemsAppended();
+    }
+    W_SLOT(appendItem)
 
     void preItemsRemoved(int first, int last)
     W_SIGNAL(preItemsRemoved, first, last)
@@ -77,6 +85,12 @@ public:
         removeItems(count - number, count - 1);
     }
     W_SLOT(removeItems, (int))
+
+    void removeItem(int index)
+    {
+        removeItems(index, index);
+    }
+    W_SLOT(removeItem, (int))
 
     void set_list(const std::vector<Type>& list) { m_items = list; }
 

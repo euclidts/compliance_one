@@ -25,7 +25,7 @@ public:
         bridge::instance().context()->setContextProperty(T::table(), m_list);
 
         connect(m_list,
-                &list<T>::validate,
+                &list<T>::save,
                 this,
                 [this] (int row)
                 {
@@ -61,10 +61,21 @@ public:
                 this,
                 [this] (int row)
                 {
-                    net_manager::instance().deleteToKey(make_key(m_list->item_at(row)).c_str(),
-                        [this, row](const QJsonValue& rep)
-                        { m_list->removeItems(row, row); },
-                        "Remove Error");
+                    auto& item{m_list->item_at(row)};
+
+                    // delete on the server if it exists
+                    if (item.inserted())
+                    {
+                        net_manager::instance().deleteToKey(make_key(item).c_str(),
+                            [this, row](const QJsonValue& rep)
+                            { m_list->removeItem(row); },
+                            "Remove Error");
+
+                        return;
+                    }
+
+                    // only remove localy otherwise
+                    m_list->removeItem(row);
                 });
 
 //        this->connect(m_list,

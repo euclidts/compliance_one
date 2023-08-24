@@ -37,7 +37,7 @@ Dialog {
 
             RoundButton {
                 id: cancelButton
-                text: qsTr("Annuler")
+                text: qsTr("Cancel")
                 visible: cancelable
                 font.capitalization: Font.MixedCase
                 font.bold: true
