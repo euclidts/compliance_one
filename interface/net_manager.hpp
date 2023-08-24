@@ -119,8 +119,8 @@ public:
 
     void downloadFile(const char* key,
                       const QString& path,
-                      const std::function<void (bool, const QString &)> &callback,
-                      const std::function<void (qint64, qint64)>& onProgress = [](qint64 byteSent, qint64 totalBytes){})
+                      const std::function<void (bool, const QString &)>&& callback,
+                      const std::function<void (qint64, qint64)>&& onProgress = [](qint64 byteSent, qint64 totalBytes){})
     {
         setRequest(key);
         auto* reply = get(rqst);
@@ -153,24 +153,28 @@ public:
     }
 
     void getFromKey(const char* key,
-                    const std::function<void (const QByteArray &)> &callback,
+                    const std::function<void (const QByteArray &)>&& callback,
                     const char* params = "")
     {
         setRequest(key);
         auto* reply = get(rqst);
-        setCallback(reply, callback);
+        setCallback(reply,
+                    std::forward<const std::function<void (const QByteArray &)>&&>(callback));
     }
 
     void putToKey(const char* key,
                   const QByteArray&& data,
-                  const std::function<void (const QJsonObject &)> &callback,
-                  const QString& errorPrefix = "",
-                  const std::function<void ()>& errorCallback = [](){},
-                  const std::function<void (qint64, qint64)>& onProgress = [](qint64 byteSent, qint64 totalBytes){})
+                  const std::function<void (const QJsonObject &)>&& callback,
+                  const QString&& errorPrefix = "",
+                  const std::function<void ()>&& errorCallback = [](){},
+                  const std::function<void (qint64, qint64)>&& onProgress = [](qint64 byteSent, qint64 totalBytes){})
     {
         setRequest(key);
         auto* reply = put(rqst, data);
-        setCallback(reply, callback, errorPrefix, errorCallback);
+        setCallback(reply,
+                    std::forward<const std::function<void (const QJsonObject &)>&&>(callback),
+                    std::forward<const QString&&>(errorPrefix),
+                    std::forward<const std::function<void ()>&&>(errorCallback));
 
         connect(reply,
                 &QNetworkReply::uploadProgress,
@@ -178,23 +182,38 @@ public:
     }
 
     void postToKey(const char* key,
-                   const QByteArray& data,
-                   const std::function<void (const QJsonObject &)> &callback,
-                   const QString& errorPrefix = "")
+                   const QByteArray&& data,
+                   const std::function<void (const QJsonObject &)>&& callback,
+                   const QString&& errorPrefix = "")
     {
         setRequest(key);
         auto* reply = post(rqst, data);
-        setCallback(reply, callback, errorPrefix);
+        setCallback(reply,
+                    std::forward<const std::function<void (const QJsonObject &)>&&>(callback),
+                    std::forward<const QString&&>(errorPrefix));
     }
 
     void deleteToKey(const char* key,
-                     const QByteArray& data,
-                     const std::function<void (const QJsonObject &)> &callback,
-                     const QString& errorPrefix = "")
+                     const QByteArray&& data,
+                     const std::function<void (const QJsonObject &)>&& callback,
+                     const QString&& errorPrefix = "")
     {
         setRequest(key);
         auto* reply = sendCustomRequest(rqst, "DELETE", data);
-        setCallback(reply, callback, errorPrefix);
+        setCallback(reply,
+                    std::forward<const std::function<void (const QJsonObject &)>&&>(callback),
+                    std::forward<const QString&&>(errorPrefix));
+    }
+
+    void deleteToKey(const char* key,
+                     const std::function<void (const QJsonObject &)>&& callback,
+                     const QString&& errorPrefix = "")
+    {
+        setRequest(key);
+        auto* reply = deleteResource(rqst);
+        setCallback(reply,
+                    std::forward<const std::function<void (const QJsonObject &)>&&>(callback),
+                    std::forward<const QString&&>(errorPrefix));
     }
 
     void userChanged(int newId)
@@ -210,7 +229,7 @@ private:
     QString prefix;
 
     void setCallback(QNetworkReply* reply,
-                     const std::function<void (const QByteArray &)> &callback)
+                     const std::function<void (const QByteArray &)>&& callback)
     {
         connect(reply, &QNetworkReply::finished,
                 [reply, callback, this]()
@@ -233,9 +252,9 @@ private:
     }
 
     void setCallback(QNetworkReply* reply,
-                     const std::function<void (const QJsonObject &)> &callback,
-                     const QString& errorPrefix,
-                     const std::function<void ()>& errorCallback = [](){})
+                     const std::function<void (const QJsonObject &)>&& callback,
+                     const QString&& errorPrefix,
+                     const std::function<void ()>&& errorCallback = [](){})
     {
         connect(reply, &QNetworkReply::finished,
                 this,

@@ -39,11 +39,7 @@ public:
                         // skip if nothing needs updating
                         if (obj.size() == 1) return;
 
-                        std::string key{T::table()};
-                        key += '/';
-                        key += std::to_string((item.get_aggregate().*T::primary_key()).value);
-
-                        net_manager::instance().putToKey(key.c_str(),
+                        net_manager::instance().putToKey(make_key(item).c_str(),
                             QJsonDocument{obj}.toJson(),
                             [&item](const QJsonObject& rep)
                             { item.reset_flags(); },
@@ -58,6 +54,17 @@ public:
                             "Add error");
 
                     }
+                });
+
+        connect(m_list,
+                &list<T>::remove,
+                this,
+                [this] (int row)
+                {
+                    net_manager::instance().deleteToKey(make_key(m_list->item_at(row)).c_str(),
+                        [this, row](const QJsonValue& rep)
+                        { m_list->removeItems(row, row); },
+                        "Remove Error");
                 });
 
 //        this->connect(m_list,
@@ -101,6 +108,19 @@ public:
         net_manager::instance().getFromKey(T::table(),
                                            [this](const QByteArray& bytes)
                                            { m_list->read(bytes); });
+    }
+
+    const std::string make_key(model<T>&& item) const
+    {
+        return make_key(std::move(item));
+    }
+
+    const std::string make_key(model<T>& item) const
+    {
+        std::string key{T::table()};
+        key += '/';
+        key += std::to_string((item.get_aggregate().*T::primary_key()).value);
+        return key;
     }
 
     static list<T>* m_list;

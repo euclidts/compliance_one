@@ -72,9 +72,9 @@ ItemDelegate {
             ToolTip.visible: hovered
             ToolTip.text: qsTr("Delete")
             Layout.alignment: Qt.AlignRight
-            //                onClicked: onExceptionAction(ToolTip.text,
-            //                                         qsTr("Le dossier selectionné serra supprimé définitivement"),
-            //                                         () => { accounts.remove(model.id) }, true)
+            onClicked: onExceptionAction(ToolTip.text,
+                                         qsTr("The selected sovereignty will be deleted"),
+                                         () => { sovereignty.remove(root.model.index) }, true)
         }
     }
 
