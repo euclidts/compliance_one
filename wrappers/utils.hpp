@@ -1,9 +1,11 @@
 #pragma once
 
 #include <QVariant>
-
 namespace crudpp
 {
+template <typename T>
+class controller;
+
 template <typename T>
 T to_qt(T v)
     requires std::is_integral_v<T>
@@ -40,4 +42,7 @@ std::string make_uri()
     return s;
 }
 
+template <typename ...Ts>
+std::tuple<controller<Ts>...> make_ctls()
+{ return std::tuple<controller<Ts>...>{}; }
 }; // namespace crudpp

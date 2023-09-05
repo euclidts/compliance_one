@@ -3,24 +3,24 @@
 
 struct user
 {
-    static consteval auto table() { return "user"; };
+    static const constexpr auto table() { return "user"; };
+    static const constexpr auto primary_key() { return &user::id; };
 
     struct id
     {
-        static consteval auto c_name() { return "id"; };
+        static const constexpr auto c_name() { return "id"; };
         int32_t value{0};
-        static consteval auto property() { return "primary"; };
     } id;
 
-        struct username
+    struct username
     {
-        static consteval auto c_name() { return "username"; };
+        static const constexpr auto c_name() { return "username"; };
         std::string value{};
     } username;
 
     struct passsword
     {
-        static consteval auto c_name() { return "password"; };
+        static const constexpr auto c_name() { return "password"; };
         std::string value{};
     } password;
     
@@ -35,7 +35,7 @@ struct user
 
     struct user_type
     {
-        static consteval auto c_name() { return "user_type"; };
+        static const constexpr auto c_name() { return "user_type"; };
         usertypes value{business_user};
     } user_type;
 };

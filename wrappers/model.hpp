@@ -31,6 +31,9 @@ struct model final
         boost::pfr::for_each_field(T{},
                                    [](const r_c_name auto& f, size_t i)
                                    { rn[i + Qt::UserRole] = f.c_name(); });
+
+        rn[flagged_role()] = "flagged_for_update";
+
         return rn;
     }
 
@@ -51,6 +54,18 @@ struct model final
                                        if (role - Qt::UserRole == i)
                                            v = to_qt(f.value);
                                    });
+
+        if (role == flagged_role())
+        {
+            for (bool f : dirtyFlag_)
+            {
+                if (f) v = true;
+                break;
+            }
+
+            if (v.isNull()) v = false;
+        }
+
         return v;
     }
 
@@ -110,23 +125,16 @@ struct model final
 
     // check if the item was inserted in the database
     // ie. if it's primary key is not flagged
-    bool inserted()
-    {
-        return !dirtyFlag_[primary_key_index];
-    }
+    bool inserted() { return !dirtyFlag_[get_primary_key_index<T>()]; }
 
-    T& get_aggregate() { return aggregate; };
+    T& get_aggregate() { return aggregate; }
+
+    static const constexpr int flagged_role() { return boost::pfr::tuple_size<T>() + Qt::UserRole; }
 
 private:
-
     // all true by default to set all fields upon insert
     bool dirtyFlag_[boost::pfr::tuple_size<T>::value] = { true };
     T aggregate{};
-
-    static const size_t primary_key_index;
 };
-
-template <typename T>
-const size_t model<T>::primary_key_index{get_primary_key_index<T>()};
 
 } // namespace crudpp

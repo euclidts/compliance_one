@@ -12,7 +12,7 @@ ApplicationWindow {
     title: "Compliance One"
     width: 1024
     height: 768
-    color: "#83919f"
+    color: settingsDrawer.theme.checked ? "#83919f" : '#121212'
 
     Material.theme: settingsDrawer.theme.checked ? Material.Light : Material.Dark
     Material.primary: "#bfe8ff"

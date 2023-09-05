@@ -114,8 +114,8 @@ public:
     W_SIGNAL(addIn, parentId)
     void addInWith(int parentId, const QJsonObject& obj)
     W_SIGNAL(addInWith, parentId, obj)
-    void remove(int id)
-    W_SIGNAL(remove, id)
+    void remove(int row)
+    W_SIGNAL(remove, row)
     void loaded()
     W_SIGNAL(loaded)
 

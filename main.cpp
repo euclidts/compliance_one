@@ -7,6 +7,7 @@
 //#include <bindigs/qt/list.hpp>
 #include "wrappers/controller.hpp"
 #include "sovereignty.hpp"
+#include "user.hpp"
 
 int main(int argc, char* argv[])
 {
@@ -29,10 +30,11 @@ int main(int argc, char* argv[])
     net_manager::instance().init(host);
 
     bridge::instance().init();
-    bridge::instance().registerQml<sovereignty>();
+    bridge::instance().registerQml<user, sovereignty>();
 //    client::instance().init();
 
-    controller<sovereignty> c{};
+//    controller<sovereignty> c{};
+    make_ctls<user, sovereignty>();
 
     // qml engine
     const QUrl url(QStringLiteral("qrc:/ui/main.qml"));
@@ -50,7 +52,7 @@ int main(int argc, char* argv[])
 
     bridge::instance().engine->load(url);
 
-    c.get();
+//    c.get();
 
     return app.exec();
 }

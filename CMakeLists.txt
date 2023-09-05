@@ -12,7 +12,8 @@ add_subdirectory(${CRUDPP_PATH} ${CMAKE_BINARY_DIR}/crudpp)
 include_directories(${CRUDPP_PATH}/include)
 
 set(AGGREGATES
-    ${CMAKE_CURRENT_SOURCE_DIR}/sovereignty.hpp)
+    ${CMAKE_CURRENT_SOURCE_DIR}/sovereignty.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/country.hpp)
 
 set(SERVER_SOURCES
     ${AGGREGATES}

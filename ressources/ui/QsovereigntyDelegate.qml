@@ -59,6 +59,8 @@ ItemDelegate {
             ToolTip.visible: hovered
             ToolTip.text: qsTr("Save")
             onClicked: sovereignty.save(root.model.index)
+            highlighted: true
+            enabled: root.model.flagged_for_update
         }
 
         Item {

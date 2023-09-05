@@ -28,7 +28,7 @@ public:
     QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override
     {
         if (!index.isValid() || !m_list)
-            return QVariant();
+            return QVariant{};
 
         return m_list->items().at(index.row()).data(role);
     }
@@ -41,7 +41,10 @@ public:
             return false;
 
         m_list->item_at(index.row()).setData(value, role);
-        emit this->dataChanged(index, index, QVector<int>() << role);
+        // emit dataChanged for both the curent role and the "flagged_for_update role"
+        emit dataChanged(index, index,
+                         QVector<int>() << role
+                                        << model<T>::flagged_role());
         return true;
     }
 
@@ -93,7 +96,7 @@ public:
 
             connect(m_list, &list<T>::dataChangedAt,
                     this, [this](int row)
-                    { emit dataChanged(index(row), index(row)); });
+                    { dataChanged(index(row), index(row)); });
         }
 
         endResetModel();

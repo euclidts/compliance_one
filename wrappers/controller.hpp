@@ -16,8 +16,7 @@ class controller final : QObject
     W_OBJECT(controller)
 
 public:
-    explicit controller()
-        : QObject{}
+    controller() : QObject{}
     {
         const auto uri{make_uri<T>()};
 
@@ -26,14 +25,13 @@ public:
 
         connect(m_list,
                 &list<T>::save,
-                this,
                 [this] (int row)
                 {
                     QJsonObject obj{};
                     auto& item{m_list->item_at(row)};
                     item.write(obj);
 
-                    // update if primary key is written
+                    // update if primary key is set
                     if (obj.contains(to_qt(get_primary_key_name<T>())))
                     {
                         // skip if nothing needs updating
@@ -52,13 +50,11 @@ public:
                             [&item](const QJsonObject& rep)
                             { item.read(rep); },
                             "Add error");
-
                     }
                 });
 
         connect(m_list,
                 &list<T>::remove,
-                this,
                 [this] (int row)
                 {
                     auto& item{m_list->item_at(row)};
@@ -112,6 +108,7 @@ public:
 //                              },
 //                              "addWith error");
 //                      });
+        get();
     }
 
     void get()
