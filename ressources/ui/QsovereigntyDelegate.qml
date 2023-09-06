@@ -22,6 +22,7 @@ ItemDelegate {
             onEdit: (txt) => { root.model.name = txt }
             placeHolder: qsTr("* Mandatory")
             Layout.columnSpan: 4
+            readOnly: root.model.now_loading
         }
 
         EnumChooser {
@@ -29,6 +30,7 @@ ItemDelegate {
             model: ["Low", "Medium", "High"]
             enumOf: root.model.ranking
             onEdit: (index) => { root.model.ranking = index }
+            editable: !root.model.now_loading
         }
 
         EnumChooser {
@@ -36,6 +38,7 @@ ItemDelegate {
             model: ["Low", "Medium", "High"]
             enumOf: root.model.fatf
             onEdit: (index) => { root.model.fatf = index }
+            editable: !root.model.now_loading
         }
 
         IntChooser {
@@ -44,6 +47,7 @@ ItemDelegate {
             maximum: 10
             numberOf: root.model.transparency
             onEdit: (val) => { root.model.transparency = val }
+            editable: !root.model.now_loading
         }
 
         IntChooser {
@@ -52,6 +56,7 @@ ItemDelegate {
             maximum: 10
             numberOf: root.model.world_bank
             onEdit: (val) => { root.model.world_bank = val }
+            editable: !root.model.now_loading
         }
 
         RoundButton {
@@ -61,12 +66,19 @@ ItemDelegate {
             onClicked: sovereignty.save(root.model.index)
             highlighted: true
             enabled: root.model.flagged_for_update
+            visible: !root.model.now_loading
         }
 
         Item {
             Layout.fillWidth: true
-            visible: !portrait
+            visible: !portrait && !root.model.now_loading
             Layout.columnSpan: portrait ? 1 : 2
+        }
+
+        BusyIndicator {
+            visible: root.model.now_loading
+            Layout.fillWidth: true
+            Layout.columnSpan: portrait ? 2 : 4
         }
 
         RoundButton {
@@ -74,6 +86,7 @@ ItemDelegate {
             ToolTip.visible: hovered
             ToolTip.text: qsTr("Delete")
             Layout.alignment: Qt.AlignRight
+            visible: !root.model.now_loading
             onClicked: onExceptionAction(ToolTip.text,
                                          qsTr("The selected sovereignty will be deleted"),
                                          () => { sovereignty.remove(root.model.index) }, true)

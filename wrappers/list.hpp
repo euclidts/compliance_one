@@ -36,6 +36,9 @@ public:
     void save(int row)
     W_SIGNAL(save, row)
 
+    void loaded(int row)
+    W_SIGNAL(loaded, row)
+
     void preItemsAppended(int number = 1)
     W_SIGNAL(preItemsAppended, number)
     void postItemsAppended()
@@ -116,8 +119,6 @@ public:
     W_SIGNAL(addInWith, parentId, obj)
     void remove(int row)
     W_SIGNAL(remove, row)
-    void loaded()
-    W_SIGNAL(loaded)
 
     void appendWith(int id);
     void appendWith(const QJsonObject& obj);
@@ -146,7 +147,6 @@ public:
                 m_items.emplace_back(Type{json.toObject()});
 
         emit postItemsAppended();
-        emit loaded();
     }
 
     void read(const QJsonObject& obj)
@@ -157,7 +157,6 @@ public:
         m_items.emplace_back(Type{obj});
 
         emit postItemsAppended();
-        emit loaded();
     }
 
     void read(const QByteArray& bytes)
@@ -190,4 +189,4 @@ private:
 } // namespace crudpp
 
 #include <wobjectimpl.h>
-W_OBJECT_IMPL(crudpp::list<T>, template <typename T>);
+W_OBJECT_IMPL(crudpp::list<T>, template <typename T>)

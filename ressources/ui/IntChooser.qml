@@ -14,6 +14,7 @@ ColumnLayout {
     property int maximum
     property int step: 1
     property alias spin: spin
+    property alias editable: spin.editable
 
     Label {
         text: name
@@ -25,7 +26,6 @@ ColumnLayout {
         id: spin
         from: minimum
         to: maximum
-        editable: true
         stepSize: step
         value: numberOf
         locale: Qt.locale()

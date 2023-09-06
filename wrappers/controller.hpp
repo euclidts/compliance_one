@@ -39,16 +39,22 @@ public:
 
                         net_manager::instance().putToKey(make_key(item).c_str(),
                             QJsonDocument{obj}.toJson(),
-                            [&item](const QJsonObject& rep)
-                            { item.reset_flags(); },
+                            [&item, row](const QJsonObject& rep)
+                            {
+                                item.reset_flags();
+                                emit m_list->loaded(row);
+                            },
                             "Validate error");
                     }
                     else // insert otherwise
                     {
                         net_manager::instance().postToKey(T::table(),
                             QJsonDocument{obj}.toJson(),
-                            [&item](const QJsonObject& rep)
-                            { item.read(rep); },
+                            [&item, row](const QJsonObject& rep)
+                            {
+                                item.read(rep);
+                                emit m_list->loaded(row);
+                            },
                             "Add error");
                     }
                 });

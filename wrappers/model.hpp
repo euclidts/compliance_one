@@ -21,6 +21,9 @@ struct model final
     model(const QJsonObject& json) { read(json); }
     model() = default;
 
+    static const constexpr int flagged_for_update_role() { return boost::pfr::tuple_size<T>::value + Qt::UserRole; }
+    static const constexpr int now_loading_role() { return flagged_for_update_role() + 1; }
+
     static QHash<int, QByteArray> roleNames()
     {
         static QHash<int, QByteArray> rn{};
@@ -32,7 +35,8 @@ struct model final
                                    [](const r_c_name auto& f, size_t i)
                                    { rn[i + Qt::UserRole] = f.c_name(); });
 
-        rn[flagged_role()] = "flagged_for_update";
+        rn[flagged_for_update_role()] = "flagged_for_update";
+        rn[now_loading_role()] = "now_loading";
 
         return rn;
     }
@@ -55,15 +59,22 @@ struct model final
                                            v = to_qt(f.value);
                                    });
 
-        if (role == flagged_role())
+        if (role == flagged_for_update_role())
         {
             for (bool f : dirtyFlag_)
             {
-                if (f) v = true;
-                break;
+                if (f)
+                {
+                    v = true;
+                    break;
+                }
             }
 
-            if (v.isNull()) v = false;
+            if (!v.isValid()) v = false;
+        }
+        else if (role == now_loading_role())
+        {
+            v = loading;
         }
 
         return v;
@@ -85,6 +96,9 @@ struct model final
                                            }
                                        }
                                    });
+
+        if (role == now_loading_role())
+            loading = v.toBool();
     }
     // --
 
@@ -120,7 +134,6 @@ struct model final
     {
         for (bool& v : dirtyFlag_)
             if (v) v = false;
-
     }
 
     // check if the item was inserted in the database
@@ -129,12 +142,11 @@ struct model final
 
     T& get_aggregate() { return aggregate; }
 
-    static const constexpr int flagged_role() { return boost::pfr::tuple_size<T>() + Qt::UserRole; }
-
 private:
     // all true by default to set all fields upon insert
     bool dirtyFlag_[boost::pfr::tuple_size<T>::value] = { true };
     T aggregate{};
+    bool loading{false};
 };
 
 } // namespace crudpp

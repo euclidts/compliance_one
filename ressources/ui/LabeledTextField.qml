@@ -9,6 +9,7 @@ ColumnLayout {
     property string placeHolder: qsTr("* Champ obligatoire")
     property alias validator: field.validator
     property alias text: field.text
+    property alias readOnly: field.readOnly
     required property string name
     required property string textOf
     required property var onEdit

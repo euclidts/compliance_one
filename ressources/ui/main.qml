@@ -62,7 +62,7 @@ ApplicationWindow {
 
     BusyDialog { id: busyDialog }
 
-    Component.onCompleted: logginDialog.open()
+//    Component.onCompleted: logginDialog.open()
 
     StackLayout {
         id: rootStack
@@ -81,35 +81,35 @@ ApplicationWindow {
             Layout.maximumHeight: parent.height / 2
 
             Button {
-                Layout.topMargin: parent.implicitHeight /2
+                Layout.topMargin: parent.implicitHeight / 2
                 Layout.leftMargin: 12
                 icon.source: "qrc:/icons/users.svg"
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignVCenter
-                icon.height: implicitHeight
-                icon.width: implicitWidth
+                icon.height: (implicitBackgroundHeight + topInset + bottomInset) * 2
+                icon.width: (implicitBackgroundWidth + leftInset + rightInset) * 2
             }
 
             Button {
-                Layout.topMargin: parent.implicitHeight /2
+                Layout.topMargin: parent.implicitHeight / 2
                 icon.source: "qrc:/icons/industry.svg"
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignVCenter
-                icon.height: implicitHeight
-                icon.width: implicitWidth
+                icon.height: (implicitBackgroundHeight + topInset + bottomInset) * 2
+                icon.width: (implicitBackgroundWidth + leftInset + rightInset) * 2
             }
 
             Button {
-                Layout.topMargin: parent.implicitHeight /2
+                Layout.topMargin: parent.implicitHeight / 2
                 Layout.rightMargin: 12
                 icon.source: "qrc:/icons/ship.svg"
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignVCenter
-                icon.height: implicitHeight
-                icon.width: implicitWidth
+                icon.height: (implicitBackgroundHeight + topInset + bottomInset) * 2
+                icon.width: (implicitBackgroundWidth + leftInset + rightInset) * 2
             }
         }
 

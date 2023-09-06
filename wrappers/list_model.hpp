@@ -44,7 +44,7 @@ public:
         // emit dataChanged for both the curent role and the "flagged_for_update role"
         emit dataChanged(index, index,
                          QVector<int>() << role
-                                        << model<T>::flagged_role());
+                                        << model<T>::flagged_for_update_role());
         return true;
     }
 
@@ -97,6 +97,18 @@ public:
             connect(m_list, &list<T>::dataChangedAt,
                     this, [this](int row)
                     { dataChanged(index(row), index(row)); });
+
+            connect(m_list, &list<T>::save,
+                    this, [this](int row)
+                    { setLoading(row, true); });
+
+            connect(m_list, &list<T>::remove,
+                    this, [this](int row)
+                    { setLoading(row, true); });
+
+            connect(m_list, &list<T>::loaded,
+                    this, [this](int row)
+                    { setLoading(row, false); });
         }
 
         endResetModel();
@@ -106,6 +118,16 @@ public:
 
 protected:
     list<T>* m_list{nullptr};
+
+private:
+    void setLoading(int row, bool value)
+    {
+        int role{model<T>::now_loading_role()};
+        m_list->item_at(row).setData(value, role);
+        emit dataChanged(index(row),
+                         index(row),
+                         QVector<int>() << role << model<T>::flagged_for_update_role());
+    }
 };
 
 } //namespace crudpp

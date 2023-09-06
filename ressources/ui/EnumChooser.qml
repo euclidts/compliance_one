@@ -8,6 +8,7 @@ ColumnLayout {
     spacing: 6
 
     property alias model: combo.model
+    property alias editable: combo.editable
     required property string name
     required property string enumOf
     required property var onEdit
