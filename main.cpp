@@ -1,11 +1,12 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
-#include "interface/net_manager.hpp"
-#include "interface/bridge.hpp"
+#include <crudpp/bindigs/qt/interface/net_manager.hpp>
+#include <crudpp/bindigs/qt/interface/bridge.hpp>
 
 //#include <bindigs/qt/list.hpp>
-#include "wrappers/controller.hpp"
+
+#include <crudpp/bindigs/qt/wrappers/controller.hpp>
 #include "sovereignty.hpp"
 #include "user.hpp"
 
