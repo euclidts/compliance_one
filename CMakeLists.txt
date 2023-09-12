@@ -11,23 +11,12 @@ set(CMAKE_PREFIX_PATH "${CRUDPP_PARTH};${CMAKE_PREFIX_PATH}")
 add_subdirectory(${CRUDPP_PATH} ${CMAKE_BINARY_DIR}/crudpp)
 include_directories(${CRUDPP_PATH}/include)
 
-set(AGGREGATES
-    ${CMAKE_CURRENT_SOURCE_DIR}/sovereignty.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/country.hpp)
-
-set(SERVER_SOURCES
-    ${AGGREGATES}
-    ${CMAKE_CURRENT_SOURCE_DIR}/ctrl_macro.cpp)
-
-make_drogon_server()
-
 option(VERDIGRIS_PATH "Path to the verdigris repository" ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${VERDIGRIS_PATH}/src)
 
-set(CLIENT_SOURCES
-    ${AGGREGATES}
-    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/ressources/compliance_one.qrc
-)
-
-make_qt_client()
+make_all(
+    INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/compliance_one.hpp
+    AGGREGATES
+    country
+    sovereignty
+    EXTRA_CLIENT_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/ressources/compliance_one.qrc)

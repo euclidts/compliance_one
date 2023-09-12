@@ -7,8 +7,8 @@
 //#include <bindigs/qt/list.hpp>
 
 #include <crudpp/bindigs/qt/wrappers/controller.hpp>
-#include "sovereignty.hpp"
-#include "user.hpp"
+#include <crudpp/macros.hpp>
+//#include "macros.cpp"
 
 int main(int argc, char* argv[])
 {
@@ -30,12 +30,14 @@ int main(int argc, char* argv[])
     qDebug() << "Host :" << host;
     net_manager::instance().init(host);
 
+//    qDebug() << "aggregates = " << QString{AGGREGATES};
+
     bridge::instance().init();
-    bridge::instance().registerQml<user, sovereignty>();
+    bridge::instance().registerQml<AGGREGATES>();
 //    client::instance().init();
 
 //    controller<sovereignty> c{};
-    make_ctls<user, sovereignty>();
+    make_ctls<AGGREGATES>();
 
     // qml engine
     const QUrl url(QStringLiteral("qrc:/ui/main.qml"));
