@@ -17,51 +17,39 @@ ItemDelegate {
         columns: portrait ? 2 : 4
 
         LabeledTextField {
-            name: qsTr("Name")
-            textOf: root.model.name
-            onEdit: (txt) => { root.model.name = txt }
+            name: qsTr("County name")
+            textOf: root.model.country_name
+            onEdit: (txt) => { root.model.country_name = txt }
             placeHolder: qsTr("* Mandatory")
-            Layout.columnSpan: 4
+            Layout.columnSpan: 2
             readOnly: root.model.now_loading
         }
 
-        EnumIntChooser {
-            name: qsTr("Internal Ranking")
-            model: ["Low", "Medium", "High"]
-            enumOf: root.model.ranking
-            onEdit: (index) => { root.model.ranking = index }
+        LabeledTextField {
+            name: qsTr("Official state name")
+            textOf: root.model.official_state_name
+            onEdit: (txt) => { root.model.official_state_name = txt }
+            placeHolder: qsTr("* Mandatory")
+            Layout.columnSpan: 2
+            readOnly: root.model.now_loading
         }
 
-        EnumIntChooser {
-            name: qsTr("FATF")
-            model: ["Low", "Medium", "High"]
-            enumOf: root.model.fatf
-            onEdit: (index) => { root.model.fatf = index }
-        }
-
-        IntChooser {
-            name: qsTr("Transparency International")
-            minimum: 1
-            maximum: 10
-            numberOf: root.model.transparency
-            onEdit: (val) => { root.model.transparency = val }
-            editable: !root.model.now_loading
-        }
-
-        IntChooser {
-            name: qsTr("World Bank")
-            minimum: 1
-            maximum: 10
-            numberOf: root.model.world_bank
-            onEdit: (val) => { root.model.world_bank = val }
-            editable: !root.model.now_loading
+        EnumValueChooser {
+            name: qsTr("Sovereignty")
+            model: sovereigntyListView.model
+            enumOf: root.model.sovereignty_id
+            onEdit: (value) => { root.model.sovereignty_id = value }
+            Layout.columnSpan: 4
+            Layout.fillWidth: true
+            textRole: "name"
+            valueRole: "id"
         }
 
         RoundButton {
             icon.source: "qrc:/icons/floppy-disk.svg"
             ToolTip.visible: hovered
             ToolTip.text: qsTr("Save")
-            onClicked: sovereignty.save(root.model.index)
+            onClicked: country.save(root.model.index)
             highlighted: true
             enabled: root.model.flagged_for_update
             visible: !root.model.now_loading
@@ -86,8 +74,8 @@ ItemDelegate {
             Layout.alignment: Qt.AlignRight
             visible: !root.model.now_loading
             onClicked: onExceptionAction(ToolTip.text,
-                                         qsTr("The selected sovereignty will be deleted"),
-                                         () => { sovereignty.remove(root.model.index) }, true)
+                                         qsTr("The selected country will be deleted"),
+                                         () => { country.remove(root.model.index) }, true)
         }
     }
 

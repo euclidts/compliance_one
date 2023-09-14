@@ -31,6 +31,6 @@ struct country
     {
         static const constexpr auto c_name() { return "sovereignty_id"; }
         int32_t value{0};
-        static const constexpr auto froeign_key() { return &country::sovereignty_id; }
+        static const constexpr auto froeign_key() { return &sovereignty::id; }
     } sovereignty_id;
 };

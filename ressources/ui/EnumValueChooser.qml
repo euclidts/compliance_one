@@ -8,7 +8,9 @@ ColumnLayout {
     spacing: 6
 
     property alias model: combo.model
-    property alias editable: combo.editable
+    property alias delegate: combo.delegate
+    property alias textRole: combo.textRole
+    property alias valueRole: combo.valueRole
     required property string name
     required property string enumOf
     required property var onEdit
@@ -21,8 +23,10 @@ ColumnLayout {
 
     ComboBox {
         id: combo
+        editable: false
         Layout.minimumWidth: 160
-        Component.onCompleted: currentIndex = enumOf
-        onActivated: onEdit(currentIndex)
+        Layout.fillWidth: true
+        Component.onCompleted: currentIndex = indexOfValue(enumOf)
+        onActivated: onEdit(currentValue)
     }
 }

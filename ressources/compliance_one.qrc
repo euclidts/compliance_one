@@ -24,7 +24,7 @@
         <file>ui/LabeledTextField.qml</file>
         <file>ui/IntChooser.qml</file>
         <file>icons/trash-alt.svg</file>
-        <file>ui/EnumChooser.qml</file>
+        <file>ui/EnumValueChooser.qml</file>
         <file>icons/plus.svg</file>
         <file>icons/floppy-disk.svg</file>
         <file>icons/users.svg</file>
@@ -32,5 +32,7 @@
         <file>icons/ship.svg</file>
         <file>icons/search.svg</file>
         <file>icons/times-circle.svg</file>
+        <file>ui/QcountryDelegate.qml</file>
+        <file>ui/EnumIntChooser.qml</file>
     </qresource>
 </RCC>

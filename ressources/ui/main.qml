@@ -5,6 +5,7 @@ import QtQuick.Layouts
 import QtQuick.Controls.Material
 
 import Qsovereignty
+import Qcountry
 
 ApplicationWindow {
     id: window
@@ -114,6 +115,7 @@ ApplicationWindow {
         }
 
         ListView {
+            id: sovereigntyListView
             spacing: 6
             clip: true
             boundsBehavior: Flickable.StopAtBounds
@@ -126,15 +128,20 @@ ApplicationWindow {
                         highlighted: true
                     }
         }
-//            ListView {
-//                Layout.fillWidth: true
-//                model: accountModel
-//                delegate: AccountDelegate {}
-//                onMovementStarted: topBar.searchBar.focus = false
-//                clip: true
-//                boundsBehavior: Flickable.StopAtBounds
-//            }
-//        }
+
+        ListView {
+            spacing: 6
+            clip: true
+            boundsBehavior: Flickable.StopAtBounds
+            model : QcountryListModel { list: country }
+            delegate: QcountryDelegate {}
+            footer: RoundButton {
+                Layout.fillWidth: true
+                icon.source: "qrc:/icons/plus.svg"
+                onClicked: country.appendItem()
+                highlighted: true
+            }
+        }
 
 //        StackLayout {
 //            id: usersPages
@@ -175,7 +182,9 @@ ApplicationWindow {
             Button {
                 id: magnifyingGlass
                 flat: true
-                icon.source: search.text == "" ? "qrc:/icons/search.svg" : "qrc:/icons/times-circle.svg"
+                icon.source: search.text === ""
+                             ? "qrc:/icons/search.svg"
+                             : "qrc:/icons/times-circle.svg"
                 onClicked: search.clear()
                 x: parent.width - width
                 y: parent.y - 12
@@ -194,7 +203,10 @@ ApplicationWindow {
                 text: "Home"
             }
             TabButton {
-                text: "Sovereignty"
+                text: "Sovereignties"
+            }
+            TabButton {
+                text: "Countries"
             }
         }
     }
