@@ -35,14 +35,28 @@ ItemDelegate {
         }
 
         EnumValueChooser {
+            id: sovereigntyCombo
             name: qsTr("Sovereignty")
             model: sovereigntyListView.model
             enumOf: root.model.sovereignty_id
             onEdit: (value) => { root.model.sovereignty_id = value }
             Layout.columnSpan: 4
             Layout.fillWidth: true
-            textRole: "name"
             valueRole: "id"
+            textRole: "name"
+            delegate: MenuItem {
+                width: ListView.view.width
+                text: model["name"] +
+                      " \t Internal ranking: " + rateModel[model["ranking"]] +
+                      " FATF: " + rateModel[model["fatf"]] +
+                      " Transparency international: " + model["transparency"] +
+                      " World bank: " + model["world_bank"]
+                Material.foreground: sovereigntyCombo.currentIndex === index ?
+                                         ListView.view.contentItem.Material.accent :
+                                         ListView.view.contentItem.Material.foreground
+                highlighted: sovereigntyCombo.highlightedIndex === index
+                hoverEnabled: sovereigntyCombo.hoverEnabled
+            }
         }
 
         RoundButton {

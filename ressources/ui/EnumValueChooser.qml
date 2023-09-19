@@ -7,6 +7,9 @@ ColumnLayout {
     Layout.topMargin: 2
     spacing: 6
 
+    property alias currentIndex: combo.currentIndex
+    property alias highlightedIndex: combo.highlightedIndex
+    property alias hoverEnabled: combo.hoverEnabled
     property alias model: combo.model
     property alias delegate: combo.delegate
     property alias textRole: combo.textRole

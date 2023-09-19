@@ -22,6 +22,7 @@ ApplicationWindow {
     font.pixelSize: 16
 
     readonly property bool portrait: width < 500
+    readonly property var rateModel: [qsTr("Low"), qsTr("Medium"), qsTr("High")]
 
     function onLogin (success: bool, error: string) {
         if (success) {

@@ -15,4 +15,5 @@ make_all(
     CLASSES
         country
         sovereignty
-    EXTRA_CLIENT_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/ressources/compliance_one.qrc)
+    EXTRA_CLIENT_SOURCES
+        ${CMAKE_CURRENT_SOURCE_DIR}/ressources/compliance_one.qrc)

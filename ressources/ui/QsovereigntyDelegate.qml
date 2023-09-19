@@ -27,14 +27,14 @@ ItemDelegate {
 
         EnumIntChooser {
             name: qsTr("Internal Ranking")
-            model: ["Low", "Medium", "High"]
+            model: rateModel
             enumOf: root.model.ranking
             onEdit: (index) => { root.model.ranking = index }
         }
 
         EnumIntChooser {
             name: qsTr("FATF")
-            model: ["Low", "Medium", "High"]
+            model: rateModel
             enumOf: root.model.fatf
             onEdit: (index) => { root.model.fatf = index }
         }
