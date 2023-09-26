@@ -5,6 +5,9 @@ struct user
 {
     static const constexpr auto table() { return "user"; }
     static const constexpr auto primary_key() { return &user::id; }
+    static const constexpr auto identifier() { return &user::username; }
+    static const constexpr auto secret() { return &user::password; }
+
     static const constexpr auto session_id() { return &user::m_session_id; }
 
     struct id
@@ -19,7 +22,7 @@ struct user
         std::string value{};
     } username;
 
-    struct passsword
+    struct password
     {
         static const constexpr auto c_name() { return "password"; }
         std::string value{};
@@ -30,8 +33,7 @@ struct user
         business_user,
         compliance_user,
         manager,
-        admin,
-        technical_admin
+        admin
     };
 
     struct user_type

@@ -13,10 +13,10 @@ Dialog {
     implicitWidth: 270
 
     function validate() {
-//        bridge.authenticate(usernNameField.text,
-//                            passwordField.text)
+        bridge.authenticate(usernNameField.text,
+                            passwordField.text)
         logginDialog.close()
-//        busyDialog.open()
+        busyDialog.open()
     }
 
     function clear() { passwordField.text = "" }

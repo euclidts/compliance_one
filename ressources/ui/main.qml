@@ -4,6 +4,7 @@ import QtQuick.Dialogs
 import QtQuick.Layouts
 import QtQuick.Controls.Material
 
+import Interface
 import Qsovereignty
 import Qcountry
 
@@ -56,15 +57,14 @@ ApplicationWindow {
 
     ExceptionDialog { id: exceptionDialog }
 
-    LoggInDialog { id: logginDialog }
-
 //    UrlProvider { id: urlProvider }
 
     SettingsDrawer { id: settingsDrawer }
 
     BusyDialog { id: busyDialog }
 
-//    Component.onCompleted: logginDialog.open()
+    LoggInDialog { id: logginDialog }
+    Component.onCompleted: logginDialog.open()
 
     StackLayout {
         id: rootStack
