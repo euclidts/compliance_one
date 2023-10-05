@@ -4,17 +4,12 @@
 struct user
 {
     static const constexpr auto table() { return "user"; }
-    static const constexpr auto primary_key() { return &user::id; }
-    static const constexpr auto identifier() { return &user::username; }
-    static const constexpr auto secret() { return &user::password; }
 
-    static const constexpr auto session_id() { return &user::m_session_id; }
-
-    struct id
+    struct primary_key
     {
         static const constexpr auto c_name() { return "id"; }
         int32_t value{0};
-    } id;
+    } primary_key;
 
     struct username
     {
@@ -42,9 +37,9 @@ struct user
         usertypes value{business_user};
     } user_type;
 
-    struct m_session_id
+    struct session_id
     {
         static const constexpr auto c_name() { return "session_id"; }
         std::string value{};
-    } m_session_id;
+    } session_id;
 };

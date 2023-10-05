@@ -6,13 +6,12 @@
 struct sovereignty
 {
     static const constexpr auto table() { return "sovereignty"; }
-    static const constexpr auto primary_key() { return &sovereignty::id; }
 
-    struct id
+    struct primary_key
     {
         static const constexpr auto c_name() { return "id"; }
         int32_t value{0};
-    } id;
+    } primary_key;
 
     struct name
     {

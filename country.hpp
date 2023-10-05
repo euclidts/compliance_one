@@ -5,13 +5,12 @@
 struct country
 {
     static const constexpr auto table() { return "country"; }
-    static const constexpr auto primary_key() { return &country::id; }
 
-    struct id
+    struct primary_key
     {
         static const constexpr auto c_name() { return "id"; }
         int32_t value{0};
-    } id;
+    } primary_key;
 
     struct country_name
     {
@@ -31,6 +30,6 @@ struct country
     {
         static const constexpr auto c_name() { return "sovereignty_id"; }
         int32_t value{0};
-        static const constexpr auto froeign_key() { return &sovereignty::id; }
+        static const constexpr auto froeign_key() { return &sovereignty::primary_key; }
     } sovereignty_id;
 };
