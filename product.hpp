@@ -14,7 +14,7 @@ struct product
 
     struct group_id
     {
-        static const constexpr auto c_name() { return "product_group"; }
+        static const constexpr auto c_name() { return "group_id"; }
         static const constexpr auto nane() { return "Product group"; }
         int32_t value{0};
         static const constexpr auto froeign_key() { return &product_group::primary_key; }

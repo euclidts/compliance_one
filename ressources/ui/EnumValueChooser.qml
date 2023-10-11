@@ -26,6 +26,7 @@ ColumnLayout {
 
     ComboBox {
         id: combo
+        Layout.topMargin: 2
         editable: false
         Layout.minimumWidth: 160
         Layout.fillWidth: true

@@ -21,8 +21,8 @@ ItemDelegate {
         EnumValueChooser {
             name: qsTr("Product group")
             model: Qproduct_groupListModel { list: product_group }
-            enumOf: root.model.product_group
-            onEdit: (value) => { root.model.product_group = value }
+            enumOf: root.model.group_id
+            onEdit: (value) => { root.model.group_id = value }
             Layout.columnSpan: 4
             Layout.fillWidth: true
             valueRole: "id"

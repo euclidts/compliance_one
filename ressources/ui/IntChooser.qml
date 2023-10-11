@@ -19,7 +19,7 @@ ColumnLayout {
     Label {
         text: name
         font.italic: true
-        Layout.topMargin: -6
+        Layout.topMargin: -2
     }
 
     SpinBox {

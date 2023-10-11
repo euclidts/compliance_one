@@ -22,6 +22,7 @@ ColumnLayout {
 
     ComboBox {
         id: combo
+        Layout.topMargin: 2
         editable: false
         Layout.minimumWidth: 160
         Component.onCompleted: currentIndex = enumOf
