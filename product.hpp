@@ -1,37 +1,35 @@
-#include <cstdint>
-#include <string>
+#pragma once
 
-#include <product_group.hpp>
+#include "product_group.hpp"
 
 struct product
 {
-    static consteval auto table() { return "product"; };
+    static const constexpr auto table() { return "product"; }
 
-    struct id
+    struct primary_key
     {
-        static consteval auto c_nane() { return "id"; };
+        static const constexpr auto c_name() { return "id"; }
         int32_t value{0};
-        static consteval auto property() { return "primary"; };
-    } id;
+    } primary_key;
 
     struct group_id
     {
-        static consteval auto c_nane() { return "product_group"; };
+        static const constexpr auto c_name() { return "product_group"; }
+        static const constexpr auto nane() { return "Product group"; }
         int32_t value{0};
-        static consteval auto references() { return &product_group::id; };
-        static consteval auto property() { return "unique"; };
+        static const constexpr auto froeign_key() { return &product_group::primary_key; }
     } group_id;
 
     struct commodity
     {
-        static consteval auto c_name() { return "commodity"; };
+        static const constexpr auto c_name() { return "commodity"; }
         std::string value{};
     } commodity;
 
     struct risk_score
     {
-        static consteval auto c_name() { return "risk_score"; };
-        static consteval auto name() { return "Risk Score"; };
-        int value{};
+        static const constexpr auto c_name() { return "risk_score"; }
+        static const constexpr auto name() { return "Risk Score"; }
+        int8_t value{1};
     } risk_score;
 };

@@ -7,6 +7,8 @@ import QtQuick.Controls.Material
 import Interface
 import Qsovereignty
 import Qcountry
+import Qproduct_group
+import Qproduct
 
 ApplicationWindow {
     id: window
@@ -69,7 +71,7 @@ ApplicationWindow {
     StackLayout {
         id: rootStack
         anchors.fill: parent
-        currentIndex: bottomBar.currentIndex
+//        currentIndex: bottomBar.currentIndex
 
 //        onCurrentIndexChanged: topBar.searchBar.text = ""
 
@@ -144,6 +146,20 @@ ApplicationWindow {
             }
         }
 
+        ListView {
+            spacing: 6
+            clip: true
+            boundsBehavior: Flickable.StopAtBounds
+            model : QproductListModel { list: product }
+            delegate: QproductDelegate {}
+            footer: RoundButton {
+                Layout.fillWidth: true
+                icon.source: "qrc:/icons/plus.svg"
+                onClicked: product.appendItem()
+                highlighted: true
+            }
+        }
+
 //        StackLayout {
 //            id: usersPages
 
@@ -200,6 +216,10 @@ ApplicationWindow {
         TabBar {
             id: bottomBar
             Layout.fillWidth: true
+            currentIndex: 0
+            onCurrentIndexChanged: rootStack.currentIndex = currentIndex
+
+
             TabButton {
                 text: "Home"
             }
@@ -208,6 +228,9 @@ ApplicationWindow {
             }
             TabButton {
                 text: "Countries"
+            }
+            TabButton {
+                text: "Products"
             }
         }
     }

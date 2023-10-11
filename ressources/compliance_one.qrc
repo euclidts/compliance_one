@@ -34,5 +34,6 @@
         <file>icons/times-circle.svg</file>
         <file>ui/QcountryDelegate.qml</file>
         <file>ui/EnumIntChooser.qml</file>
+        <file>ui/QproductDelegate.qml</file>
     </qresource>
 </RCC>
