@@ -35,5 +35,6 @@
         <file>ui/QcountryDelegate.qml</file>
         <file>ui/EnumIntChooser.qml</file>
         <file>ui/QproductDelegate.qml</file>
+        <file>ui/EnumValueEditor.qml</file>
     </qresource>
 </RCC>

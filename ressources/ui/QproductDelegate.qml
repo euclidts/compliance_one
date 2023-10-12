@@ -18,7 +18,7 @@ ItemDelegate {
     contentItem: GridLayout {
         columns: portrait ? 2 : 4
 
-        EnumValueChooser {
+        EnumValueEditor {
             name: qsTr("Product group")
             model: Qproduct_groupListModel { list: product_group }
             enumOf: root.model.group_id
@@ -34,8 +34,8 @@ ItemDelegate {
             textOf: root.model.commodity
             onEdit: (txt) => { root.model.commodity = txt }
             placeHolder: qsTr("* Mandatory")
-            Layout.columnSpan: 2
             readOnly: root.model.now_loading
+            Layout.columnSpan: 2
         }
 
         IntChooser {
