@@ -33,4 +33,6 @@ struct country
         int32_t value{0};
         static const constexpr auto froeign_key() { return &sovereignty::primary_key; }
     } sovereignty_id;
+
+    // phone extension
 };
