@@ -12,7 +12,7 @@
 -- (
 --     id INT AUTO_INCREMENT,
 --     PRIMARY KEY(id),
---     group_name VARCHAR(63)
+--     name VARCHAR(63)
 -- )
 
 -- CREATE TABLE product 
@@ -59,3 +59,5 @@
 --     zip MEDIUMINT UNSIGNED,
 --     location VARCHAR(63)
 -- )
+
+DELETE FROM product_group WHERE name = 'test'

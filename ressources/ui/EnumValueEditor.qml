@@ -30,18 +30,66 @@ ColumnLayout {
         editable: true
         Layout.minimumWidth: 160
         Layout.fillWidth: true
+        rightPadding: Material.textFieldHorizontalPadding + 50
         Component.onCompleted: currentIndex = indexOfValue(enumOf)
         onActivated: onEdit(currentValue)
+        onAccepted: onEdit(currentValue)
         indicator.visible: editText === "" || find(editText) !== -1
+
+        delegate: MenuItem {
+            required property var model
+            required property int index
+
+            width: ListView.view.width
+            text: model[combo.textRole]
+            Material.foreground: combo.currentIndex === index ? ListView.view.contentItem.Material.accent : ListView.view.contentItem.Material.foreground
+            highlighted: combo.highlightedIndex === index
+            hoverEnabled: combo.hoverEnabled
+
+            Button {
+                flat: true
+                visible: combo.currentValue !== model[valueRole]
+                icon.source: "qrc:/icons/trash-alt.svg"
+                x: parent.width - width - padding
+                y: parent.topPadding + (parent.availableHeight - height) / 2
+                onClicked: onExceptionAction(ToolTip.text,
+                                             qsTr("The selected item will be deleted"),
+                                             () => { combo.model.list.remove(index) }, true)
+            }
+        }
+
+        property bool inserting: false
+        property string insertText: ""
+
+        onCountChanged: {
+            if (inserting) {
+                currentIndex = find(insertText)
+                onEdit(currentValue)
+                inserting = false
+                busyDialog.close()
+            }
+        }
 
         Button {
             id: addButton
             flat: true
             visible: !combo.indicator.visible
-            checkable: true
             icon.source: "qrc:/icons/plus.svg"
             x: parent.width - width - padding
             y: parent.topPadding + (parent.availableHeight - height) / 2
+            onClicked: {
+                busyDialog.open()
+                combo.inserting = true
+                combo.insertText = combo.editText
+
+                var txt = '{"'
+                + textRole
+                + '" : "'
+                + combo.editText
+                + '"}'
+
+                model.list.addWith(JSON.parse(txt))
+            }
         }
     }
 }
