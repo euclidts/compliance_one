@@ -33,13 +33,7 @@ ApplicationWindow {
             logginDialog.clear()
             busyDialog.close()
         }
-        else {
-            onExceptionAction(qsTr("Authentication"),
-                    error === "Host requires authentication" ?
-                        qsTr("Incorect username or password")
-                      : error,
-                    function() { logginDialog.open() })
-        }
+        else { logginDialog.open() }
     }
 
     function onException (prefix: string, error: string) {

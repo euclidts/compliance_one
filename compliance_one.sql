@@ -59,5 +59,3 @@
 --     zip MEDIUMINT UNSIGNED,
 --     location VARCHAR(63)
 -- )
-
-DELETE FROM product_group WHERE name = 'test'
