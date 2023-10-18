@@ -29,7 +29,7 @@ ApplicationWindow {
 
     function onLogin (success: bool, error: string) {
         if (success) {
-            rootStack.currentIndex = 0
+            bottomBar.currentIndex = 0
             logginDialog.clear()
             busyDialog.close()
         }
@@ -64,6 +64,7 @@ ApplicationWindow {
 
     StackLayout {
         id: rootStack
+        currentIndex: 4
         anchors.fill: parent
 //        currentIndex: bottomBar.currentIndex
 
@@ -116,7 +117,7 @@ ApplicationWindow {
             spacing: 6
             clip: true
             boundsBehavior: Flickable.StopAtBounds
-            model : QsovereigntyListModel { list: sovereignty }
+            model : QsovereigntyListModel { list: sovereigntyList }
             delegate: QsovereigntyDelegate {}
             footer: RoundButton {
                         Layout.fillWidth: true
@@ -130,7 +131,7 @@ ApplicationWindow {
             spacing: 6
             clip: true
             boundsBehavior: Flickable.StopAtBounds
-            model : QcountryListModel { list: country }
+            model : QcountryListModel { list: countryList }
             delegate: QcountryDelegate {}
             footer: RoundButton {
                 Layout.fillWidth: true
@@ -144,7 +145,7 @@ ApplicationWindow {
             spacing: 6
             clip: true
             boundsBehavior: Flickable.StopAtBounds
-            model : QproductListModel { list: product }
+            model : QproductListModel { list: productList }
             delegate: QproductDelegate {}
             footer: RoundButton {
                 Layout.fillWidth: true
@@ -181,6 +182,7 @@ ApplicationWindow {
 
     header: RowLayout {
         height: 48
+        visible: bottomBar.currentIndex !== 4
 
         TextField {
             id: search
@@ -209,21 +211,24 @@ ApplicationWindow {
 
         TabBar {
             id: bottomBar
+            visible: bottomBar.currentIndex !== 4
             Layout.fillWidth: true
-            currentIndex: 0
+            currentIndex: 4
             onCurrentIndexChanged: rootStack.currentIndex = currentIndex
-
 
             TabButton {
                 text: "Home"
             }
             TabButton {
+                visible: user.user_type !== 0
                 text: "Sovereignties"
             }
             TabButton {
+                visible: user.user_type !== 0
                 text: "Countries"
             }
             TabButton {
+                visible: user.user_type !== 0
                 text: "Products"
             }
         }

@@ -20,7 +20,7 @@ ItemDelegate {
 
         EnumValueEditor {
             name: qsTr("Product group")
-            model: Qproduct_groupListModel { list: product_group }
+            model: Qproduct_groupListModel { list: product_groupList }
             enumOf: root.model.group_id
             onEdit: (value) => { root.model.group_id = value }
             Layout.columnSpan: 4
