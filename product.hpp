@@ -31,5 +31,5 @@ struct product
         static const constexpr auto c_name() { return "risk_score"; }
         static const constexpr auto name() { return "Risk Score"; }
         int8_t value{1};
-    } risk_score;
+    } risk_score; // 0 -> 10
 };

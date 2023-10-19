@@ -5,6 +5,7 @@ import QtQuick.Layouts
 import QtQuick.Controls.Material
 
 import Interface
+import Quser
 import Qsovereignty
 import Qcountry
 import Qproduct_group
@@ -122,7 +123,7 @@ ApplicationWindow {
             footer: RoundButton {
                         Layout.fillWidth: true
                         icon.source: "qrc:/icons/plus.svg"
-                        onClicked: sovereignty.appendItem()
+                        onClicked: sovereigntyList.appendItem()
                         highlighted: true
                     }
         }
@@ -136,7 +137,7 @@ ApplicationWindow {
             footer: RoundButton {
                 Layout.fillWidth: true
                 icon.source: "qrc:/icons/plus.svg"
-                onClicked: country.appendItem()
+                onClicked: countryList.appendItem()
                 highlighted: true
             }
         }
@@ -150,7 +151,7 @@ ApplicationWindow {
             footer: RoundButton {
                 Layout.fillWidth: true
                 icon.source: "qrc:/icons/plus.svg"
-                onClicked: product.appendItem()
+                onClicked: productList.appendItem()
                 highlighted: true
             }
         }
@@ -211,24 +212,23 @@ ApplicationWindow {
 
         TabBar {
             id: bottomBar
-            visible: bottomBar.currentIndex !== 4
+            visible: bottomBar.currentIndex !== 4 && user.user_type !== 0
             Layout.fillWidth: true
             currentIndex: 4
             onCurrentIndexChanged: rootStack.currentIndex = currentIndex
+
+            Component.onCompleted: console.log(user.id)
 
             TabButton {
                 text: "Home"
             }
             TabButton {
-                visible: user.user_type !== 0
                 text: "Sovereignties"
             }
             TabButton {
-                visible: user.user_type !== 0
                 text: "Countries"
             }
             TabButton {
-                visible: user.user_type !== 0
                 text: "Products"
             }
         }
