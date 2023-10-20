@@ -5,7 +5,7 @@ import QtQuick.Layouts
 import QtQuick.Controls.Material
 
 import Interface
-import Quser
+import QappUser
 import Qsovereignty
 import Qcountry
 import Qproduct_group
@@ -33,6 +33,7 @@ ApplicationWindow {
             bottomBar.currentIndex = 0
             logginDialog.clear()
             busyDialog.close()
+            console.log(user && user.id)
         }
         else { logginDialog.open() }
     }
@@ -212,12 +213,12 @@ ApplicationWindow {
 
         TabBar {
             id: bottomBar
-            visible: bottomBar.currentIndex !== 4 && user.user_type !== 0
+            visible: bottomBar.currentIndex !== 4 && user && user.user_type === 3
             Layout.fillWidth: true
             currentIndex: 4
             onCurrentIndexChanged: rootStack.currentIndex = currentIndex
 
-            Component.onCompleted: console.log(user.id)
+            Component.onCompleted: console.log(user.username)
 
             TabButton {
                 text: "Home"
