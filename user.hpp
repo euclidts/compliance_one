@@ -23,7 +23,7 @@ struct user
         std::string value{};
     } password;
     
-    enum usertypes
+    enum clearances
     {
         business_user,
         compliance_user,
@@ -31,11 +31,11 @@ struct user
         admin
     };
 
-    struct user_type
+    struct clearance
     {
-        static const constexpr auto c_name() { return "user_type"; }
-        usertypes value{business_user};
-    } user_type;
+        static const constexpr auto c_name() { return "clearance"; }
+        clearances value{business_user};
+    } clearance;
 
     struct session_id
     {

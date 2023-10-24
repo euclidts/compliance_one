@@ -33,7 +33,6 @@ ApplicationWindow {
             bottomBar.currentIndex = 0
             logginDialog.clear()
             busyDialog.close()
-            console.log(user && user.id)
         }
         else { logginDialog.open() }
     }
@@ -184,7 +183,7 @@ ApplicationWindow {
 
     header: RowLayout {
         height: 48
-        visible: bottomBar.currentIndex !== 4
+        visible: bottomBar.currentIndex === 0
 
         TextField {
             id: search
@@ -213,12 +212,10 @@ ApplicationWindow {
 
         TabBar {
             id: bottomBar
-            visible: bottomBar.currentIndex !== 4 && user && user.user_type === 3
+            visible: currentIndex < 4 && user && user.clearance === 3
             Layout.fillWidth: true
             currentIndex: 4
             onCurrentIndexChanged: rootStack.currentIndex = currentIndex
-
-            Component.onCompleted: console.log(user.username)
 
             TabButton {
                 text: "Home"

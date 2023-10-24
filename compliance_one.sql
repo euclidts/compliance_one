@@ -3,8 +3,8 @@
 --     id INT AUTO_INCREMENT,
 --     PRIMARY KEY(id),
 --     username VARCHAR(63),
---     password VARCHAR(63),
---     user_type TINYINT UNSIGNED,
+--     password VARCHAR(255),
+--     clearance TINYINT UNSIGNED,
 --     session_id UUID
 -- )
 
@@ -59,3 +59,4 @@
 --     zip MEDIUMINT UNSIGNED,
 --     location VARCHAR(63)
 -- )
+
