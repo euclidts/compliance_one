@@ -1,3 +1,5 @@
+#pragma once
+
 #include <cstdint>
 #include <string>
 
@@ -17,10 +19,18 @@ struct user
         std::string value{};
     } username;
 
+    enum permissions
+    {
+        none,
+        read,
+        write
+    };
+
     struct password
     {
         static const constexpr auto c_name() { return "password"; }
         std::string value{};
+        static const constexpr auto permission() { return write; }
     } password;
     
     enum clearances

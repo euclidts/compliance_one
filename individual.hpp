@@ -1,26 +1,24 @@
-#include <cstdint>
-#include <chrono>
+#pragma once
 
-#include <contact.hpp>
-#include <address_spec.hpp>
+#include "contact.hpp"
+//#include <address_spec.hpp>
 
 struct individual
 {
-    static consteval auto table() { return "individual"; };
+    static const constexpr auto table() { return "individual"; }
 
     struct id
     {
-        static consteval auto c_nane() { return "id"; };
+        static const constexpr auto c_name() { return "id"; }
         int32_t value{0};
-        static consteval auto property() { return "primary"; };
     } id;
 
     struct contact_id
     {
-        static consteval auto c_nane() { return "contact_id"; };
+        static const constexpr auto c_name() { return "contact_id"; }
         int32_t value{0};
-        static consteval auto property() { return "unique"; };
-        static consteval auto references() { return &contact::id; };
+        static const constexpr auto property() { return "unique"; }
+        static const constexpr auto references() { return &contact::id; }
     } contact_id;
     
     enum roles
@@ -33,8 +31,8 @@ struct individual
 
     struct role
     {
-        static consteval auto c_name() { return "role"; };
-        roles value{};
+        static const constexpr auto c_name() { return "role"; }
+        roles value{other};
     } role;
 
     // KYC 
@@ -43,59 +41,59 @@ struct individual
 
     struct uuid
     {
-        static consteval auto c_name() { return "individual_unique_identifier"; };
-        static consteval auto name() { return "Individual Unique Identifier"; };
+        static const constexpr auto c_name() { return "individual_unique_identifier"; }
+        static const constexpr auto name() { return "Individual Unique Identifier"; }
         std::string value{};
     } uuid;
 
     struct local_name
     {
-        static consteval auto c_name() { return "local_name"; };
-        static consteval auto name() { return "Name (Local Characters)"; };
+        static const constexpr auto c_name() { return "local_name"; }
+        static const constexpr auto name() { return "Name (Local Characters)"; }
         std::string value{};
     } local_name;
 
     struct local_forenames
     {
-        static consteval auto c_name() { return "local_forenames"; };
-        static consteval auto name() { return "Forenames (Local Characters)"; };
+        static const constexpr auto c_name() { return "local_forenames"; }
+        static const constexpr auto name() { return "Forenames (Local Characters)"; }
         std::string value{};
     } local_forenames;
 
-    address_spec address;
+//    address_spec address;
 
-    struct date_of_birth
-    {
-        static consteval auto c_name() { return "date_of_birth"; };
-        static consteval auto name() { return "Date of Birth"; };
-        std::chrono::year_month_day value{};
-    } date_of_birth;
+//    struct date_of_birth
+//    {
+//        static const constexpr auto c_name() { return "date_of_birth"; }
+//        static const constexpr auto name() { return "Date of Birth"; }
+//        std::chrono::year_month_day value{};
+//    } date_of_birth;
 
     struct pep
     {
-        static consteval auto c_name() { return "pep"; };
-        static consteval auto name() { return "Is a PEP"; };
+        static const constexpr auto c_name() { return "pep"; }
+        static const constexpr auto name() { return "Is a PEP"; }
         bool value{};
     } pep;
 
     struct pep_country
     {
-        static consteval auto c_name() { return "pep_country"; };
-        static consteval auto name() { return "Country"; };
+        static const constexpr auto c_name() { return "pep_country"; }
+        static const constexpr auto name() { return "Country"; }
         bool value{};
     } pep_country;
 
     struct pep_notes
     {
-        static consteval auto c_name() { return "pep_notes"; };
-        static consteval auto name() { return "Additional Notes"; };
+        static const constexpr auto c_name() { return "pep_notes"; }
+        static const constexpr auto name() { return "Additional Notes"; }
         std::string value{};
     } pep_notes;
 
     // only accesible to compliance users
     struct notes
     {
-        static consteval auto c_name() { return "notes"; };
+        static const constexpr auto c_name() { return "notes"; }
         std::string value{};
     } notes;
 };

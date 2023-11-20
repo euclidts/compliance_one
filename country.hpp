@@ -1,9 +1,16 @@
 #pragma once
 
 #include "sovereignty.hpp"
+#include "user.hpp"
 
 struct country
 {
+    static const constexpr int permission(const user* u)
+    {
+        if (u) return user::read;
+        else return user::read + user::write;
+    }
+
     static const constexpr auto table() { return "country"; }
 
     struct primary_key
@@ -30,7 +37,7 @@ struct country
     {
         static const constexpr auto c_name() { return "sovereignty_id"; }
         static const constexpr auto name() { return "Sovereignty"; }
-        int32_t value{0};
+        int32_t value{1};
         static const constexpr auto froeign_key() { return &sovereignty::primary_key; }
     } sovereignty_id;
 

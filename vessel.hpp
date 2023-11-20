@@ -1,15 +1,18 @@
+#pragma once
+
 #include <cstdint>
 #include <string>
 
+#include "company.hpp"
+
 struct vessel
 {
-    static consteval auto table() { return "vessel"; };
+    static const constexpr auto table() { return "vessel"; }
 
     struct id
     {
-        static consteval auto c_nane() { return "id"; };
+        static const constexpr auto c_nane() { return "id"; }
         int32_t value{0};
-        static consteval auto property() { return "primary"; };
     } id;
 
     // KYC 
@@ -18,18 +21,30 @@ struct vessel
 
     struct imo
     {
-        static consteval auto c_name() { return "imo"; };
-        static consteval auto name() { return "IMO"; };
+        static const constexpr auto c_name() { return "imo"; }
+        static const constexpr auto name() { return "IMO"; }
         std::string value{};
     } imo;
 
     struct vessel_name
     {
-        static consteval auto c_name() { return "name"; };
+        static const constexpr auto c_name() { return "name"; }
         std::string value{};
     } vessel_name;
 
-    // owner --- link to company
-    // manager --- link to company
+    struct owner
+    {
+        static const constexpr auto c_name() { return "owner"; }
+        int32_t value{};
+        static const constexpr auto references() { return &company::id; }
+    } owner;
+
+    struct manager
+    {
+        static const constexpr auto c_name() { return "manager"; }
+        int32_t value{};
+        static const constexpr auto references() { return &company::id; }
+    } manager;
+
     // restrictions Flag
 };
