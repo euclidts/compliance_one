@@ -10,6 +10,8 @@ import Qsovereignty
 import Qcountry
 import Qproduct_group
 import Qproduct
+import Qcontact
+import Qindividual
 
 ApplicationWindow {
     id: window
@@ -30,6 +32,8 @@ ApplicationWindow {
 
     function onLogin (success: bool, error: string) {
         if (success) {
+            contact_list.get()
+            // individual_list.get()
             bottomBar.currentIndex = 0
             logginDialog.clear()
             busyDialog.close()
@@ -65,7 +69,7 @@ ApplicationWindow {
 
     StackLayout {
         id: rootStack
-        currentIndex: 4
+        currentIndex: count
         anchors.fill: parent
 //        currentIndex: bottomBar.currentIndex
 
@@ -89,6 +93,7 @@ ApplicationWindow {
                 Layout.alignment: Qt.AlignVCenter
                 icon.height: (implicitBackgroundHeight + topInset + bottomInset) * 2
                 icon.width: (implicitBackgroundWidth + leftInset + rightInset) * 2
+                onClicked: rootStack.currentIndex = 4
             }
 
             Button {
@@ -118,12 +123,12 @@ ApplicationWindow {
             spacing: 6
             clip: true
             boundsBehavior: Flickable.StopAtBounds
-            model : QsovereigntyListModel { list: sovereigntyList }
+            model : QsovereigntyListModel { list: sovereignty_list }
             delegate: QsovereigntyDelegate {}
             footer: RoundButton {
                         Layout.fillWidth: true
                         icon.source: "qrc:/icons/plus.svg"
-                        onClicked: sovereigntyList.appendItem()
+                        onClicked: sovereignty_list.appendItem()
                         highlighted: true
                     }
         }
@@ -132,12 +137,12 @@ ApplicationWindow {
             spacing: 6
             clip: true
             boundsBehavior: Flickable.StopAtBounds
-            model : QcountryListModel { list: countryList }
+            model : QcountryListModel { list: country_list }
             delegate: QcountryDelegate {}
             footer: RoundButton {
                 Layout.fillWidth: true
                 icon.source: "qrc:/icons/plus.svg"
-                onClicked: countryList.appendItem()
+                onClicked: country_list.appendItem()
                 highlighted: true
             }
         }
@@ -146,15 +151,17 @@ ApplicationWindow {
             spacing: 6
             clip: true
             boundsBehavior: Flickable.StopAtBounds
-            model : QproductListModel { list: productList }
+            model : QproductListModel { list: product_list }
             delegate: QproductDelegate {}
             footer: RoundButton {
                 Layout.fillWidth: true
                 icon.source: "qrc:/icons/plus.svg"
-                onClicked: productList.appendItem()
+                onClicked: product_list.appendItem()
                 highlighted: true
             }
         }
+
+        QindividualPage { id: individualPage }
 
 //        StackLayout {
 //            id: usersPages
@@ -183,7 +190,7 @@ ApplicationWindow {
 
     header: RowLayout {
         height: 48
-        visible: bottomBar.currentIndex === 0
+        visible: rootStack.currentIndex === 0
 
         TextField {
             id: search
@@ -205,6 +212,7 @@ ApplicationWindow {
             }
         }
     }
+
 //    header: TopBar { id: topBar }
 //    footer: BottomBar { id: bottomBar }
     footer: RowLayout {
@@ -212,10 +220,10 @@ ApplicationWindow {
 
         TabBar {
             id: bottomBar
-            visible: currentIndex < 4 && user && user.clearance === 3
+            visible: rootStack.currentIndex < count && user && user.clearance === 3
             Layout.fillWidth: true
-            currentIndex: 4
             onCurrentIndexChanged: rootStack.currentIndex = currentIndex
+            currentIndex: rootStack.count
 
             TabButton {
                 text: "Home"

@@ -36,5 +36,7 @@
         <file>ui/EnumIntChooser.qml</file>
         <file>ui/QproductDelegate.qml</file>
         <file>ui/EnumValueEditor.qml</file>
+        <file>ui/QindividualPage.qml</file>
+        <file>ui/PhoneChooser.qml</file>
     </qresource>
 </RCC>

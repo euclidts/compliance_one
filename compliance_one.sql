@@ -46,17 +46,20 @@
 --     CONSTRAINT FOREIGN KEY (sovereignty_id) REFERENCES sovereignty (id)
 -- )
 
--- CREATE TABLE contact 
--- (
---     id INT AUTO_INCREMENT,
---     PRIMARY KEY(id),
---     family_name VARCHAR(63),
---     fore_names VARCHAR(63),
---     email VARCHAR(127),
---     phone VARCHAR(63),
---     address VARCHAR(63),
---     country VARCHAR(63),
---     zip MEDIUMINT UNSIGNED,
---     location VARCHAR(63)
--- )
+CREATE TABLE contact 
+(
+    id INT AUTO_INCREMENT,
+    PRIMARY KEY(id),
+    family_name VARCHAR(63),
+    fore_names VARCHAR(63),
+    email VARCHAR(127),
+    calling_code VARCHAR(5),
+    phone VARCHAR(10),
+    address VARCHAR(63),
+    country VARCHAR(63),
+    zip MEDIUMINT UNSIGNED,
+    location VARCHAR(63)
+)
+
+-- DESCRIBE contact
 

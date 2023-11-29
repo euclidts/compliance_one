@@ -13,7 +13,7 @@ Dialog {
     implicitWidth: 270
 
     function validate() {
-        bridge.authenticate(usernNameField.text,
+        bridge.authenticate(userNameField.text,
                             passwordField.text)
         logginDialog.close()
         busyDialog.open()
@@ -33,19 +33,18 @@ Dialog {
         }
 
         TextField {
-            id: usernNameField
+            id: userNameField
             Layout.fillWidth: true
             placeholderText: qsTr("Username")
             onAccepted: passwordField.text !== "" ? validate()
                                                    : passwordField.fieldFocus = true
-            Component.onCompleted: focus = true
         }
 
         PwdField {
             id: passwordField
             onFieldAccepted: function () {
-                usernNameField.text !== "" ? validate()
-                                           : usernNameField.focus = true
+                userNameField.text !== "" ? validate()
+                                          : userNameField.focus = true
             }
         }
 
@@ -56,9 +55,17 @@ Dialog {
             Layout.fillWidth: true
             font.capitalization: Font.MixedCase
             font.bold: true
-            highlighted: passwordField.text !== "" && usernNameField.text !== ""
-            onClicked: if (passwordField.text !== "" && usernNameField.text !== "")
+            highlighted: passwordField.text !== "" && userNameField.text !== ""
+            onClicked: if (passwordField.text !== "" && userNameField.text !== "")
                            validate()
+        }
+
+        Component.onCompleted: {
+            userNameField.focus = true
+            sovereignty_list.get()
+            country_list.get()
+            product_group_list.get()
+            product_list.get()
         }
     }
 }
