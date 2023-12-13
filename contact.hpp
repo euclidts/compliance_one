@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cstdint>
-#include <chrono>
 
 struct contact
 {
@@ -36,7 +35,6 @@ struct contact
     struct calling_code
     {
         static const constexpr auto c_name() { return "calling_code"; }
-        static const constexpr auto regex() { return "/^(\+\d{1,3})|(\d{3,5})/"; }
         static const constexpr auto max() { return 5; }
         std::string value{};
     } calling_code;
@@ -44,7 +42,6 @@ struct contact
     struct phone
     {
         static const constexpr auto c_name() { return "phone"; }
-        static const constexpr auto regex() { return "/^$|\d{6,13}?$/"; }
         static const constexpr auto max() { return 13; }
         std::string value{};
     } phone;
