@@ -3,6 +3,7 @@
 #include <chrono>
 
 #include "contact.hpp"
+#include "country.hpp"
 
 // using namespace std::chrono;
 
@@ -56,12 +57,12 @@ struct individual
         std::string value{};
     } local_forenames;
 
-    struct country
+    struct country_id
     {
         static const constexpr auto c_name() { return "country"; }
         int32_t value{0};
-        static const constexpr auto references() { return &country::id; }
-    } country;
+        static const constexpr auto references() { return &country::primary_key; }
+    } country_id;
 
     struct address
     {
@@ -91,7 +92,7 @@ struct individual
    {
         static const constexpr auto c_name() { return "date_of_birth"; }
         static const constexpr auto name() { return "Date of birth"; }
-        std::chrono::year_month_day value{};
+        std::chrono::sys_days value{};
         // year_month_day value{floor<days>(system_clock::now())};
    } date_of_birth;
 

@@ -6,16 +6,12 @@ import QtQuick.Controls.Material
 ScrollView {
     ScrollBar.vertical.policy: ScrollBar.AlwaysOff
     ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-    leftInset: 6
-    rightInset: 6
-    topInset: 3
-    bottomInset: 3
 
     FlickableItem {
         BackgroundRect {
             ColumnLayout {
                 width: parent.width
-                Layout.minimumWidth: 200
+                // Layout.minimumWidth: 200
 
                 Label {
                     text: qsTr("Individual")
@@ -24,6 +20,7 @@ ScrollView {
                 }
 
                 GridLayout {
+                    Layout.margins: 6
                     columns: portrait ? 1 : 2
 
                     LabeledTextField {
@@ -59,6 +56,81 @@ ScrollView {
                         phoneOf : current_contact
                         Layout.maximumWidth: portrait ? window.width
                                                       : window.width / 2
+                    }
+                }
+
+                AddressChooser {
+                    Layout.margins: 6
+                    // addressOf: model
+                }
+
+                GridLayout {
+                    Layout.margins: 6
+                    columns: portrait ? 1 : 2
+
+                    EnumIntChooser {
+                        name: "Role"
+                        model: [
+                            "owner",
+                            "director",
+                            "intermediary",
+                            "other"
+                        ]
+                    }
+
+                    LabeledTextField {
+                        name: qsTr("Individual Unique Identifier")
+                        // textOf: current_contact.family_name
+                        // onEdit: (txt) => { current_contact.family_name = txt }
+                        placeHolder: qsTr("* Mandatory")
+                        // readOnly: current_contact.now_loading
+                    }
+
+                    LabeledTextField {
+                        name: qsTr("Name (Local Characters)")
+                        // textOf: current_contact.family_name
+                        // onEdit: (txt) => { current_contact.family_name = txt }
+                        placeHolder: qsTr("* Optional")
+                        // readOnly: current_contact.now_loading
+                    }
+
+                    LabeledTextField {
+                        name: qsTr("Forenames (Local Characters)")
+                        // textOf: current_contact.forenames
+                        // onEdit: (txt) => { current_contact.forenames = txt }
+                        placeHolder: qsTr("* Optional")
+                        // readOnly: current_contact.now_loading
+                    }
+
+                    CheckBox {
+                        // checked: exterior.hasParking
+                        // onCheckStateChanged: exterior.hasParking = checked
+                        text: qsTr("Is a PEP")
+                    }
+
+                    EnumValueChooser {
+                        name: qsTr("Country")
+                        model: countryListView.model
+                        // enumOf: root.model.sovereignty_id
+                        Layout.fillWidth: true
+                        valueRole: "id"
+                        textRole: "country_name"
+                    }
+
+                    LabeledTextField {
+                        name: qsTr("Additional PEP Notes")
+                        // textOf: current_contact.family_name
+                        // onEdit: (txt) => { current_contact.family_name = txt }
+                        placeHolder: qsTr("* Optional")
+                        // readOnly: current_contact.now_loading
+                    }
+
+                    LabeledTextField {
+                        name: qsTr("Notes")
+                        // textOf: current_contact.forenames
+                        // onEdit: (txt) => { current_contact.forenames = txt }
+                        placeHolder: qsTr("* Optional")
+                        // readOnly: current_contact.now_loading
                     }
                 }
             }

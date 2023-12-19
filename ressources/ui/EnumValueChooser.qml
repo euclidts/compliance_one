@@ -15,8 +15,8 @@ ColumnLayout {
     property alias textRole: combo.textRole
     property alias valueRole: combo.valueRole
     required property string name
-    required property string enumOf
-    required property var onEdit
+    /*required*/ property string enumOf
+    /*required*/ property var onEdit
 
     Label {
         id: label

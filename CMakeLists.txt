@@ -14,7 +14,6 @@ make_all(
     INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/compliance_one.hpp
     USER_CLASS user
     CLASSES
-        sovereignty
         country
         product_group
         product

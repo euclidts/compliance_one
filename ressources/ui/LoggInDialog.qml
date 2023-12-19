@@ -62,7 +62,6 @@ Dialog {
 
         Component.onCompleted: {
             userNameField.focus = true
-            sovereignty_list.get()
             country_list.get()
             product_group_list.get()
             product_list.get()

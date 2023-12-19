@@ -9,10 +9,10 @@ GroupBox {
     Layout.topMargin: 12
     Layout.fillWidth: true
 
-    required property var addressOf
+    // required property var addressOf
 
     label: Label {
-        text: qsTr("Adresse")
+        text: qsTr("Adress")
         font.italic: true
     }
 
@@ -24,70 +24,40 @@ GroupBox {
             columns: portrait ? 1 : 2
             Layout.fillWidth: true
 
-            LabeledTextField {
-                name: qsTr("Rue")
-                textOf: addressOf.street
-                onEdit: function(txt) { addressOf.street = txt }
-                capitalization: Font.MixedCase
-            }
-
-            LabeledTextField {
-                name: qsTr("Ville")
-                textOf: addressOf.city
-                onEdit: function(txt) { addressOf.city = txt }
-                capitalization: Font.MixedCase
-            }
-        }
-
-        RowLayout {
-            Layout.fillWidth: true
-
-            ColumnLayout {
-
-                Label {
-                    text: qsTr("Canton")
-                    font.italic: true
-                }
-
-
-                ComboBox {
-                    id: cantonField
-                    textRole: "text"
-                    valueRole: "npa"
-                    model: SwissCantons {}
-                    Layout.minimumWidth: 164
-                    onActivated: {
-                        addressOf.canton = currentText
-                        addressOf.zip = currentValue
-                    }
-                    displayText: addressOf.canton
-                    currentIndex: -1
-                }
+            EnumValueChooser {
+                id: countryCombo
+                name: qsTr("Country")
+                model: countryListView.model
+                // enumOf: root.model.sovereignty_id
+                Layout.fillWidth: true
+                valueRole: "id"
+                textRole: "country_name"
             }
 
             IntChooser {
-                name: qsTr("NPA")
+                name: qsTr("ZIP")
                 minimum: 1000
                 maximum: 9999
-                numberOf: addressOf.zip
-                onEdit: (val) => { addressOf.zip = val }
+                // numberOf: addressOf.zip
+                // onEdit: (val) => { addressOf.zip = val }
                 spin.textFromValue: (value, locale) => {
                     return Number(value).toString();
                 }
             }
 
-//            SpinBox {
-//                from: 1000
-//                to: 9999
-//                editable: true
-//                value: addressOf.zip
-//                onValueModified: addressOf.zip = value
-//                inputMethodHints: Qt.ImhFormattedNumbersOnly
-//                Layout.maximumWidth: 130
-//                textFromValue: function(value, locale) {
-//                    return Number(value).toString();
-//                }
-//            }
+            LabeledTextField {
+                name: qsTr("City")
+                // textOf: addressOf.city
+                // onEdit: function(txt) { addressOf.city = txt }
+                capitalization: Font.MixedCase
+            }
+
+            LabeledTextField {
+                name: qsTr("Street")
+                // textOf: addressOf.street
+                // onEdit: function(txt) { addressOf.street = txt }
+                capitalization: Font.MixedCase
+            }
         }
     }
 }

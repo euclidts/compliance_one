@@ -20,7 +20,6 @@
         <file>icons/arrow-right.svg</file>
         <file>icons/arrow-left.svg</file>
         <file>icons/C1_logov1.svg</file>
-        <file>ui/QsovereigntyDelegate.qml</file>
         <file>ui/LabeledTextField.qml</file>
         <file>ui/IntChooser.qml</file>
         <file>icons/trash-alt.svg</file>
@@ -38,5 +37,6 @@
         <file>ui/EnumValueEditor.qml</file>
         <file>ui/QindividualPage.qml</file>
         <file>ui/PhoneChooser.qml</file>
+        <file>ui/AddressChooser.qml</file>
     </qresource>
 </RCC>

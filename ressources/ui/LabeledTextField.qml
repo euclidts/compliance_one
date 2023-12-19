@@ -6,13 +6,12 @@ import QtQuick.Controls.Material
 ColumnLayout {
     spacing: 12
 
-    property string placeHolder: qsTr("* Champ obligatoire")
+    property string placeHolder
     property alias validator: field.validator
-    property alias text: field.text
     property alias readOnly: field.readOnly
     required property string name
-    required property string textOf
-    required property var onEdit
+    /*required*/ property string textOf
+    /*required*/ property var onEdit
     property int inputHint: Qt.ImhNone
     property int capitalization: Font.MixedCase
 

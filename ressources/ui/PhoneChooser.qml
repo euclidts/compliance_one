@@ -53,14 +53,12 @@ ColumnLayout {
         TextField {
             Layout.maximumWidth: 90
             text: phoneOf.calling_code
-            onAccepted: focus = false
+            onAccepted: phoneOf.calling_code = text
             validator: RegularExpressionValidator {
                 regularExpression: /^(\+\d{1,3})|(\d{3,5})/
             }
-            onTextChanged: if (acceptableInput) {
-                               color = Material.foreground
-                               phoneOf.calling_code = text
-                           } else color = "red"
+            onTextChanged: acceptableInput ? color = Material.foreground
+                                           : color = "red"
         }
 
         TextField {
@@ -68,14 +66,12 @@ ColumnLayout {
             inputMethodHints: Qt.ImhFormattedNumbersOnly
             Layout.fillWidth: true
             placeholderText: qsTr("* Mandatory")
-            onAccepted: focus = false
+            onAccepted: phoneOf.phone = text
             validator: RegularExpressionValidator {
                 regularExpression: /^$|\d{6,13}?$/
             }
-            onTextChanged: if (acceptableInput) {
-                               color = Material.foreground
-                               phoneOf.phone = text
-                           } else color = "red"
+            onTextChanged: acceptableInput ? color = Material.foreground
+                                           : color = "red"
         }
     }
 }

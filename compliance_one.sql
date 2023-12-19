@@ -25,41 +25,48 @@
 --     risk_score TINYINT UNSIGNED
 -- )
 
--- CREATE TABLE sovereignty
+-- CREATE TABLE contact 
 -- (
 --     id INT AUTO_INCREMENT,
 --     PRIMARY KEY(id),
---     name VARCHAR(63),
---     ranking TINYINT UNSIGNED,
---     fatf TINYINT UNSIGNED,
---     transparency TINYINT UNSIGNED,
---     world_bank TINYINT UNSIGNED
+--     family_name VARCHAR(63),
+--     fore_names VARCHAR(63),
+--     email VARCHAR(127),
+--     calling_code VARCHAR(5),
+--     phone VARCHAR(13),
+--     address VARCHAR(63),
+--     country VARCHAR(63),
+--     zip MEDIUMINT UNSIGNED,
+--     location VARCHAR(63)
 -- )
 
--- CREATE TABLE country 
--- (
---     id INT AUTO_INCREMENT,
---     PRIMARY KEY(id),
---     country_name VARCHAR(63),
---     official_state_name VARCHAR(63),
---     sovereignty_id INT NOT NULL,
---     CONSTRAINT FOREIGN KEY (sovereignty_id) REFERENCES sovereignty (id)
--- )
+-- run sql scripts dowloaded from 
+-- https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/sql/countries.sql
 
-CREATE TABLE contact 
-(
-    id INT AUTO_INCREMENT,
-    PRIMARY KEY(id),
-    family_name VARCHAR(63),
-    fore_names VARCHAR(63),
-    email VARCHAR(127),
-    calling_code VARCHAR(5),
-    phone VARCHAR(10),
-    address VARCHAR(63),
-    country VARCHAR(63),
-    zip MEDIUMINT UNSIGNED,
-    location VARCHAR(63)
-)
+-- ALTER TABLE countries
+-- DROP COLUMN iso2,
+-- DROP COLUMN capital,
+-- DROP COLUMN currency,
+-- DROP COLUMN currency_name,
+-- DROP COLUMN currency_symbol,
+-- DROP COLUMN tld,
+-- DROP COLUMN native,
+-- DROP COLUMN region,
+-- DROP COLUMN subregion,
+-- DROP COLUMN nationality,
+-- DROP COLUMN timezones,
+-- DROP COLUMN translations,
+-- DROP COLUMN emojiU,
+-- DROP COLUMN flag,
+-- DROP CONSTRAINT country_continent_final,
+-- DROP CONSTRAINT country_subregion_final,
+-- DROP COLUMN region_id,
+-- DROP COLUMN subregion_id,
+-- ADD COLUMN ranking TINYINT UNSIGNED,
+-- ADD COLUMN fatf TINYINT UNSIGNED,
+-- ADD COLUMN transparency TINYINT UNSIGNED,
+-- ADD COLUMN world_bank TINYINT UNSIGNED,
+-- ADD COLUMN sovereignty_id MEDIUMINT UNSIGNED,
+-- ADD CONSTRAINT FOREIGN KEY (sovereignty_id) REFERENCES country (id)
 
--- DESCRIBE contact
-
+DESCRIBE country

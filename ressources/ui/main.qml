@@ -6,7 +6,6 @@ import QtQuick.Controls.Material
 
 import Interface
 import QappUser
-import Qsovereignty
 import Qcountry
 import Qproduct_group
 import Qproduct
@@ -119,21 +118,7 @@ ApplicationWindow {
         }
 
         ListView {
-            id: sovereigntyListView
-            spacing: 6
-            clip: true
-            boundsBehavior: Flickable.StopAtBounds
-            model : QsovereigntyListModel { list: sovereignty_list }
-            delegate: QsovereigntyDelegate {}
-            footer: RoundButton {
-                        Layout.fillWidth: true
-                        icon.source: "qrc:/icons/plus.svg"
-                        onClicked: sovereignty_list.appendItem()
-                        highlighted: true
-                    }
-        }
-
-        ListView {
+            id: countryListView
             spacing: 6
             clip: true
             boundsBehavior: Flickable.StopAtBounds
@@ -190,7 +175,15 @@ ApplicationWindow {
 
     header: RowLayout {
         height: 48
-        visible: rootStack.currentIndex === 0
+        visible: rootStack.currentIndex !== rootStack.count
+
+        Button {
+            id: backButton
+            visible: !bottomBar.visible
+            icon.source: "qrc:/icons/arrow-left.svg"
+            flat: true
+            onClicked: rootStack.currentIndex = 0
+        }
 
         TextField {
             id: search
@@ -227,9 +220,6 @@ ApplicationWindow {
 
             TabButton {
                 text: "Home"
-            }
-            TabButton {
-                text: "Sovereignties"
             }
             TabButton {
                 text: "Countries"
