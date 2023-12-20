@@ -7,6 +7,9 @@ ColumnLayout {
     spacing: 12
 
     required property var phoneOf
+    required property var onPhoneEdit
+    required property var codeOf
+    required property var onCodeEdit
     property int capitalization: Font.Capitalize
 
     Label {
@@ -18,55 +21,45 @@ ColumnLayout {
 
     RowLayout {
         Layout.topMargin: -6
+
         ComboBox {
             id: codeBox
             Layout.maximumWidth: 90
-
-            model: ListModel {
-                ListElement {
-                    text: "SUI"
-                    code: "+41"
-                }
-                ListElement {
-                    text: "FRA"
-                    code: "+33"
-                }
-                ListElement {
-                    text: "DEU"
-                    code: "+49"
-                }
-                ListElement {
-                    text: "ITA"
-                    code: "+39"
-                }
-                ListElement {
-                    text: "IRL"
-                    code: "+353"
-                }
+            model: countryListView.model
+            editable: true
+            textRole: "iso3"
+            valueRole: "phonecode"
+            delegate: MenuItem {
+                width: ListView.view.width
+                text: model["emoji"] + ' ' + model["iso3"]
+                Material.foreground: codeBox.currentIndex === index ?
+                                         ListView.view.contentItem.Material.accent :
+                                         ListView.view.contentItem.Material.foreground
+                highlighted: codeBox.highlightedIndex === index
+                hoverEnabled: codeBox.hoverEnabled
             }
-            textRole: "text"
-            valueRole: "code"
-            Component.onCompleted: currentIndex = indexOfValue(phoneOf.calling_code)
-            onActivated: { phoneOf.calling_code = currentValue }
+            Component.onCompleted: currentIndex = indexOfValue(codeOf)
+            onActivated: codeField.text = currentValue
         }
 
         TextField {
+            id: codeField
             Layout.maximumWidth: 90
-            text: phoneOf.calling_code
-            onAccepted: phoneOf.calling_code = text
+            text: codeOf
+            onAccepted: onCodeEdit(text)
             validator: RegularExpressionValidator {
-                regularExpression: /^(\+\d{1,3})|(\d{3,5})/
+                regularExpression: /^(\+\d{1,3})|(\d{1,5})|(\d{1,3}\-\d{2,5})|(\+\d{1,3}\-\d{2,5})/
             }
             onTextChanged: acceptableInput ? color = Material.foreground
                                            : color = "red"
         }
 
         TextField {
-            text: phoneOf.phone
-            inputMethodHints: Qt.ImhFormattedNumbersOnly
+            text: phoneOf
+            inputMethodHints: Qt.ImhDialableCharactersOnly
             Layout.fillWidth: true
             placeholderText: qsTr("* Mandatory")
-            onAccepted: phoneOf.phone = text
+            onAccepted: onPhoneEdit(text)
             validator: RegularExpressionValidator {
                 regularExpression: /^$|\d{6,13}?$/
             }

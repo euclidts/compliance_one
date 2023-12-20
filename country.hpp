@@ -73,13 +73,6 @@ struct country
         std::string value{};
     } emoji;
 
-    struct created_at
-    {
-        static const constexpr auto name() { return "Created at"; }
-        static const constexpr auto c_name() { return "created_at"; }
-        std::chrono::sys_seconds value{};
-    } created_at;
-
     struct updated_at
     {
         static const constexpr auto name() { return "Updated at"; }

@@ -7,7 +7,7 @@ import QtQuick.Controls.Material.impl
 ColumnLayout {
     spacing: 12
 
-    /*required*/ property int numberOf
+    property int numberOf
     required property string name
     property var onEdit
     property int minimum: 0
@@ -27,7 +27,7 @@ ColumnLayout {
         from: minimum
         to: maximum
         stepSize: step
-        // value: numberOf
+        value: numberOf
         locale: Qt.locale()
         onFocusChanged: if (focus) contentItem.selectAll()
         onValueModified: onEdit(value)

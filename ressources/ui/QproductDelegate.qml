@@ -17,6 +17,7 @@ ItemDelegate {
 
     contentItem: GridLayout {
         columns: portrait ? 2 : 4
+        enabled: !root.model.now_loading
 
         EnumValueEditor {
             name: qsTr("Product group")
@@ -34,7 +35,6 @@ ItemDelegate {
             textOf: root.model.commodity
             onEdit: (txt) => { root.model.commodity = txt }
             placeHolder: qsTr("* Mandatory")
-            readOnly: root.model.now_loading
             Layout.columnSpan: 2
         }
 
@@ -45,7 +45,7 @@ ItemDelegate {
             Layout.columnSpan: 2
             numberOf: root.model.risk_score
             onEdit: (val) => { root.model.risk_score = val }
-            editable: !root.model.now_loading
+            editable: true
         }
 
 

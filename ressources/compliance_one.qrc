@@ -38,5 +38,7 @@
         <file>ui/QindividualPage.qml</file>
         <file>ui/PhoneChooser.qml</file>
         <file>ui/AddressChooser.qml</file>
+        <file>ui/FloatChooser.qml</file>
+        <file>ui/CountryChooser.qml</file>
     </qresource>
 </RCC>

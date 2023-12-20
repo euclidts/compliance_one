@@ -10,8 +10,8 @@ ColumnLayout {
     property alias validator: field.validator
     property alias readOnly: field.readOnly
     required property string name
-    /*required*/ property string textOf
-    /*required*/ property var onEdit
+    required property string textOf
+    required property var onEdit
     property int inputHint: Qt.ImhNone
     property int capitalization: Font.MixedCase
 

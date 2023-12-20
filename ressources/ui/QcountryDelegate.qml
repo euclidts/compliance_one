@@ -15,20 +15,33 @@ ItemDelegate {
 
     contentItem: GridLayout {
         columns: portrait ? 2 : 4
+        enabled: !root.model.now_loading
 
         LabeledTextField {
             name: qsTr("Name")
             textOf: root.model.name
             onEdit: (txt) => { root.model.name = txt }
             placeHolder: qsTr("* Mandatory")
-            readOnly: root.model.now_loading
+        }
+
+        CheckBox {
+            id: unCheck
+            onCheckStateChanged: if (checked) root.model.sovereignty_id = 0
+            text: qsTr("UN Member State")
+            Component.onCompleted: if (root.model.sovereignty_id === 0) checked = true
+        }
+
+        CountryChooser {
+            name: qsTr("Sovereignty")
+            enumOf: root.model.sovereignty_id
+            onEdit: (value) => { root.model.sovereignty_id = value }
+            enabled: !unCheck.checked
         }
 
         LabeledTextField {
             name: qsTr("Flag")
             textOf: root.model.emoji
             onEdit: (txt) => { root.model.emoji = txt }
-            readOnly: root.model.now_loading
         }
 
         // LabeledTextField {
@@ -37,7 +50,6 @@ ItemDelegate {
         //     onEdit: (txt) => { root.model.official_state_name = txt }
         //     placeHolder: qsTr("* Mandatory")
         //     Layout.columnSpan: 2
-        //     readOnly: root.model.now_loading
         // }
 
         LabeledTextField {
@@ -45,7 +57,6 @@ ItemDelegate {
             textOf: root.model.iso3
             onEdit: (txt) => { root.model.iso3 = txt }
             placeHolder: qsTr("* Mandatory")
-            readOnly: root.model.now_loading
         }
 
         LabeledTextField {
@@ -53,18 +64,6 @@ ItemDelegate {
             textOf: root.model.numeric_code
             onEdit: (txt) => { root.model.numeric_code = txt }
             placeHolder: qsTr("* Mandatory")
-            readOnly: root.model.now_loading
-        }
-
-        EnumValueChooser {
-            id: sovereigntyCombo
-            name: qsTr("Sovereignty")
-            model: countryListView.model
-            enumOf: root.model.sovereignty_id
-            onEdit: (value) => { root.model.sovereignty_id = value }
-            Layout.fillWidth: true
-            valueRole: "id"
-            textRole: "name"
         }
 
         LabeledTextField {
@@ -72,8 +71,12 @@ ItemDelegate {
             textOf: root.model.phonecode
             onEdit: (txt) => { root.model.phonecode = txt }
             placeHolder: qsTr("* Mandatory")
-            readOnly: root.model.now_loading
+            validator: RegularExpressionValidator {
+                regularExpression: /^(\+\d{1,3})|(\d{1,5})|(\d{1,3}\-\d{2,5})|(\+\d{1,3}\-\d{2,5})/
+            }
         }
+
+        Item {}
 
         IntChooser {
             name: qsTr("Latitude")
@@ -81,7 +84,6 @@ ItemDelegate {
             onEdit: (val) => { root.model.latitude = val }
             minimum: -90.0
             maximum: 90.0
-            editable: !root.model.now_loading
         }
 
         IntChooser {
@@ -90,31 +92,20 @@ ItemDelegate {
             onEdit: (val) => { root.model.longitude = val }
             minimum: -180.0
             maximum: 180.0
-            editable: !root.model.now_loading
-        }
-
-        LabeledTextField {
-            name: qsTr("Created at")
-            textOf: root.model.created_at
-            onEdit: (txt) => { root.model.created_at = txt }
-            readOnly: root.model.now_loading
-        }
-
-        LabeledTextField {
-            name: qsTr("Updated at")
-            textOf: root.model.updated_at
-            onEdit: (txt) => { root.model.updated_at = txt }
-            readOnly: root.model.now_loading
         }
 
         LabeledTextField {
             name: qsTr("WikiData")
             textOf: root.model.wikiDataId
             onEdit: (txt) => { root.model.wikiDataId = txt }
-            readOnly: root.model.now_loading
         }
 
-        Item {}
+        LabeledTextField {
+            name: qsTr("Updated at")
+            textOf: root.model.updated_at.toISOString()
+            readOnly: true
+            onEdit: () => {}
+        }
 
         EnumIntChooser {
             name: qsTr("Internal Ranking")
@@ -136,7 +127,6 @@ ItemDelegate {
             maximum: 10
             numberOf: root.model.transparency
             onEdit: (val) => { root.model.transparency = val }
-            editable: !root.model.now_loading
         }
 
         IntChooser {
@@ -145,7 +135,6 @@ ItemDelegate {
             maximum: 10
             numberOf: root.model.world_bank
             onEdit: (val) => { root.model.world_bank = val }
-            editable: !root.model.now_loading
         }
 
         RoundButton {

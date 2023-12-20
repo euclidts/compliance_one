@@ -57,6 +57,7 @@
 -- DROP COLUMN timezones,
 -- DROP COLUMN translations,
 -- DROP COLUMN emojiU,
+-- DROP COLUMN created_at,
 -- DROP COLUMN flag,
 -- DROP CONSTRAINT country_continent_final,
 -- DROP CONSTRAINT country_subregion_final,
@@ -67,6 +68,4 @@
 -- ADD COLUMN transparency TINYINT UNSIGNED,
 -- ADD COLUMN world_bank TINYINT UNSIGNED,
 -- ADD COLUMN sovereignty_id MEDIUMINT UNSIGNED,
--- ADD CONSTRAINT FOREIGN KEY (sovereignty_id) REFERENCES country (id)
-
-DESCRIBE country
+-- ADD CONSTRAINT FOREIGN KEY (sovereignty_id) REFERENCES countries (id)

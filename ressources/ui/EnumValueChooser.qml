@@ -14,20 +14,19 @@ ColumnLayout {
     property alias delegate: combo.delegate
     property alias textRole: combo.textRole
     property alias valueRole: combo.valueRole
-    required property string name
-    /*required*/ property string enumOf
-    /*required*/ property var onEdit
+    property alias name: label.text
+    property alias ediatable: combo.editable
+    required property string enumOf
+    required property var onEdit
 
     Label {
         id: label
-        text: name
         font.italic: true
     }
 
     ComboBox {
         id: combo
         Layout.topMargin: 2
-        editable: false
         Layout.minimumWidth: 160
         Layout.fillWidth: true
         Component.onCompleted: currentIndex = indexOfValue(enumOf)

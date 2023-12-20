@@ -9,10 +9,19 @@ GroupBox {
     Layout.topMargin: 12
     Layout.fillWidth: true
 
-    // required property var addressOf
+    property alias countryOf: country.enumOf
+    property alias onCountryEdit: country.onEdit
+    property alias addressOf: address.textOf
+    property alias onAddressEdit: address.onEdit
+    property alias localityOf: locality.textOf
+    property alias onLocalityEdit: locality.onEdit
+    property alias regionOf: region.textOf
+    property alias onRegionEdit: region.onEdit
+    property alias postcodeOf: postcode.textOf
+    property alias onPostcodeEdit: postcode.onEdit
 
     label: Label {
-        text: qsTr("Adress")
+        text: qsTr("Address")
         font.italic: true
     }
 
@@ -24,38 +33,32 @@ GroupBox {
             columns: portrait ? 1 : 2
             Layout.fillWidth: true
 
-            EnumValueChooser {
-                id: countryCombo
-                name: qsTr("Country")
-                model: countryListView.model
-                // enumOf: root.model.sovereignty_id
-                Layout.fillWidth: true
-                valueRole: "id"
-                textRole: "country_name"
-            }
-
-            IntChooser {
-                name: qsTr("ZIP")
-                minimum: 1000
-                maximum: 9999
-                // numberOf: addressOf.zip
-                // onEdit: (val) => { addressOf.zip = val }
-                spin.textFromValue: (value, locale) => {
-                    return Number(value).toString();
-                }
+            CountryChooser {
+                id: country
             }
 
             LabeledTextField {
-                name: qsTr("City")
-                // textOf: addressOf.city
-                // onEdit: function(txt) { addressOf.city = txt }
+                id: address
+                name: qsTr("Address")
+                capitalization: Font.MixedCase
+                Layout.rowSpan: 4
+            }
+
+            LabeledTextField {
+                id: locality
+                name: qsTr("Locality")
                 capitalization: Font.MixedCase
             }
 
             LabeledTextField {
-                name: qsTr("Street")
-                // textOf: addressOf.street
-                // onEdit: function(txt) { addressOf.street = txt }
+                id: region
+                name: qsTr("Region")
+                capitalization: Font.MixedCase
+            }
+
+            LabeledTextField {
+                id: postcode
+                name: qsTr("Postcode")
                 capitalization: Font.MixedCase
             }
         }

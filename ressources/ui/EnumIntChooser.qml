@@ -10,13 +10,12 @@ ColumnLayout {
     property alias model: combo.model
     property alias delegate: combo.delegate
     property alias textRole: combo.textRole
-    required property string name
-    /*required*/ property string enumOf
-    /*required*/ property var onEdit
+    property alias name: label.text
+    required property string enumOf
+    required property var onEdit
 
     Label {
         id: label
-        text: name
         font.italic: true
     }
 

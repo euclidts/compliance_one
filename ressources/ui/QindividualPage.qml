@@ -12,6 +12,7 @@ ScrollView {
             ColumnLayout {
                 width: parent.width
                 // Layout.minimumWidth: 200
+                enabled: !current_contact.now_loading
 
                 Label {
                     text: qsTr("Individual")
@@ -28,7 +29,6 @@ ScrollView {
                         textOf: current_contact.family_name
                         onEdit: (txt) => { current_contact.family_name = txt }
                         placeHolder: qsTr("* Mandatory")
-                        // readOnly: current_contact.now_loading
                     }
 
                     LabeledTextField {
@@ -38,7 +38,6 @@ ScrollView {
                         placeHolder: qsTr("* Mandatory")
                         Layout.maximumWidth: portrait ? window.width
                                                       : window.width / 2
-                        // readOnly: current_contact.now_loading
                     }
 
                     LabeledTextField {
@@ -49,11 +48,14 @@ ScrollView {
                         validator: RegularExpressionValidator {
                             regularExpression: /^$|\S+@\S+\.\S+$/
                         }
-                        // readOnly: current_contact.now_loading
+                        inputHint: Qt.ImhEmailCharactersOnly
                     }
 
                     PhoneChooser {
-                        phoneOf : current_contact
+                        phoneOf : current_contact.phone
+                        codeOf : current_contact.calling_code
+                        onPhoneEdit: (txt) => { current_contact.phone = txt }
+                        onCodeEdit: (txt) => { current_contact.calling_code = txt }
                         Layout.maximumWidth: portrait ? window.width
                                                       : window.width / 2
                     }
@@ -61,76 +63,73 @@ ScrollView {
 
                 AddressChooser {
                     Layout.margins: 6
-                    // addressOf: model
+                    countryOf: current_individual.country
+                    onCountryEdit: (txt) => { current_individual.country = txt }
+                    addressOf: current_individual.address
+                    onAddressEdit: (txt) => { current_individual.address = txt }
+                    regionOf: current_individual.region
+                    onRegionEdit: (txt) => { current_individual.region = txt }
+                    postcodeOf: current_individual.postcode
+                    onPostcodeEdit: (txt) => { current_individual.postcode = txt }
+                    localityOf: current_individual.locality
+                    onLocalityEdit: (txt) => { current_individual.locality = txt }
                 }
 
                 GridLayout {
                     Layout.margins: 6
                     columns: portrait ? 1 : 2
 
-                    EnumIntChooser {
-                        name: "Role"
-                        model: [
-                            "owner",
-                            "director",
-                            "intermediary",
-                            "other"
-                        ]
+                    LabeledTextField {
+                        name: qsTr("Passport number")
+                        textOf: current_individual.passport
+                        onEdit: (txt) => { current_individual.passport = txt }
+                        placeHolder: qsTr("* Mandatory")
                     }
 
-                    LabeledTextField {
-                        name: qsTr("Individual Unique Identifier")
-                        // textOf: current_contact.family_name
-                        // onEdit: (txt) => { current_contact.family_name = txt }
-                        placeHolder: qsTr("* Mandatory")
-                        // readOnly: current_contact.now_loading
+                    CountryChooser {
+                        name: qsTr("Ensuing country")
+                        enumOf: current_individual.ensuing
+                        onEdit: (value) => { current_individual.ensuing = value }
                     }
 
                     LabeledTextField {
                         name: qsTr("Name (Local Characters)")
-                        // textOf: current_contact.family_name
-                        // onEdit: (txt) => { current_contact.family_name = txt }
+                        textOf: current_individual.local_name
+                        onEdit: (txt) => { current_individual.local_name = txt }
                         placeHolder: qsTr("* Optional")
-                        // readOnly: current_contact.now_loading
                     }
 
                     LabeledTextField {
                         name: qsTr("Forenames (Local Characters)")
-                        // textOf: current_contact.forenames
-                        // onEdit: (txt) => { current_contact.forenames = txt }
+                        textOf: current_individual.local_forenames
+                        onEdit: (txt) => { current_individual.local_forenames = txt }
                         placeHolder: qsTr("* Optional")
-                        // readOnly: current_contact.now_loading
                     }
 
                     CheckBox {
-                        // checked: exterior.hasParking
-                        // onCheckStateChanged: exterior.hasParking = checked
+                        checked: current_individual.pep
+                        onCheckStateChanged: current_individual.pep = checked
                         text: qsTr("Is a PEP")
                     }
 
-                    EnumValueChooser {
-                        name: qsTr("Country")
-                        model: countryListView.model
-                        // enumOf: root.model.sovereignty_id
-                        Layout.fillWidth: true
-                        valueRole: "id"
-                        textRole: "country_name"
+                    CountryChooser {
+                        name: qsTr("PEP country")
+                        enumOf: current_individual.pep_country
+                        onEdit: (value) => { current_individual.pep_country = value }
                     }
 
                     LabeledTextField {
                         name: qsTr("Additional PEP Notes")
-                        // textOf: current_contact.family_name
-                        // onEdit: (txt) => { current_contact.family_name = txt }
+                        textOf: current_individual.pep_notes
+                        onEdit: (txt) => { current_individual.pep_notes = txt }
                         placeHolder: qsTr("* Optional")
-                        // readOnly: current_contact.now_loading
                     }
 
                     LabeledTextField {
                         name: qsTr("Notes")
-                        // textOf: current_contact.forenames
-                        // onEdit: (txt) => { current_contact.forenames = txt }
+                        textOf: current_individual.notes
+                        onEdit: (txt) => { current_individual.notes = txt }
                         placeHolder: qsTr("* Optional")
-                        // readOnly: current_contact.now_loading
                     }
                 }
             }

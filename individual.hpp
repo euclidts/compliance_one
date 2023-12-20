@@ -5,8 +5,6 @@
 #include "contact.hpp"
 #include "country.hpp"
 
-// using namespace std::chrono;
-
 struct individual
 {
     static const constexpr auto table() { return "individual"; }
@@ -24,20 +22,6 @@ struct individual
         static const constexpr auto property() { return "unique"; }
         static const constexpr auto references() { return &contact::id; }
     } contact_id;
-    
-    // enum roles
-    // {
-    //     owner,
-    //     director,
-    //     intermediary,
-    //     other
-    // };
-
-    // struct role
-    // {
-    //     static const constexpr auto c_name() { return "role"; }
-    //     roles value{other};
-    // } role;
 
     // KYC 
     // counteparty information
@@ -45,22 +29,22 @@ struct individual
 
     struct local_name
     {
-        static const constexpr auto c_name() { return "local_name"; }
         static const constexpr auto name() { return "Name (Local Characters)"; }
+        static const constexpr auto c_name() { return "local_name"; }
         std::string value{};
     } local_name;
 
     struct local_forenames
     {
-        static const constexpr auto c_name() { return "local_forenames"; }
         static const constexpr auto name() { return "Forenames (Local Characters)"; }
+        static const constexpr auto c_name() { return "local_forenames"; }
         std::string value{};
     } local_forenames;
 
     struct country_id
     {
         static const constexpr auto c_name() { return "country"; }
-        int32_t value{0};
+        uint32_t value{0};
         static const constexpr auto references() { return &country::primary_key; }
     } country_id;
 
@@ -90,34 +74,46 @@ struct individual
 
    struct date_of_birth
    {
-        static const constexpr auto c_name() { return "date_of_birth"; }
         static const constexpr auto name() { return "Date of birth"; }
+        static const constexpr auto c_name() { return "date_of_birth"; }
         std::chrono::sys_days value{};
-        // year_month_day value{floor<days>(system_clock::now())};
    } date_of_birth;
 
-    // passport number
-    // expeiry date
-    // ensuing country
-    // struct uuid
-    // {
-    //     static const constexpr auto c_name() { return "individual_unique_identifier"; }
-    //     static const constexpr auto name() { return "Individual Unique Identifier"; }
-    //     std::string value{};
-    // } uuid;
+    struct passport
+    {
+        static const constexpr auto name() { return "Passport number"; }
+        static const constexpr auto c_name() { return "passport"; }
+        std::string value{};
+    } passport;
+
+    struct expeiry_date
+    {
+        static const constexpr auto name() { return "Expeiry date"; }
+        static const constexpr auto c_name() { return "expeiry_date"; }
+        std::chrono::sys_days value{};
+    } expeiry_date;
+
+    struct ensuing
+    {
+        static const constexpr auto name() { return "Ensuing country"; }
+        static const constexpr auto c_name() { return "ensuing"; }
+        uint32_t value{0};
+        static const constexpr auto references() { return &country::primary_key; }
+    } ensuing;
 
     struct pep
     {
-        static const constexpr auto c_name() { return "pep"; }
         static const constexpr auto name() { return "Is a PEP"; }
+        static const constexpr auto c_name() { return "pep"; }
         bool value{};
     } pep;
 
     struct pep_country
     {
+        static const constexpr auto name() { return "PEP Country"; }
         static const constexpr auto c_name() { return "pep_country"; }
-        static const constexpr auto name() { return "Country"; }
-        bool value{};
+        uint32_t value{0};
+        static const constexpr auto references() { return &country::primary_key; }
     } pep_country;
 
     struct pep_notes
@@ -133,6 +129,4 @@ struct individual
         static const constexpr auto c_name() { return "notes"; }
         std::string value{};
     } notes;
-
-    //
 };

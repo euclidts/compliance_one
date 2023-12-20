@@ -92,7 +92,7 @@ ApplicationWindow {
                 Layout.alignment: Qt.AlignVCenter
                 icon.height: (implicitBackgroundHeight + topInset + bottomInset) * 2
                 icon.width: (implicitBackgroundWidth + leftInset + rightInset) * 2
-                onClicked: rootStack.currentIndex = 4
+                onClicked: rootStack.currentIndex = 3
             }
 
             Button {
@@ -209,7 +209,13 @@ ApplicationWindow {
 //    header: TopBar { id: topBar }
 //    footer: BottomBar { id: bottomBar }
     footer: RowLayout {
+        id: footer
         height: 48
+        property var setVis: () => {
+                                 footer.visibleChildren.length === 0
+                                 ? footer.visible = false
+                                 : footer.visible = true
+                             }
 
         TabBar {
             id: bottomBar
@@ -217,6 +223,7 @@ ApplicationWindow {
             Layout.fillWidth: true
             onCurrentIndexChanged: rootStack.currentIndex = currentIndex
             currentIndex: rootStack.count
+            // onVisibleChanged: footer.setVis()
 
             TabButton {
                 text: "Home"
