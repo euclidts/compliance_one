@@ -93,13 +93,13 @@ struct individual
         std::chrono::sys_days value{};
     } expeiry_date;
 
-    struct ensuing
+    struct isssuing
     {
-        static const constexpr auto name() { return "Ensuing country"; }
-        static const constexpr auto c_name() { return "ensuing"; }
+        static const constexpr auto name() { return "Isssuing country"; }
+        static const constexpr auto c_name() { return "isssuing"; }
         uint32_t value{0};
         static const constexpr auto references() { return &country::primary_key; }
-    } ensuing;
+    } isssuing;
 
     struct pep
     {

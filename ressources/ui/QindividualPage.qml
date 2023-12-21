@@ -87,9 +87,9 @@ ScrollView {
                     }
 
                     CountryChooser {
-                        name: qsTr("Ensuing country")
-                        enumOf: current_individual.ensuing
-                        onEdit: (value) => { current_individual.ensuing = value }
+                        name: qsTr("Isssuing country")
+                        enumOf: current_individual.isssuing
+                        onEdit: (value) => { current_individual.isssuing = value }
                     }
 
                     LabeledTextField {

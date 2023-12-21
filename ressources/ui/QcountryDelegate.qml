@@ -102,7 +102,7 @@ ItemDelegate {
 
         LabeledTextField {
             name: qsTr("Updated at")
-            textOf: root.model.updated_at.toISOString()
+            textOf: formatDateTime(root.model.updated_at)
             readOnly: true
             onEdit: () => {}
         }
