@@ -24,6 +24,12 @@ ItemDelegate {
             placeHolder: qsTr("* Mandatory")
         }
 
+        LabeledTextField {
+            name: qsTr("Flag")
+            textOf: root.model.emoji
+            onEdit: (txt) => { root.model.emoji = txt }
+        }
+
         CheckBox {
             id: unCheck
             onCheckStateChanged: if (checked) root.model.sovereignty_id = 0
@@ -35,14 +41,10 @@ ItemDelegate {
             name: qsTr("Sovereignty")
             enumOf: root.model.sovereignty_id
             onEdit: (value) => { root.model.sovereignty_id = value }
-            enabled: !unCheck.checked
+            visible: !unCheck.checked
         }
 
-        LabeledTextField {
-            name: qsTr("Flag")
-            textOf: root.model.emoji
-            onEdit: (txt) => { root.model.emoji = txt }
-        }
+        Item { visible: unCheck.checked }
 
         // LabeledTextField {
         //     name: qsTr("Official state name")
@@ -78,20 +80,28 @@ ItemDelegate {
 
         Item {}
 
-        IntChooser {
+        LabeledTextField {
             name: qsTr("Latitude")
-            numberOf: root.model.latitude
+            textOf: root.model.latitude
             onEdit: (val) => { root.model.latitude = val }
-            minimum: -90.0
-            maximum: 90.0
+            validator: DoubleValidator {
+                bottom: Math.min(-90.0, 90.0)
+                top:  Math.max(-90.0, 90.0)
+                decimals: 8
+                notation: DoubleValidator.StandardNotation
+            }
         }
 
-        IntChooser {
+        LabeledTextField {
             name: qsTr("Longitude")
-            numberOf: root.model.longitude
+            textOf: root.model.longitude
             onEdit: (val) => { root.model.longitude = val }
-            minimum: -180.0
-            maximum: 180.0
+            validator: DoubleValidator {
+                bottom: Math.min(-180.0, 180.0)
+                top:  Math.max(-180.0, 180.0)
+                decimals: 8
+                notation: DoubleValidator.StandardNotation
+            }
         }
 
         LabeledTextField {
@@ -100,12 +110,7 @@ ItemDelegate {
             onEdit: (txt) => { root.model.wikiDataId = txt }
         }
 
-        LabeledTextField {
-            name: qsTr("Updated at")
-            textOf: formatDateTime(root.model.updated_at)
-            readOnly: true
-            onEdit: () => {}
-        }
+        Item {}
 
         EnumIntChooser {
             name: qsTr("Internal Ranking")

@@ -234,7 +234,7 @@ ApplicationWindow {
             id: bottomBar
             visible: rootStack.currentIndex < count && user && user.clearance === 3
             Layout.fillWidth: true
-            // onCurrentIndexChanged: rootStack.currentIndex = currentIndex
+            onCurrentIndexChanged: rootStack.currentIndex = currentIndex
             currentIndex: rootStack.count
             // onVisibleChanged: footer.setVis()
 

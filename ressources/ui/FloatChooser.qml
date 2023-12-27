@@ -13,6 +13,7 @@ ColumnLayout {
     property int minimum: 0
     property int maximum
     property int step: 1
+    property int decimals: 2
     property alias spin: spin
     property alias editable: spin.editable
 
@@ -26,12 +27,10 @@ ColumnLayout {
         id: spin
         from: decimalToInt(minimum)
         to: decimalToInt(maximum)
-        stepSize: decimalFactor
-        value: numberOf
+        stepSize: decimalFactor * step
+        value: decimalToInt(numberOf)
         locale: Qt.locale()
 
-        property int decimals: 2
-        property real realValue: value / step
         readonly property int decimalFactor: Math.pow(10, decimals)
 
         function decimalToInt(decimal) {
@@ -39,18 +38,18 @@ ColumnLayout {
         }
 
         validator: DoubleValidator {
-            bottom: Math.min(spinBox.from, spinBox.to)
-            top:  Math.max(spinBox.from, spinBox.to)
-            decimals: spinBox.decimals
+            bottom: Math.min(spin.from, spin.to)
+            top:  Math.max(spin.from, spin.to)
+            decimals: decimals
             notation: DoubleValidator.StandardNotation
         }
 
         textFromValue: function(value, locale) {
-            return Number(value / decimalFactor).toLocaleString(locale, 'f', spinBox.decimals)
+            return Number(value / decimalFactor).toLocaleString(spin.locale, 'f', decimals)
         }
 
         valueFromText: function(text, locale) {
-            return Math.round(Number.fromLocaleString(locale, text) * decimalFactor)
+            return Math.round(Number.fromLocaleString(spin.locale, text) * decimalFactor)
         }
     }
 }
