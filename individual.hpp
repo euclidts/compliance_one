@@ -9,18 +9,18 @@ struct individual
 {
     static const constexpr auto table() { return "individual"; }
 
-    struct id
+    struct primary_key
     {
         static const constexpr auto c_name() { return "id"; }
         int32_t value{0};
-    } id;
+    } primary_key;
 
     struct contact_id
     {
         static const constexpr auto c_name() { return "contact_id"; }
         int32_t value{0};
         static const constexpr auto property() { return "unique"; }
-        static const constexpr auto references() { return &contact::id; }
+        static const constexpr auto references() { return &contact::primary_key; }
     } contact_id;
 
     // KYC 

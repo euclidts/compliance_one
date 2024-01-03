@@ -6,11 +6,11 @@ struct contact
 {
     static const constexpr auto table() { return "contact"; }
 
-    struct id
+    struct primary_key
     {
         static const constexpr auto c_name() { return "id"; }
         int32_t value{0};
-    } id;
+    } primary_key;
 
     struct family_name
     {
