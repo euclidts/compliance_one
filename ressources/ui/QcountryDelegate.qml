@@ -15,7 +15,7 @@ ItemDelegate {
 
     contentItem: GridLayout {
         columns: portrait ? 2 : 4
-        enabled: !root.model.now_loading
+        enabled: !root.model.loading
 
         LabeledTextField {
             name: qsTr("Name")
@@ -149,17 +149,17 @@ ItemDelegate {
             onClicked: country_list.save(root.model.index)
             highlighted: true
             enabled: root.model.flagged_for_update
-            visible: !root.model.now_loading
+            visible: !root.model.loading
         }
 
         Item {
             Layout.fillWidth: true
-            visible: !portrait && !root.model.now_loading
+            visible: !portrait && !root.model.loading
             Layout.columnSpan: portrait ? 1 : 2
         }
 
         BusyIndicator {
-            visible: root.model.now_loading
+            visible: root.model.loading
             Layout.fillWidth: true
             Layout.columnSpan: portrait ? 2 : 4
         }
@@ -169,7 +169,7 @@ ItemDelegate {
             ToolTip.visible: hovered
             ToolTip.text: qsTr("Delete")
             Layout.alignment: Qt.AlignRight
-            visible: !root.model.now_loading
+            visible: !root.model.loading
             onClicked: onExceptionAction(ToolTip.text,
                                          qsTr("The selected country will be deleted"),
                                          () => { country_list.remove(root.model.index) }, true)

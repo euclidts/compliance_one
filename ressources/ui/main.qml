@@ -47,7 +47,7 @@ ApplicationWindow {
         if (success) {
             contact_list.get()
             // individual_list.get()
-            bottomBar.currentIndex = 0
+            rootStack.currentIndex = 0
             logginDialog.clear()
             busyDialog.close()
         }
@@ -71,8 +71,6 @@ ApplicationWindow {
 
     ExceptionDialog { id: exceptionDialog }
 
-//    UrlProvider { id: urlProvider }
-
     SettingsDrawer { id: settingsDrawer }
 
     BusyDialog { id: busyDialog }
@@ -85,168 +83,118 @@ ApplicationWindow {
         currentIndex: count
         anchors.fill: parent
 
-//        onCurrentIndexChanged: topBar.searchBar.text = ""
+        Page {
+            background: Rectangle { color: "transparent" }
 
-//        StackLayout {
-//            id: accountsPages
+            header: RowLayout {
 
-        GridLayout {
-            columns: 3
-            columnSpacing: 12
-            rowSpacing: 12
-            Layout.maximumHeight: parent.height / 2
+                TextField {
+                    id: search
+                    implicitHeight: 38
+                    Layout.margins: 6
+                    Layout.fillWidth: true
+                    placeholderText: qsTr("Search")
+                    rightPadding: Material.textFieldHorizontalPadding + 50
 
-            Button {
-                Layout.topMargin: parent.implicitHeight / 2
-                Layout.leftMargin: 12
-                icon.source: "qrc:/icons/users.svg"
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignVCenter
-                icon.height: (implicitBackgroundHeight + topInset + bottomInset) * 2
-                icon.width: (implicitBackgroundWidth + leftInset + rightInset) * 2
-                onClicked: rootStack.currentIndex = 3
+                    Button {
+                        id: magnifyingGlass
+                        flat: true
+                        icon.source: search.text === ""
+                                     ? "qrc:/icons/search.svg"
+                                     : "qrc:/icons/times-circle.svg"
+                        onClicked: search.clear()
+                        x: parent.width - width
+                        y: parent.y - 12
+                    }
+                }
             }
 
-            Button {
-                Layout.topMargin: parent.implicitHeight / 2
-                icon.source: "qrc:/icons/industry.svg"
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignVCenter
-                icon.height: (implicitBackgroundHeight + topInset + bottomInset) * 2
-                icon.width: (implicitBackgroundWidth + leftInset + rightInset) * 2
+            contentItem: StackLayout {
+                id: homeStack
+                currentIndex: homeBar.currentIndex
+
+                GridLayout {
+                    columns: 3
+                    columnSpacing: 12
+                    rowSpacing: 12
+                    Layout.fillWidth: true
+
+                    Button {
+                        text: qsTr("Add Individual")
+                        Layout.leftMargin: 12
+                        Layout.fillWidth: true
+                        icon.source: "qrc:/icons/users.svg"
+                        Layout.alignment: Qt.AlignVCenter
+                        onClicked: rootStack.currentIndex = 1
+                    }
+
+                    Button {
+                        text: qsTr("Add Counterparty")
+                        icon.source: "qrc:/icons/industry.svg"
+                        Layout.fillWidth: true
+                        Layout.alignment: Qt.AlignVCenter
+                    }
+
+                    Button {
+                        text: qsTr("Add Vessel")
+                        Layout.rightMargin: 12
+                        Layout.fillWidth: true
+                        icon.source: "qrc:/icons/ship.svg"
+                        Layout.alignment: Qt.AlignVCenter
+                    }
+                }
+
+                ListView {
+                    id: countryListView
+                    spacing: 6
+                    clip: true
+                    boundsBehavior: Flickable.StopAtBounds
+                    model : QcountryListModel { list: country_list }
+                    delegate: QcountryDelegate {}
+                    footer: RoundButton {
+                        Layout.fillWidth: true
+                        icon.source: "qrc:/icons/plus.svg"
+                        onClicked: country_list.appendItem()
+                        highlighted: true
+                    }
+                }
+
+                ListView {
+                    spacing: 6
+                    clip: true
+                    boundsBehavior: Flickable.StopAtBounds
+                    model : QproductListModel { list: product_list }
+                    delegate: QproductDelegate {}
+                    footer: RoundButton {
+                        Layout.fillWidth: true
+                        icon.source: "qrc:/icons/plus.svg"
+                        onClicked: product_list.appendItem()
+                        highlighted: true
+                    }
+                }
             }
 
-            Button {
-                Layout.topMargin: parent.implicitHeight / 2
-                Layout.rightMargin: 12
-                icon.source: "qrc:/icons/ship.svg"
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignVCenter
-                icon.height: (implicitBackgroundHeight + topInset + bottomInset) * 2
-                icon.width: (implicitBackgroundWidth + leftInset + rightInset) * 2
-            }
-        }
+                footer: RowLayout {
+                    id: footer
+                    height: 48
 
-        ListView {
-            id: countryListView
-            spacing: 6
-            clip: true
-            boundsBehavior: Flickable.StopAtBounds
-            model : QcountryListModel { list: country_list }
-            delegate: QcountryDelegate {}
-            footer: RoundButton {
-                Layout.fillWidth: true
-                icon.source: "qrc:/icons/plus.svg"
-                onClicked: country_list.appendItem()
-                highlighted: true
-            }
-        }
+                    TabBar {
+                        id: homeBar
+                        Layout.fillWidth: true
 
-        ListView {
-            spacing: 6
-            clip: true
-            boundsBehavior: Flickable.StopAtBounds
-            model : QproductListModel { list: product_list }
-            delegate: QproductDelegate {}
-            footer: RoundButton {
-                Layout.fillWidth: true
-                icon.source: "qrc:/icons/plus.svg"
-                onClicked: product_list.appendItem()
-                highlighted: true
-            }
+                        TabButton {
+                            text: "Home"
+                        }
+                        TabButton {
+                            text: "Countries"
+                        }
+                        TabButton {
+                            text: "Products"
+                        }
+                    }
+                }
         }
 
         QindividualPage { id: individualPage }
-
-//        StackLayout {
-//            id: usersPages
-
-//            ListView {
-//                Layout.fillWidth: true
-//                model: userModel
-//                delegate: UserDelegate {}
-//                onMovementStarted: topBar.searchBar.focus = false
-//                clip: true
-//                boundsBehavior: Flickable.StopAtBounds
-//            }
-
-//            Connections {
-//                target: selectedUser
-//                function onFilterRoleChanged() {
-//                    usersPages.currentIndex = 1
-//                }
-//            }
-
-//            UserPage { id: userPage }
-//        }
-
-//        CalculatorPage { id: calculatorPage }
-    }
-
-    header: RowLayout {
-        height: 48
-        visible: rootStack.currentIndex !== rootStack.count
-
-        Button {
-            id: backButton
-            visible: !bottomBar.visible
-            icon.source: "qrc:/icons/arrow-left.svg"
-            flat: true
-            onClicked: rootStack.currentIndex = 0
-        }
-
-        TextField {
-            id: search
-            implicitHeight: 38
-            Layout.margins: 6
-            Layout.fillWidth: true
-            placeholderText: qsTr("Search")
-            rightPadding: Material.textFieldHorizontalPadding + 50
-
-            Button {
-                id: magnifyingGlass
-                flat: true
-                icon.source: search.text === ""
-                             ? "qrc:/icons/search.svg"
-                             : "qrc:/icons/times-circle.svg"
-                onClicked: search.clear()
-                x: parent.width - width
-                y: parent.y - 12
-            }
-        }
-    }
-
-//    header: TopBar { id: topBar }
-//    footer: BottomBar { id: bottomBar }
-    footer: RowLayout {
-        id: footer
-        height: 48
-        property var setVis: () => {
-                                 footer.visibleChildren.length === 0
-                                 ? footer.visible = false
-                                 : footer.visible = true
-                             }
-
-        TabBar {
-            id: bottomBar
-            visible: rootStack.currentIndex < count && user && user.clearance === 3
-            Layout.fillWidth: true
-            onCurrentIndexChanged: rootStack.currentIndex = currentIndex
-            currentIndex: rootStack.count
-            // onVisibleChanged: footer.setVis()
-
-            TabButton {
-                text: "Home"
-            }
-            TabButton {
-                text: "Countries"
-            }
-            TabButton {
-                text: "Products"
-            }
-        }
     }
 }
