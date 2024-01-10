@@ -6,9 +6,9 @@ import QtQuick.Controls.Material
 ColumnLayout {
     spacing: 12
 
-    required property var phoneOf
+    required property string phoneOf
     required property var onPhoneEdit
-    required property var codeOf
+    required property string codeOf
     required property var onCodeEdit
     property int capitalization: Font.Capitalize
 
@@ -46,12 +46,18 @@ ColumnLayout {
             id: codeField
             Layout.maximumWidth: 90
             text: codeOf
-            onAccepted: onCodeEdit(text)
+            onAccepted: focus = false
             validator: RegularExpressionValidator {
                 regularExpression: /^(\+\d{1,3})|(\d{1,5})|(\d{1,3}\-\d{2,5})|(\+\d{1,3}\-\d{2,5})/
             }
-            onTextChanged: acceptableInput ? color = Material.foreground
-                                           : color = "red"
+            onTextChanged: if (acceptableInput) {
+                               color = Material.foreground
+                               onCodeEdit(text)
+                               codeBox.currentIndex = codeBox.indexOfValue(text)
+                           } else {
+                               color = "red"
+                               codeBox.currentIndex = -1
+                           }
         }
 
         TextField {
@@ -59,12 +65,14 @@ ColumnLayout {
             inputMethodHints: Qt.ImhDialableCharactersOnly
             Layout.fillWidth: true
             placeholderText: qsTr("* Mandatory")
-            onAccepted: onPhoneEdit(text)
+            onAccepted: focus = false
             validator: RegularExpressionValidator {
                 regularExpression: /^$|\d{6,13}?$/
             }
-            onTextChanged: acceptableInput ? color = Material.foreground
-                                           : color = "red"
+            onTextChanged: if (acceptableInput) {
+                               color = Material.foreground
+                               onPhoneEdit(text)
+                           } else color = "red"
         }
     }
 }

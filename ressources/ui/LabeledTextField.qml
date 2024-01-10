@@ -15,13 +15,6 @@ ColumnLayout {
     property int inputHint: Qt.ImhNone
     property int capitalization: Font.MixedCase
 
-    function reColor () {
-        if (field.acceptableInput) {
-            field.color = Material.foreground
-            onEdit(field.text)
-        } else field.color = "red"
-    }
-
     Label {
         id: label
         text: name
@@ -36,13 +29,9 @@ ColumnLayout {
         Layout.fillWidth: true
         font.capitalization: capitalization
         onAccepted: focus = false
-        onTextChanged: reColor()
-    }
-
-    Connections {
-        target: settingsDrawer.theme
-        function onCheckedChanged() {
-            reColor()
-        }
+        onTextChanged: if (acceptableInput) {
+                           color = Material.foreground
+                           onEdit(text)
+                       } else color = "red"
     }
 }
