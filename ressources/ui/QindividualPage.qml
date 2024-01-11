@@ -26,14 +26,15 @@ Page {
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
 
         FlickableItem {
-            BackgroundRect {
-                ColumnLayout {
-                    width: parent.width
-                    // Layout.minimumWidth: 200
-                    enabled: !current_contact.loading
+            ColumnLayout {
+                width: parent.width
 
+                BackgroundRect {
                     GridLayout {
+                        width: parent.width
                         Layout.margins: 6
+                        uniformCellWidths: true
+                        uniformCellHeights: true
                         columns: portrait ? 1 : 2
 
                         LabeledTextField {
@@ -41,7 +42,7 @@ Page {
                             textOf: current_contact.family_name
                             onEdit: (txt) => {
                                         if (current_contact.family_name !== txt)
-                                            current_contact.family_name = txt
+                                        current_contact.family_name = txt
                                     }
                             placeHolder: qsTr("* Mandatory")
                         }
@@ -51,11 +52,9 @@ Page {
                             textOf: current_contact.forenames
                             onEdit: (txt) => {
                                         if (current_contact.forenames !== txt)
-                                            current_contact.forenames = txt
+                                        current_contact.forenames = txt
                                     }
                             placeHolder: qsTr("* Mandatory")
-                            Layout.maximumWidth: portrait ? window.width
-                                                          : window.width / 2
                         }
 
                         LabeledTextField {
@@ -63,7 +62,7 @@ Page {
                             textOf: current_contact.email
                             onEdit: (txt) => {
                                         if (current_contact.email !== txt)
-                                            current_contact.email = txt
+                                        current_contact.email = txt
                                     }
                             placeHolder: qsTr("* Mandatory")
                             validator: RegularExpressionValidator {
@@ -77,56 +76,60 @@ Page {
                             codeOf : current_contact.calling_code
                             onPhoneEdit: (txt) => {
                                              if (current_contact.phone !== txt)
-                                                 current_contact.phone = txt
+                                             current_contact.phone = txt
                                          }
                             onCodeEdit: (txt) => {
                                             if (current_contact.calling_code !== txt)
-                                                current_contact.calling_code = txt
+                                            current_contact.calling_code = txt
                                         }
-                            Layout.maximumWidth: portrait ? window.width
-                                                          : window.width / 2
                         }
                     }
+                }
 
-                    AddressChooser {
-                        Layout.margins: 6
-                        countryOf: current_individual.country
-                        onCountryEdit: (txt) => {
-                                           if (current_individual.country !== txt)
-                                               current_individual.country = txt
-                                       }
-                        addressOf: current_individual.address
-                        onAddressEdit: (txt) => {
-                                           if (current_individual.address !== txt)
-                                               current_individual.address = txt
-                                       }
-                        regionOf: current_individual.region
-                        onRegionEdit: (txt) => {
-                                          if (current_individual.region !== txt)
-                                              current_individual.region = txt
-                                      }
-                        postcodeOf: current_individual.postcode
-                        onPostcodeEdit: (txt) => {
-                                            if (current_individual.postcode !== txt)
-                                                current_individual.postcode = txt
-                                        }
-                        localityOf: current_individual.locality
-                        onLocalityEdit: (txt) => {
-                                            if (current_individual.locality !== txt)
-                                                current_individual.locality = txt
-                                        }
-                    }
+                AddressChooser {
+                    countryOf: current_individual.country
+                    onCountryEdit: (txt) => {
+                                       if (current_individual.country !== txt)
+                                       current_individual.country = txt
+                                   }
+                    addressOf: current_individual.address
+                    onAddressEdit: (txt) => {
+                                       if (current_individual.address !== txt)
+                                       current_individual.address = txt
+                                   }
+                    regionOf: current_individual.region
+                    onRegionEdit: (txt) => {
+                                      if (current_individual.region !== txt)
+                                      current_individual.region = txt
+                                  }
+                    postcodeOf: current_individual.postcode
+                    onPostcodeEdit: (txt) => {
+                                        if (current_individual.postcode !== txt)
+                                        current_individual.postcode = txt
+                                    }
+                    localityOf: current_individual.locality
+                    onLocalityEdit: (txt) => {
+                                        if (current_individual.locality !== txt)
+                                        current_individual.locality = txt
+                                    }
+                }
+
+                BackgroundRect {
+                    Layout.topMargin: 12
+                    Layout.margins: 6
 
                     GridLayout {
-                        Layout.margins: 6
+                        width: parent.width
                         columns: portrait ? 1 : 2
+                        uniformCellHeights: true
+                        uniformCellWidths: true
 
                         LabeledTextField {
                             name: qsTr("Passport number")
                             textOf: current_individual.passport
                             onEdit: (txt) => {
                                         if (current_individual.passport !== txt)
-                                            current_individual.passport = txt
+                                        current_individual.passport = txt
                                     }
                             placeHolder: qsTr("* Mandatory")
                         }
@@ -136,7 +139,7 @@ Page {
                             enumOf: current_individual.issuing
                             onEdit: (value) => {
                                         if (current_individual.issuing !== value)
-                                            current_individual.issuing = value
+                                        current_individual.issuing = value
                                     }
                         }
 
@@ -145,7 +148,7 @@ Page {
                             textOf: current_individual.local_name
                             onEdit: (txt) => {
                                         if (current_individual.local_name !== txt)
-                                            current_individual.local_name = txt
+                                        current_individual.local_name = txt
                                     }
                             placeHolder: qsTr("* Optional")
                         }
@@ -155,7 +158,7 @@ Page {
                             textOf: current_individual.local_forenames
                             onEdit: (txt) => {
                                         if (current_individual.local_forenames !== txt)
-                                            current_individual.local_forenames = txt
+                                        current_individual.local_forenames = txt
                                     }
                             placeHolder: qsTr("* Optional")
                         }
@@ -171,26 +174,26 @@ Page {
                             enumOf: current_individual.pep_country
                             onEdit: (value) => {
                                         if (current_individual.pep_country !== value)
-                                            current_individual.pep_country = value
+                                        current_individual.pep_country = value
                                     }
                         }
 
-                        LabeledTextField {
+                        LabeledTextArea {
                             name: qsTr("Additional PEP Notes")
                             textOf: current_individual.pep_notes
                             onEdit: (txt) => {
                                         if (current_individual.pep_notes !== txt)
-                                            current_individual.pep_notes = txt
+                                        current_individual.pep_notes = txt
                                     }
                             placeHolder: qsTr("* Optional")
                         }
 
-                        LabeledTextField {
+                        LabeledTextArea {
                             name: qsTr("Notes")
                             textOf: current_individual.notes
                             onEdit: (txt) => {
                                         if (current_individual.notes !== txt)
-                                            current_individual.notes = txt
+                                        current_individual.notes = txt
                                     }
                             placeHolder: qsTr("* Optional")
                         }
@@ -201,7 +204,6 @@ Page {
     }
 
     footer: RowLayout {
-        enabled: !current_contact.loading
 
         RoundButton {
             icon.source: "qrc:/icons/floppy-disk.svg"

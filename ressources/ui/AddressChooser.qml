@@ -4,7 +4,7 @@ import QtQuick.Layouts
 import QtQuick.Controls.Material
 import QtQuick.Controls.Material.impl
 
-GroupBox {
+BackgroundRect {
     id: root
     Layout.topMargin: 12
     Layout.fillWidth: true
@@ -20,47 +20,36 @@ GroupBox {
     property alias postcodeOf: postcode.textOf
     property alias onPostcodeEdit: postcode.onEdit
 
-    label: Label {
-        text: qsTr("Address")
-        font.italic: true
-    }
-
-    ColumnLayout {
-        spacing: 12
+    GridLayout {
+        columns: portrait ? 1 : 2
         width: parent.width
+        uniformCellWidths: true
 
-        GridLayout {
-            columns: portrait ? 1 : 2
-            Layout.fillWidth: true
+        CountryChooser { id: country }
 
-            CountryChooser {
-                id: country
-            }
+        LabeledTextArea {
+            id: address
+            name: qsTr("Address")
+            capitalization: Font.MixedCase
+            Layout.rowSpan: 4
+        }
 
-            LabeledTextField {
-                id: address
-                name: qsTr("Address")
-                capitalization: Font.MixedCase
-                Layout.rowSpan: 4
-            }
+        LabeledTextField {
+            id: locality
+            name: qsTr("Locality")
+            capitalization: Font.MixedCase
+        }
 
-            LabeledTextField {
-                id: locality
-                name: qsTr("Locality")
-                capitalization: Font.MixedCase
-            }
+        LabeledTextField {
+            id: region
+            name: qsTr("Region")
+            capitalization: Font.MixedCase
+        }
 
-            LabeledTextField {
-                id: region
-                name: qsTr("Region")
-                capitalization: Font.MixedCase
-            }
-
-            LabeledTextField {
-                id: postcode
-                name: qsTr("Postcode")
-                capitalization: Font.MixedCase
-            }
+        LabeledTextField {
+            id: postcode
+            name: qsTr("Postcode")
+            capitalization: Font.MixedCase
         }
     }
 }

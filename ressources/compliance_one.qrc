@@ -40,5 +40,6 @@
         <file>ui/AddressChooser.qml</file>
         <file>ui/FloatChooser.qml</file>
         <file>ui/CountryChooser.qml</file>
+        <file>ui/LabeledTextArea.qml</file>
     </qresource>
 </RCC>
