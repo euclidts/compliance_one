@@ -4,7 +4,6 @@ import QtQuick.Layouts
 import QtQuick.Controls.Material
 
 ColumnLayout {
-    Layout.topMargin: 2
     spacing: 6
 
     property alias currentIndex: combo.currentIndex

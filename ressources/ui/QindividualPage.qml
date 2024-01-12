@@ -28,16 +28,20 @@ Page {
         FlickableItem {
             ColumnLayout {
                 width: parent.width
+                spacing: 12
 
                 BackgroundRect {
                     GridLayout {
                         width: parent.width
-                        Layout.margins: 6
+                        columnSpacing: 0
+                        rowSpacing: 0
                         uniformCellWidths: true
                         uniformCellHeights: true
                         columns: portrait ? 1 : 2
 
+
                         LabeledTextField {
+                            Layout.margins: 12
                             name: qsTr("Family Name (Latin script)")
                             textOf: current_contact.family_name
                             onEdit: (txt) => {
@@ -48,6 +52,7 @@ Page {
                         }
 
                         LabeledTextField {
+                            Layout.margins: 12
                             name: qsTr("Forenames (Latin script)")
                             textOf: current_contact.forenames
                             onEdit: (txt) => {
@@ -58,6 +63,7 @@ Page {
                         }
 
                         LabeledTextField {
+                            Layout.margins: 12
                             name: qsTr("Email")
                             textOf: current_contact.email
                             onEdit: (txt) => {
@@ -72,6 +78,7 @@ Page {
                         }
 
                         PhoneChooser {
+                            Layout.margins: 12
                             phoneOf : current_contact.phone
                             codeOf : current_contact.calling_code
                             onPhoneEdit: (txt) => {
