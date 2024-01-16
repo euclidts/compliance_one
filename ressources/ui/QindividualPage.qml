@@ -122,16 +122,16 @@ Page {
                 }
 
                 BackgroundRect {
-                    Layout.topMargin: 12
-                    Layout.margins: 6
-
                     GridLayout {
                         width: parent.width
+                        columnSpacing: 0
+                        rowSpacing: 0
                         columns: portrait ? 1 : 2
                         uniformCellHeights: true
                         uniformCellWidths: true
 
                         LabeledTextField {
+                            Layout.margins: 12
                             name: qsTr("Passport number")
                             textOf: current_individual.passport
                             onEdit: (txt) => {
@@ -142,6 +142,7 @@ Page {
                         }
 
                         CountryChooser {
+                            Layout.margins: 12
                             name: qsTr("Isssuing country")
                             enumOf: current_individual.issuing
                             onEdit: (value) => {
@@ -151,6 +152,7 @@ Page {
                         }
 
                         LabeledTextField {
+                            Layout.margins: 12
                             name: qsTr("Name (Local Characters)")
                             textOf: current_individual.local_name
                             onEdit: (txt) => {
@@ -161,6 +163,7 @@ Page {
                         }
 
                         LabeledTextField {
+                            Layout.margins: 12
                             name: qsTr("Forenames (Local Characters)")
                             textOf: current_individual.local_forenames
                             onEdit: (txt) => {
@@ -171,13 +174,16 @@ Page {
                         }
 
                         CheckBox {
+                            Layout.margins: 12
                             checked: current_individual.pep
                             onCheckStateChanged: current_individual.pep = checked
                             text: qsTr("Is a PEP")
                         }
 
                         CountryChooser {
+                            Layout.margins: 12
                             name: qsTr("PEP country")
+                            visible: current_individual.pep
                             enumOf: current_individual.pep_country
                             onEdit: (value) => {
                                         if (current_individual.pep_country !== value)
@@ -186,24 +192,30 @@ Page {
                         }
 
                         LabeledTextArea {
+                            Layout.margins: 12
                             name: qsTr("Additional PEP Notes")
+                            visible: current_individual.pep
                             textOf: current_individual.pep_notes
                             onEdit: (txt) => {
                                         if (current_individual.pep_notes !== txt)
                                         current_individual.pep_notes = txt
                                     }
                             placeHolder: qsTr("* Optional")
+                            Layout.rowSpan: 4
                         }
 
                         LabeledTextArea {
+                            Layout.margins: 12
                             name: qsTr("Notes")
-                            textOf: current_individual.notes
                             onEdit: (txt) => {
                                         if (current_individual.notes !== txt)
                                         current_individual.notes = txt
                                     }
                             placeHolder: qsTr("* Optional")
+                            Layout.rowSpan: 4
                         }
+
+                        Item{ Layout.rowSpan: 4 }
                     }
                 }
             }
@@ -213,6 +225,7 @@ Page {
     footer: RowLayout {
 
         RoundButton {
+            Layout.margins: 12
             icon.source: "qrc:/icons/floppy-disk.svg"
             ToolTip.visible: hovered
             ToolTip.text: qsTr("Save")
@@ -224,15 +237,14 @@ Page {
         Item { Layout.fillWidth: true }
 
         RoundButton {
+            Layout.margins: 12
             icon.source: "qrc:/icons/trash-alt.svg"
             ToolTip.visible: hovered
             ToolTip.text: qsTr("Delete")
             Layout.alignment: Qt.AlignRight
-            onClicked: current_contact.clear()
-            // Layout.alignment: Qt.AlignRight
-            // onClicked: onExceptionAction(ToolTip.text,
-            //                              qsTr("The selected country will be deleted"),
-            //                              () => { country_list.remove(root.model.index) }, true)
+            onClicked: onExceptionAction(ToolTip.text,
+                                         qsTr("The selected individual will be deleted"),
+                                         () => { current_contact.remove() }, true)
         }
     }
 }
