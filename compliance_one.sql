@@ -30,14 +30,10 @@
 --     id INT AUTO_INCREMENT,
 --     PRIMARY KEY(id),
 --     family_name VARCHAR(63),
---     fore_names VARCHAR(63),
+--     forenames VARCHAR(63),
 --     email VARCHAR(127),
 --     calling_code VARCHAR(5),
---     phone VARCHAR(13),
---     address VARCHAR(63),
---     country VARCHAR(63),
---     zip MEDIUMINT UNSIGNED,
---     location VARCHAR(63)
+--     phone VARCHAR(13)
 -- )
 
 -- run sql scripts dowloaded from 

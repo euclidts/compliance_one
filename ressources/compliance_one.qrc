@@ -41,5 +41,6 @@
         <file>ui/FloatChooser.qml</file>
         <file>ui/CountryChooser.qml</file>
         <file>ui/LabeledTextArea.qml</file>
+        <file>ui/QcontactDelegate.qml</file>
     </qresource>
 </RCC>

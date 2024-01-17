@@ -113,34 +113,46 @@ ApplicationWindow {
                 id: homeStack
                 currentIndex: homeBar.currentIndex
 
-                GridLayout {
-                    columns: 3
-                    columnSpacing: 12
-                    rowSpacing: 12
-                    Layout.fillWidth: true
+                RowLayout {
+                    spacing: 12
 
-                    Button {
-                        text: qsTr("Add Individual")
-                        Layout.leftMargin: 12
-                        Layout.fillWidth: true
-                        icon.source: "qrc:/icons/users.svg"
-                        Layout.alignment: Qt.AlignVCenter
-                        onClicked: rootStack.currentIndex = 1
+                    ListView {
+                        spacing: 6
+                        clip: true
+                        boundsBehavior: Flickable.StopAtBounds
+                        model : QcontactListModel { list: contact_list }
+                        delegate: QcontactDelegate
                     }
 
-                    Button {
-                        text: qsTr("Add Counterparty")
-                        icon.source: "qrc:/icons/industry.svg"
+                    GridLayout {
+                        columns: 3
+                        rowSpacing: 12
+                        columnSpacing: 12
                         Layout.fillWidth: true
-                        Layout.alignment: Qt.AlignVCenter
-                    }
 
-                    Button {
-                        text: qsTr("Add Vessel")
-                        Layout.rightMargin: 12
-                        Layout.fillWidth: true
-                        icon.source: "qrc:/icons/ship.svg"
-                        Layout.alignment: Qt.AlignVCenter
+                        Button {
+                            text: qsTr("Add Individual")
+                            Layout.leftMargin: 12
+                            Layout.fillWidth: true
+                            icon.source: "qrc:/icons/users.svg"
+                            Layout.alignment: Qt.AlignVCenter
+                            onClicked: rootStack.currentIndex = 1
+                        }
+
+                        Button {
+                            text: qsTr("Add Counterparty")
+                            icon.source: "qrc:/icons/industry.svg"
+                            Layout.fillWidth: true
+                            Layout.alignment: Qt.AlignVCenter
+                        }
+
+                        Button {
+                            text: qsTr("Add Vessel")
+                            Layout.rightMargin: 12
+                            Layout.fillWidth: true
+                            icon.source: "qrc:/icons/ship.svg"
+                            Layout.alignment: Qt.AlignVCenter
+                        }
                     }
                 }
 
