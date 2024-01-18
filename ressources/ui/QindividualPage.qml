@@ -178,6 +178,7 @@ Page {
                             checked: current_individual.pep
                             onCheckStateChanged: current_individual.pep = checked
                             text: qsTr("Is a PEP")
+                            Layout.columnSpan: current_individual.pep ? 1 : 2
                         }
 
                         CountryChooser {
@@ -202,7 +203,10 @@ Page {
                                     }
                             placeHolder: qsTr("* Optional")
                             Layout.rowSpan: 4
+                            Layout.columnSpan: 2
                         }
+
+                        Item { visible: current_individual.pep }
 
                         LabeledTextArea {
                             Layout.margins: 12
@@ -213,9 +217,10 @@ Page {
                                     }
                             placeHolder: qsTr("* Optional")
                             Layout.rowSpan: 4
+                            Layout.columnSpan: 2
                         }
 
-                        Item{ Layout.rowSpan: 4 }
+                        Item {}
                     }
                 }
             }

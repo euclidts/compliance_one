@@ -113,45 +113,53 @@ ApplicationWindow {
                 id: homeStack
                 currentIndex: homeBar.currentIndex
 
-                RowLayout {
-                    spacing: 12
+                FlickableItem {
+                    Layout.fillWidth: true
 
-                    ListView {
-                        spacing: 6
-                        clip: true
-                        boundsBehavior: Flickable.StopAtBounds
-                        model : QcontactListModel { list: contact_list }
-                        delegate: QcontactDelegate
-                    }
+                    ColumnLayout {
+                        spacing: 12
+                        width: parent.width
 
-                    GridLayout {
-                        columns: 3
-                        rowSpacing: 12
-                        columnSpacing: 12
-                        Layout.fillWidth: true
-
-                        Button {
-                            text: qsTr("Add Individual")
-                            Layout.leftMargin: 12
+                        ListView {
                             Layout.fillWidth: true
-                            icon.source: "qrc:/icons/users.svg"
-                            Layout.alignment: Qt.AlignVCenter
-                            onClicked: rootStack.currentIndex = 1
+                            implicitHeight: contentHeight
+                            model : QcontactListModel { list: contact_list }
+                            delegate: QcontactDelegate {}
+                            interactive: false
                         }
 
-                        Button {
-                            text: qsTr("Add Counterparty")
-                            icon.source: "qrc:/icons/industry.svg"
+                        GridLayout {
+                            columns: 3
+                            rowSpacing: 12
+                            columnSpacing: 12
                             Layout.fillWidth: true
-                            Layout.alignment: Qt.AlignVCenter
-                        }
 
-                        Button {
-                            text: qsTr("Add Vessel")
-                            Layout.rightMargin: 12
-                            Layout.fillWidth: true
-                            icon.source: "qrc:/icons/ship.svg"
-                            Layout.alignment: Qt.AlignVCenter
+                            Button {
+                                text: qsTr("Add Individual")
+                                Layout.leftMargin: 12
+                                Layout.fillWidth: true
+                                icon.source: "qrc:/icons/users.svg"
+                                Layout.alignment: Qt.AlignVCenter
+                                onClicked: {
+                                    current_contact.clear()
+                                    rootStack.currentIndex = 1
+                                }
+                            }
+
+                            Button {
+                                text: qsTr("Add Counterparty")
+                                icon.source: "qrc:/icons/industry.svg"
+                                Layout.fillWidth: true
+                                Layout.alignment: Qt.AlignVCenter
+                            }
+
+                            Button {
+                                text: qsTr("Add Vessel")
+                                Layout.rightMargin: 12
+                                Layout.fillWidth: true
+                                icon.source: "qrc:/icons/ship.svg"
+                                Layout.alignment: Qt.AlignVCenter
+                            }
                         }
                     }
                 }

@@ -5,7 +5,6 @@
         <file>ui/PwdField.qml</file>
         <file>ui/MaterialButton.qml</file>
         <file>ui/LoggInDialog.qml</file>
-        <file>ui/FlickableRect.qml</file>
         <file>ui/FlickableItem.qml</file>
         <file>ui/ExceptionDialog.qml</file>
         <file>ui/BusyDialog.qml</file>

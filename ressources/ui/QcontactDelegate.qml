@@ -5,7 +5,7 @@ import QtQuick.Controls.Material
 
 ItemDelegate {
     id: root
-    width: window.width
+    width: parent.width
     leftInset: 6
     rightInset: 6
     topInset: 3
@@ -13,11 +13,14 @@ ItemDelegate {
 
     required property var model
 
-    contentItem: GridLayout {
-        columns: portrait ? 2 : 4
-        enabled: !root.model.loading
+    icon.source: "qrc:/icons/users.svg"
+    text: root.model.forenames + " " +
+          root.model.family_name + '\t' +
+          root.model.email
 
-        Label { text: root.model.family_namne }
+    onClicked : {
+        contact_list.select(root.model.index)
+        rootStack.currentIndex = 1
     }
 
     background: Rectangle {
