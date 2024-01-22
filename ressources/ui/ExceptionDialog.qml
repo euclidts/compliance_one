@@ -9,7 +9,7 @@ Dialog {
     closePolicy: Popup.NoAutoClose
     background.opacity: .8
     x: Math.round((parent.width - width) / 2)
-    y: Math.round((parent.height - height) / 2)
+    y: parent.height / 3
     implicitWidth: parent.width * 0.6
 
     property var func: function () {}
@@ -28,7 +28,6 @@ Dialog {
         Label {
             id: textLabel
             Layout.fillWidth: true
-            wrapMode: Text.Wrap
         }
 
         RowLayout {

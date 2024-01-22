@@ -13,7 +13,7 @@ Dialog {
     implicitWidth: 270
 
     function connect() {
-        setHost(hostField.text)
+        bridge.setHost(hostField.text)
         country_list.get()
         product_group_list.get()
         product_list.get()
