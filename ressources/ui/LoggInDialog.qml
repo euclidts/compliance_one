@@ -12,9 +12,16 @@ Dialog {
     y: 120
     implicitWidth: 270
 
+    function connect() {
+        setHost(hostField.text)
+        country_list.get()
+        product_group_list.get()
+        product_list.get()
+        userNameField.focus = true
+    }
+
     function validate() {
-        bridge.authenticate(userNameField.text,
-                            passwordField.text)
+        bridge.authenticate(userNameField.text, passwordField.text)
         logginDialog.close()
         busyDialog.open()
     }
@@ -33,11 +40,19 @@ Dialog {
         }
 
         TextField {
+            id:hostField
+            Layout.fillWidth: true
+            placeholderText: qsTr("Host")
+            text: "https://complianceonetestrive.euclidtradingsystems.com"
+            onAccepted: connect()
+        }
+
+        TextField {
             id: userNameField
             Layout.fillWidth: true
             placeholderText: qsTr("Username")
             onAccepted: passwordField.text !== "" ? validate()
-                                                   : passwordField.fieldFocus = true
+                                                  : passwordField.fieldFocus = true
         }
 
         PwdField {
@@ -60,12 +75,7 @@ Dialog {
                            validate()
         }
 
-        Component.onCompleted: {
-            userNameField.focus = true
-            country_list.get()
-            product_group_list.get()
-            product_list.get()
-        }
+        Component.onCompleted: connect()
     }
 }
 
