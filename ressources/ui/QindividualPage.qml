@@ -95,9 +95,9 @@ Page {
 
                 AddressChooser {
                     countryOf: current_individual.country
-                    onCountryEdit: (txt) => {
-                                       if (current_individual.country !== txt)
-                                       current_individual.country = txt
+                    onCountryEdit: (value) => {
+                                       if (current_individual.country !== value)
+                                       current_individual.country = value
                                    }
                     addressOf: current_individual.address
                     onAddressEdit: (txt) => {
@@ -173,23 +173,27 @@ Page {
                             placeHolder: qsTr("* Optional")
                         }
 
-                        CheckBox {
+                        RowLayout {
                             Layout.margins: 12
-                            checked: current_individual.pep
-                            onCheckStateChanged: current_individual.pep = checked
-                            text: qsTr("Is a PEP")
-                            Layout.columnSpan: current_individual.pep ? 1 : 2
-                        }
+                            spacing: 24
 
-                        CountryChooser {
-                            Layout.margins: 12
-                            name: qsTr("PEP country")
-                            visible: current_individual.pep
-                            enumOf: current_individual.pep_country
-                            onEdit: (value) => {
-                                        if (current_individual.pep_country !== value)
-                                        current_individual.pep_country = value
-                                    }
+                            CheckBox {
+                                checked: current_individual.pep
+                                onCheckStateChanged: if (current_individual.pep !== checked)
+                                                         current_individual.pep !== checked
+                                text: qsTr("Is a PEP")
+                                Layout.columnSpan: current_individual.pep ? 1 : 2
+                            }
+
+                            CountryChooser {
+                                name: qsTr("PEP country")
+                                visible: current_individual.pep
+                                enumOf: current_individual.pep_country
+                                onEdit: (value) => {
+                                            if (current_individual.pep_country !== value)
+                                            current_individual.pep_country = value
+                                        }
+                            }
                         }
 
                         LabeledTextArea {
@@ -202,8 +206,7 @@ Page {
                                         current_individual.pep_notes = txt
                                     }
                             placeHolder: qsTr("* Optional")
-                            Layout.rowSpan: 4
-                            Layout.columnSpan: 2
+                            Layout.rowSpan: 2
                         }
 
                         Item { visible: current_individual.pep }
@@ -234,9 +237,16 @@ Page {
             icon.source: "qrc:/icons/floppy-disk.svg"
             ToolTip.visible: hovered
             ToolTip.text: qsTr("Save")
-            onClicked: current_contact.save()
+            onClicked: {
+                if (current_individual.flagged_for_update)
+                    busyDialog.onLoaded = () => {
+                        current_individual.contact_id = current_contact.id
+                        current_individual.save()
+                    }
+                current_contact.save()
+            }
             highlighted: true
-            enabled: current_contact.flagged_for_update
+            enabled: current_contact.flagged_for_update || current_individual.flagged_for_update
         }
 
         Item { Layout.fillWidth: true }
@@ -249,7 +259,27 @@ Page {
             Layout.alignment: Qt.AlignRight
             onClicked: onExceptionAction(ToolTip.text,
                                          qsTr("The selected individual will be deleted"),
-                                         () => { current_contact.remove() }, true)
+                                         () => {
+                                             busyDialog.onLoaded = () => {
+                                                 current_contact.remove()
+                                                 busyDialog.onLoaded = () => { rootStack.currentIndex = 0 }
+                                             }
+                                             current_individual.remove()
+                                         }, true)
+        }
+
+        Connections {
+            target: current_contact
+            function onLoadingChanged() {
+                current_contact.loading ? busyDialog.open() : busyDialog.close()
+            }
+        }
+
+        Connections {
+            target: current_individual
+            function onLoadingChanged() {
+                current_individual.loading ? busyDialog.open() : busyDialog.close()
+            }
         }
     }
 }

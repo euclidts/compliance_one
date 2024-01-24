@@ -46,12 +46,12 @@ ApplicationWindow {
     function onLogin (success: bool, error: string) {
         if (success) {
             contact_list.get()
-            // individual_list.get()
+            individual_list.get()
             rootStack.currentIndex = 0
-            logginDialog.clear()
+            loginDialog.clear()
             busyDialog.close()
         }
-        else { logginDialog.open() }
+        else { loginDialog.open() }
     }
 
     function onException (prefix: string, error: string) {
@@ -75,8 +75,8 @@ ApplicationWindow {
 
     BusyDialog { id: busyDialog }
 
-    LoggInDialog { id: logginDialog }
-    Component.onCompleted: logginDialog.open()
+    LogInDialog { id: loginDialog }
+    Component.onCompleted: loginDialog.open()
 
     StackLayout {
         id: rootStack
@@ -123,7 +123,10 @@ ApplicationWindow {
                         ListView {
                             Layout.fillWidth: true
                             implicitHeight: contentHeight
-                            model : QcontactListModel { list: contact_list }
+                            model : QcontactListModel {
+                                id: contactListModel
+                                list: contact_list
+                            }
                             delegate: QcontactDelegate {}
                             interactive: false
                         }
@@ -138,7 +141,7 @@ ApplicationWindow {
                                 text: qsTr("Add Individual")
                                 Layout.leftMargin: 12
                                 Layout.fillWidth: true
-                                icon.source: "qrc:/icons/users.svg"
+                                icon.source: "qrc:/icons/user.svg"
                                 Layout.alignment: Qt.AlignVCenter
                                 onClicked: {
                                     current_contact.clear()

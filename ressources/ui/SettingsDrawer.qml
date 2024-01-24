@@ -103,7 +103,7 @@ Drawer {
                         accountsPages.currentIndex = 0
                         usersPages.currentIndex = 0
                         settingsDrawer.close()
-                        logginDialog.open()
+                        loginDialog.open()
                     }
                 }
 

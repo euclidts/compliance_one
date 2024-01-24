@@ -4,7 +4,7 @@
         <file>ui/SettingsDrawer.qml</file>
         <file>ui/PwdField.qml</file>
         <file>ui/MaterialButton.qml</file>
-        <file>ui/LoggInDialog.qml</file>
+        <file>ui/LogInDialog.qml</file>
         <file>ui/FlickableItem.qml</file>
         <file>ui/ExceptionDialog.qml</file>
         <file>ui/BusyDialog.qml</file>
@@ -41,5 +41,6 @@
         <file>ui/CountryChooser.qml</file>
         <file>ui/LabeledTextArea.qml</file>
         <file>ui/QcontactDelegate.qml</file>
+        <file>icons/user.svg</file>
     </qresource>
 </RCC>

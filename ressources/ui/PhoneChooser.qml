@@ -26,7 +26,6 @@ ColumnLayout {
             id: codeBox
             Layout.maximumWidth: 90
             model: countryListView.model
-            editable: true
             textRole: "iso3"
             valueRole: "phonecode"
             delegate: MenuItem {

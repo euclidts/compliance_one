@@ -32,7 +32,7 @@
 --     family_name VARCHAR(63),
 --     forenames VARCHAR(63),
 --     email VARCHAR(127),
---     calling_code VARCHAR(5),
+--     calling_code VARCHAR(6),
 --     phone VARCHAR(13)
 -- )
 
@@ -67,4 +67,31 @@
 -- ADD COLUMN sovereignty_id MEDIUMINT UNSIGNED,
 -- ADD CONSTRAINT FOREIGN KEY (sovereignty_id) REFERENCES countries (id)
 
--- SELECT name, latitude, longitude, updated_at FROM country
+-- CREATE TABLE individual
+-- (
+--     id INT AUTO_INCREMENT,
+--     PRIMARY KEY(id),
+--     contact_id INT UNIQUE,
+--     CONSTRAINT FOREIGN KEY (contact_id) REFERENCES contact (id),
+--     local_name VARCHAR(63),
+--     local_forenames VARCHAR(63),
+--     country MEDIUMINT UNSIGNED,
+--     CONSTRAINT FOREIGN KEY (country) REFERENCES country (id),
+--     address VARCHAR(255),
+--     locality VARCHAR(63),
+--     region VARCHAR(63),
+--     postcode VARCHAR(31),
+--     date_of_birth DATE,
+--     passport VARCHAR(63),
+--     expeiry_date DATE,
+--     issuing MEDIUMINT UNSIGNED,
+--     CONSTRAINT FOREIGN KEY (issuing) REFERENCES country (id),
+--     pep BOOLEAN NOT NULL DEFAULT false,
+--     pep_country MEDIUMINT UNSIGNED,
+--     CONSTRAINT FOREIGN KEY (pep_country) REFERENCES country (id),
+--     pep_notes VARCHAR(255),
+--     notes VARCHAR(255)
+-- )
+
+-- DELETE FROM individual
+SELECT * FROM individual

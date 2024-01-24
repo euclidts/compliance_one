@@ -22,7 +22,7 @@ Dialog {
 
     function validate() {
         bridge.authenticate(userNameField.text, passwordField.text)
-        logginDialog.close()
+        loginDialog.close()
         busyDialog.open()
     }
 
@@ -66,7 +66,7 @@ Dialog {
         RoundButton {
             id: validationButton
             icon.source: "qrc:/icons/door-open.svg"
-            text: qsTr("Logg in")
+            text: qsTr("Log in")
             Layout.fillWidth: true
             font.capitalization: Font.MixedCase
             font.bold: true
