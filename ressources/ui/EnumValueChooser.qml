@@ -18,6 +18,8 @@ ColumnLayout {
     required property string enumOf
     required property var onEdit
 
+    onEnumOfChanged: combo.currentIndex = combo.indexOfValue(enumOf)
+
     Label {
         id: label
         font.italic: true

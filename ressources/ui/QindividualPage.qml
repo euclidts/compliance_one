@@ -147,7 +147,7 @@ Page {
                             enumOf: current_individual.issuing
                             onEdit: (value) => {
                                         if (current_individual.issuing !== value)
-                                        current_individual.issuing = value
+                                            current_individual.issuing = value
                                     }
                         }
 
@@ -239,7 +239,7 @@ Page {
             ToolTip.text: qsTr("Save")
             onClicked: {
                 if (current_individual.flagged_for_update)
-                    busyDialog.onLoaded = () => {
+                    onLoaded = () => {
                         current_individual.contact_id = current_contact.id
                         current_individual.save()
                     }
@@ -260,9 +260,9 @@ Page {
             onClicked: onExceptionAction(ToolTip.text,
                                          qsTr("The selected individual will be deleted"),
                                          () => {
-                                             busyDialog.onLoaded = () => {
+                                             onLoaded = () => {
                                                  current_contact.remove()
-                                                 busyDialog.onLoaded = () => { rootStack.currentIndex = 0 }
+                                                 onLoaded = () => { rootStack.currentIndex = 0 }
                                              }
                                              current_individual.remove()
                                          }, true)
@@ -271,14 +271,14 @@ Page {
         Connections {
             target: current_contact
             function onLoadingChanged() {
-                current_contact.loading ? busyDialog.open() : busyDialog.close()
+                current_contact.loading ? loading = true : loading = false
             }
         }
 
         Connections {
             target: current_individual
             function onLoadingChanged() {
-                current_individual.loading ? busyDialog.open() : busyDialog.close()
+                current_individual.loading ? loading = true : loading = false
             }
         }
     }

@@ -28,6 +28,22 @@ ApplicationWindow {
 
     readonly property bool portrait: width < 500
     readonly property var rateModel: [qsTr("Low"), qsTr("Medium"), qsTr("High")]
+    property bool loading: false
+    property var onLoaded: function () {}
+
+    LogInDialog { id: loginDialog }
+    Component.onCompleted: loginDialog.open()
+    BusyDialog { id: busyDialog }
+    ExceptionDialog { id: exceptionDialog }
+
+    onLoadingChanged: if (loading) { busyDialog.open() }
+                      else {
+                          // set asside for imediate use and cleanup
+                          var next = onLoaded
+                          onLoaded = function () {}
+                          next()
+                          busyDialog.close()
+                      }
 
     function formatDateTimeMs(date) {
         let str = date.toISOString()
@@ -69,14 +85,7 @@ ApplicationWindow {
         onException(prefix, error)
     }
 
-    ExceptionDialog { id: exceptionDialog }
-
     SettingsDrawer { id: settingsDrawer }
-
-    BusyDialog { id: busyDialog }
-
-    LogInDialog { id: loginDialog }
-    Component.onCompleted: loginDialog.open()
 
     StackLayout {
         id: rootStack

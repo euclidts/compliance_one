@@ -11,17 +11,8 @@ Dialog {
     x: Math.round((parent.width - width) / 2)
     y: Math.round((parent.height - height) / 2)
 
-    property var onLoaded: function () {}
-
     BusyIndicator {
         anchors.fill: parent
-    }
-
-    onClosed: {
-       // set asside for imediate use and cleanup
-       var next = onLoaded
-       onLoaded = function () {}
-       next()
     }
 }
 
