@@ -14,6 +14,8 @@ ColumnLayout {
     required property string enumOf
     required property var onEdit
 
+    onEnumOfChanged: combo.currentIndex = combo.indexOfValue(enumOf)
+
     Label {
         id: label
         font.italic: true
@@ -24,7 +26,6 @@ ColumnLayout {
         Layout.topMargin: 2
         editable: false
         Layout.minimumWidth: 160
-        Component.onCompleted: currentIndex = enumOf
         onActivated: onEdit(currentIndex)
     }
 }

@@ -12,6 +12,8 @@ ColumnLayout {
     required property var onCodeEdit
     property int capitalization: Font.Capitalize
 
+    onCodeOfChanged: codeBox.currentIndex = codeBox.indexOfValue(codeOf)
+
     Label {
         id: label
         Layout.topMargin: 6
@@ -37,7 +39,6 @@ ColumnLayout {
                 highlighted: codeBox.highlightedIndex === index
                 hoverEnabled: codeBox.hoverEnabled
             }
-            Component.onCompleted: currentIndex = indexOfValue(codeOf)
             onActivated: codeField.text = currentValue
         }
 

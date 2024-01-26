@@ -8,6 +8,7 @@ ColumnLayout {
 
     property string placeHolder
     property alias readOnly: field.readOnly
+    property alias areaHeight: field.implicitHeight
     required property string name
     required property string textOf
     required property var onEdit

@@ -19,12 +19,11 @@ ApplicationWindow {
     width: 1024
     height: 768
     color: settingsDrawer.theme.checked ? "#83919f" : '#121212'
+    font.pixelSize: 16
 
     Material.theme: settingsDrawer.theme.checked ? Material.Light : Material.Dark
     Material.primary: "#bfe8ff"
     Material.accent: "#4183a8"
-
-    font.pixelSize: 16
 
     readonly property bool portrait: width < 500
     readonly property var rateModel: [qsTr("Low"), qsTr("Medium"), qsTr("High")]
@@ -41,9 +40,11 @@ ApplicationWindow {
                           // set asside for imediate use and cleanup
                           var next = onLoaded
                           onLoaded = function () {}
-                          next()
                           busyDialog.close()
+                          next()
                       }
+
+    DateDialog { id: dateDialog }
 
     function formatDateTimeMs(date) {
         let str = date.toISOString()

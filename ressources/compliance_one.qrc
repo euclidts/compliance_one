@@ -42,5 +42,9 @@
         <file>ui/LabeledTextArea.qml</file>
         <file>ui/QcontactDelegate.qml</file>
         <file>icons/user.svg</file>
+        <file>ui/DateDialog.qml</file>
+        <file>ui/DateField.qml</file>
+        <file>ui/LabeledDateField.qml</file>
+        <file>icons/calendar-days.svg</file>
     </qresource>
 </RCC>

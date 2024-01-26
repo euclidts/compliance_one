@@ -127,8 +127,17 @@ Page {
                         columnSpacing: 0
                         rowSpacing: 0
                         columns: portrait ? 1 : 2
-                        uniformCellHeights: true
                         uniformCellWidths: true
+
+                        LabeledDateField {
+                            Layout.margins: 12
+                            name: qsTr("Date of birth")
+                            dateOf: current_individual.date_of_birth
+                            onEdit: (date) => {
+                                        if (current_individual.date_of_birth !== date)
+                                        current_individual.date_of_birth = date
+                                    }
+                        }
 
                         LabeledTextField {
                             Layout.margins: 12
@@ -148,6 +157,16 @@ Page {
                             onEdit: (value) => {
                                         if (current_individual.issuing !== value)
                                             current_individual.issuing = value
+                                    }
+                        }
+
+                        LabeledDateField {
+                            Layout.margins: 12
+                            name: qsTr("Expeiry date")
+                            dateOf: current_individual.expeiry_date
+                            onEdit: (date) => {
+                                        if (current_individual.expeiry_date !== date)
+                                        current_individual.expeiry_date = date
                                     }
                         }
 
@@ -173,14 +192,14 @@ Page {
                             placeHolder: qsTr("* Optional")
                         }
 
-                        RowLayout {
+                        ColumnLayout {
                             Layout.margins: 12
                             spacing: 24
 
                             CheckBox {
                                 checked: current_individual.pep
                                 onCheckStateChanged: if (current_individual.pep !== checked)
-                                                         current_individual.pep !== checked
+                                                         current_individual.pep = checked
                                 text: qsTr("Is a PEP")
                                 Layout.columnSpan: current_individual.pep ? 1 : 2
                             }
@@ -208,22 +227,24 @@ Page {
                             placeHolder: qsTr("* Optional")
                             Layout.rowSpan: 2
                         }
+                    }
+                }
 
-                        Item { visible: current_individual.pep }
+                BackgroundRect {
+                    implicitHeight: childrenRect.height + 24
 
-                        LabeledTextArea {
-                            Layout.margins: 12
-                            name: qsTr("Notes")
-                            onEdit: (txt) => {
-                                        if (current_individual.notes !== txt)
-                                        current_individual.notes = txt
-                                    }
-                            placeHolder: qsTr("* Optional")
-                            Layout.rowSpan: 4
-                            Layout.columnSpan: 2
-                        }
-
-                        Item {}
+                    LabeledTextArea {
+                        width: parent.width - 24
+                        areaHeight: 120
+                        x: 12
+                        y: 12
+                        name: qsTr("Notes")
+                        textOf: current_individual.notes
+                        onEdit: (txt) => {
+                                    if (current_individual.notes !== txt)
+                                    current_individual.notes = txt
+                                }
+                        placeHolder: qsTr("* Optional")
                     }
                 }
             }

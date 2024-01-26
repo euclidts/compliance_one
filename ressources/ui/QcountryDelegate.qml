@@ -32,9 +32,10 @@ ItemDelegate {
 
         CheckBox {
             id: unCheck
-            onCheckStateChanged: if (checked) root.model.sovereignty_id = 0
+            checked: current_individual.pep
+            onCheckStateChanged: if (root.model.sovereignty_id !== checked)
+                                     root.model.sovereignty_id = checked
             text: qsTr("UN Member State")
-            Component.onCompleted: if (root.model.sovereignty_id === 0) checked = true
         }
 
         CountryChooser {

@@ -30,7 +30,6 @@ ColumnLayout {
         Layout.topMargin: 2
         Layout.minimumWidth: 160
         Layout.fillWidth: true
-        Component.onCompleted: currentIndex = indexOfValue(enumOf)
         onActivated: onEdit(currentValue)
     }
 }
