@@ -3,7 +3,7 @@
 #include <chrono>
 
 #include "contact.hpp"
-#include "country.hpp"
+#include "address.hpp"
 
 struct individual
 {
@@ -41,38 +41,7 @@ struct individual
         std::string value{};
     } local_forenames;
 
-    struct country_id
-    {
-        static const constexpr auto c_name() { return "country"; }
-        uint32_t value{0};
-        static const constexpr auto references() { return &country::primary_key; }
-    } country_id;
-
-    struct address
-    {
-        static const constexpr auto c_name() { return "address"; }
-        std::string value{};
-    } address;
-
-    struct locality
-    {
-        static const constexpr auto c_name() { return "locality"; }
-        std::string value{};
-    } locality;
-
-    struct region
-    {
-        static const constexpr auto c_name() { return "region"; }
-        std::string value{};
-    } region;
-
-    struct postcode
-    {
-        static const constexpr auto c_name() { return "postcode"; }
-        std::string value{};
-    } postcode;
-
-   struct date_of_birth
+    struct date_of_birth
    {
         static const constexpr auto name() { return "Date of birth"; }
         static const constexpr auto c_name() { return "date_of_birth"; }
@@ -129,4 +98,11 @@ struct individual
         static const constexpr auto c_name() { return "notes"; }
         std::string value{};
     } notes;
+
+    struct address_id
+    {
+        static const constexpr auto c_name() { return "address_id"; }
+        int32_t value{0};
+        static const constexpr auto references() { return &address::primary_key; }
+    } address_id;
 };

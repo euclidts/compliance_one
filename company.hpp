@@ -48,7 +48,7 @@ struct company
         bool value{};
     } is_branch;
 
-//    address_spec address;
+    // address_spec address;
 
     struct websdite
     {

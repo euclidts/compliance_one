@@ -67,6 +67,18 @@
 -- ADD COLUMN sovereignty_id MEDIUMINT UNSIGNED,
 -- ADD CONSTRAINT FOREIGN KEY (sovereignty_id) REFERENCES countries (id)
 
+-- CREATE TABLE address
+-- (
+--     id INT AUTO_INCREMENT,
+--     PRIMARY KEY(id),
+--     country_id MEDIUMINT UNSIGNED,
+--     CONSTRAINT FOREIGN KEY (country_id) REFERENCES country (id),
+--     address_lines VARCHAR(255),
+--     locality VARCHAR(63),
+--     region VARCHAR(63),
+--     postcode VARCHAR(31)
+-- )
+
 -- CREATE TABLE individual
 -- (
 --     id INT AUTO_INCREMENT,
@@ -75,12 +87,6 @@
 --     CONSTRAINT FOREIGN KEY (contact_id) REFERENCES contact (id),
 --     local_name VARCHAR(63),
 --     local_forenames VARCHAR(63),
---     country MEDIUMINT UNSIGNED,
---     CONSTRAINT FOREIGN KEY (country) REFERENCES country (id),
---     address VARCHAR(255),
---     locality VARCHAR(63),
---     region VARCHAR(63),
---     postcode VARCHAR(31),
 --     date_of_birth DATE,
 --     passport VARCHAR(63),
 --     expeiry_date DATE,
@@ -90,8 +96,7 @@
 --     pep_country MEDIUMINT UNSIGNED,
 --     CONSTRAINT FOREIGN KEY (pep_country) REFERENCES country (id),
 --     pep_notes VARCHAR(255),
---     notes VARCHAR(255)
+--     notes VARCHAR(255),
+--     address_id INT,
+--     CONSTRAINT FOREIGN KEY (address_id) REFERENCES address (id)
 -- )
-
--- DELETE FROM individual
-SELECT * FROM individual

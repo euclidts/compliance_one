@@ -18,6 +18,7 @@ make_all(
         product_group
         product
         contact
+        address
         individual
     EXTRA_CLIENT_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/ressources/compliance_one.qrc)

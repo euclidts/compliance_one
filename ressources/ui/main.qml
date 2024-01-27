@@ -10,6 +10,7 @@ import Qcountry
 import Qproduct_group
 import Qproduct
 import Qcontact
+import Qaddress
 import Qindividual
 
 ApplicationWindow {
@@ -63,6 +64,7 @@ ApplicationWindow {
     function onLogin (success: bool, error: string) {
         if (success) {
             contact_list.get()
+            address_list.get()
             individual_list.get()
             rootStack.currentIndex = 0
             loginDialog.clear()

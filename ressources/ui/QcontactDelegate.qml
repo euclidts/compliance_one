@@ -21,6 +21,7 @@ ItemDelegate {
     onClicked : {
         contact_list.select(root.model.index)
         individual_list.select_by("contact_id", root.model.id)
+        address_list.select_by("address_id", current_individual.id)
         rootStack.currentIndex = 1
     }
 

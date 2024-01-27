@@ -94,30 +94,30 @@ Page {
                 }
 
                 AddressChooser {
-                    countryOf: current_individual.country
+                    countryOf: current_address.country
                     onCountryEdit: (value) => {
-                                       if (current_individual.country !== value)
-                                       current_individual.country = value
+                                       if (current_address.country !== value)
+                                       current_address.country = value
                                    }
-                    addressOf: current_individual.address
+                    addressOf: current_address.address
                     onAddressEdit: (txt) => {
-                                       if (current_individual.address !== txt)
-                                       current_individual.address = txt
+                                       if (current_address.address !== txt)
+                                       current_address.address = txt
                                    }
-                    regionOf: current_individual.region
+                    regionOf: current_address.region
                     onRegionEdit: (txt) => {
-                                      if (current_individual.region !== txt)
-                                      current_individual.region = txt
+                                      if (current_address.region !== txt)
+                                      current_address.region = txt
                                   }
-                    postcodeOf: current_individual.postcode
+                    postcodeOf: current_address.postcode
                     onPostcodeEdit: (txt) => {
-                                        if (current_individual.postcode !== txt)
-                                        current_individual.postcode = txt
+                                        if (current_address.postcode !== txt)
+                                        current_address.postcode = txt
                                     }
-                    localityOf: current_individual.locality
+                    localityOf: current_address.locality
                     onLocalityEdit: (txt) => {
-                                        if (current_individual.locality !== txt)
-                                        current_individual.locality = txt
+                                        if (current_address.locality !== txt)
+                                        current_address.locality = txt
                                     }
                 }
 
