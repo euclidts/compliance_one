@@ -10,6 +10,12 @@ ColumnLayout {
     required property date dateOf
     required property var onEdit
 
+    function openCal () {
+        dateDialog.currentDate = dateOf
+        dateDialog.func = onEdit
+        dateDialog.open()
+    }
+
     Label {
         id: label
         text: name
@@ -18,22 +24,22 @@ ColumnLayout {
 
     TextField {
         id: field
-        text: dateOf.toISOString()
+        text: dateOf.toISOString().slice(0, -14)
         readOnly: true
-        placeholderText: "YYYY-MM-DD"
+        placeholderText: qsTr("YYYY-MM-DD")
         Layout.fillWidth: true
-        onAccepted: focus = false
 
-        Button {
-            flat: true
-            checkable: true
-            icon.source: "qrc:/icons/calendar-days.svg"
-            x: parent.width - width
-            onClicked: {
-                dateDialog.currentDate = dateOf
-                dateDialog.func = onEdit
-                dateDialog.open()
-            }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: openCal()
+        }
+
+        IconImage {
+            source: "qrc:/icons/calendar-days.svg"
+            x: parent.width - width - 12
+            y: 12
+            color: Material.accent
+            height: parent.height - 24
         }
     }
 }

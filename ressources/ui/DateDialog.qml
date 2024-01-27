@@ -11,9 +11,9 @@ Dialog {
     y: 120
 
     property date currentDate
+    property var func: function () {}
     property int minYear: 1900
     property int maxYear: 2100
-    property var func: function () {}
 
     onCurrentDateChanged: {
         if (years.value !== currentDate.getFullYear())
@@ -34,6 +34,15 @@ Dialog {
                 Layout.fillWidth: true
                 from: minYear
                 to: maxYear
+                editable: true
+
+                function onNewVal() {
+                    currentDate.setFullYear(value)
+                    func(currentDate)
+                }
+
+                onValueModified: onNewVal()
+
                 textFromValue: function(value) {
                     return Number(value).toString()
                 }
@@ -41,9 +50,27 @@ Dialog {
                     return Number.parseInt(text)
                 }
 
+                validator: IntValidator {
+                    bottom: Math.min(years.from, years.to)
+                    top: Math.max(years.from, years.to)
+                }
+
+                inputMethodHints: Qt.ImhDigitsOnly
+
                 contentItem: TextInput {
                     text: years.textFromValue(years.value)
-                    onTextChanged: years.value = years.valueFromText(text)
+                    onTextChanged: if (acceptableInput) years.onNewVal()
+                                   else {
+                                       if (years.valueFromText < minYear) {
+                                           years.value = minYear
+                                           years.onNewVal()
+                                       }
+
+                                       if (years.valueFromText > maxYear) {
+                                           years.value = maxYear
+                                           years.onNewVal()
+                                       }
+                                   }
 
                     font: window.font
                     color: Material.foreground
@@ -51,15 +78,13 @@ Dialog {
                     selectedTextColor: Material.foreground
                     horizontalAlignment: Qt.AlignHCenter
                     verticalAlignment: Qt.AlignVCenter
-                    cursorDelegate: CursorDelegate { }
-                    clip: width < implicitWidth
-                    inputMethodHints: Qt.ImhDigitsOnly
-                    readOnly: false
 
-                    validator: IntValidator {
-                        bottom: Math.min(years.from, years.to)
-                        top: Math.max(years.from, years.to)
-                    }
+                    cursorDelegate: CursorDelegate { }
+
+                    readOnly: !years.editable
+                    validator: years.validator
+                    inputMethodHints: years.inputMethodHints
+                    clip: width < implicitWidth
                 }
             }
 
@@ -68,13 +93,18 @@ Dialog {
                 Layout.fillWidth: true
                 from: 1
                 to: 12
+                editable: true
+                onValueModified: {
+                    currentDate.setMonth(value - 1)
+                    func(currentDate)
+                }
             }
         }
 
         MonthGrid {
             id: grid
-            month: Math.max(0, months.value - 1)
-            year: years.value
+            month: Math.max(0, currentDate.getMonth())
+            year: currentDate.getFullYear()
             Layout.fillWidth: true
             Layout.fillHeight: true
             delegate: Text {
@@ -109,10 +139,10 @@ Dialog {
         }
     }
 
-    // onClosed {
-    // func = function () {}
-    //     minYear = 1900
-    //     maxYear = 2100
-    // }
+    onClosed: {
+        func = function () {}
+        minYear = 1900
+        maxYear = 2100
+    }
 }
 
