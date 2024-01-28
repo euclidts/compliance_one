@@ -45,5 +45,7 @@
         <file>ui/DateDialog.qml</file>
         <file>ui/LabeledDateField.qml</file>
         <file>icons/calendar-days.svg</file>
+        <file>ui/QcompanyDelegate.qml</file>
+        <file>ui/QctpTypeDelegate.qml</file>
     </qresource>
 </RCC>

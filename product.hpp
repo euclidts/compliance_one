@@ -15,7 +15,7 @@ struct product
     struct group_id
     {
         static const constexpr auto c_name() { return "group_id"; }
-        static const constexpr auto nane() { return "Product group"; }
+        // static const constexpr auto nane() { return "Product group"; }
         int32_t value{1};
         static const constexpr auto foreign_key() { return &product_group::primary_key; }
     } group_id;
@@ -29,7 +29,7 @@ struct product
     struct risk_score
     {
         static const constexpr auto c_name() { return "risk_score"; }
-        static const constexpr auto name() { return "Risk Score"; }
+        // static const constexpr auto name() { return "Risk Score"; }
         int8_t value{1};
     } risk_score; // 0 -> 10
 };

@@ -6,11 +6,11 @@
 
 struct country
 {
-    static const constexpr int permission(const user* u)
-    {
-        if (u) return user::read;
-        else return user::read + user::write;
-    }
+    // static const constexpr int permission(const user* u)
+    // {
+    //     if (u) return user::read;
+    //     else return user::read + user::write;
+    // }
 
     static const constexpr auto table() { return "country"; }
 
@@ -35,14 +35,14 @@ struct country
 
     struct iso3
     {
-        static const constexpr auto name() { return "ISO 3"; }
+        // static const constexpr auto name() { return "ISO 3"; }
         static const constexpr auto c_name() { return "iso3"; }
         std::string value{};
     } iso3;
 
     struct numeric_code
     {
-        static const constexpr auto name() { return "Numeric code"; }
+        // static const constexpr auto name() { return "Numeric code"; }
         static const constexpr auto c_name() { return "numeric_code"; }
         std::string value{};
     } numeric_code;
@@ -89,35 +89,35 @@ struct country
     struct ranking
     {
         static const constexpr auto c_name() { return "ranking"; }
-        static const constexpr auto name() { return "Internal Ranking"; }
+        // static const constexpr auto name() { return "Internal Ranking"; }
         ranks value{mid};
     } ranking;
 
     struct fatf
     {
         static const constexpr auto c_name() { return "fatf"; }
-        static const constexpr auto name() { return "FATF"; }
+        // static const constexpr auto name() { return "FATF"; }
         ranks value{mid};
     } fatf;
 
     struct transparency
     {
         static const constexpr auto c_name() { return "transparency"; }
-        static const constexpr auto name() { return "Transparency International"; }
+        // static const constexpr auto name() { return "Transparency International"; }
         uint8_t value{5};
     } transparency;
 
     struct world_bank
     {
         static const constexpr auto c_name() { return "world_bank"; }
-        static const constexpr auto name() { return "World Bank"; }
+        // static const constexpr auto name() { return "World Bank"; }
         uint8_t value{5};
     } world_bank;
 
     struct sovereignty_id
     {
         static const constexpr auto c_name() { return "sovereignty_id"; }
-        static const constexpr auto name() { return "Sovereignty"; }
+        // static const constexpr auto name() { return "Sovereignty"; }
         uint32_t value{0};
         static const constexpr auto foreign_key() { return &country::primary_key; }
     } sovereignty_id;

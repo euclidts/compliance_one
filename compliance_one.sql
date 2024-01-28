@@ -100,3 +100,23 @@
 --     address_id INT,
 --     CONSTRAINT FOREIGN KEY (address_id) REFERENCES address (id)
 -- )
+
+-- CREATE TABLE ctp_group 
+-- (
+--     id INT AUTO_INCREMENT,
+--     PRIMARY KEY(id),
+--     name VARCHAR(63)
+-- )
+
+-- CREATE TABLE ctp_type 
+-- (
+--     id INT AUTO_INCREMENT,
+--     PRIMARY KEY(id),
+--     group_id INT NOT NULL,
+--     CONSTRAINT FOREIGN KEY (group_id) REFERENCES ctp_group (id),
+--     name VARCHAR(63),
+--     notes VARCHAR(255),
+--     risk_score TINYINT UNSIGNED
+-- )
+
+

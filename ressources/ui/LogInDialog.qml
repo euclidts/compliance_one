@@ -17,6 +17,8 @@ Dialog {
         country_list.get()
         product_group_list.get()
         product_list.get()
+        ctp_group_list.get()
+        ctp_type_list.get()
         userNameField.focus = true
     }
 

@@ -4,7 +4,7 @@
 
 struct address
 {
-    static const constexpr auto table() { return "individual"; }
+    static const constexpr auto table() { return "address"; }
 
     struct primary_key
     {
@@ -14,16 +14,18 @@ struct address
 
     struct country_id
     {
+        // static const constexpr auto name() { return "Country"; }
         static const constexpr auto c_name() { return "country_id"; }
         uint32_t value{0};
         static const constexpr auto references() { return &country::primary_key; }
     } country_id;
 
-    struct address
+    struct address_lines
     {
-        static const constexpr auto c_name() { return "address"; }
+        // static const constexpr auto name() { return "Address lines"; }
+        static const constexpr auto c_name() { return "address_lines"; }
         std::string value{};
-    } address;
+    } address_lines;
 
     struct locality
     {

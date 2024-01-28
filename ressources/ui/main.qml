@@ -9,6 +9,8 @@ import QappUser
 import Qcountry
 import Qproduct_group
 import Qproduct
+import Qctp_group
+import Qctp_type
 import Qcontact
 import Qaddress
 import Qindividual
@@ -143,8 +145,19 @@ ApplicationWindow {
                             interactive: false
                         }
 
+                        // ListView {
+                        //     Layout.fillWidth: true
+                        //     implicitHeight: contentHeight
+                        //     model : QcontactListModel {
+                        //         id: counterpartyListModel
+                        //         list: contact_list
+                        //     }
+                        //     delegate: QcontactDelegate {}
+                        //     interactive: false
+                        // }
+
                         GridLayout {
-                            columns: 3
+                            columns: portrait ? 1 : 3
                             rowSpacing: 12
                             columnSpacing: 12
                             Layout.fillWidth: true
@@ -157,12 +170,14 @@ ApplicationWindow {
                                 Layout.alignment: Qt.AlignVCenter
                                 onClicked: {
                                     current_contact.clear()
+                                    current_address.clear()
+                                    current_individual.clear()
                                     rootStack.currentIndex = 1
                                 }
                             }
 
                             Button {
-                                text: qsTr("Add Counterparty")
+                                text: qsTr("Add Company")
                                 icon.source: "qrc:/icons/industry.svg"
                                 Layout.fillWidth: true
                                 Layout.alignment: Qt.AlignVCenter
@@ -207,6 +222,20 @@ ApplicationWindow {
                         highlighted: true
                     }
                 }
+
+                ListView {
+                    spacing: 6
+                    clip: true
+                    boundsBehavior: Flickable.StopAtBounds
+                    model : Qctp_typeListModel { list: ctp_type_list }
+                    delegate: QctpTypeDelegate {}
+                    footer: RoundButton {
+                        Layout.fillWidth: true
+                        icon.source: "qrc:/icons/plus.svg"
+                        onClicked: ctp_type_list.appendItem()
+                        highlighted: true
+                    }
+                }
             }
 
                 footer: RowLayout {
@@ -225,6 +254,9 @@ ApplicationWindow {
                         }
                         TabButton {
                             text: "Products"
+                        }
+                        TabButton {
+                            text: "Counterparty types"
                         }
                     }
                 }

@@ -94,15 +94,15 @@ Page {
                 }
 
                 AddressChooser {
-                    countryOf: current_address.country
+                    countryOf: current_address.country_id
                     onCountryEdit: (value) => {
-                                       if (current_address.country !== value)
-                                       current_address.country = value
+                                       if (current_address.country_id !== value)
+                                       current_address.country_id = value
                                    }
-                    addressOf: current_address.address
+                    addressOf: current_address.address_lines
                     onAddressEdit: (txt) => {
-                                       if (current_address.address !== txt)
-                                       current_address.address = txt
+                                       if (current_address.address_lines !== txt)
+                                       current_address.address_lines = txt
                                    }
                     regionOf: current_address.region
                     onRegionEdit: (txt) => {
@@ -259,15 +259,21 @@ Page {
             ToolTip.visible: hovered
             ToolTip.text: qsTr("Save")
             onClicked: {
-                if (current_individual.flagged_for_update)
+                if (current_address.flagged_for_update)
                     onLoaded = () => {
-                        current_individual.contact_id = current_contact.id
-                        current_individual.save()
+                        current_address.save()
+                        onLoaded = () => {
+                            current_individual.contact_id = current_contact.id
+                            current_individual.address_id = current_address.id
+                            current_individual.save()
+                        }
                     }
                 current_contact.save()
             }
             highlighted: true
-            enabled: current_contact.flagged_for_update || current_individual.flagged_for_update
+            enabled: current_contact.flagged_for_update ||
+                     current_individual.flagged_for_update ||
+                     current_address.flagged_for_update
         }
 
         Item { Layout.fillWidth: true }
@@ -282,8 +288,11 @@ Page {
                                          qsTr("The selected individual will be deleted"),
                                          () => {
                                              onLoaded = () => {
-                                                 current_contact.remove()
-                                                 onLoaded = () => { rootStack.currentIndex = 0 }
+                                                 current_address.remove()
+                                                 onLoaded = () => {
+                                                     current_contact.remove()
+                                                     onLoaded = () => { rootStack.currentIndex = 0 }
+                                                 }
                                              }
                                              current_individual.remove()
                                          }, true)
@@ -293,6 +302,13 @@ Page {
             target: current_contact
             function onLoadingChanged() {
                 current_contact.loading ? loading = true : loading = false
+            }
+        }
+
+        Connections {
+            target: current_address
+            function onLoadingChanged() {
+                current_address.loading ? loading = true : loading = false
             }
         }
 

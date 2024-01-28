@@ -9,11 +9,11 @@ struct vessel
 {
     static const constexpr auto table() { return "vessel"; }
 
-    struct id
+    struct primary_key
     {
-        static const constexpr auto c_nane() { return "id"; }
+        static const constexpr auto c_name() { return "id"; }
         int32_t value{0};
-    } id;
+    } primary_key;
 
     // KYC 
     // Vessel information
@@ -22,7 +22,7 @@ struct vessel
     struct imo
     {
         static const constexpr auto c_name() { return "imo"; }
-        static const constexpr auto name() { return "IMO"; }
+        // static const constexpr auto name() { return "IMO"; }
         std::string value{};
     } imo;
 
@@ -36,14 +36,14 @@ struct vessel
     {
         static const constexpr auto c_name() { return "owner"; }
         int32_t value{};
-        static const constexpr auto references() { return &company::id; }
+        static const constexpr auto references() { return &company::primary_key; }
     } owner;
 
     struct manager
     {
         static const constexpr auto c_name() { return "manager"; }
         int32_t value{};
-        static const constexpr auto references() { return &company::id; }
+        static const constexpr auto references() { return &company::primary_key; }
     } manager;
 
     // restrictions Flag

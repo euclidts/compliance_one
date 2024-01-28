@@ -10,11 +10,11 @@ struct company
 {
     static const constexpr auto table() { return "company"; }
 
-    struct id
+    struct primary_key
     {
-        static const constexpr auto c_nane() { return "id"; }
+        static const constexpr auto c_name() { return "id"; }
         int32_t value{0};
-    } id;
+    } primary_key;
 
     // KYC
     // counteparty information
@@ -22,29 +22,29 @@ struct company
 
     struct uuid
     {
-        static const constexpr auto c_name() { return "company_unique_identifier"; }
-        static const constexpr auto name() { return "Company Unique Identifier"; }
+        static const constexpr auto c_name() { return "uuid"; }
+        // static const constexpr auto name() { return "Company Unique Identifier"; }
         std::string value{};
     } uuid;
 
     struct counterparty_name
     {
-        static const constexpr auto c_name() { return "counterparty_name"; }
-        static const constexpr auto name() { return "Counterparty Name (Latin script)"; }
+        static const constexpr auto c_name() { return "name"; }
+        // static const constexpr auto name() { return "Counterparty Name (Latin script)"; }
         std::string value{};
     } counterparty_name;
 
     struct local_name
     {
         static const constexpr auto c_name() { return "local_name"; }
-        static const constexpr auto name() { return "Counterparty Name (Local Characters)"; }
+        // static const constexpr auto name() { return "Counterparty Name (Local Characters)"; }
         std::string value{};
     } local_name;
 
     struct is_branch
     {
         static const constexpr auto c_name() { return "is_branch"; }
-        static const constexpr auto name() { return "Is a Branch"; }
+        // static const constexpr auto name() { return "Is a Branch"; }
         bool value{};
     } is_branch;
 
@@ -61,21 +61,21 @@ struct company
     struct comercial_registery
     {
         static const constexpr auto c_name() { return "comercial_registery"; }
-        static const constexpr auto name() { return "Commercial Registry Number"; }
+        // static const constexpr auto name() { return "Commercial Registry Number"; }
         std::string value{};
     } comercial_registery;
 
     struct branch_registery
     {
         static const constexpr auto c_name() { return "branch_registery"; }
-        static const constexpr auto name() { return "Branch Commercial Registry Number"; }
+        // static const constexpr auto name() { return "Branch Commercial Registry Number"; }
         std::string value{};
     } branch_registery;
 
     struct is_public
     {
         static const constexpr auto c_name() { return "is_public"; }
-        static const constexpr auto name() { return "Company Publically Listed"; }
+        // static const constexpr auto name() { return "Company Publically Listed"; }
         std::string value{};
     } is_public;
 
@@ -83,14 +83,14 @@ struct company
     struct listing_country
     {
         static const constexpr auto c_name() { return "listing_country"; }
-        static const constexpr auto name() { return "Country of Main Listing"; }
+        // static const constexpr auto name() { return "Country of Main Listing"; }
         std::string value{};
     } listing_country;
 
     struct lei
     {
         static const constexpr auto c_name() { return "lei"; }
-        static const constexpr auto name() { return "Legal Entitiy Identifier (LEI)"; }
+        // static const constexpr auto name() { return "Legal Entitiy Identifier (LEI)"; }
         std::string value{};
     } lei;
 
@@ -100,14 +100,14 @@ struct company
     struct pep
     {
         static const constexpr auto c_name() { return "pep"; }
-        static const constexpr auto name() { return "Politically Exposed Person (PEP)"; }
+        // static const constexpr auto name() { return "Politically Exposed Person (PEP)"; }
         bool value{};
     } pep;
 
     struct soe
     {
         static const constexpr auto c_name() { return "soe"; }
-        static const constexpr auto name() { return "State Owned Enterprise (SOE)"; }
+        // static const constexpr auto name() { return "State Owned Enterprise (SOE)"; }
         bool value{};
     } soe;
 
@@ -138,7 +138,7 @@ struct company
     struct ancellery
     {
         static const constexpr auto c_name() { return "ancellery"; }
-        static const constexpr auto name() { return "ANCILLARY status"; }
+        // static const constexpr auto name() { return "ANCILLARY status"; }
         bool value{};
     } ancellery;
 
@@ -147,7 +147,7 @@ struct company
     struct acer
     {
         static const constexpr auto c_name() { return "acer"; }
-        static const constexpr auto name() { return "ACER Code"; }
+        // static const constexpr auto name() { return "ACER Code"; }
         std::string value{};
     } acer;
 

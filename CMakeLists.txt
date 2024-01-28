@@ -17,8 +17,12 @@ make_all(
         country
         product_group
         product
+        ctp_group
+        ctp_type
         contact
         address
         individual
+        company
+        vessel
     EXTRA_CLIENT_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/ressources/compliance_one.qrc)
