@@ -3,9 +3,6 @@
 #include <cstdint>
 #include <chrono>
 
-//#include "address_spec.hpp"
-//#include "sanctions_spec.hpp"
-
 struct company
 {
     static const constexpr auto table() { return "company"; }
@@ -19,13 +16,6 @@ struct company
     // KYC
     // counteparty information
     // accesible to all users
-
-    struct uuid
-    {
-        static const constexpr auto c_name() { return "uuid"; }
-        // static const constexpr auto name() { return "Company Unique Identifier"; }
-        std::string value{};
-    } uuid;
 
     struct counterparty_name
     {
@@ -41,36 +31,18 @@ struct company
         std::string value{};
     } local_name;
 
-    struct is_branch
-    {
-        static const constexpr auto c_name() { return "is_branch"; }
-        // static const constexpr auto name() { return "Is a Branch"; }
-        bool value{};
-    } is_branch;
-
-    // address_spec address;
-
-    struct websdite
+    struct website
     {
         static const constexpr auto c_name() { return "website"; }
         std::string value{};
     } website;
 
-    // contact person
-
-    struct comercial_registery
+    struct uuid
     {
-        static const constexpr auto c_name() { return "comercial_registery"; }
-        // static const constexpr auto name() { return "Commercial Registry Number"; }
+        static const constexpr auto c_name() { return "uuid"; }
+        // static const constexpr auto name() { return "Company Unique Identifier"; }
         std::string value{};
-    } comercial_registery;
-
-    struct branch_registery
-    {
-        static const constexpr auto c_name() { return "branch_registery"; }
-        // static const constexpr auto name() { return "Branch Commercial Registry Number"; }
-        std::string value{};
-    } branch_registery;
+    } uuid;
 
     struct is_public
     {
@@ -79,12 +51,34 @@ struct company
         std::string value{};
     } is_public;
 
+    struct comercial_registery
+    {
+        static const constexpr auto c_name() { return "comercial_registery"; }
+        // static const constexpr auto name() { return "Commercial Registry Number"; }
+        std::string value{};
+    } comercial_registery;
+
+    struct is_branch
+    {
+        static const constexpr auto c_name() { return "is_branch"; }
+        // static const constexpr auto name() { return "Is a Branch"; }
+        bool value{};
+    } is_branch;
+
+    struct branch_registery
+    {
+        static const constexpr auto c_name() { return "branch_registery"; }
+        // static const constexpr auto name() { return "Branch Commercial Registry Number"; }
+        std::string value{};
+    } branch_registery;
+
     // foreign key Country
     struct listing_country
     {
         static const constexpr auto c_name() { return "listing_country"; }
         // static const constexpr auto name() { return "Country of Main Listing"; }
-        std::string value{};
+        uint32_t value{0};
+        static const constexpr auto references() { return &country::primary_key; }
     } listing_country;
 
     struct lei
@@ -93,6 +87,10 @@ struct company
         // static const constexpr auto name() { return "Legal Entitiy Identifier (LEI)"; }
         std::string value{};
     } lei;
+
+    // address_spec address;
+
+    // contact person
 
     // ABC
 

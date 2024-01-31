@@ -7,13 +7,14 @@ import QtQuick.Controls.Material
 import Interface
 import QappUser
 import Qcountry
+import Qcontact
+import Qaddress
+import Qindividual
 import Qproduct_group
 import Qproduct
 import Qctp_group
 import Qctp_type
-import Qcontact
-import Qaddress
-import Qindividual
+import Qcompany
 
 ApplicationWindow {
     id: window
@@ -141,20 +142,20 @@ ApplicationWindow {
                                 id: contactListModel
                                 list: contact_list
                             }
-                            delegate: QcontactDelegate {}
+                            delegate: IndividualDelegate {}
                             interactive: false
                         }
 
-                        // ListView {
-                        //     Layout.fillWidth: true
-                        //     implicitHeight: contentHeight
-                        //     model : QcontactListModel {
-                        //         id: counterpartyListModel
-                        //         list: contact_list
-                        //     }
-                        //     delegate: QcontactDelegate {}
-                        //     interactive: false
-                        // }
+                        ListView {
+                            Layout.fillWidth: true
+                            implicitHeight: contentHeight
+                            model : QcompanyListModel {
+                                id: companyListModel
+                                list: company_list
+                            }
+                            delegate: CompanyDelegate {}
+                            interactive: false
+                        }
 
                         GridLayout {
                             columns: portrait ? 1 : 3
@@ -181,6 +182,10 @@ ApplicationWindow {
                                 icon.source: "qrc:/icons/industry.svg"
                                 Layout.fillWidth: true
                                 Layout.alignment: Qt.AlignVCenter
+                                onClicked: {
+                                    current_company.clear()
+                                    rootStack.currentIndex = 2
+                                }
                             }
 
                             Button {
@@ -200,7 +205,7 @@ ApplicationWindow {
                     clip: true
                     boundsBehavior: Flickable.StopAtBounds
                     model : QcountryListModel { list: country_list }
-                    delegate: QcountryDelegate {}
+                    delegate: CountryDelegate {}
                     footer: RoundButton {
                         Layout.fillWidth: true
                         icon.source: "qrc:/icons/plus.svg"
@@ -214,7 +219,7 @@ ApplicationWindow {
                     clip: true
                     boundsBehavior: Flickable.StopAtBounds
                     model : QproductListModel { list: product_list }
-                    delegate: QproductDelegate {}
+                    delegate: ProductDelegate {}
                     footer: RoundButton {
                         Layout.fillWidth: true
                         icon.source: "qrc:/icons/plus.svg"
@@ -228,7 +233,7 @@ ApplicationWindow {
                     clip: true
                     boundsBehavior: Flickable.StopAtBounds
                     model : Qctp_typeListModel { list: ctp_type_list }
-                    delegate: QctpTypeDelegate {}
+                    delegate: CtpTypeDelegate {}
                     footer: RoundButton {
                         Layout.fillWidth: true
                         icon.source: "qrc:/icons/plus.svg"
@@ -262,6 +267,6 @@ ApplicationWindow {
                 }
         }
 
-        QindividualPage { id: individualPage }
+        IndividualPage { id: individualPage }
     }
 }

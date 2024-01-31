@@ -13,15 +13,13 @@ ItemDelegate {
 
     required property var model
 
-    icon.source: "qrc:/icons/user.svg"
-    text: root.model.forenames + " " +
-          root.model.family_name + '\t' +
-          root.model.email
+    icon.source: "qrc:/icons/industry.svg"
+    text: root.model.name
 
     onClicked : {
-        contact_list.select(root.model.index)
-        individual_list.select_by("contact_id", root.model.id)
-        address_list.select_by("id", current_individual.address_id)
+        company.select(root.model.index)
+        // individual_list.select_by("contact_id", root.model.id)
+        // address_list.select_by("id", current_individual.address_id)
         rootStack.currentIndex = 1
     }
 

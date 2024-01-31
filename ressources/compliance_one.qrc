@@ -30,22 +30,23 @@
         <file>icons/ship.svg</file>
         <file>icons/search.svg</file>
         <file>icons/times-circle.svg</file>
-        <file>ui/QcountryDelegate.qml</file>
+        <file>ui/CountryDelegate.qml</file>
         <file>ui/EnumIntChooser.qml</file>
-        <file>ui/QproductDelegate.qml</file>
+        <file>ui/ProductDelegate.qml</file>
         <file>ui/EnumValueEditor.qml</file>
-        <file>ui/QindividualPage.qml</file>
+        <file>ui/IndividualPage.qml</file>
         <file>ui/PhoneChooser.qml</file>
         <file>ui/AddressChooser.qml</file>
         <file>ui/FloatChooser.qml</file>
         <file>ui/CountryChooser.qml</file>
         <file>ui/LabeledTextArea.qml</file>
-        <file>ui/QcontactDelegate.qml</file>
+        <file>ui/IndividualDelegate.qml</file>
         <file>icons/user.svg</file>
         <file>ui/DateDialog.qml</file>
         <file>ui/LabeledDateField.qml</file>
         <file>icons/calendar-days.svg</file>
-        <file>ui/QcompanyDelegate.qml</file>
-        <file>ui/QctpTypeDelegate.qml</file>
+        <file>ui/CompanyDelegate.qml</file>
+        <file>ui/CtpTypeDelegate.qml</file>
+        <file>ui/CompanyPage.qml</file>
     </qresource>
 </RCC>

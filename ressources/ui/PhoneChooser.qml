@@ -44,6 +44,7 @@ ColumnLayout {
 
         TextField {
             id: codeField
+            inputMethodHints: Qt.ImhDialableCharactersOnly
             Layout.maximumWidth: 90
             text: codeOf
             onAccepted: focus = false

@@ -16,7 +16,7 @@ ItemDelegate {
     required property var model
 
     contentItem: GridLayout {
-        columns: portrait ? 1 : 2
+        columns: portrait ? 2 : 4
         enabled: !root.model.loading
 
         EnumValueEditor {
@@ -24,7 +24,7 @@ ItemDelegate {
             model: Qctp_groupListModel { list: ctp_group_list }
             enumOf: root.model.group_id
             onEdit: (value) => { root.model.group_id = value }
-            Layout.columnSpan: 2
+            Layout.columnSpan: 4
             Layout.fillWidth: true
             valueRole: "id"
             textRole: "name"
@@ -35,6 +35,7 @@ ItemDelegate {
             textOf: root.model.name
             onEdit: (txt) => { root.model.name = txt }
             placeHolder: qsTr("* Mandatory")
+            Layout.columnSpan: 2
         }
 
         IntChooser {
@@ -44,6 +45,7 @@ ItemDelegate {
             numberOf: root.model.risk_score
             onEdit: (val) => { root.model.risk_score = val }
             editable: true
+            Layout.columnSpan: 2
         }
 
         LabeledTextArea {
@@ -51,8 +53,9 @@ ItemDelegate {
             textOf: root.model.notes
             onEdit: (txt) => { root.model.notes = txt }
             placeHolder: qsTr("* Optional")
-            Layout.columnSpan: 2
-            Layout.rowSpan: 2
+            Layout.columnSpan: 4
+            Layout.topMargin: 6
+            areaHeight: 120
         }
 
 
@@ -75,7 +78,7 @@ ItemDelegate {
         BusyIndicator {
             visible: root.model.loading
             Layout.fillWidth: true
-            Layout.columnSpan: portrait ? 1 : 2
+            Layout.columnSpan: portrait ? 2 : 4
         }
 
         RoundButton {
