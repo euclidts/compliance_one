@@ -138,9 +138,9 @@ ApplicationWindow {
                         ListView {
                             Layout.fillWidth: true
                             implicitHeight: contentHeight
-                            model : QcontactListModel {
-                                id: contactListModel
-                                list: contact_list
+                            model : QindividualListModel {
+                                id: individualListModel
+                                list: individual_list
                             }
                             delegate: IndividualDelegate {}
                             interactive: false

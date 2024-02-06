@@ -3,6 +3,9 @@
 #include <cstdint>
 #include <chrono>
 
+#include "address.hpp"
+#include "contact.hpp"
+
 struct company
 {
     static const constexpr auto table() { return "company"; }
@@ -17,12 +20,19 @@ struct company
     // counteparty information
     // accesible to all users
 
-    struct counterparty_name
+    struct uuid
+    {
+        static const constexpr auto c_name() { return "uuid"; }
+        // static const constexpr auto name() { return "Company Unique Identifier"; }
+        std::string value{};
+    } uuid;
+
+    struct name
     {
         static const constexpr auto c_name() { return "name"; }
         // static const constexpr auto name() { return "Counterparty Name (Latin script)"; }
         std::string value{};
-    } counterparty_name;
+    } name;
 
     struct local_name
     {
@@ -31,18 +41,39 @@ struct company
         std::string value{};
     } local_name;
 
+    struct is_branch
+    {
+        static const constexpr auto c_name() { return "is_branch"; }
+        // static const constexpr auto name() { return "Is a Branch"; }
+        bool value{};
+    } is_branch;
+
+    struct address_id
+    {
+        static const constexpr auto c_name() { return "address_id"; }
+        int32_t value{0};
+        static const constexpr auto references() { return &address::primary_key; }
+    } address_id;
+
+    struct branch_address_id
+    {
+        static const constexpr auto c_name() { return "branch_address_id"; }
+        int32_t value{0};
+        static const constexpr auto references() { return &address::primary_key; }
+    } branch_address_id;
+
     struct website
     {
         static const constexpr auto c_name() { return "website"; }
         std::string value{};
     } website;
 
-    struct uuid
+    struct contact_id
     {
-        static const constexpr auto c_name() { return "uuid"; }
-        // static const constexpr auto name() { return "Company Unique Identifier"; }
-        std::string value{};
-    } uuid;
+        static const constexpr auto c_name() { return "contact_id"; }
+        int32_t value{0};
+        static const constexpr auto references() { return &contact::primary_key; }
+    } contact_id;
 
     struct is_public
     {
@@ -55,15 +86,8 @@ struct company
     {
         static const constexpr auto c_name() { return "comercial_registery"; }
         // static const constexpr auto name() { return "Commercial Registry Number"; }
-        std::string value{};
+        int value{};
     } comercial_registery;
-
-    struct is_branch
-    {
-        static const constexpr auto c_name() { return "is_branch"; }
-        // static const constexpr auto name() { return "Is a Branch"; }
-        bool value{};
-    } is_branch;
 
     struct branch_registery
     {
@@ -88,13 +112,7 @@ struct company
         std::string value{};
     } lei;
 
-    // address_spec address;
-
-    // contact person
-
     // ABC
-
-    // foreign key Individual
     struct pep
     {
         static const constexpr auto c_name() { return "pep"; }
@@ -114,15 +132,15 @@ struct company
     // regulatory
     // EMIR
 
-    enum categories
-    {
-        fc,
-        fcplus,
-        fcminus,
-        nfc,
-        nfcplus,
-        nfcminus,
-    };
+    // enum categories
+    // {
+    //     fc,
+    //     fcplus,
+    //     fcminus,
+    //     nfc,
+    //     nfcplus,
+    //     nfcminus,
+    // };
 
     // MIFID 2
 
@@ -159,5 +177,4 @@ struct company
 //    };
 
     // sanctions
-//    sanctions_spec sanctions;
 };

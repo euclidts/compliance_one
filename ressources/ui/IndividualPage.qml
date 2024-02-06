@@ -259,15 +259,14 @@ Page {
             ToolTip.visible: hovered
             ToolTip.text: qsTr("Save")
             onClicked: {
-                if (current_address.flagged_for_update)
+                onLoaded = () => {
                     onLoaded = () => {
-                        current_address.save()
-                        onLoaded = () => {
-                            current_individual.contact_id = current_contact.id
-                            current_individual.address_id = current_address.id
-                            current_individual.save()
-                        }
+                        current_individual.contact_id = current_contact.id
+                        current_individual.address_id = current_address.id
+                        current_individual.save()
                     }
+                    current_address.save()
+                }
                 current_contact.save()
             }
             highlighted: true
@@ -288,14 +287,15 @@ Page {
                                          qsTr("The selected individual will be deleted"),
                                          () => {
                                              onLoaded = () => {
-                                                 current_address.remove()
                                                  onLoaded = () => {
-                                                     current_contact.remove()
                                                      onLoaded = () => { rootStack.currentIndex = 0 }
+                                                     current_contact.remove()
                                                  }
+                                                 current_address.remove()
                                              }
                                              current_individual.remove()
-                                         }, true)
+                                         },
+                                         true)
         }
 
         Connections {
