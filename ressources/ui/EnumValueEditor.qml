@@ -7,15 +7,13 @@ ColumnLayout {
     Layout.topMargin: 2
     spacing: 6
 
-    property alias currentIndex: combo.currentIndex
     property alias highlightedIndex: combo.highlightedIndex
     property alias hoverEnabled: combo.hoverEnabled
     property alias model: combo.model
-    property alias delegate: combo.delegate
     property alias textRole: combo.textRole
     property alias valueRole: combo.valueRole
     property alias name: label.text
-    required property string enumOf
+    required property var enumOf
     required property var onEdit
 
     onEnumOfChanged: combo.currentIndex = combo.indexOfValue(enumOf)
@@ -35,6 +33,7 @@ ColumnLayout {
         onActivated: onEdit(currentValue)
         onAccepted: onEdit(currentValue)
         indicator.visible: editText === "" || find(editText) !== -1
+        Component.onCompleted: currentIndex = indexOfValue(enumOf)
 
         delegate: MenuItem {
             required property var model

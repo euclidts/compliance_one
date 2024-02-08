@@ -20,7 +20,7 @@ ItemDelegate {
         company.select(root.model.index)
         // individual_list.select_by("contact_id", root.model.id)
         // address_list.select_by("id", current_individual.address_id)
-        rootStack.currentIndex = 1
+        rootStack.currentIndex = 2
     }
 
     background: Rectangle {

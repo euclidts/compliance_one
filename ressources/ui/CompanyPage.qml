@@ -122,56 +122,46 @@ Page {
                             visible: current_company.is_branch
                         }
 
-                        CountryChooser {
-                            Layout.margins: 12
-                            name: qsTr("Isssuing country")
-                            enumOf: current_individual.issuing
-                            onEdit: (value) => {
-                                        if (current_individual.issuing !== value)
-                                            current_individual.issuing = value
-                                    }
-                        }
-
                         LabeledTextField {
                             Layout.margins: 12
                             name: qsTr("Legal Entitiy Identifier (LEI)")
-                            textOf: current_company.uuid
+                            textOf: current_company.lei
                             onEdit: (txt) => {
-                                        if (current_company.uuid !== txt)
-                                        current_company.uuid = txt
+                                        if (current_company.lei !== txt)
+                                        current_company.lei = txt
                                     }
                             placeHolder: qsTr("* Mandatory")
                         }
                     }
                 }
 
-                // AddressChooser {
-                //     countryOf: current_address.country_id
-                //     onCountryEdit: (value) => {
-                //                        if (current_address.country_id !== value)
-                //                        current_address.country_id = value
-                //                    }
-                //     addressOf: current_address.address_lines
-                //     onAddressEdit: (txt) => {
-                //                        if (current_address.address_lines !== txt)
-                //                        current_address.address_lines = txt
-                //                    }
-                //     regionOf: current_address.region
-                //     onRegionEdit: (txt) => {
-                //                       if (current_address.region !== txt)
-                //                       current_address.region = txt
-                //                   }
-                //     postcodeOf: current_address.postcode
-                //     onPostcodeEdit: (txt) => {
-                //                         if (current_address.postcode !== txt)
-                //                         current_address.postcode = txt
-                //                     }
-                //     localityOf: current_address.locality
-                //     onLocalityEdit: (txt) => {
-                //                         if (current_address.locality !== txt)
-                //                         current_address.locality = txt
-                //                     }
-                // }
+                AddressChooser {
+                    countryOf: current_address.country_id
+                    onCountryEdit: (value) => {
+                                       if (current_address.country_id !== value)
+                                       current_address.country_id = value
+                                   }
+                    addressOf: current_address.address_lines
+                    onAddressEdit: (txt) => {
+                                       if (current_address.address_lines !== txt)
+                                       current_address.address_lines = txt
+                                   }
+                    regionOf: current_address.region
+                    onRegionEdit: (txt) => {
+                                      if (current_address.region !== txt)
+                                      current_address.region = txt
+                                  }
+                    postcodeOf: current_address.postcode
+                    onPostcodeEdit: (txt) => {
+                                        if (current_address.postcode !== txt)
+                                        current_address.postcode = txt
+                                    }
+                    localityOf: current_address.locality
+                    onLocalityEdit: (txt) => {
+                                        if (current_address.locality !== txt)
+                                        current_address.locality = txt
+                                    }
+                }
 
                 BackgroundRect {
                     GridLayout {

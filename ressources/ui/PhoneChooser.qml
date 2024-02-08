@@ -40,6 +40,7 @@ ColumnLayout {
                 hoverEnabled: codeBox.hoverEnabled
             }
             onActivated: codeField.text = currentValue
+            Component.onCompleted: currentIndex = indexOfValue(codeOf)
         }
 
         TextField {

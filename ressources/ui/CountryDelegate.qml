@@ -31,10 +31,9 @@ ItemDelegate {
         }
 
         CheckBox {
-            id: unCheck
-            checked: current_individual.pep
-            onCheckStateChanged: if (root.model.sovereignty_id !== checked)
-                                     root.model.sovereignty_id = checked
+            checked: root.model.sovereignty_id === 0
+            onCheckStateChanged: if (root.model.sovereignty_id !== 0 && checked)
+                                     root.model.sovereignty_id = 0
             text: qsTr("UN Member State")
         }
 
@@ -42,10 +41,10 @@ ItemDelegate {
             name: qsTr("Sovereignty")
             enumOf: root.model.sovereignty_id
             onEdit: (value) => { root.model.sovereignty_id = value }
-            visible: !unCheck.checked
+            visible: root.model.sovereignty_id !== 0
         }
 
-        Item { visible: unCheck.checked }
+        Item { visible: root.model.sovereignty_id === 0 }
 
         // LabeledTextField {
         //     name: qsTr("Official state name")

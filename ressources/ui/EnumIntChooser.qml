@@ -11,7 +11,7 @@ ColumnLayout {
     property alias delegate: combo.delegate
     property alias textRole: combo.textRole
     property alias name: label.text
-    required property string enumOf
+    required property int enumOf
     required property var onEdit
 
     onEnumOfChanged: combo.currentIndex = combo.indexOfValue(enumOf)
@@ -27,5 +27,6 @@ ColumnLayout {
         editable: false
         Layout.minimumWidth: 160
         onActivated: onEdit(currentIndex)
+        Component.onCompleted: currentIndex = indexOfValue(enumOf)
     }
 }
