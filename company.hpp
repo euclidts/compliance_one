@@ -79,14 +79,14 @@ struct company
     {
         static const constexpr auto c_name() { return "is_public"; }
         // static const constexpr auto name() { return "Company Publically Listed"; }
-        std::string value{};
+        bool value{};
     } is_public;
 
     struct comercial_registery
     {
         static const constexpr auto c_name() { return "comercial_registery"; }
         // static const constexpr auto name() { return "Commercial Registry Number"; }
-        int value{};
+        std::string value{};
     } comercial_registery;
 
     struct branch_registery
@@ -151,12 +151,12 @@ struct company
     } regulated;
 
     // regulators --- foreign table
-    struct ancellery
+    struct ancillary
     {
-        static const constexpr auto c_name() { return "ancellery"; }
+        static const constexpr auto c_name() { return "ancillary"; }
         // static const constexpr auto name() { return "ANCILLARY status"; }
         bool value{};
-    } ancellery;
+    } ancillary;
 
     // REMIT
 

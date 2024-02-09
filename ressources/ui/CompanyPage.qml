@@ -54,7 +54,7 @@ Page {
                         LabeledTextField {
                             Layout.margins: 12
                             name: qsTr("Counterparty Name (Local Characters)")
-                            textOf: current_company.Local_name
+                            textOf: current_company.local_name
                             onEdit: (txt) => {
                                         if (current_company.local_name !== txt)
                                         current_company.local_name = txt
@@ -64,7 +64,7 @@ Page {
 
                         LabeledTextField {
                             Layout.margins: 12
-                            name: qsTr("website")
+                            name: qsTr("Website")
                             textOf: current_company.website
                             onEdit: (txt) => {
                                         if (current_company.website !== txt)
@@ -84,8 +84,30 @@ Page {
                             placeHolder: qsTr("* Mandatory")
                         }
 
+                        LabeledTextField {
+                            Layout.margins: 12
+                            name: qsTr("Legal Entitiy Identifier (LEI)")
+                            textOf: current_company.lei
+                            onEdit: (txt) => {
+                                        if (current_company.lei !== txt)
+                                            current_company.lei = txt
+                                    }
+                            placeHolder: qsTr("* Mandatory")
+                        }
+
+                        LabeledTextField {
+                            Layout.margins: 12
+                            name: qsTr("ACER code")
+                            textOf: current_company.acer
+                            onEdit: (txt) => {
+                                        if (current_company.acer !== txt)
+                                        current_company.acer = txt
+                                    }
+                            placeHolder: qsTr("* Mandatory")
+                        }
+
                         CheckBox {
-                            checked: current_company.is_public;
+                            checked: current_company.is_public
                             onCheckStateChanged: if (current_company.is_public !== checked)
                                                      current_company.is_public = checked
                             text: qsTr("Company Publically Listed")
@@ -97,7 +119,7 @@ Page {
                             textOf: current_company.comercial_registery
                             onEdit: (txt) => {
                                         if (current_company.comercial_registery !== txt)
-                                        current_company.comercial_registery = txt
+                                            current_company.comercial_registery = txt
                                     }
                             placeHolder: qsTr("* Mandatory")
                         }
@@ -107,7 +129,7 @@ Page {
                             onCheckStateChanged: if (current_company.is_branch !== checked)
                                                      current_company.is_branch = checked
                             text: qsTr("Is a Branch")
-                            Layout.columnSpan: current_company.is_branch ? 1 : 2
+                            Layout.columnSpan: portrait ? 1 : 2
                         }
 
                         LabeledTextField {
@@ -116,21 +138,10 @@ Page {
                             textOf: current_company.branch_registery
                             onEdit: (txt) => {
                                         if (current_company.branch_registery !== txt)
-                                        current_company.branch_registery = txt
+                                            current_company.branch_registery = txt
                                     }
                             placeHolder: qsTr("* Mandatory")
                             visible: current_company.is_branch
-                        }
-
-                        LabeledTextField {
-                            Layout.margins: 12
-                            name: qsTr("Legal Entitiy Identifier (LEI)")
-                            textOf: current_company.lei
-                            onEdit: (txt) => {
-                                        if (current_company.lei !== txt)
-                                        current_company.lei = txt
-                                    }
-                            placeHolder: qsTr("* Mandatory")
                         }
                     }
                 }
@@ -139,28 +150,57 @@ Page {
                     countryOf: current_address.country_id
                     onCountryEdit: (value) => {
                                        if (current_address.country_id !== value)
-                                       current_address.country_id = value
+                                           current_address.country_id = value
                                    }
                     addressOf: current_address.address_lines
                     onAddressEdit: (txt) => {
                                        if (current_address.address_lines !== txt)
-                                       current_address.address_lines = txt
+                                           current_address.address_lines = txt
                                    }
                     regionOf: current_address.region
                     onRegionEdit: (txt) => {
                                       if (current_address.region !== txt)
-                                      current_address.region = txt
+                                          current_address.region = txt
                                   }
                     postcodeOf: current_address.postcode
                     onPostcodeEdit: (txt) => {
                                         if (current_address.postcode !== txt)
-                                        current_address.postcode = txt
+                                            current_address.postcode = txt
                                     }
                     localityOf: current_address.locality
                     onLocalityEdit: (txt) => {
                                         if (current_address.locality !== txt)
-                                        current_address.locality = txt
+                                            current_address.locality = txt
                                     }
+                }
+
+                ContatChooser {
+                    label: "Contact person"
+                    familyNameOf: current_contact.family_name
+                    onFamilyNameEdit: (txt) => {
+                                          if (current_contact.family_name !== txt)
+                                              current_contact.family_name = txt
+                                      }
+                    forenamesOf: current_contact.forenames
+                    onForenamesEdit: (txt) => {
+                                         if (current_contact.forenames !== txt)
+                                             current_contact.forenames = txt
+                                     }
+                    emailOf: current_contact.email
+                    onEmailEdit: (txt) => {
+                                     if (current_contact.email !== txt)
+                                         current_contact.email = txt
+                                 }
+                    phoneOf: current_contact.phone
+                    codeOf: current_contact.calling_code
+                    onPhoneEdit: (txt) => {
+                                     if (current_contact.phone !== txt)
+                                         current_contact.phone = txt
+                                 }
+                    onCodeEdit: (txt) => {
+                                    if (current_contact.calling_code !== txt)
+                                        current_contact.calling_code = txt
+                                }
                 }
 
                 BackgroundRect {
@@ -171,122 +211,33 @@ Page {
                         columns: portrait ? 1 : 2
                         uniformCellWidths: true
 
-                        LabeledDateField {
-                            Layout.margins: 12
-                            name: qsTr("Date of birth")
-                            dateOf: current_individual.date_of_birth
-                            onEdit: (date) => {
-                                        if (current_individual.date_of_birth !== date)
-                                        current_individual.date_of_birth = date
-                                    }
+                        CheckBox {
+                            checked: current_company.pep
+                            onCheckStateChanged: if (current_company.pep !== checked)
+                                                     current_company.pep = checked
+                            text: qsTr("PEP")
                         }
 
-                        LabeledTextField {
-                            Layout.margins: 12
-                            name: qsTr("Passport number")
-                            textOf: current_individual.passport
-                            onEdit: (txt) => {
-                                        if (current_individual.passport !== txt)
-                                        current_individual.passport = txt
-                                    }
-                            placeHolder: qsTr("* Mandatory")
+                        CheckBox {
+                            checked: current_company.soe
+                            onCheckStateChanged: if (current_company.soe !== checked)
+                                                     current_company.soe = checked
+                            text: qsTr("State Owned Enterprise (SOE)")
                         }
 
-                        CountryChooser {
-                            Layout.margins: 12
-                            name: qsTr("Isssuing country")
-                            enumOf: current_individual.issuing
-                            onEdit: (value) => {
-                                        if (current_individual.issuing !== value)
-                                            current_individual.issuing = value
-                                    }
+                        CheckBox {
+                            checked: current_company.regulated
+                            onCheckStateChanged: if (current_company.regulated !== checked)
+                                                     current_company.regulated = checked
+                            text: qsTr("Regulated")
                         }
 
-                        LabeledDateField {
-                            Layout.margins: 12
-                            name: qsTr("Expeiry date")
-                            dateOf: current_individual.expeiry_date
-                            onEdit: (date) => {
-                                        if (current_individual.expeiry_date !== date)
-                                        current_individual.expeiry_date = date
-                                    }
+                        CheckBox {
+                            checked: current_company.ancillary
+                            onCheckStateChanged: if (current_company.ancillary !== checked)
+                                                     current_company.ancillary = checked
+                            text: qsTr("ANCILLARY status")
                         }
-
-                        LabeledTextField {
-                            Layout.margins: 12
-                            name: qsTr("Name (Local Characters)")
-                            textOf: current_individual.local_name
-                            onEdit: (txt) => {
-                                        if (current_individual.local_name !== txt)
-                                        current_individual.local_name = txt
-                                    }
-                            placeHolder: qsTr("* Optional")
-                        }
-
-                        LabeledTextField {
-                            Layout.margins: 12
-                            name: qsTr("Forenames (Local Characters)")
-                            textOf: current_individual.local_forenames
-                            onEdit: (txt) => {
-                                        if (current_individual.local_forenames !== txt)
-                                        current_individual.local_forenames = txt
-                                    }
-                            placeHolder: qsTr("* Optional")
-                        }
-
-                        ColumnLayout {
-                            Layout.margins: 12
-                            spacing: 24
-
-                            CheckBox {
-                                checked: current_individual.pep
-                                onCheckStateChanged: if (current_individual.pep !== checked)
-                                                         current_individual.pep = checked
-                                text: qsTr("Is a PEP")
-                                Layout.columnSpan: current_individual.pep ? 1 : 2
-                            }
-
-                            CountryChooser {
-                                name: qsTr("PEP country")
-                                visible: current_individual.pep
-                                enumOf: current_individual.pep_country
-                                onEdit: (value) => {
-                                            if (current_individual.pep_country !== value)
-                                            current_individual.pep_country = value
-                                        }
-                            }
-                        }
-
-                        LabeledTextArea {
-                            Layout.margins: 12
-                            name: qsTr("Additional PEP Notes")
-                            visible: current_individual.pep
-                            textOf: current_individual.pep_notes
-                            onEdit: (txt) => {
-                                        if (current_individual.pep_notes !== txt)
-                                        current_individual.pep_notes = txt
-                                    }
-                            placeHolder: qsTr("* Optional")
-                            Layout.rowSpan: 2
-                        }
-                    }
-                }
-
-                BackgroundRect {
-                    implicitHeight: childrenRect.height + 24
-
-                    LabeledTextArea {
-                        width: parent.width - 24
-                        areaHeight: 120
-                        x: 12
-                        y: 12
-                        name: qsTr("Notes")
-                        textOf: current_individual.notes
-                        onEdit: (txt) => {
-                                    if (current_individual.notes !== txt)
-                                    current_individual.notes = txt
-                                }
-                        placeHolder: qsTr("* Optional")
                     }
                 }
             }
@@ -305,16 +256,16 @@ Page {
                     onLoaded = () => {
                         current_address.save()
                         onLoaded = () => {
-                            current_individual.contact_id = current_contact.id
-                            current_individual.address_id = current_address.id
-                            current_individual.save()
+                            current_company.contact_id = current_contact.id
+                            current_company.address_id = current_address.id
+                            current_company.save()
                         }
                     }
                 current_contact.save()
             }
             highlighted: true
             enabled: current_contact.flagged_for_update ||
-                     current_individual.flagged_for_update ||
+                     current_company.flagged_for_update ||
                      current_address.flagged_for_update
         }
 
@@ -327,7 +278,7 @@ Page {
             ToolTip.text: qsTr("Delete")
             Layout.alignment: Qt.AlignRight
             onClicked: onExceptionAction(ToolTip.text,
-                                         qsTr("The selected individual will be deleted"),
+                                         qsTr("The selected company will be deleted"),
                                          () => {
                                              onLoaded = () => {
                                                  current_address.remove()
@@ -336,7 +287,7 @@ Page {
                                                      onLoaded = () => { rootStack.currentIndex = 0 }
                                                  }
                                              }
-                                             current_individual.remove()
+                                             current_comapny.remove()
                                          }, true)
         }
 
@@ -355,9 +306,9 @@ Page {
         }
 
         Connections {
-            target: current_individual
+            target: current_company
             function onLoadingChanged() {
-                current_individual.loading ? loading = true : loading = false
+                current_company.loading ? loading = true : loading = false
             }
         }
     }

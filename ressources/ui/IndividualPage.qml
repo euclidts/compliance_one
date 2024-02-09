@@ -30,94 +30,59 @@ Page {
                 width: parent.width
                 spacing: 12
 
-                BackgroundRect {
-                    GridLayout {
-                        width: parent.width
-                        columnSpacing: 0
-                        rowSpacing: 0
-                        uniformCellWidths: true
-                        uniformCellHeights: true
-                        columns: portrait ? 1 : 2
-
-
-                        LabeledTextField {
-                            Layout.margins: 12
-                            name: qsTr("Family Name (Latin script)")
-                            textOf: current_contact.family_name
-                            onEdit: (txt) => {
-                                        if (current_contact.family_name !== txt)
-                                        current_contact.family_name = txt
-                                    }
-                            placeHolder: qsTr("* Mandatory")
-                        }
-
-                        LabeledTextField {
-                            Layout.margins: 12
-                            name: qsTr("Forenames (Latin script)")
-                            textOf: current_contact.forenames
-                            onEdit: (txt) => {
-                                        if (current_contact.forenames !== txt)
-                                        current_contact.forenames = txt
-                                    }
-                            placeHolder: qsTr("* Mandatory")
-                        }
-
-                        LabeledTextField {
-                            Layout.margins: 12
-                            name: qsTr("Email")
-                            textOf: current_contact.email
-                            onEdit: (txt) => {
-                                        if (current_contact.email !== txt)
-                                        current_contact.email = txt
-                                    }
-                            placeHolder: qsTr("* Mandatory")
-                            validator: RegularExpressionValidator {
-                                regularExpression: /^$|\S+@\S+\.\S+$/
-                            }
-                            inputHint: Qt.ImhEmailCharactersOnly
-                        }
-
-                        PhoneChooser {
-                            Layout.margins: 12
-                            phoneOf : current_contact.phone
-                            codeOf : current_contact.calling_code
-                            onPhoneEdit: (txt) => {
-                                             if (current_contact.phone !== txt)
-                                             current_contact.phone = txt
-                                         }
-                            onCodeEdit: (txt) => {
-                                            if (current_contact.calling_code !== txt)
-                                            current_contact.calling_code = txt
-                                        }
-                        }
-                    }
+                ContatChooser {
+                    familyNameOf: current_contact.family_name
+                    onFamilyNameEdit: (txt) => {
+                                          if (current_contact.family_name !== txt)
+                                              current_contact.family_name = txt
+                                      }
+                    forenamesOf: current_contact.forenames
+                    onForenamesEdit: (txt) => {
+                                         if (current_contact.forenames !== txt)
+                                             current_contact.forenames = txt
+                                     }
+                    emailOf: current_contact.email
+                    onEmailEdit: (txt) => {
+                                     if (current_contact.email !== txt)
+                                         current_contact.email = txt
+                                 }
+                    phoneOf: current_contact.phone
+                    codeOf: current_contact.calling_code
+                    onPhoneEdit: (txt) => {
+                                     if (current_contact.phone !== txt)
+                                         current_contact.phone = txt
+                                 }
+                    onCodeEdit: (txt) => {
+                                    if (current_contact.calling_code !== txt)
+                                        current_contact.calling_code = txt
+                                }
                 }
 
                 AddressChooser {
                     countryOf: current_address.country_id
                     onCountryEdit: (value) => {
                                        if (current_address.country_id !== value)
-                                       current_address.country_id = value
+                                           current_address.country_id = value
                                    }
                     addressOf: current_address.address_lines
                     onAddressEdit: (txt) => {
                                        if (current_address.address_lines !== txt)
-                                       current_address.address_lines = txt
+                                           current_address.address_lines = txt
                                    }
                     regionOf: current_address.region
                     onRegionEdit: (txt) => {
                                       if (current_address.region !== txt)
-                                      current_address.region = txt
+                                          current_address.region = txt
                                   }
                     postcodeOf: current_address.postcode
                     onPostcodeEdit: (txt) => {
                                         if (current_address.postcode !== txt)
-                                        current_address.postcode = txt
+                                            current_address.postcode = txt
                                     }
                     localityOf: current_address.locality
                     onLocalityEdit: (txt) => {
                                         if (current_address.locality !== txt)
-                                        current_address.locality = txt
+                                            current_address.locality = txt
                                     }
                 }
 
@@ -135,7 +100,7 @@ Page {
                             dateOf: current_individual.date_of_birth
                             onEdit: (date) => {
                                         if (current_individual.date_of_birth !== date)
-                                        current_individual.date_of_birth = date
+                                            current_individual.date_of_birth = date
                                     }
                         }
 
@@ -145,7 +110,7 @@ Page {
                             textOf: current_individual.passport
                             onEdit: (txt) => {
                                         if (current_individual.passport !== txt)
-                                        current_individual.passport = txt
+                                            current_individual.passport = txt
                                     }
                             placeHolder: qsTr("* Mandatory")
                         }
@@ -166,7 +131,7 @@ Page {
                             dateOf: current_individual.expeiry_date
                             onEdit: (date) => {
                                         if (current_individual.expeiry_date !== date)
-                                        current_individual.expeiry_date = date
+                                            current_individual.expeiry_date = date
                                     }
                         }
 
@@ -176,7 +141,7 @@ Page {
                             textOf: current_individual.local_name
                             onEdit: (txt) => {
                                         if (current_individual.local_name !== txt)
-                                        current_individual.local_name = txt
+                                            current_individual.local_name = txt
                                     }
                             placeHolder: qsTr("* Optional")
                         }
@@ -187,7 +152,7 @@ Page {
                             textOf: current_individual.local_forenames
                             onEdit: (txt) => {
                                         if (current_individual.local_forenames !== txt)
-                                        current_individual.local_forenames = txt
+                                            current_individual.local_forenames = txt
                                     }
                             placeHolder: qsTr("* Optional")
                         }
@@ -210,7 +175,7 @@ Page {
                                 enumOf: current_individual.pep_country
                                 onEdit: (value) => {
                                             if (current_individual.pep_country !== value)
-                                            current_individual.pep_country = value
+                                                current_individual.pep_country = value
                                         }
                             }
                         }
@@ -222,7 +187,7 @@ Page {
                             textOf: current_individual.pep_notes
                             onEdit: (txt) => {
                                         if (current_individual.pep_notes !== txt)
-                                        current_individual.pep_notes = txt
+                                            current_individual.pep_notes = txt
                                     }
                             placeHolder: qsTr("* Optional")
                             Layout.rowSpan: 2
@@ -242,7 +207,7 @@ Page {
                         textOf: current_individual.notes
                         onEdit: (txt) => {
                                     if (current_individual.notes !== txt)
-                                    current_individual.notes = txt
+                                        current_individual.notes = txt
                                 }
                         placeHolder: qsTr("* Optional")
                     }

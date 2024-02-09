@@ -119,30 +119,30 @@
 --     risk_score TINYINT UNSIGNED
 -- )
 
-CREATE TABLE company
-(
-    id INT AUTO_INCREMENT,
-    PRIMARY KEY(id),
-    uuid VARCHAR(63),
-    name VARCHAR(63),
-    local_name VARCHAR(63),
-    is_branch BOOLEAN NOT NULL DEFAULT false,
-    address_id INT,
-    CONSTRAINT FOREIGN KEY (address_id) REFERENCES address (id),
-    branch_address_id INT,
-    CONSTRAINT FOREIGN KEY (branch_address_id) REFERENCES address (id),
-    website VARCHAR(127),
-    contact_id INT,
-    CONSTRAINT FOREIGN KEY (contact_id) REFERENCES contact (id),
-    is_public BOOLEAN NOT NULL DEFAULT false,
-    comercial_registery VARCHAR(127),
-    branch_registery VARCHAR(127),
-    listing_country_id MEDIUMINT UNSIGNED,
-    CONSTRAINT FOREIGN KEY (listing_country_id) REFERENCES country (id),
-    lei VARCHAR(127),
-    pep BOOLEAN NOT NULL DEFAULT false,
-    soe BOOLEAN NOT NULL DEFAULT false,
-    regulated BOOLEAN NOT NULL DEFAULT false,
-    ancellery BOOLEAN NOT NULL DEFAULT false,
-    acer VARCHAR(127)
-)
+-- CREATE TABLE company
+-- (
+--     id INT AUTO_INCREMENT,
+--     PRIMARY KEY(id),
+--     uuid VARCHAR(63),
+--     name VARCHAR(63),
+--     local_name VARCHAR(63),
+--     is_branch BOOLEAN NOT NULL DEFAULT false,
+--     address_id INT,
+--     CONSTRAINT FOREIGN KEY (address_id) REFERENCES address (id),
+--     branch_address_id INT,
+--     CONSTRAINT FOREIGN KEY (branch_address_id) REFERENCES address (id),
+--     website VARCHAR(127),
+--     contact_id INT,
+--     CONSTRAINT FOREIGN KEY (contact_id) REFERENCES contact (id),
+--     is_public BOOLEAN NOT NULL DEFAULT false,
+--     comercial_registery VARCHAR(127),
+--     branch_registery VARCHAR(127),
+--     listing_country_id MEDIUMINT UNSIGNED,
+--     CONSTRAINT FOREIGN KEY (listing_country_id) REFERENCES country (id),
+--     lei VARCHAR(127),
+--     pep BOOLEAN NOT NULL DEFAULT false,
+--     soe BOOLEAN NOT NULL DEFAULT false,
+--     regulated BOOLEAN NOT NULL DEFAULT false,
+--     ancillary BOOLEAN NOT NULL DEFAULT false,
+--     acer VARCHAR(127)
+-- )

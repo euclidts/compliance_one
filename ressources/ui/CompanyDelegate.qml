@@ -18,8 +18,8 @@ ItemDelegate {
 
     onClicked : {
         company.select(root.model.index)
-        // individual_list.select_by("contact_id", root.model.id)
-        // address_list.select_by("id", current_individual.address_id)
+        contact_list.select_by("id", current_company.contact_id)
+        address_list.select_by("id", current_company.address_id)
         rootStack.currentIndex = 2
     }
 

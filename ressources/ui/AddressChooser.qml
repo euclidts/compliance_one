@@ -5,8 +5,8 @@ import QtQuick.Controls.Material
 import QtQuick.Controls.Material.impl
 
 BackgroundRect {
-    id: root
 
+    property string label
     property alias countryOf: country.enumOf
     property alias onCountryEdit: country.onEdit
     property alias addressOf: address.textOf
@@ -22,6 +22,14 @@ BackgroundRect {
         columns: portrait ? 1 : 2
         width: parent.width
         uniformCellWidths: true
+
+        Label {
+            Layout.topMargin: 12
+            text: label && label
+            font.italic: true
+            visible: label
+            Layout.columnSpan: 2
+        }
 
         CountryChooser {
             id: country

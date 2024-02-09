@@ -29,7 +29,7 @@ ApplicationWindow {
     Material.primary: "#bfe8ff"
     Material.accent: "#4183a8"
 
-    readonly property bool portrait: width < 500
+    readonly property bool portrait: width < height
     readonly property var rateModel: [qsTr("Low"), qsTr("Medium"), qsTr("High")]
     property bool loading: false
     property var onLoaded: function () {}
@@ -160,12 +160,12 @@ ApplicationWindow {
                         GridLayout {
                             columns: portrait ? 1 : 3
                             rowSpacing: 12
-                            columnSpacing: 12
                             Layout.fillWidth: true
 
                             Button {
                                 text: qsTr("Add Individual")
                                 Layout.leftMargin: 12
+                                Layout.rightMargin: 12
                                 Layout.fillWidth: true
                                 icon.source: "qrc:/icons/user.svg"
                                 Layout.alignment: Qt.AlignVCenter
@@ -180,6 +180,8 @@ ApplicationWindow {
                             Button {
                                 text: qsTr("Add Company")
                                 icon.source: "qrc:/icons/industry.svg"
+                                Layout.leftMargin: 12
+                                Layout.rightMargin: 12
                                 Layout.fillWidth: true
                                 Layout.alignment: Qt.AlignVCenter
                                 onClicked: {
@@ -190,6 +192,7 @@ ApplicationWindow {
 
                             Button {
                                 text: qsTr("Add Vessel")
+                                Layout.leftMargin: 12
                                 Layout.rightMargin: 12
                                 Layout.fillWidth: true
                                 icon.source: "qrc:/icons/ship.svg"
@@ -268,5 +271,6 @@ ApplicationWindow {
         }
 
         IndividualPage { id: individualPage }
+        CompanyPage { id: companyPage }
     }
 }

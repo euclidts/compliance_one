@@ -10,9 +10,11 @@ ColumnLayout {
     required property var onPhoneEdit
     required property string codeOf
     required property var onCodeEdit
-    property int capitalization: Font.Capitalize
 
-    onCodeOfChanged: codeBox.currentIndex = codeBox.indexOfValue(codeOf)
+    onCodeOfChanged: {
+        codeBox.currentIndex = codeBox.indexOfValue(codeOf)
+        codeField.text = codeOf
+    }
 
     Label {
         id: label

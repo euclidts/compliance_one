@@ -48,5 +48,6 @@
         <file>ui/CompanyDelegate.qml</file>
         <file>ui/CtpTypeDelegate.qml</file>
         <file>ui/CompanyPage.qml</file>
+        <file>ui/ContatChooser.qml</file>
     </qresource>
 </RCC>
