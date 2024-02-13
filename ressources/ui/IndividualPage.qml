@@ -226,18 +226,18 @@ Page {
             onClicked: {
                 onLoaded = () => {
                     onLoaded = () => {
-                        current_individual.contact_id = current_contact.id
                         current_individual.address_id = current_address.id
                         current_individual.save()
                     }
-                    current_address.save()
+                    current_individual.contact_id = current_contact.id
+                    current_contact.save()
                 }
-                current_contact.save()
+                current_address.save()
             }
             highlighted: true
             enabled: current_contact.flagged_for_update ||
-                     current_individual.flagged_for_update ||
-                     current_address.flagged_for_update
+                     current_address.flagged_for_update ||
+                     current_individual.flagged_for_update
         }
 
         Item { Layout.fillWidth: true }
@@ -261,27 +261,6 @@ Page {
                                              current_individual.remove()
                                          },
                                          true)
-        }
-
-        Connections {
-            target: current_contact
-            function onLoadingChanged() {
-                current_contact.loading ? loading = true : loading = false
-            }
-        }
-
-        Connections {
-            target: current_address
-            function onLoadingChanged() {
-                current_address.loading ? loading = true : loading = false
-            }
-        }
-
-        Connections {
-            target: current_individual
-            function onLoadingChanged() {
-                current_individual.loading ? loading = true : loading = false
-            }
         }
     }
 }

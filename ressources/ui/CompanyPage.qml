@@ -252,15 +252,14 @@ Page {
             ToolTip.visible: hovered
             ToolTip.text: qsTr("Save")
             onClicked: {
-                if (current_address.flagged_for_update)
+                onLoaded = () => {
                     onLoaded = () => {
-                        current_address.save()
-                        onLoaded = () => {
-                            current_company.contact_id = current_contact.id
-                            current_company.address_id = current_address.id
-                            current_company.save()
-                        }
+                        current_company.address_id = current_address.id
+                        current_company.save()
                     }
+                    current_company.contact_id = current_contact.id
+                    current_address.save()
+                }
                 current_contact.save()
             }
             highlighted: true
@@ -281,35 +280,14 @@ Page {
                                          qsTr("The selected company will be deleted"),
                                          () => {
                                              onLoaded = () => {
-                                                 current_address.remove()
                                                  onLoaded = () => {
-                                                     current_contact.remove()
                                                      onLoaded = () => { rootStack.currentIndex = 0 }
+                                                     current_contact.remove()
                                                  }
+                                                 current_address.remove()
                                              }
                                              current_comapny.remove()
                                          }, true)
-        }
-
-        Connections {
-            target: current_contact
-            function onLoadingChanged() {
-                current_contact.loading ? loading = true : loading = false
-            }
-        }
-
-        Connections {
-            target: current_address
-            function onLoadingChanged() {
-                current_address.loading ? loading = true : loading = false
-            }
-        }
-
-        Connections {
-            target: current_company
-            function onLoadingChanged() {
-                current_company.loading ? loading = true : loading = false
-            }
         }
     }
 }

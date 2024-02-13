@@ -24,9 +24,9 @@ BackgroundRect {
         uniformCellWidths: true
 
         Label {
-            Layout.topMargin: 12
+            Layout.margins: 12
             text: label && label
-            font.italic: true
+            font.bold: true
             visible: label
             Layout.columnSpan: 2
         }

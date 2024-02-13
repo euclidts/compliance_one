@@ -24,14 +24,13 @@ BackgroundRect {
         columnSpacing: 0
         rowSpacing: 0
         uniformCellWidths: true
-        uniformCellHeights: true
         columns: portrait ? 1 : 2
 
         Label {
-            Layout.topMargin: 12
+            Layout.margins: 12
             text: label && label
-            font.italic: true
-            visible: label !== ""
+            font.bold: true
+            visible: label
             Layout.columnSpan: 2
         }
 

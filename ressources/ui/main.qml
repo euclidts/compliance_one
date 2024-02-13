@@ -185,6 +185,8 @@ ApplicationWindow {
                                 Layout.fillWidth: true
                                 Layout.alignment: Qt.AlignVCenter
                                 onClicked: {
+                                    current_contact.clear()
+                                    current_address.clear()
                                     current_company.clear()
                                     rootStack.currentIndex = 2
                                 }
@@ -272,5 +274,26 @@ ApplicationWindow {
 
         IndividualPage { id: individualPage }
         CompanyPage { id: companyPage }
+
+        Connections {
+            target: current_contact
+            function onLoadingChanged() {
+                current_contact.loading ? loading = true : loading = false
+            }
+        }
+
+        Connections {
+            target: current_address
+            function onLoadingChanged() {
+                current_address.loading ? loading = true : loading = false
+            }
+        }
+
+        Connections {
+            target: current_individual
+            function onLoadingChanged() {
+                current_individual.loading ? loading = true : loading = false
+            }
+        }
     }
 }

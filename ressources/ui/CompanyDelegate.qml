@@ -17,7 +17,7 @@ ItemDelegate {
     text: root.model.name
 
     onClicked : {
-        company.select(root.model.index)
+        company_list.select(root.model.index)
         contact_list.select_by("id", current_company.contact_id)
         address_list.select_by("id", current_company.address_id)
         rootStack.currentIndex = 2
