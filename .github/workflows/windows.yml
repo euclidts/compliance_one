@@ -28,7 +28,7 @@ jobs:
         pip install
         aqtinstall
 #        conan
-    - run: aqt install-qt windows desktop ${{env.QT_VERSION}} win64_mingw -m qtmultimedia
+    - run: aqt install-qt windows desktop ${{env.QT_VERSION}} win64_mingw #-m qtmultimedia
     - run: aqt install-tool windows desktop tools_ifw
 
     - run: mkdir build
@@ -49,11 +49,13 @@ jobs:
       uses: actions/checkout@v3
       with:
         repository: thibaudk/crudpp
+        path: ${{github.workspace}}/crudpp
 
     - name: Clone verdigris
       uses: actions/checkout@v3
       with:
         repository: woboq/verdigris
+        path: ${{github.workspace}}/verdigris
 
     - name: Configure CMake
       working-directory: ./build
