@@ -14,7 +14,7 @@ ItemDelegate {
     required property var model
 
     icon.source: "qrc:/icons/user.svg"
-    text: root.model.local_name + " " + root.model.local_forenames
+    text: root.model.local_name + ' ' + root.model.local_forenames + "PPE: " + root.model.pep
 
     onClicked : {
         individual_list.select(root.model.index)

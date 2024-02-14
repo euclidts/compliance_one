@@ -69,6 +69,7 @@ ApplicationWindow {
             contact_list.get()
             address_list.get()
             individual_list.get()
+            company_list.get()
             rootStack.currentIndex = 0
             loginDialog.clear()
             busyDialog.close()
@@ -293,6 +294,13 @@ ApplicationWindow {
             target: current_individual
             function onLoadingChanged() {
                 current_individual.loading ? loading = true : loading = false
+            }
+        }
+
+        Connections {
+            target: current_company
+            function onLoadingChanged() {
+                current_company.loading ? loading = true : loading = false
             }
         }
     }

@@ -163,8 +163,12 @@ Page {
 
                             CheckBox {
                                 checked: current_individual.pep
-                                onCheckStateChanged: if (current_individual.pep !== checked)
-                                                         current_individual.pep = checked
+                                onCheckStateChanged: {
+                                    if (current_individual.pep !== checked)
+                                        current_individual.pep = checked
+
+                                    console.log("is pep: " + current_individual.pep)
+                                   }
                                 text: qsTr("Is a PEP")
                                 Layout.columnSpan: current_individual.pep ? 1 : 2
                             }
@@ -230,9 +234,9 @@ Page {
                         current_individual.save()
                     }
                     current_individual.contact_id = current_contact.id
-                    current_contact.save()
+                    current_address.save()
                 }
-                current_address.save()
+                current_contact.save()
             }
             highlighted: true
             enabled: current_contact.flagged_for_update ||

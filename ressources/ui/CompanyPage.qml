@@ -46,7 +46,7 @@ Page {
                             textOf: current_company.name
                             onEdit: (txt) => {
                                         if (current_company.name !== txt)
-                                        current_company.name = txt
+                                            current_company.name = txt
                                     }
                             placeHolder: qsTr("* Mandatory")
                         }
@@ -57,7 +57,7 @@ Page {
                             textOf: current_company.local_name
                             onEdit: (txt) => {
                                         if (current_company.local_name !== txt)
-                                        current_company.local_name = txt
+                                            current_company.local_name = txt
                                     }
                             placeHolder: qsTr("* Mandatory")
                         }
@@ -68,7 +68,7 @@ Page {
                             textOf: current_company.website
                             onEdit: (txt) => {
                                         if (current_company.website !== txt)
-                                        current_company.website = txt
+                                            current_company.website = txt
                                     }
                             placeHolder: qsTr("* Mandatory")
                         }
@@ -79,7 +79,7 @@ Page {
                             textOf: current_company.uuid
                             onEdit: (txt) => {
                                         if (current_company.uuid !== txt)
-                                        current_company.uuid = txt
+                                            current_company.uuid = txt
                                     }
                             placeHolder: qsTr("* Mandatory")
                         }
@@ -101,7 +101,7 @@ Page {
                             textOf: current_company.acer
                             onEdit: (txt) => {
                                         if (current_company.acer !== txt)
-                                        current_company.acer = txt
+                                            current_company.acer = txt
                                     }
                             placeHolder: qsTr("* Mandatory")
                         }
@@ -264,8 +264,8 @@ Page {
             }
             highlighted: true
             enabled: current_contact.flagged_for_update ||
-                     current_company.flagged_for_update ||
-                     current_address.flagged_for_update
+                     current_address.flagged_for_update ||
+                     current_company.flagged_for_update
         }
 
         Item { Layout.fillWidth: true }
@@ -287,7 +287,8 @@ Page {
                                                  current_address.remove()
                                              }
                                              current_comapny.remove()
-                                         }, true)
+                                         },
+                                         true)
         }
     }
 }
