@@ -15,6 +15,7 @@ import Qproduct
 import Qctp_group
 import Qctp_type
 import Qcompany
+import Qvessel
 
 ApplicationWindow {
     id: window
@@ -70,6 +71,7 @@ ApplicationWindow {
             address_list.get()
             individual_list.get()
             company_list.get()
+            vessel_list.get()
             rootStack.currentIndex = 0
             loginDialog.clear()
             busyDialog.close()
@@ -158,6 +160,17 @@ ApplicationWindow {
                             interactive: false
                         }
 
+                        ListView {
+                            Layout.fillWidth: true
+                            implicitHeight: contentHeight
+                            model : QvesselListModel {
+                                id: vesselListModel
+                                list: vessel_list
+                            }
+                            delegate: VesselDelegate {}
+                            interactive: false
+                        }
+
                         GridLayout {
                             columns: portrait ? 1 : 3
                             rowSpacing: 12
@@ -200,6 +213,10 @@ ApplicationWindow {
                                 Layout.fillWidth: true
                                 icon.source: "qrc:/icons/ship.svg"
                                 Layout.alignment: Qt.AlignVCenter
+                                onClicked: {
+                                    current_vessel.clear()
+                                    rootStack.currentIndex = 3
+                                }
                             }
                         }
                     }
@@ -275,6 +292,7 @@ ApplicationWindow {
 
         IndividualPage { id: individualPage }
         CompanyPage { id: companyPage }
+        VesselPage { id: vesselPage }
 
         Connections {
             target: current_contact

@@ -49,5 +49,7 @@
         <file>ui/CtpTypeDelegate.qml</file>
         <file>ui/CompanyPage.qml</file>
         <file>ui/ContatChooser.qml</file>
+        <file>ui/VesselPage.qml</file>
+        <file>ui/VesselDelegate.qml</file>
     </qresource>
 </RCC>

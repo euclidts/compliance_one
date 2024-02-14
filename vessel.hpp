@@ -19,6 +19,12 @@ struct vessel
     // Vessel information
     // accesible to all users
 
+    struct vessel_name
+    {
+        static const constexpr auto c_name() { return "name"; }
+        std::string value{};
+    } vessel_name;
+
     struct imo
     {
         static const constexpr auto c_name() { return "imo"; }
@@ -26,25 +32,19 @@ struct vessel
         std::string value{};
     } imo;
 
-    struct vessel_name
+    struct owner_id
     {
-        static const constexpr auto c_name() { return "name"; }
-        std::string value{};
-    } vessel_name;
-
-    struct owner
-    {
-        static const constexpr auto c_name() { return "owner"; }
+        static const constexpr auto c_name() { return "owner_id"; }
         int32_t value{};
         static const constexpr auto references() { return &company::primary_key; }
-    } owner;
+    } owner_id;
 
-    struct manager
+    struct manager_id
     {
-        static const constexpr auto c_name() { return "manager"; }
+        static const constexpr auto c_name() { return "manager_id"; }
         int32_t value{};
         static const constexpr auto references() { return &company::primary_key; }
-    } manager;
+    } manager_id;
 
     // restrictions Flag
 };

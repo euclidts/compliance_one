@@ -146,3 +146,15 @@
 --     ancillary BOOLEAN NOT NULL DEFAULT false,
 --     acer VARCHAR(127)
 -- )
+
+-- CREATE TABLE vessel 
+-- (
+--     id INT AUTO_INCREMENT,
+--     PRIMARY KEY(id),
+--     name VARCHAR(63),
+--     imo VARCHAR(63),
+--     owner_id INT,
+--     CONSTRAINT FOREIGN KEY (owner_id) REFERENCES company (id),
+--     manager_id INT,
+--     CONSTRAINT FOREIGN KEY (manager_id) REFERENCES company (id)
+-- )
