@@ -48,12 +48,12 @@ jobs:
     - name: Clone crudpp
       uses: actions/checkout@v3
       with:
-      repository: thibaudk/crudpp
+        repository: thibaudk/crudpp
 
     - name: Clone verdigris
       uses: actions/checkout@v3
       with:
-      repository: woboq/verdigris
+        repository: woboq/verdigris
 
     - name: Configure CMake
       working-directory: ./build
