@@ -45,11 +45,17 @@ jobs:
 #    - run: echo "-DCPACK_IFW_ROOT=${{github.workspace}}/Tools/QtInstallerFramework/4.4" >> $GITHUB_PATH
 #    - run: echo "C:/Program Files (x86)/Etc" | Out-File -Append -FilePath $env:GITHUB_PATH -Encoding utf8 "${{github.workspace}}/Tools/QtInstallerFramework/4.4"
 
+    - name: Clone pfr
+      uses: actions/checkout@v3
+      with:
+        repository: boostorg/pfr
+        path: ${{github.workspace}}/pfr
+
     - name: Clone crudpp
       uses: actions/checkout@v3
       with:
-        repository: thibaudk/crudpp
-        path: ${{github.workspace}}/crudpp
+       repository: thibaudk/crudpp
+       path: ${{github.workspace}}/crudpp
 
     - name: Clone verdigris
       uses: actions/checkout@v3
@@ -64,6 +70,7 @@ jobs:
         -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
         -DCMAKE_PREFIX_PATH="${{github.workspace}}/${{env.QT_VERSION}}/mingw_64"
         -DCPACK_IFW_ROOT="${{github.workspace}}/Tools/QtInstallerFramework/4.6"
+        -DPFR_PATH="${{github.workspace}}/pfr"
         -DCRUDPP_PATH="${{github.workspace}}/crudpp"
         -DVERDIGRIS_PATH="${{github.workspace}}/verdigris"
 #        -DCMAKE_TOOLCHAIN_FILE="conan_paths.cmake"
@@ -75,7 +82,7 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: compliance_one
-        path: ${{github.workspace}}/build/qt/compliance_one-*-win64.exe
+        path: ${{github.workspace}}/build/compliance_one-*-win64.exe
 
     #- name: Test
       # working-directory: ${{github.workspace}}/build
