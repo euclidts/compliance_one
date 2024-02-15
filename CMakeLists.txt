@@ -25,7 +25,7 @@ make_all(
         company
         vessel
     EXTRA_CLIENT_SOURCES
-        ${CMAKE_CURRENT_SOURCE_DIR}/ressources/compliance_one.qrc
+        ${CMAKE_CURRENT_SOURCE_DIR}/resources/compliance_one.qrc
     )
 
 if(NOT ANDROID AND NOT IOS AND CMAKE_BUILD_TYPE STREQUAL "Release")

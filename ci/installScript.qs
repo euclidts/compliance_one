@@ -41,9 +41,13 @@ Component.prototype.createOperations = function()
     component.createOperations();
 
     if (systemInfo.productType === "windows") {
-        component.addOperation("CreateShortcut", "@TargetDir@/bin/compliance_one.exe", "@StartMenuDir@/compliance_one.lnk",
-            "workingDirectory=@TargetDir@");
-        component.addOperation("CreateShortcut", "@TargetDir@/bin/compliance_one.exe", "@DesktopDir@/compliance_one.lnk",
-            "workingDirectory=@TargetDir@");
+        component.addOperation("CreateShortcut",
+                               "@TargetDir@/bin/compliance_one.exe",
+                               "@StartMenuDir@/compliance_one.lnk",
+                               "workingDirectory=@TargetDir@");
+        component.addOperation("CreateShortcut",
+                               "@TargetDir@/bin/compliance_one.exe",
+                               "@DesktopDir@/compliance_one.lnk",
+                               "workingDirectory=@TargetDir@");
     }
 }
