@@ -3,7 +3,11 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import QtQuick.Controls.Material
 
+import Qvessel
+
 Page {
+    property var current_vessel: Single_vessel {}
+
     background: Rectangle { color: "transparent" }
 
     header: RowLayout {
@@ -116,6 +120,13 @@ Page {
                                          qsTr("The selected vessel will be deleted"),
                                          () => { current_vessel.remove() },
                                          true)
+        }
+    }
+
+    Connections {
+        target: current_vessel
+        function onLoadingChanged() {
+            current_vessel.loading ? loading = true : loading = false
         }
     }
 }

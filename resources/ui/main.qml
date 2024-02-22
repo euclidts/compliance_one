@@ -293,33 +293,5 @@ ApplicationWindow {
         IndividualPage { id: individualPage }
         CompanyPage { id: companyPage }
         VesselPage { id: vesselPage }
-
-        Connections {
-            target: current_contact
-            function onLoadingChanged() {
-                current_contact.loading ? loading = true : loading = false
-            }
-        }
-
-        Connections {
-            target: current_address
-            function onLoadingChanged() {
-                current_address.loading ? loading = true : loading = false
-            }
-        }
-
-        Connections {
-            target: current_individual
-            function onLoadingChanged() {
-                current_individual.loading ? loading = true : loading = false
-            }
-        }
-
-        Connections {
-            target: current_company
-            function onLoadingChanged() {
-                current_company.loading ? loading = true : loading = false
-            }
-        }
     }
 }

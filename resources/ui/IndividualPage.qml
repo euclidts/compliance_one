@@ -3,7 +3,15 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import QtQuick.Controls.Material
 
+import Qcontact
+import Qaddress
+import Qindividual
+
 Page {
+    property var current_contact : Single_contact {}
+    property var current_address : Single_address {}
+    property var current_individual : Single_individual {}
+
     background: Rectangle { color: "transparent" }
 
     header: RowLayout {
@@ -265,6 +273,27 @@ Page {
                                              current_individual.remove()
                                          },
                                          true)
+        }
+    }
+
+    Connections {
+        target: current_contact
+        function onLoadingChanged() {
+            current_contact.loading ? loading = true : loading = false
+        }
+    }
+
+    Connections {
+        target: current_address
+        function onLoadingChanged() {
+            current_address.loading ? loading = true : loading = false
+        }
+    }
+
+    Connections {
+        target: current_individual
+        function onLoadingChanged() {
+            current_individual.loading ? loading = true : loading = false
         }
     }
 }

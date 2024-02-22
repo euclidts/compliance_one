@@ -11,29 +11,31 @@ set(CMAKE_PREFIX_PATH "${CRUDPP_PARTH};${CMAKE_PREFIX_PATH}")
 add_subdirectory(${CRUDPP_PATH} ${CMAKE_BINARY_DIR}/crudpp)
 
 make_all(
-    INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/compliance_one.hpp
-    USER_CLASS user
-    CLASSES
-        country
-        product_group
-        product
-        ctp_group
-        ctp_type
-        contact
-        address
-        individual
-        company
-        vessel
-    EXTRA_CLIENT_SOURCES
-        ${CMAKE_CURRENT_SOURCE_DIR}/resources/compliance_one.qrc
-    )
+   INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/compliance_one.hpp
+   USER_CLASS user
+   CLASSES
+       country
+       product_group
+       product
+       ctp_group
+       ctp_type
+       contact
+       address
+       individual
+       company
+       vessel
+   EXTRA_CLIENT_SOURCES
+       ${CMAKE_CURRENT_SOURCE_DIR}/resources/compliance_one.qrc
+   )
 
 if(NOT ANDROID AND NOT IOS AND CMAKE_BUILD_TYPE STREQUAL "Release")
     set(COMPONENT_NAME_MAIN "${PROJECT_NAME}")
     set(COMPONENT_NAME_DEPENDENCIES "RuntimeLibs")
 
     include(GNUInstallDirs)
-    install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT ${COMPONENT_NAME_MAIN})
+    install(TARGETS ${PROJECT_NAME}
+            DESTINATION ${CMAKE_INSTALL_BINDIR}
+            COMPONENT ${COMPONENT_NAME_MAIN})
 
     if(MINGW)
         message(STATUS "Installing system-libraries: MinGW DLLs.")
