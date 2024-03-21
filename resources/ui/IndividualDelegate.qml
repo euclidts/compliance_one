@@ -17,9 +17,13 @@ ItemDelegate {
     text: root.model.local_name + ' ' + root.model.local_forenames + "PPE: " + root.model.pep
 
     onClicked : {
-        individual_list.select(root.model.index)
-        contact_list.select_by("id", current_individual.contact_id)
-        address_list.select_by("id", current_individual.address_id)
+        individualPage.current_individual.from_list(individual_list, root.model.index)
+        individualPage.current_contact.from_list_by(contact_list,
+                                                    "id",
+                                                    individualPage.current_individual.contact_id)
+        individualPage.current_address.from_list_by(address_list,
+                                                    "id",
+                                                    individualPage.current_individual.address_id)
         rootStack.currentIndex = 1
     }
 

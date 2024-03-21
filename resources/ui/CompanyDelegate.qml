@@ -17,9 +17,13 @@ ItemDelegate {
     text: root.model.name
 
     onClicked : {
-        company_list.select(root.model.index)
-        contact_list.select_by("id", current_company.contact_id)
-        address_list.select_by("id", current_company.address_id)
+        companyPage.current_company.from_list(company_list, root.model.index)
+        companyPage.current_contact.from_list_by(contact_list,
+                                                 "id",
+                                                 companyPage.current_company.contact_id)
+        companyPage.current_address.from_list_by(address_list,
+                                                 "id",
+                                                 companyPage.current_company.address_id)
         rootStack.currentIndex = 2
     }
 

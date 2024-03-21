@@ -30,66 +30,69 @@ Page {
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
 
         FlickableItem {
-            BackgroundRect {
+            ColumnLayout {
                 width: parent.width
+                spacing: 12
 
-                GridLayout {
-                    width: parent.width
-                    columnSpacing: 0
-                    rowSpacing: 0
-                    columns: portrait ? 1 : 2
-                    uniformCellWidths: true
+                BackgroundRect {
+                    GridLayout {
+                        width: parent.width
+                        columnSpacing: 0
+                        rowSpacing: 0
+                        uniformCellWidths: true
+                        columns: portrait ? 1 : 2
 
-                    LabeledTextField {
-                        Layout.margins: 12
-                        name: qsTr("Name")
-                        textOf: current_vessel.name
-                        onEdit: (txt) => {
-                                    if (current_vessel.name !== txt)
+                        LabeledTextField {
+                            Layout.margins: 12
+                            name: qsTr("Name")
+                            textOf: current_vessel.name
+                            onEdit: (txt) => {
+                                        if (current_vessel.name !== txt)
                                         current_vessel.name = txt
-                                }
-                        placeHolder: qsTr("* Mandatory")
-                    }
+                                    }
+                            placeHolder: qsTr("* Mandatory")
+                        }
 
-                    LabeledTextField {
-                        Layout.margins: 12
-                        name: qsTr("IMO")
-                        textOf: current_vessel.imo
-                        onEdit: (txt) => {
-                                    if (current_vessel.imo !== txt)
+                        LabeledTextField {
+                            Layout.margins: 12
+                            name: qsTr("IMO")
+                            textOf: current_vessel.imo
+                            onEdit: (txt) => {
+                                        if (current_vessel.imo !== txt)
                                         current_vessel.imo = txt
-                                }
-                        placeHolder: qsTr("* Mandatory")
-                    }
+                                    }
+                            placeHolder: qsTr("* Mandatory")
+                        }
 
-                    EnumValueChooser {
-                        Layout.margins: 12
-                        name: qsTr("Owner")
-                        model: companyListModel
-                        Layout.fillWidth: true
-                        ediatable: true
-                        valueRole: "id"
-                        textRole: "name"
-                        enumOf: current_vessel.owner_id
-                        onEdit: (value) => {
-                                    if (current_vessel.owner_id !== value)
+                        EnumValueChooser {
+                            Layout.margins: 12
+                            name: qsTr("Owner")
+                            model: companyListModel
+                            Layout.fillWidth: true
+                            ediatable: true
+                            valueRole: "id"
+                            textRole: "name"
+                            enumOf: current_vessel.owner_id
+                            onEdit: (value) => {
+                                        if (current_vessel.owner_id !== value)
                                         current_vessel.owner_id = value
-                                }
-                    }
+                                    }
+                        }
 
-                    EnumValueChooser {
-                        Layout.margins: 12
-                        name: qsTr("Manager")
-                        model: companyListModel
-                        Layout.fillWidth: true
-                        ediatable: true
-                        valueRole: "id"
-                        textRole: "name"
-                        enumOf: current_vessel.manager_id
-                        onEdit: (value) => {
-                                    if (current_vessel.manager_id !== value)
-                                    current_vessel.manager_id = value
-                                }
+                        EnumValueChooser {
+                            Layout.margins: 12
+                            name: qsTr("Manager")
+                            model: companyListModel
+                            Layout.fillWidth: true
+                            ediatable: true
+                            valueRole: "id"
+                            textRole: "name"
+                            enumOf: current_vessel.manager_id
+                            onEdit: (value) => {
+                                        if (current_vessel.manager_id !== value)
+                                        current_vessel.manager_id = value
+                                    }
+                        }
                     }
                 }
             }
