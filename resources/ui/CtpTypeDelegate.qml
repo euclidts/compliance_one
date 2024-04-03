@@ -21,7 +21,7 @@ ItemDelegate {
 
         EnumValueEditor {
             name: qsTr("Counterparty group")
-            model: Qctp_groupListModel { list: ctp_group_list }
+            model: ctp_groupListModel
             enumOf: root.model.group_id
             onEdit: (value) => { root.model.group_id = value }
             Layout.columnSpan: 4
@@ -63,7 +63,7 @@ ItemDelegate {
             icon.source: "qrc:/icons/floppy-disk.svg"
             ToolTip.visible: hovered
             ToolTip.text: qsTr("Save")
-            onClicked: ctp_type_list.save(root.model.index)
+            onClicked: ctp_typeListModel.save(root.model.index)
             highlighted: true
             enabled: root.model.flagged_for_update
             visible: !root.model.loading
@@ -89,7 +89,7 @@ ItemDelegate {
             visible: !root.model.loading
             onClicked: onExceptionAction(ToolTip.text,
                                          qsTr("The selected counterpary type will be deleted"),
-                                         () => { ctp_type_list.remove(root.model.index) }, true)
+                                         () => { ctp_typeListModel.remove(root.model.index) }, true)
         }
     }
 

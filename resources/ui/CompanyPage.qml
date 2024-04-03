@@ -8,9 +8,9 @@ import Qaddress
 import Qcompany
 
 Page {
-    property var current_contact : Single_contact {}
-    property var current_address : Single_address {}
-    property var current_company : Single_company {}
+    property var current_contact : SingleQcontact {}
+    property var current_address : SingleQaddress {}
+    property var current_company : SingleQcompany {}
 
     background: Rectangle { color: "transparent" }
 
@@ -290,11 +290,11 @@ Page {
                                              onLoaded = () => {
                                                  onLoaded = () => {
                                                      onLoaded = () => { rootStack.currentIndex = 0 }
-                                                     current_contact.remove()
+                                                     companyPage.current_contact.remove()
                                                  }
-                                                 current_address.remove()
+                                                 companyPage.current_address.remove()
                                              }
-                                             current_comapny.remove()
+                                             companyPage.current_comapny.remove()
                                          },
                                          true)
         }

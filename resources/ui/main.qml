@@ -35,6 +35,17 @@ ApplicationWindow {
     property bool loading: false
     property var onLoaded: function () {}
 
+    property var countryListModel: QcountryListModel{}
+    property var product_groupListModel: Qproduct_groupListModel{}
+    property var productListModel: QproductListModel{}
+    property var ctp_groupListModel: Qctp_groupListModel{}
+    property var ctp_typeListModel: Qctp_typeListModel{}
+    property var contactListModel: QcontactListModel{}
+    property var addressListModel: QaddressListModel{}
+    property var individualListModel: QindividualListModel{}
+    property var companyListModel: QcompanyListModel{}
+    property var vesselListModel: QvesselListModel{}
+
     LogInDialog { id: loginDialog }
     Component.onCompleted: loginDialog.open()
     BusyDialog { id: busyDialog }
@@ -67,16 +78,16 @@ ApplicationWindow {
 
     function onLogin (success: bool, error: string) {
         if (success) {
-            contact_list.get()
-            address_list.get()
-            individual_list.get()
-            company_list.get()
-            vessel_list.get()
+            contactListModel.get()
+            addressListModel.get()
+            individualListModel.get()
+            companyListModel.get()
+            vesselListModel.get()
             rootStack.currentIndex = 0
             loginDialog.clear()
             busyDialog.close()
         }
-        else { loginDialog.open() }
+        else exceptionDialog.func = () => { loginDialog.open() }
     }
 
     function onException (prefix: string, error: string) {
@@ -141,10 +152,7 @@ ApplicationWindow {
                         ListView {
                             Layout.fillWidth: true
                             implicitHeight: contentHeight
-                            model : QindividualListModel {
-                                id: individualListModel
-                                list: individual_list
-                            }
+                            model: individualListModel
                             delegate: IndividualDelegate {}
                             interactive: false
                         }
@@ -152,10 +160,7 @@ ApplicationWindow {
                         ListView {
                             Layout.fillWidth: true
                             implicitHeight: contentHeight
-                            model : QcompanyListModel {
-                                id: companyListModel
-                                list: company_list
-                            }
+                            model: companyListModel
                             delegate: CompanyDelegate {}
                             interactive: false
                         }
@@ -163,10 +168,7 @@ ApplicationWindow {
                         ListView {
                             Layout.fillWidth: true
                             implicitHeight: contentHeight
-                            model : QvesselListModel {
-                                id: vesselListModel
-                                list: vessel_list
-                            }
+                            model: vesselListModel
                             delegate: VesselDelegate {}
                             interactive: false
                         }
@@ -184,9 +186,9 @@ ApplicationWindow {
                                 icon.source: "qrc:/icons/user.svg"
                                 Layout.alignment: Qt.AlignVCenter
                                 onClicked: {
-                                    current_contact.clear()
-                                    current_address.clear()
-                                    current_individual.clear()
+                                    individualPage.current_contact.clear()
+                                    individualPage.current_address.clear()
+                                    individualPage.current_individual.clear()
                                     rootStack.currentIndex = 1
                                 }
                             }
@@ -199,9 +201,9 @@ ApplicationWindow {
                                 Layout.fillWidth: true
                                 Layout.alignment: Qt.AlignVCenter
                                 onClicked: {
-                                    current_contact.clear()
-                                    current_address.clear()
-                                    current_company.clear()
+                                    companyPage.current_contact.clear()
+                                    companyPage.current_address.clear()
+                                    companyPage.current_company.clear()
                                     rootStack.currentIndex = 2
                                 }
                             }
@@ -214,7 +216,7 @@ ApplicationWindow {
                                 icon.source: "qrc:/icons/ship.svg"
                                 Layout.alignment: Qt.AlignVCenter
                                 onClicked: {
-                                    current_vessel.clear()
+                                    vesselPage.current_vessel.clear()
                                     rootStack.currentIndex = 3
                                 }
                             }
@@ -223,16 +225,15 @@ ApplicationWindow {
                 }
 
                 ListView {
-                    id: countryListView
                     spacing: 6
                     clip: true
                     boundsBehavior: Flickable.StopAtBounds
-                    model : QcountryListModel { list: country_list }
+                    model : countryListModel
                     delegate: CountryDelegate {}
                     footer: RoundButton {
                         Layout.fillWidth: true
                         icon.source: "qrc:/icons/plus.svg"
-                        onClicked: country_list.appendItem()
+                        onClicked: countryListModel.appendItem()
                         highlighted: true
                     }
                 }
@@ -241,12 +242,12 @@ ApplicationWindow {
                     spacing: 6
                     clip: true
                     boundsBehavior: Flickable.StopAtBounds
-                    model : QproductListModel { list: product_list }
+                    model : productListModel
                     delegate: ProductDelegate {}
                     footer: RoundButton {
                         Layout.fillWidth: true
                         icon.source: "qrc:/icons/plus.svg"
-                        onClicked: product_list.appendItem()
+                        onClicked: productListModel.appendItem()
                         highlighted: true
                     }
                 }
@@ -255,12 +256,12 @@ ApplicationWindow {
                     spacing: 6
                     clip: true
                     boundsBehavior: Flickable.StopAtBounds
-                    model : Qctp_typeListModel { list: ctp_type_list }
+                    model : ctp_typeListModel
                     delegate: CtpTypeDelegate {}
                     footer: RoundButton {
                         Layout.fillWidth: true
                         icon.source: "qrc:/icons/plus.svg"
-                        onClicked: ctp_type_list.appendItem()
+                        onClicked: ctp_typeListModel.appendItem()
                         highlighted: true
                     }
                 }

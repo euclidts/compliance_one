@@ -6,7 +6,7 @@ import QtQuick.Controls.Material
 import Qvessel
 
 Page {
-    property var current_vessel: Single_vessel {}
+    property var current_vessel: SingleQvessel {}
 
     background: Rectangle { color: "transparent" }
 
@@ -121,7 +121,7 @@ Page {
             Layout.alignment: Qt.AlignRight
             onClicked: onExceptionAction(ToolTip.text,
                                          qsTr("The selected vessel will be deleted"),
-                                         () => { current_vessel.remove() },
+                                         () => { vesselPage.current_vessel.remove() },
                                          true)
         }
     }

@@ -21,7 +21,7 @@ ItemDelegate {
 
         EnumValueEditor {
             name: qsTr("Product group")
-            model: Qproduct_groupListModel { list: product_group_list }
+            model: product_groupListModel
             enumOf: root.model.group_id
             onEdit: (value) => { root.model.group_id = value }
             Layout.columnSpan: 4
@@ -53,7 +53,7 @@ ItemDelegate {
             icon.source: "qrc:/icons/floppy-disk.svg"
             ToolTip.visible: hovered
             ToolTip.text: qsTr("Save")
-            onClicked: product_list.save(root.model.index)
+            onClicked: productListModel.save(root.model.index)
             highlighted: true
             enabled: root.model.flagged_for_update
             visible: !root.model.loading
@@ -79,7 +79,7 @@ ItemDelegate {
             visible: !root.model.loading
             onClicked: onExceptionAction(ToolTip.text,
                                          qsTr("The selected country will be deleted"),
-                                         () => { product_list.remove(root.model.index) }, true)
+                                         () => { productListModel.remove(root.model.index) }, true)
         }
     }
 

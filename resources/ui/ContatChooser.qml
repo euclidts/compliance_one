@@ -31,7 +31,7 @@ BackgroundRect {
             text: label && label
             font.bold: true
             visible: label
-            Layout.columnSpan: 2
+            Layout.columnSpan: portrait ? 1 : 2
         }
 
         LabeledTextField {

@@ -16,12 +16,12 @@ ItemDelegate {
     icon.source: "qrc:/icons/user.svg"
     text: root.model.local_name + ' ' + root.model.local_forenames + "PPE: " + root.model.pep
 
-    onClicked : {
-        individualPage.current_individual.from_list(individual_list, root.model.index)
-        individualPage.current_contact.from_list_by(contact_list,
+    onClicked: {
+        individualPage.current_individual.from_list(individualListModel, root.model.index)
+        individualPage.current_contact.from_list_by(contactListModel,
                                                     "id",
                                                     individualPage.current_individual.contact_id)
-        individualPage.current_address.from_list_by(address_list,
+        individualPage.current_address.from_list_by(addressListModel,
                                                     "id",
                                                     individualPage.current_individual.address_id)
         rootStack.currentIndex = 1

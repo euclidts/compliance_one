@@ -55,12 +55,12 @@ struct individual
         std::string value{};
     } passport;
 
-    struct expeiry_date
+    struct expiry_date
     {
-        // static const constexpr auto name() { return "Expeiry date"; }
-        static const constexpr auto c_name() { return "expeiry_date"; }
+        // static const constexpr auto name() { return "Expiry date"; }
+        static const constexpr auto c_name() { return "expiry_date"; }
         std::chrono::sys_days value{};
-    } expeiry_date;
+    } expiry_date;
 
     struct issuing
     {

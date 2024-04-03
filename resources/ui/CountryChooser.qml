@@ -6,7 +6,7 @@ import QtQuick.Controls.Material
 EnumValueChooser {
     id: countryCombo
     name: qsTr("Country")
-    model: countryListView.model
+    model: countryListModel
     Layout.fillWidth: true
     ediatable: true
     valueRole: "id"

@@ -8,9 +8,9 @@ import Qaddress
 import Qindividual
 
 Page {
-    property var current_contact : Single_contact {}
-    property var current_address : Single_address {}
-    property var current_individual : Single_individual {}
+    property var current_contact : SingleQcontact {}
+    property var current_address : SingleQaddress {}
+    property var current_individual : SingleQindividual {}
 
     background: Rectangle { color: "transparent" }
 
@@ -125,7 +125,7 @@ Page {
 
                         CountryChooser {
                             Layout.margins: 12
-                            name: qsTr("Isssuing country")
+                            name: qsTr("Isuing country")
                             enumOf: current_individual.issuing
                             onEdit: (value) => {
                                         if (current_individual.issuing !== value)
@@ -135,11 +135,11 @@ Page {
 
                         LabeledDateField {
                             Layout.margins: 12
-                            name: qsTr("Expeiry date")
-                            dateOf: current_individual.expeiry_date
+                            name: qsTr("Expiry date")
+                            dateOf: current_individual.expiry_date
                             onEdit: (date) => {
-                                        if (current_individual.expeiry_date !== date)
-                                            current_individual.expeiry_date = date
+                                        if (current_individual.expiry_date !== date)
+                                            current_individual.expiry_date = date
                                     }
                         }
 
@@ -174,8 +174,6 @@ Page {
                                 onCheckStateChanged: {
                                     if (current_individual.pep !== checked)
                                         current_individual.pep = checked
-
-                                    console.log("is pep: " + current_individual.pep)
                                    }
                                 text: qsTr("Is a PEP")
                                 Layout.columnSpan: current_individual.pep ? 1 : 2
@@ -266,11 +264,11 @@ Page {
                                              onLoaded = () => {
                                                  onLoaded = () => {
                                                      onLoaded = () => { rootStack.currentIndex = 0 }
-                                                     current_contact.remove()
+                                                     individualPage.current_contact.remove()
                                                  }
-                                                 current_address.remove()
+                                                 individualPage.current_address.remove()
                                              }
-                                             current_individual.remove()
+                                             individualPage.current_individual.remove()
                                          },
                                          true)
         }

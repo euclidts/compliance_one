@@ -17,7 +17,7 @@ ItemDelegate {
     text: root.model.name
 
     onClicked : {
-        vesselPage.current_vessel.from_list(vessel_list, root.model.index)
+        vesselPage.current_vessel.from_list(vesselListModel, root.model.index)
         rootStack.currentIndex = 3
     }
 

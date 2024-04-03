@@ -29,7 +29,7 @@ ColumnLayout {
         ComboBox {
             id: codeBox
             Layout.maximumWidth: 90
-            model: countryListView.model
+            model: countryListModel
             textRole: "iso3"
             valueRole: "phonecode"
             delegate: MenuItem {
