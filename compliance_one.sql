@@ -25,17 +25,6 @@
 --     risk_score TINYINT UNSIGNED
 -- )
 
--- CREATE TABLE contact 
--- (
---     id INT AUTO_INCREMENT,
---     PRIMARY KEY(id),
---     family_name VARCHAR(63),
---     forenames VARCHAR(63),
---     email VARCHAR(127),
---     calling_code VARCHAR(6),
---     phone VARCHAR(13)
--- )
-
 -- run sql scripts dowloaded from 
 -- https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/sql/countries.sql
 
@@ -79,6 +68,17 @@
 --     postcode VARCHAR(31)
 -- )
 
+-- CREATE TABLE contact 
+-- (
+--     id INT AUTO_INCREMENT,
+--     PRIMARY KEY(id),
+--     family_name VARCHAR(63),
+--     forenames VARCHAR(63),
+--     email VARCHAR(127) UNIQUE,
+--     calling_code VARCHAR(6),
+--     phone VARCHAR(13)
+-- )
+
 -- CREATE TABLE individual
 -- (
 --     id INT AUTO_INCREMENT,
@@ -88,7 +88,7 @@
 --     local_name VARCHAR(63),
 --     local_forenames VARCHAR(63),
 --     date_of_birth DATE,
---     passport VARCHAR(63),
+--     passport VARCHAR(63) UNIQUE,
 --     expeiry_date DATE,
 --     issuing MEDIUMINT UNSIGNED,
 --     CONSTRAINT FOREIGN KEY (issuing) REFERENCES country (id),
@@ -123,20 +123,20 @@
 -- (
 --     id INT AUTO_INCREMENT,
 --     PRIMARY KEY(id),
---     uuid VARCHAR(63),
---     name VARCHAR(63),
---     local_name VARCHAR(63),
+--     uuid VARCHAR(63) UNIQUE,
+--     name VARCHAR(63) UNIQUE,
+--     local_name VARCHAR(63) UNIQUE,
 --     is_branch BOOLEAN NOT NULL DEFAULT false,
---     address_id INT,
+--     address_id INT UNIQUE,
 --     CONSTRAINT FOREIGN KEY (address_id) REFERENCES address (id),
---     branch_address_id INT,
+--     branch_address_id INT UNIQUE,
 --     CONSTRAINT FOREIGN KEY (branch_address_id) REFERENCES address (id),
---     website VARCHAR(127),
+--     website VARCHAR(127) UNIQUE,
 --     contact_id INT,
 --     CONSTRAINT FOREIGN KEY (contact_id) REFERENCES contact (id),
 --     is_public BOOLEAN NOT NULL DEFAULT false,
---     comercial_registery VARCHAR(127),
---     branch_registery VARCHAR(127),
+--     comercial_registery VARCHAR(127) UNIQUE,
+--     branch_registery VARCHAR(127) UNIQUE,
 --     listing_country_id MEDIUMINT UNSIGNED,
 --     CONSTRAINT FOREIGN KEY (listing_country_id) REFERENCES country (id),
 --     lei VARCHAR(127),
@@ -157,4 +157,11 @@
 --     CONSTRAINT FOREIGN KEY (owner_id) REFERENCES company (id),
 --     manager_id INT,
 --     CONSTRAINT FOREIGN KEY (manager_id) REFERENCES company (id)
+-- )
+
+-- CREATE TABLE exchange
+-- (
+--     code CHAR(3) NOT NULL UNIQUE,
+--     PRIMARY KEY(code),
+--     description VARCHAR(255)
 -- )

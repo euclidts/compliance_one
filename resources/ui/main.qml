@@ -40,6 +40,7 @@ ApplicationWindow {
     property var productListModel: QproductListModel{}
     property var ctp_groupListModel: Qctp_groupListModel{}
     property var ctp_typeListModel: Qctp_typeListModel{}
+    property var exchangeListModel: QexchangeModel{}
     property var contactListModel: QcontactListModel{}
     property var addressListModel: QaddressListModel{}
     property var individualListModel: QindividualListModel{}

@@ -28,13 +28,13 @@ ColumnLayout {
 
         ComboBox {
             id: codeBox
-            Layout.maximumWidth: 90
+            Layout.fillWidth: true
             model: countryListModel
-            textRole: "iso3"
+            textRole: "name"
             valueRole: "phonecode"
             delegate: MenuItem {
                 width: ListView.view.width
-                text: model["emoji"] + ' ' + model["iso3"]
+                text: model["emoji"] + ' ' + model["name"]
                 Material.foreground: codeBox.currentIndex === index ?
                                          ListView.view.contentItem.Material.accent :
                                          ListView.view.contentItem.Material.foreground

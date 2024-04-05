@@ -32,7 +32,8 @@ Dialog {
 
         RowLayout {
             Layout.fillWidth: true
-            layoutDirection: Qt.RightToLeft
+
+            Item { Layout.fillWidth: true }
 
             RoundButton {
                 id: cancelButton
@@ -57,14 +58,8 @@ Dialog {
             }
         }
 
-        onVisibleChanged: if (visible) {
-                              cancelable ? cancelButton.focus = true
-                                         : validateButton.focus = true
-
-                          } else {
-                              validateButton.focus = false
-                              cancelButton.focus = false
-                          }
+        onVisibleChanged: if (visible) cancelable ? cancelButton.focus = true
+                                                  : validateButton.focus = true
     }
 }
 

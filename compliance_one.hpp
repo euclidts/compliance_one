@@ -6,6 +6,7 @@
 #include "product.hpp"
 #include "ctp_group.hpp"
 #include "ctp_type.hpp"
+#include "exchange.hpp"
 #include "contact.hpp"
 #include "address.hpp"
 #include "individual.hpp"

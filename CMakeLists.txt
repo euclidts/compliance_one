@@ -19,6 +19,7 @@ make_all(
        product
        ctp_group
        ctp_type
+       exchange
        contact
        address
        individual

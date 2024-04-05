@@ -19,6 +19,7 @@ Dialog {
         productListModel.get()
         ctp_groupListModel.get()
         ctp_typeListModel.get()
+        exchangeListModel.get()
         userNameField.focus = true
     }
 

@@ -91,66 +91,6 @@ Page {
                                     }
                             placeHolder: qsTr("* Mandatory")
                         }
-
-                        LabeledTextField {
-                            Layout.margins: 12
-                            name: qsTr("Legal Entitiy Identifier (LEI)")
-                            textOf: current_company.lei
-                            onEdit: (txt) => {
-                                        if (current_company.lei !== txt)
-                                            current_company.lei = txt
-                                    }
-                            placeHolder: qsTr("* Mandatory")
-                        }
-
-                        LabeledTextField {
-                            Layout.margins: 12
-                            name: qsTr("ACER code")
-                            textOf: current_company.acer
-                            onEdit: (txt) => {
-                                        if (current_company.acer !== txt)
-                                            current_company.acer = txt
-                                    }
-                            placeHolder: qsTr("* Mandatory")
-                        }
-
-                        CheckBox {
-                            checked: current_company.is_public
-                            onCheckStateChanged: if (current_company.is_public !== checked)
-                                                     current_company.is_public = checked
-                            text: qsTr("Company Publically Listed")
-                        }
-
-                        LabeledTextField {
-                            Layout.margins: 12
-                            name: qsTr("Commercial Registry Number")
-                            textOf: current_company.comercial_registery
-                            onEdit: (txt) => {
-                                        if (current_company.comercial_registery !== txt)
-                                            current_company.comercial_registery = txt
-                                    }
-                            placeHolder: qsTr("* Mandatory")
-                        }
-
-                        CheckBox {
-                            checked: current_company.is_branch
-                            onCheckStateChanged: if (current_company.is_branch !== checked)
-                                                     current_company.is_branch = checked
-                            text: qsTr("Is a Branch")
-                            Layout.columnSpan: portrait ? 1 : 2
-                        }
-
-                        LabeledTextField {
-                            Layout.margins: 12
-                            name: qsTr("Branch Commercial Registry Number")
-                            textOf: current_company.branch_registery
-                            onEdit: (txt) => {
-                                        if (current_company.branch_registery !== txt)
-                                            current_company.branch_registery = txt
-                                    }
-                            placeHolder: qsTr("* Mandatory")
-                            visible: current_company.is_branch
-                        }
                     }
                 }
 
@@ -223,7 +163,7 @@ Page {
                             checked: current_company.pep
                             onCheckStateChanged: if (current_company.pep !== checked)
                                                      current_company.pep = checked
-                            text: qsTr("PEP")
+                            text: qsTr("Associated PEPs")
                         }
 
                         CheckBox {
@@ -245,6 +185,67 @@ Page {
                             onCheckStateChanged: if (current_company.ancillary !== checked)
                                                      current_company.ancillary = checked
                             text: qsTr("ANCILLARY status")
+                        }
+
+                        LabeledTextField {
+                            Layout.margins: 12
+                            name: qsTr("Legal Entitiy Identifier (LEI)")
+                            textOf: current_company.lei
+                            onEdit: (txt) => {
+                                        if (current_company.lei !== txt)
+                                            current_company.lei = txt
+                                    }
+                            placeHolder: qsTr("* Mandatory")
+                        }
+
+                        LabeledTextField {
+                            Layout.margins: 12
+                            name: qsTr("ACER code")
+                            textOf: current_company.acer
+                            onEdit: (txt) => {
+                                        if (current_company.acer !== txt)
+                                            current_company.acer = txt
+                                    }
+                            placeHolder: qsTr("* Mandatory")
+                        }
+
+                        CheckBox {
+                            checked: current_company.is_public
+                            onCheckStateChanged: if (current_company.is_public !== checked)
+                                                     current_company.is_public = checked
+                            text: qsTr("Company Publically Listed")
+                        }
+
+                        LabeledTextField {
+                            Layout.margins: 12
+                            name: qsTr("Commercial Registry Number")
+                            textOf: current_company.comercial_registery
+                            onEdit: (txt) => {
+                                        if (current_company.comercial_registery !== txt)
+                                            current_company.comercial_registery = txt
+                                    }
+                            placeHolder: qsTr("* Mandatory")
+                        }
+
+                        CheckBox {
+                            checked: current_company.is_branch
+                            onCheckStateChanged: if (current_company.is_branch !== checked)
+                                                     current_company.is_branch = checked
+                            text: qsTr("Is a Branch")
+                        }
+
+                        Item { visible: !current_company.is_branch }
+
+                        LabeledTextField {
+                            Layout.margins: 12
+                            name: qsTr("Branch Commercial Registry Number")
+                            textOf: current_company.branch_registery
+                            onEdit: (txt) => {
+                                        if (current_company.branch_registery !== txt)
+                                            current_company.branch_registery = txt
+                                    }
+                            placeHolder: qsTr("* Mandatory")
+                            visible: current_company.is_branch
                         }
                     }
                 }

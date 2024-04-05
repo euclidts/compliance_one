@@ -137,6 +137,21 @@ Dialog {
                  }
              }
         }
+
+        RowLayout {
+            Layout.fillWidth: true
+
+            Item { Layout.fillWidth: true }
+
+            RoundButton {
+                id: validateButton
+                text: qsTr("Ok")
+                font.capitalization: Font.MixedCase
+                font.bold: true
+                highlighted: true
+                onClicked: dateDialog.close()
+            }
+        }
     }
 
     onClosed: {

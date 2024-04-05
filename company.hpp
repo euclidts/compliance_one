@@ -116,7 +116,7 @@ struct company
     struct pep
     {
         static const constexpr auto c_name() { return "pep"; }
-        // static const constexpr auto name() { return "Politically Exposed Person (PEP)"; }
+        // static const constexpr auto name() { return "Associated PEPs"; }
         bool value{};
     } pep;
 
