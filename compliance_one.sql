@@ -144,7 +144,8 @@
 --     soe BOOLEAN NOT NULL DEFAULT false,
 --     regulated BOOLEAN NOT NULL DEFAULT false,
 --     ancillary BOOLEAN NOT NULL DEFAULT false,
---     acer VARCHAR(127)
+--     acer VARCHAR(127),
+--     exchange CHAR(3)
 -- )
 
 -- CREATE TABLE vessel 
@@ -161,7 +162,7 @@
 
 -- CREATE TABLE exchange
 -- (
---     code CHAR(3) NOT NULL UNIQUE,
+--     code CHAR(3),
 --     PRIMARY KEY(code),
 --     description VARCHAR(255)
 -- )

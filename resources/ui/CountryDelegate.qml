@@ -65,7 +65,7 @@ ItemDelegate {
                 visible: !unCheck.checked
             }
 
-            Item { visible: root.model.sovereignty_id === 0 }
+            Item { visible: unCheck.checked }
 
             LabeledTextField {
                 name: qsTr("ISO 3")
@@ -183,7 +183,8 @@ ItemDelegate {
                 visible: !root.model.loading
                 onClicked: onExceptionAction(ToolTip.text,
                                              qsTr("The selected country will be deleted"),
-                                             () => { countryListModel.remove(root.model.index) }, true)
+                                             () => { countryListModel.remove(root.model.index) },
+                                             true)
             }
         }
     }

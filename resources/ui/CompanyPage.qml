@@ -47,7 +47,6 @@ Page {
                         uniformCellHeights: true
                         columns: portrait ? 1 : 2
 
-
                         LabeledTextField {
                             Layout.margins: 12
                             name: qsTr("Counterparty Name (Latin script)")
@@ -159,6 +158,19 @@ Page {
                         columns: portrait ? 1 : 2
                         uniformCellWidths: true
 
+                        LabeledTextField {
+                            Layout.margins: 12
+                            name: qsTr("Commercial Registry Number")
+                            textOf: current_company.comercial_registery
+                            onEdit: (txt) => {
+                                        if (current_company.comercial_registery !== txt)
+                                            current_company.comercial_registery = txt
+                                    }
+                            placeHolder: qsTr("* Mandatory")
+                        }
+
+                        Item { visible: !portrait }
+
                         CheckBox {
                             checked: current_company.pep
                             onCheckStateChanged: if (current_company.pep !== checked)
@@ -216,15 +228,41 @@ Page {
                             text: qsTr("Company Publically Listed")
                         }
 
-                        LabeledTextField {
+                        Item { visible: !portrait }
+
+                        CountryChooser {
+                            name: qsTr("Country of Listing")
                             Layout.margins: 12
-                            name: qsTr("Commercial Registry Number")
-                            textOf: current_company.comercial_registery
-                            onEdit: (txt) => {
-                                        if (current_company.comercial_registery !== txt)
-                                            current_company.comercial_registery = txt
+                            enumOf: current_company.listing_country_id
+                            onEdit: (value) => {
+                                        if (current_company.listing_country_id !== value)
+                                        current_company.listing_country_id = value
                                     }
-                            placeHolder: qsTr("* Mandatory")
+                            visible: current_company.is_public
+                        }
+
+                        EnumValueChooser {
+                            id: exchangeCombo
+                            name: qsTr("Exchange")
+                            model: exchangeListModel
+                            Layout.margins: 12
+                            valueRole: "code"
+                            textRole: "description"
+                            delegate: MenuItem {
+                                width: ListView.view.width
+                                text: model["code"] + ' ' + model["description"]
+                                Material.foreground: exchangeCombo.currentIndex === index ?
+                                                         ListView.view.contentItem.Material.accent :
+                                                         ListView.view.contentItem.Material.foreground
+                                highlighted: exchangeCombo.highlightedIndex === index
+                                hoverEnabled: exchangeCombo.hoverEnabled
+                            }
+                            enumOf: current_company.exchange
+                            onEdit: (value) => {
+                                        if (current_company.exchange !== value)
+                                        current_company.exchange = value
+                                    }
+                            visible: current_company.is_public
                         }
 
                         CheckBox {

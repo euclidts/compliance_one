@@ -97,13 +97,13 @@ struct company
     } branch_registery;
 
     // foreign key Country
-    struct listing_country
+    struct listing_country_id
     {
-        static const constexpr auto c_name() { return "listing_country"; }
+        static const constexpr auto c_name() { return "listing_country_id"; }
         // static const constexpr auto name() { return "Country of Main Listing"; }
         uint32_t value{0};
         static const constexpr auto references() { return &country::primary_key; }
-    } listing_country;
+    } listing_country_id;
 
     struct lei
     {
@@ -166,6 +166,12 @@ struct company
         // static const constexpr auto name() { return "ACER Code"; }
         std::string value{};
     } acer;
+
+    struct exchange
+    {
+        static const constexpr auto c_name() { return "exchange"; }
+        std::string value{};
+    } exchange;
 
     // EIC code(s) -- foreign table
 

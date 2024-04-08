@@ -51,5 +51,6 @@
         <file>ui/ContatChooser.qml</file>
         <file>ui/VesselPage.qml</file>
         <file>ui/VesselDelegate.qml</file>
+        <file>ui/ExchangeDelegate.qml</file>
     </qresource>
 </RCC>

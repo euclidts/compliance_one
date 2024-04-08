@@ -14,6 +14,7 @@ import Qproduct_group
 import Qproduct
 import Qctp_group
 import Qctp_type
+import Qexchange
 import Qcompany
 import Qvessel
 
@@ -40,7 +41,7 @@ ApplicationWindow {
     property var productListModel: QproductListModel{}
     property var ctp_groupListModel: Qctp_groupListModel{}
     property var ctp_typeListModel: Qctp_typeListModel{}
-    property var exchangeListModel: QexchangeModel{}
+    property var exchangeListModel: QexchangeListModel{}
     property var contactListModel: QcontactListModel{}
     property var addressListModel: QaddressListModel{}
     property var individualListModel: QindividualListModel{}
@@ -266,30 +267,47 @@ ApplicationWindow {
                         highlighted: true
                     }
                 }
-            }
 
-                footer: RowLayout {
-                    id: footer
-                    height: 48
-
-                    TabBar {
-                        id: homeBar
+                ListView {
+                    spacing: 6
+                    clip: true
+                    boundsBehavior: Flickable.StopAtBounds
+                    model : exchangeListModel
+                    delegate: ExchangeDelegate {}
+                    footer: RoundButton {
                         Layout.fillWidth: true
-
-                        TabButton {
-                            text: "Home"
-                        }
-                        TabButton {
-                            text: "Countries"
-                        }
-                        TabButton {
-                            text: "Products"
-                        }
-                        TabButton {
-                            text: "Counterparty types"
-                        }
+                        icon.source: "qrc:/icons/plus.svg"
+                        onClicked: exchangeListModel.appendItem()
+                        highlighted: true
                     }
                 }
+            }
+
+            footer: RowLayout {
+                id: footer
+                height: 48
+
+                TabBar {
+                    id: homeBar
+                    Layout.fillWidth: true
+
+                    TabButton {
+                        text: "Home"
+                    }
+                    TabButton {
+                        text: "Countries"
+                    }
+                    TabButton {
+                        text: "Products"
+                    }
+                    TabButton {
+                        text: "Counterparty types"
+                    }
+                    TabButton {
+                        text: "Exchange codes"
+                    }
+                }
+            }
         }
 
         IndividualPage { id: individualPage }

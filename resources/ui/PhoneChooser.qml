@@ -19,7 +19,7 @@ ColumnLayout {
     Label {
         id: label
         Layout.topMargin: 6
-        text: qsTr("phone")
+        text: qsTr("Phone")
         font.italic: true
     }
 
