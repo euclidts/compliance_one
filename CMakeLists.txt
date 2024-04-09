@@ -29,62 +29,58 @@ make_all(
        ${CMAKE_CURRENT_SOURCE_DIR}/resources
    )
 
-if(NOT ANDROID AND NOT IOS AND CMAKE_BUILD_TYPE STREQUAL "Release")
-    set(COMPONENT_NAME_MAIN "${PROJECT_NAME}")
-    set(COMPONENT_NAME_DEPENDENCIES "RuntimeLibs")
+if(CMAKE_BUILD_TYPE STREQUAL "Release")
+    if(WIN32)
+        # Installer setup copyed from
+        # https://github.com/christopro/AwesomeWorld-Cmake/blob/main/AwesomeWorld/CMakeList.txt
+        set(COMPONENT_NAME_MAIN "${PROJECT_NAME}")
+        set(COMPONENT_NAME_DEPENDENCIES "RuntimeLibs")
 
-    include(GNUInstallDirs)
-    install(TARGETS ${PROJECT_NAME}
+        install(TARGETS ${PROJECT_NAME}
             DESTINATION ${CMAKE_INSTALL_BINDIR}
             COMPONENT ${COMPONENT_NAME_MAIN})
 
-    if(MINGW)
-        message(STATUS "Installing system-libraries: MinGW DLLs.")
-        get_target_property(QMAKE_EXECUTABLE Qt::qmake IMPORTED_LOCATION)
-        get_filename_component(QT_BINARY_DIR "${QMAKE_EXECUTABLE}" DIRECTORY)
-        set(CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS
-            ${QT_BINARY_DIR}/libgcc_s_seh-1.dll
-            ${QT_BINARY_DIR}/libstdc++-6.dll
-            ${QT_BINARY_DIR}/libwinpthread-1.dll)
-    endif()
+        set(CMAKE_INSTALL_SYSTEM_RUNTIME_COMPONENT ${COMPONENT_NAME_DEPENDENCIES})
 
-    set(CMAKE_INSTALL_SYSTEM_RUNTIME_COMPONENT ${COMPONENT_NAME_DEPENDENCIES})
-    include(InstallRequiredSystemLibraries)
-
-    set(CPACK_GENERATOR "IFW")
-    set(CPACK_IFW_PACKAGE_NAME "${PROJECT_NAME}")
-    set(CPACK_IFW_PACKAGE_TITLE "${PROJECT_NAME}")
-    set(CPACK_IFW_PACKAGE_PUBLISHER "${PROJECT_NAME}")
-    set(CPACK_IFW_PACKAGE_WIZARD_STYLE "Classic")
-    set(CPACK_IFW_PACKAGE_WIZARD_SHOW_PAGE_LIST OFF)
-
-    set(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE)
-
-    if (WIN32)
         find_program(WINDEPLOYQT windeployqt HINTS "${_qt_bin_dir}")
         configure_file("${CMAKE_CURRENT_SOURCE_DIR}/ci/deploy-qt-windows.cmake.in"
-            "${CMAKE_CURRENT_SOURCE_DIR}/ci/deploy-qt-windows.cmake" @ONLY)
+            "${CMAKE_CURRENT_SOURCE_DIR}/ci/deploy-qt-windows.cmake"
+            @ONLY)
 
-        if(CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS)
-            install(PROGRAMS ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS}
-                DESTINATION ${CMAKE_INSTALL_BINDIR}
-                COMPONENT ${COMPONENT_NAME_MAIN})
-        endif()
-
+        set(CPACK_GENERATOR "IFW")
+        set(CPACK_IFW_PACKAGE_NAME "${PROJECT_NAME}")
+        set(CPACK_IFW_PACKAGE_TITLE "${PROJECT_NAME}")
+        set(CPACK_IFW_PACKAGE_PUBLISHER "${PROJECT_NAME}")
+        set(CPACK_IFW_PACKAGE_WIZARD_STYLE "Classic")
+        set(CPACK_IFW_PACKAGE_WIZARD_SHOW_PAGE_LIST OFF)
         set(CPACK_IFW_PACKAGE_ICON "${CMAKE_CURRENT_SOURCE_DIR}/resources/icons/C1_logov1.ico")
         set(CPACK_IFW_PACKAGE_LOGO "${CMAKE_CURRENT_SOURCE_DIR}/resources/icons/C1_logov1.ico")
-        set(CPACK_PRE_BUILD_SCRIPTS ${CMAKE_CURRENT_SOURCE_DIR}/deploy-qt-windows.cmake)
+        set(CPACK_PRE_BUILD_SCRIPTS ${CMAKE_CURRENT_SOURCE_DIR}/ci/deploy-qt-windows.cmake)
+        set(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE)
+
+        include(CPack)
+        include(CPackIFW)
+
+        CPACK_ADD_COMPONENT(${COMPONENT_NAME_MAIN})
+
+        cpack_ifw_configure_component(${COMPONENT_NAME_DEPENDENCIES} VIRTUAL FORCED_INSTALLATION)
+        cpack_ifw_configure_component(${COMPONENT_NAME_MAIN} ESSENTIAL FORCED_INSTALLATION)
+        cpack_ifw_configure_component(${COMPONENT_NAME_MAIN} LICENSES
+            "LGPL License" ${CPACK_RESOURCE_FILE_LICENSE})
+        cpack_ifw_configure_component(${COMPONENT_NAME_MAIN} SCRIPT
+            ${CMAKE_CURRENT_SOURCE_DIR}/ci/installScript.qs)
     endif()
 
-    include(CPack)
-    include(CPackIFW)
+    # if(APPLE)
+    #     set_target_properties(${PROJECT_NAME} PROPERTIES
+    #         MACOSX_BUNDLE TRUE
+    #         MACOSX_BUNDLE_ICON_FILE ${ICON_NAME})
 
-    CPACK_ADD_COMPONENT(${COMPONENT_NAME_MAIN})
+    #     find_program(MACDEPLOYQT macdeployqt HINTS "${_qt_bin_dir}")
 
-    cpack_ifw_configure_component(${COMPONENT_NAME_DEPENDENCIES} VIRTUAL FORCED_INSTALLATION)
-    cpack_ifw_configure_component(${COMPONENT_NAME_MAIN} ESSENTIAL FORCED_INSTALLATION)
-    cpack_ifw_configure_component(${COMPONENT_NAME_MAIN} LICENSES
-        "LGPL License" ${CPACK_RESOURCE_FILE_LICENSE})
-    cpack_ifw_configure_component(${COMPONENT_NAME_MAIN} SCRIPT
-        ${CMAKE_CURRENT_SOURCE_DIR}/ci/installScript.qs)
+    #     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    #         COMMAND ${MACDEPLOYQT} ${CMAKE_BINARY_DIR}"/bin/${PROJECT_NAME}.app"
+    #         -qmldir"=${CMAKE_CURRENT_SOURCE_DIR}"
+    #         -dmg)
+    # endif()
 endif()
