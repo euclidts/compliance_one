@@ -25,8 +25,8 @@ make_all(
        individual
        company
        vessel
-   EXTRA_CLIENT_SOURCES
-       ${CMAKE_CURRENT_SOURCE_DIR}/resources/compliance_one.qrc
+    CLIENT_RESOURCE_DIR
+       ${CMAKE_CURRENT_SOURCE_DIR}/resources
    )
 
 if(NOT ANDROID AND NOT IOS AND CMAKE_BUILD_TYPE STREQUAL "Release")
@@ -63,7 +63,7 @@ if(NOT ANDROID AND NOT IOS AND CMAKE_BUILD_TYPE STREQUAL "Release")
     if (WIN32)
         find_program(WINDEPLOYQT windeployqt HINTS "${_qt_bin_dir}")
         configure_file("${CMAKE_CURRENT_SOURCE_DIR}/ci/deploy-qt-windows.cmake.in"
-            "${CMAKE_CURRENT_SOURCE_DIR}/deploy-qt-windows.cmake" @ONLY)
+            "${CMAKE_CURRENT_SOURCE_DIR}/ci/deploy-qt-windows.cmake" @ONLY)
 
         if(CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS)
             install(PROGRAMS ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS}
