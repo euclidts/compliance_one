@@ -7,3 +7,4 @@ compliance application based on [crudpp](https://github.com/thibaudk/crudpp)
 # v0.0.2 update
 * typos in indiviual page 
 
+* remove UNIQUE individual passport
