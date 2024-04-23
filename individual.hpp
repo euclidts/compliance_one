@@ -8,19 +8,20 @@
 struct individual
 {
     static const constexpr auto table() { return "individual"; }
+    static const constexpr auto primary_key() { return &individual::id; }
 
-    struct primary_key
+    struct id
     {
         static const constexpr auto c_name() { return "id"; }
         int32_t value{0};
-    } primary_key;
+    } id;
 
     struct contact_id
     {
         static const constexpr auto c_name() { return "contact_id"; }
         int32_t value{0};
         // static const constexpr auto property() { return "unique"; }
-        static const constexpr auto references() { return &contact::primary_key; }
+        static const constexpr auto references() { return &contact::id; }
     } contact_id;
 
     // KYC 
@@ -67,7 +68,7 @@ struct individual
         // static const constexpr auto name() { return "Issuing country"; }
         static const constexpr auto c_name() { return "issuing"; }
         uint32_t value{0};
-        static const constexpr auto references() { return &country::primary_key; }
+        static const constexpr auto references() { return &country::id; }
     } issuing;
 
     struct pep
@@ -82,7 +83,7 @@ struct individual
         // static const constexpr auto name() { return "PEP Country"; }
         static const constexpr auto c_name() { return "pep_country"; }
         uint32_t value{0};
-        static const constexpr auto references() { return &country::primary_key; }
+        static const constexpr auto references() { return &country::id; }
     } pep_country;
 
     struct pep_notes
@@ -103,6 +104,6 @@ struct individual
     {
         static const constexpr auto c_name() { return "address_id"; }
         int32_t value{0};
-        static const constexpr auto references() { return &address::primary_key; }
+        static const constexpr auto references() { return &address::id; }
     } address_id;
 };

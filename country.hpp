@@ -13,12 +13,13 @@ struct country
     // }
 
     static const constexpr auto table() { return "country"; }
+    static const constexpr auto primary_key() { return &country::id; }
 
-    struct primary_key
+    struct id
     {
         static const constexpr auto c_name() { return "id"; }
         uint32_t value{0};
-    } primary_key;
+    } id;
 
     struct name
     {
@@ -119,7 +120,7 @@ struct country
         static const constexpr auto c_name() { return "sovereignty_id"; }
         // static const constexpr auto name() { return "Sovereignty"; }
         uint32_t value{0};
-        static const constexpr auto foreign_key() { return &country::primary_key; }
+        static const constexpr auto foreign_key() { return &country::id; }
     } sovereignty_id;
 
     // phone extension

@@ -5,19 +5,20 @@
 struct address
 {
     static const constexpr auto table() { return "address"; }
+    static const constexpr auto primary_key() { return &address::id; }
 
-    struct primary_key
+    struct id
     {
         static const constexpr auto c_name() { return "id"; }
         int32_t value{0};
-    } primary_key;
+    } id;
 
     struct country_id
     {
         // static const constexpr auto name() { return "Country"; }
         static const constexpr auto c_name() { return "country_id"; }
         uint32_t value{0};
-        static const constexpr auto references() { return &country::primary_key; }
+        static const constexpr auto references() { return &country::id; }
     } country_id;
 
     struct address_lines

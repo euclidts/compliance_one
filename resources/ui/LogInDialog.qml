@@ -46,6 +46,7 @@ Dialog {
             id:hostField
             Layout.fillWidth: true
             placeholderText: qsTr("Host")
+            // text: "http://localhost:8080"
             // text: "http://10.133.2.57:8080"
             text: "https://complianceonetestrive.euclidtradingsystems.com"
             onAccepted: connect()

@@ -9,12 +9,13 @@
 struct company
 {
     static const constexpr auto table() { return "company"; }
+    static const constexpr auto primary_key() { return &company::id; }
 
-    struct primary_key
+    struct id
     {
         static const constexpr auto c_name() { return "id"; }
         int32_t value{0};
-    } primary_key;
+    } id;
 
     // KYC
     // counteparty information
@@ -52,14 +53,14 @@ struct company
     {
         static const constexpr auto c_name() { return "address_id"; }
         int32_t value{0};
-        static const constexpr auto references() { return &address::primary_key; }
+        static const constexpr auto references() { return &address::id; }
     } address_id;
 
     struct branch_address_id
     {
         static const constexpr auto c_name() { return "branch_address_id"; }
         int32_t value{0};
-        static const constexpr auto references() { return &address::primary_key; }
+        static const constexpr auto references() { return &address::id; }
     } branch_address_id;
 
     struct website
@@ -72,7 +73,7 @@ struct company
     {
         static const constexpr auto c_name() { return "contact_id"; }
         int32_t value{0};
-        static const constexpr auto references() { return &contact::primary_key; }
+        static const constexpr auto references() { return &contact::id; }
     } contact_id;
 
     struct is_public
@@ -102,7 +103,7 @@ struct company
         static const constexpr auto c_name() { return "listing_country_id"; }
         // static const constexpr auto name() { return "Country of Main Listing"; }
         uint32_t value{0};
-        static const constexpr auto references() { return &country::primary_key; }
+        static const constexpr auto references() { return &country::id; }
     } listing_country_id;
 
     struct lei

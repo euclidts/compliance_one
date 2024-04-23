@@ -6,12 +6,13 @@
 struct product_group
 {
     static const constexpr auto table() { return "product_group"; }
+    static const constexpr auto primary_key() { return &product_group::id; }
 
-    struct primary_key
+    struct id
     {
         static const constexpr auto c_name() { return "id"; }
         int32_t value{0};
-    } primary_key;
+    } id;
 
     struct group_name
     {

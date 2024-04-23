@@ -5,12 +5,13 @@
 struct exchange
 {
     static const constexpr auto table() { return "exchange"; }
+    static const constexpr auto primary_key() { return &exchange::id; }
 
-    struct primary_key
+    struct id
     {
         static const constexpr auto c_name() { return "code"; }
         std::string value{};
-    } primary_key;
+    } id;
 
     struct description
     {

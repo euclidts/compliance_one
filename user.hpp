@@ -6,12 +6,13 @@
 struct user
 {
     static const constexpr auto table() { return "user"; }
+    static const constexpr auto primary_key() { return &user::id; }
 
-    struct primary_key
+    struct id
     {
         static const constexpr auto c_name() { return "id"; }
         int32_t value{0};
-    } primary_key;
+    } id;
 
     struct username
     {

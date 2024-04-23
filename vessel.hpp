@@ -8,12 +8,13 @@
 struct vessel
 {
     static const constexpr auto table() { return "vessel"; }
+    static const constexpr auto primary_key() { return &vessel::id; }
 
-    struct primary_key
+    struct id
     {
         static const constexpr auto c_name() { return "id"; }
         int32_t value{0};
-    } primary_key;
+    } id;
 
     // KYC 
     // Vessel information
@@ -36,14 +37,14 @@ struct vessel
     {
         static const constexpr auto c_name() { return "owner_id"; }
         int32_t value{};
-        static const constexpr auto references() { return &company::primary_key; }
+        static const constexpr auto references() { return &company::id; }
     } owner_id;
 
     struct manager_id
     {
         static const constexpr auto c_name() { return "manager_id"; }
         int32_t value{};
-        static const constexpr auto references() { return &company::primary_key; }
+        static const constexpr auto references() { return &company::id; }
     } manager_id;
 
     // restrictions Flag

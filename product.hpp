@@ -5,19 +5,20 @@
 struct product
 {
     static const constexpr auto table() { return "product"; }
+    static const constexpr auto primary_key() { return &product::id; }
 
-    struct primary_key
+    struct id
     {
         static const constexpr auto c_name() { return "id"; }
         int32_t value{0};
-    } primary_key;
+    } id;
 
     struct group_id
     {
         static const constexpr auto c_name() { return "group_id"; }
         // static const constexpr auto nane() { return "Product group"; }
         int32_t value{1};
-        static const constexpr auto foreign_key() { return &product_group::primary_key; }
+        static const constexpr auto foreign_key() { return &product_group::id; }
     } group_id;
 
     struct commodity

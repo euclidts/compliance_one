@@ -5,12 +5,13 @@
 struct contact
 {
     static const constexpr auto table() { return "contact"; }
+    static const constexpr auto primary_key() { return &contact::id; }
 
-    struct primary_key
+    struct id
     {
         static const constexpr auto c_name() { return "id"; }
         int32_t value{0};
-    } primary_key;
+    } id;
 
     struct family_name
     {
