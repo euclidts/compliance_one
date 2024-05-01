@@ -11,26 +11,19 @@ struct user
     struct id
     {
         static const constexpr auto c_name() { return "id"; }
-        int32_t value{0};
+        int32_t value;
     } id;
 
     struct username
     {
         static const constexpr auto c_name() { return "username"; }
-        std::string value{};
+        std::string value;
     } username;
-
-    enum permissions
-    {
-        none,
-        read,
-        write
-    };
 
     struct password
     {
         static const constexpr auto c_name() { return "password"; }
-        std::string value{};
+        std::string value;
         static const constexpr auto permission() { return write; }
     } password;
     
@@ -51,6 +44,6 @@ struct user
     struct session_id
     {
         static const constexpr auto c_name() { return "session_id"; }
-        std::string value{};
+        std::string value;
     } session_id;
 };

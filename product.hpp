@@ -10,7 +10,7 @@ struct product
     struct id
     {
         static const constexpr auto c_name() { return "id"; }
-        int32_t value{0};
+        int32_t value;
     } id;
 
     struct group_id
@@ -24,7 +24,7 @@ struct product
     struct commodity
     {
         static const constexpr auto c_name() { return "commodity"; }
-        std::string value{};
+        std::string value;
     } commodity;
 
     struct risk_score

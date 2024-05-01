@@ -10,31 +10,31 @@ struct ctp_type
     struct id
     {
         static const constexpr auto c_name() { return "id"; }
-        int32_t value{0};
+        int32_t value;
     } id;
 
     struct group_id
     {
         static const constexpr auto c_name() { return "group_id"; }
-        int32_t value{0};
+        int32_t value;
         static const constexpr auto foreign_key() { return &ctp_group::id; }
     } group_id;
 
     struct type_name
     {
         static const constexpr auto c_name() { return "name"; }
-        std::string value{};
+        std::string value;
     } type_name;
 
     struct notes
     {
         static const constexpr auto c_name() { return "notes"; }
-        std::string value{};
+        std::string value;
     } notes;
 
     struct risk_score
     {
         static const constexpr auto c_name() { return "risk_score"; }
-        int8_t value{};
+        int8_t value;
     } risk_score;
 };

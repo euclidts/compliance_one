@@ -10,14 +10,14 @@ struct address
     struct id
     {
         static const constexpr auto c_name() { return "id"; }
-        int32_t value{0};
+        int32_t value;
     } id;
 
     struct country_id
     {
         // static const constexpr auto name() { return "Country"; }
         static const constexpr auto c_name() { return "country_id"; }
-        uint32_t value{0};
+        uint32_t value;
         static const constexpr auto references() { return &country::id; }
     } country_id;
 
@@ -25,24 +25,24 @@ struct address
     {
         // static const constexpr auto name() { return "Address lines"; }
         static const constexpr auto c_name() { return "address_lines"; }
-        std::string value{};
+        std::string value;
     } address_lines;
 
     struct locality
     {
         static const constexpr auto c_name() { return "locality"; }
-        std::string value{};
+        std::string value;
     } locality;
 
     struct region
     {
         static const constexpr auto c_name() { return "region"; }
-        std::string value{};
+        std::string value;
     } region;
 
     struct postcode
     {
         static const constexpr auto c_name() { return "postcode"; }
-        std::string value{};
+        std::string value;
     } postcode;
 };

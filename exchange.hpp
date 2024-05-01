@@ -10,12 +10,12 @@ struct exchange
     struct id
     {
         static const constexpr auto c_name() { return "code"; }
-        std::string value{};
+        std::string value;
     } id;
 
     struct description
     {
         static const constexpr auto c_name() { return "description"; }
-        std::string value{};
+        std::string value;
     } description;
 };

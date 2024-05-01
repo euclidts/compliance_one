@@ -11,12 +11,12 @@ struct ctp_group
     struct id
     {
         static const constexpr auto c_name() { return "id"; }
-        int32_t value{0};
+        int32_t value;
     } id;
 
     struct group_name
     {
         static const constexpr auto c_name() { return "name"; }
-        std::string value{};
+        std::string value;
     } group_name;
 };
