@@ -2,9 +2,9 @@
 -- (
 --     id INT AUTO_INCREMENT,
 --     PRIMARY KEY(id),
---     username VARCHAR(63),
+--     username VARCHAR(63) UNIQUE NOT NULL,
 --     password VARCHAR(255),
---     clearance TINYINT UNSIGNED,
+--     clearance TINYINT UNSIGNED NOT NULL,
 --     session_id UUID
 -- )
 

@@ -13,8 +13,27 @@ ItemDelegate {
 
     required property var model
 
+    InvisibleCombo {
+        id: familyNameCombo
+        model: contactListModel
+        valueRole: "id"
+        textRole: "family_name"
+        currentIndex: indexOfValue(root.model.contact_id)
+        Component.onCompleted: currentIndex = indexOfValue(root.model.contact_id)
+    }
+
+    InvisibleCombo {
+        id: forenamesCombo
+        model: contactListModel
+        valueRole: "id"
+        textRole: "forenames"
+        currentIndex: familyNameCombo.currentIndex
+    }
+
     icon.source: "qrc:/icons/user.svg"
-    text: root.model.local_name + ' ' + root.model.local_forenames + "\t PPE: " + root.model.pep
+    text: familyNameCombo.currentText + ' ' + forenamesCombo.currentText + ' '
+          + root.model.local_name + ' ' + root.model.local_forenames +
+          (root.model.pep ? "\t PPE" : '')
 
     onClicked: {
         individualPage.current_individual.from_list(individualListModel, root.model.index)

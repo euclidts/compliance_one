@@ -52,5 +52,6 @@
         <file>ui/VesselPage.qml</file>
         <file>ui/VesselDelegate.qml</file>
         <file>ui/ExchangeDelegate.qml</file>
+        <file>ui/InvisibleCombo.qml</file>
     </qresource>
 </RCC>
