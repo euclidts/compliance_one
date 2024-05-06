@@ -28,7 +28,7 @@ ItemDelegate {
         Label {
             visible: !dropIndicator.checked
             Layout.fillWidth: true
-            text: root.model.emoji + ' ' + root.model.name + '\t' + root.model.iso3
+            text: root.model.emoji + ' ' + root.model.iso3 + '\t' + root.model.name
         }
 
         GridLayout {

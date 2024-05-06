@@ -64,20 +64,6 @@ ApplicationWindow {
 
     DateDialog { id: dateDialog }
 
-    function formatDateTimeMs(date) {
-        let str = date.toISOString()
-        str = str.replace('T', ' ')
-        return str.slice(0, -1)
-    }
-
-    function formatDateTime(date) {
-        return formatDateTimeMs(date).slice(0, -4)
-    }
-
-    function formatDate(date) {
-        return formatDateTime(date).slice(0, -9)
-    }
-
     function onLogin (success: bool, error: string) {
         if (success) {
             contactListModel.get()

@@ -24,9 +24,9 @@ ColumnLayout {
 
     TextField {
         id: field
-        text: dateOf.toISOString().slice(0, -14)
+        text: dateOf.toLocaleDateString(Locale.ShortFormat)
         readOnly: true
-        placeholderText: qsTr("YYYY-MM-DD")
+        placeholderText: qsTr(locale.dateFormat(Locale.ShortFormat))
         Layout.fillWidth: true
 
         MouseArea {

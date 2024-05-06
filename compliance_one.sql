@@ -25,8 +25,8 @@
 --     risk_score TINYINT UNSIGNED
 -- )
 
--- run sql scripts dowloaded from 
--- https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/sql/countries.sql
+-- run sql scripts dowloaded from
+-- https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/sql/regionss.sql
 
 -- ALTER TABLE countries
 -- DROP COLUMN iso2,
@@ -47,14 +47,16 @@
 -- DROP COLUMN flag,
 -- DROP CONSTRAINT country_continent_final,
 -- DROP CONSTRAINT country_subregion_final,
--- DROP COLUMN region_id,
 -- DROP COLUMN subregion_id,
 -- ADD COLUMN ranking TINYINT UNSIGNED,
 -- ADD COLUMN fatf TINYINT UNSIGNED,
 -- ADD COLUMN transparency TINYINT UNSIGNED,
 -- ADD COLUMN world_bank TINYINT UNSIGNED,
 -- ADD COLUMN sovereignty_id MEDIUMINT UNSIGNED,
--- ADD CONSTRAINT FOREIGN KEY (sovereignty_id) REFERENCES countries (id)
+-- ADD CONSTRAINT FOREIGN KEY (sovereignty_id) REFERENCES countries (id),
+-- RENAME TO country
+
+-- ALTER TABLE regions RENAME TO region
 
 -- CREATE TABLE address
 -- (
