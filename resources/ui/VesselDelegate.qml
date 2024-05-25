@@ -5,7 +5,7 @@ import QtQuick.Controls.Material
 
 ItemDelegate {
     id: root
-    width: parent.width
+    width: parent && parent.width
     leftInset: 6
     rightInset: 6
     topInset: 3

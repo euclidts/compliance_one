@@ -7,15 +7,13 @@ import QtQuick.Controls.Material
 import Interface
 import QappUser
 import Qcountry
-import Qcontact
-import Qaddress
-import Qindividual
 import Qproduct_group
 import Qproduct
 import Qctp_group
 import Qctp_type
 import Qexchange
-import Qcompany
+import Qindividual_view
+import Qcompany_view
 import Qvessel
 
 ApplicationWindow {
@@ -42,10 +40,8 @@ ApplicationWindow {
     property var ctp_groupListModel: Qctp_groupListModel{}
     property var ctp_typeListModel: Qctp_typeListModel{}
     property var exchangeListModel: QexchangeListModel{}
-    property var contactListModel: QcontactListModel{}
-    property var addressListModel: QaddressListModel{}
-    property var individualListModel: QindividualListModel{}
-    property var companyListModel: QcompanyListModel{}
+    property var individual_viewListModel: Qindividual_viewListModel{}
+    property var company_viewListModel: Qcompany_viewListModel{}
     property var vesselListModel: QvesselListModel{}
 
     LogInDialog { id: loginDialog }
@@ -66,11 +62,6 @@ ApplicationWindow {
 
     function onLogin (success: bool, error: string) {
         if (success) {
-            contactListModel.get()
-            addressListModel.get()
-            individualListModel.get()
-            companyListModel.get()
-            vesselListModel.get()
             rootStack.currentIndex = 0
             loginDialog.clear()
             busyDialog.close()
@@ -103,29 +94,6 @@ ApplicationWindow {
         Page {
             background: Rectangle { color: "transparent" }
 
-            header: RowLayout {
-
-                TextField {
-                    id: search
-                    implicitHeight: 38
-                    Layout.margins: 6
-                    Layout.fillWidth: true
-                    placeholderText: qsTr("Search")
-                    rightPadding: Material.textFieldHorizontalPadding + 50
-
-                    Button {
-                        id: magnifyingGlass
-                        flat: true
-                        icon.source: search.text === ""
-                                     ? "qrc:/icons/search.svg"
-                                     : "qrc:/icons/times-circle.svg"
-                        onClicked: search.clear()
-                        x: parent.width - width
-                        y: parent.y - 12
-                    }
-                }
-            }
-
             contentItem: StackLayout {
                 id: homeStack
                 currentIndex: homeBar.currentIndex
@@ -140,15 +108,28 @@ ApplicationWindow {
                         ListView {
                             Layout.fillWidth: true
                             implicitHeight: contentHeight
-                            model: individualListModel
+                            model: individual_viewListModel
                             delegate: IndividualDelegate {}
                             interactive: false
+
+                            header: SearchBar {
+                                width: parent.width
+                                name: qsTr("Search")
+                                busy: individual_viewListModel.loading ||
+                                      company_viewListModel.loading ||
+                                      vesselListModel.loading
+                                onTextChanged: (text) => {
+                                                   individual_viewListModel.search(text)
+                                                   company_viewListModel.search(text)
+                                                   vesselListModel.search(text)
+                                               }
+                            }
                         }
 
                         ListView {
                             Layout.fillWidth: true
                             implicitHeight: contentHeight
-                            model: companyListModel
+                            model: company_viewListModel
                             delegate: CompanyDelegate {}
                             interactive: false
                         }

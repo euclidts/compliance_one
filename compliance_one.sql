@@ -12,7 +12,7 @@
 -- (
 --     id INT AUTO_INCREMENT,
 --     PRIMARY KEY(id),
---     name VARCHAR(63)
+--     name VARCHAR(63) UNIQUE NOT NULL
 -- )
 
 -- CREATE TABLE product 
@@ -21,12 +21,14 @@
 --     PRIMARY KEY(id),
 --     group_id INT NOT NULL,
 --     CONSTRAINT FOREIGN KEY (group_id) REFERENCES product_group (id),
---     commodity VARCHAR(63),
---     risk_score TINYINT UNSIGNED
+--     commodity VARCHAR(63) NOT NULL,
+--     risk_score TINYINT UNSIGNED NOT NULL
 -- )
 
 -- run sql scripts dowloaded from
--- https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/sql/regionss.sql
+-- https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/sql/regions.sql
+-- https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/sql/subregions.sql
+-- https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/sql/countries.sql
 
 -- ALTER TABLE countries
 -- DROP COLUMN iso2,
@@ -48,10 +50,10 @@
 -- DROP CONSTRAINT country_continent_final,
 -- DROP CONSTRAINT country_subregion_final,
 -- DROP COLUMN subregion_id,
--- ADD COLUMN ranking TINYINT UNSIGNED,
--- ADD COLUMN fatf TINYINT UNSIGNED,
--- ADD COLUMN transparency TINYINT UNSIGNED,
--- ADD COLUMN world_bank TINYINT UNSIGNED,
+-- ADD COLUMN ranking TINYINT UNSIGNED NOT NULL,
+-- ADD COLUMN fatf TINYINT UNSIGNED NOT NULL,
+-- ADD COLUMN transparency TINYINT UNSIGNED NOT NULL,
+-- ADD COLUMN world_bank TINYINT UNSIGNED NOT NULL,
 -- ADD COLUMN sovereignty_id MEDIUMINT UNSIGNED,
 -- ADD CONSTRAINT FOREIGN KEY (sovereignty_id) REFERENCES countries (id),
 -- RENAME TO country
@@ -74,12 +76,21 @@
 -- (
 --     id INT AUTO_INCREMENT,
 --     PRIMARY KEY(id),
---     family_name VARCHAR(63),
---     forenames VARCHAR(63),
---     email VARCHAR(127) UNIQUE,
---     calling_code VARCHAR(6),
---     phone VARCHAR(13)
+--     family_name VARCHAR(63) NOT NULL,
+--     forenames VARCHAR(63) NOT NULL,
+--     email VARCHAR(127) UNIQUE NOT NULL,
+--     calling_code VARCHAR(6) NOT NULL,
+--     phone VARCHAR(13) NOT NULL
 -- )
+
+-- ALTER TABLE address
+-- MODIFY family_name VARCHAR(63) NOT NULL,
+-- MODIFY forenames VARCHAR(63) NOT NULL,
+-- MODIFY email VARCHAR(127) UNIQUE NOT NULL,
+-- MODIFY calling_code VARCHAR(6) NOT NULL,
+-- MODIFY phone VARCHAR(13) NOT NULL
+
+-- DESCRIBE contact
 
 -- CREATE TABLE individual
 -- (
@@ -102,6 +113,31 @@
 --     address_id INT,
 --     CONSTRAINT FOREIGN KEY (address_id) REFERENCES address (id)
 -- )
+
+-- CREATE VIEW individual_view AS
+-- SELECT 
+-- individual.id,
+-- individual.pep,
+-- individual.local_name,
+-- individual.local_forenames,
+-- individual.contact_id,
+-- contact.family_name,
+-- contact.forenames,
+-- individual.address_id
+-- -- ,
+-- -- country.name AS country_name
+-- FROM
+-- individual,
+-- contact,
+-- address
+-- -- ,
+-- -- country
+-- WHERE
+-- contact.id = individual.contact_id AND
+-- address.id = individual.address_id 
+-- -- AND
+-- -- country.id = address.country_id
+-- WITH CHECK OPTION
 
 -- CREATE TABLE ctp_group 
 -- (
@@ -150,6 +186,28 @@
 --     exchange CHAR(3)
 -- )
 
+-- CREATE VIEW company_view AS
+-- SELECT 
+-- company.id,
+-- company.name,
+-- company.local_name,
+-- company.contact_id,
+-- company.address_id
+-- -- ,
+-- -- country.name AS country_name
+-- FROM
+-- company,
+-- contact,
+-- address
+-- -- ,
+-- -- country
+-- WHERE
+-- contact.id = company.contact_id AND
+-- address.id = company.address_id 
+-- -- AND
+-- -- country.id = address.country_id
+-- WITH CHECK OPTION
+
 -- CREATE TABLE vessel 
 -- (
 --     id INT AUTO_INCREMENT,
@@ -166,5 +224,5 @@
 -- (
 --     code CHAR(3),
 --     PRIMARY KEY(code),
---     description VARCHAR(255)
+--     description VARCHAR(255) NOT NULL
 -- )

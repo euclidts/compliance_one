@@ -234,15 +234,25 @@ Page {
             ToolTip.visible: hovered
             ToolTip.text: qsTr("Save")
             onClicked: {
-                onLoaded = () => {
-                    onLoaded = () => {
-                        current_individual.address_id = current_address.id
-                        current_individual.save()
-                    }
-                    current_individual.contact_id = current_contact.id
+                if (current_contact.inserted &&
+                    current_address.inserted &&
+                    current_individual.inserted) {
+                    current_contact.save()
                     current_address.save()
+                    current_individual.save()
                 }
-                current_contact.save()
+                else {
+                    onLoaded = () => {
+                        onLoaded = () => {
+                            onLoaded = () => {}
+                            current_individual.address_id = current_address.id
+                            current_individual.save()
+                        }
+                        current_individual.contact_id = current_contact.id
+                        current_address.save()
+                    }
+                    current_contact.save()
+                }
             }
             highlighted: true
             enabled: current_contact.flagged_for_update ||
@@ -263,7 +273,10 @@ Page {
                                          () => {
                                              onLoaded = () => {
                                                  onLoaded = () => {
-                                                     onLoaded = () => { rootStack.currentIndex = 0 }
+                                                     onLoaded = () => {
+                                                         onLoaded = () => {}
+                                                         rootStack.currentIndex = 0
+                                                     }
                                                      individualPage.current_contact.remove()
                                                  }
                                                  individualPage.current_address.remove()

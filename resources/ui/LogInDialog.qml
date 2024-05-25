@@ -13,7 +13,8 @@ Dialog {
     implicitWidth: 270
 
     function connect() {
-        if(!EMSCRIPTEN) bridge.setHost(hostField.text)
+        // if(!EMSCRIPTEN) bridge.setHost(hostField.text)
+        if(Qt.platform.os !== "wasm") bridge.setHost(hostField.text)
         countryListModel.get()
         product_groupListModel.get()
         productListModel.get()
@@ -50,7 +51,8 @@ Dialog {
             // text: "http://10.133.2.57:8080"
             // text: "https://complianceonetestrive.euclidtradingsystems.com"
             onAccepted: connect()
-            visible: !EMSCRIPTEN
+            // visible: !EMSCRIPTEN
+            visible: Qt.platform.os !== "wasm"
         }
 
         TextField {

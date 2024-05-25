@@ -5,7 +5,7 @@ import QtQuick.Controls.Material
 
 ItemDelegate {
     id: root
-    width: parent.width
+    width: parent && parent.width
     leftInset: 6
     rightInset: 6
     topInset: 3
@@ -14,16 +14,16 @@ ItemDelegate {
     required property var model
 
     icon.source: "qrc:/icons/industry.svg"
-    text: root.model.name
+    text: root.model.name + ' ' + root.model.local_name + ' '
 
     onClicked : {
-        companyPage.current_company.from_list(companyListModel, root.model.index)
-        companyPage.current_contact.from_list_by(contactListModel,
-                                                 "id",
-                                                 companyPage.current_company.contact_id)
-        companyPage.current_address.from_list_by(addressListModel,
-                                                 "id",
-                                                 companyPage.current_company.address_id)
+        companyPage.current_contact.id = root.model.contact_id
+        companyPage.current_contact.get()
+        companyPage.current_address.id = root.model.address_id
+        companyPage.current_address.get()
+        companyPage.current_company.id = root.model.id
+        companyPage.current_company.get()
+
         rootStack.currentIndex = 2
     }
 

@@ -18,7 +18,7 @@ struct contact
         static const constexpr auto c_name() { return "family_name"; }
         // static const constexpr auto name() { return "Family Name (Latin script)"; }
         std::string value;
-    } name;
+    } family_name;
 
     struct forenames
     {

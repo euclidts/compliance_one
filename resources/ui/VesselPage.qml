@@ -64,35 +64,35 @@ Page {
                             placeHolder: qsTr("* Mandatory")
                         }
 
-                        EnumValueChooser {
-                            Layout.margins: 12
-                            name: qsTr("Owner")
-                            model: companyListModel
-                            Layout.fillWidth: true
-                            ediatable: true
-                            valueRole: "id"
-                            textRole: "name"
-                            enumOf: current_vessel.owner_id
-                            onEdit: (value) => {
-                                        if (current_vessel.owner_id !== value)
-                                        current_vessel.owner_id = value
-                                    }
-                        }
+                        // EnumValueChooser {
+                        //     Layout.margins: 12
+                        //     name: qsTr("Owner")
+                        //     model: companyListModel
+                        //     Layout.fillWidth: true
+                        //     ediatable: true
+                        //     valueRole: "id"
+                        //     textRole: "name"
+                        //     enumOf: current_vessel.owner_id
+                        //     onEdit: (value) => {
+                        //                 if (current_vessel.owner_id !== value)
+                        //                 current_vessel.owner_id = value
+                        //             }
+                        // }
 
-                        EnumValueChooser {
-                            Layout.margins: 12
-                            name: qsTr("Manager")
-                            model: companyListModel
-                            Layout.fillWidth: true
-                            ediatable: true
-                            valueRole: "id"
-                            textRole: "name"
-                            enumOf: current_vessel.manager_id
-                            onEdit: (value) => {
-                                        if (current_vessel.manager_id !== value)
-                                        current_vessel.manager_id = value
-                                    }
-                        }
+                        // EnumValueChooser {
+                        //     Layout.margins: 12
+                        //     name: qsTr("Manager")
+                        //     model: companyListModel
+                        //     Layout.fillWidth: true
+                        //     ediatable: true
+                        //     valueRole: "id"
+                        //     textRole: "name"
+                        //     enumOf: current_vessel.manager_id
+                        //     onEdit: (value) => {
+                        //                 if (current_vessel.manager_id !== value)
+                        //                 current_vessel.manager_id = value
+                        //             }
+                        // }
                     }
                 }
             }

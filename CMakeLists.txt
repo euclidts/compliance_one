@@ -23,7 +23,9 @@ make_all(
        contact
        address
        individual
+       individual_view
        company
+       company_view
        vessel
     CLIENT_RESOURCE_DIR
        ${CMAKE_CURRENT_SOURCE_DIR}/resources

@@ -10,5 +10,7 @@
 #include "contact.hpp"
 #include "address.hpp"
 #include "individual.hpp"
+#include "individual_view.hpp"
 #include "company.hpp"
+#include "company_view.hpp"
 #include "vessel.hpp"

@@ -299,15 +299,25 @@ Page {
             ToolTip.visible: hovered
             ToolTip.text: qsTr("Save")
             onClicked: {
-                onLoaded = () => {
-                    onLoaded = () => {
-                        current_company.address_id = current_address.id
-                        current_company.save()
-                    }
-                    current_company.contact_id = current_contact.id
+                if (current_contact.inserted &&
+                    current_address.inserted &&
+                    current_company.inserted) {
+                    current_contact.save()
                     current_address.save()
+                    current_company.save()
                 }
-                current_contact.save()
+                else {
+                    onLoaded = () => {
+                        onLoaded = () => {
+                            onLoaded = () => {}
+                            current_company.address_id = current_address.id
+                            current_company.save()
+                        }
+                        current_company.contact_id = current_contact.id
+                        current_address.save()
+                    }
+                    current_contact.save()
+                }
             }
             highlighted: true
             enabled: current_contact.flagged_for_update ||
@@ -328,7 +338,10 @@ Page {
                                          () => {
                                              onLoaded = () => {
                                                  onLoaded = () => {
-                                                     onLoaded = () => { rootStack.currentIndex = 0 }
+                                                     onLoaded = () => {
+                                                         onLoaded = () => {}
+                                                         rootStack.currentIndex = 0
+                                                     }
                                                      companyPage.current_contact.remove()
                                                  }
                                                  companyPage.current_address.remove()
