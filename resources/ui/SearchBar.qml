@@ -7,6 +7,7 @@ RowLayout {
 
     property alias name: search.placeholderText
     property var onTextChanged: function (text) {}
+    property var onCleared: onTextChanged
     property bool busy: false
 
     TextField {
@@ -16,7 +17,12 @@ RowLayout {
         Layout.fillWidth: true
         placeholderText: qsTr("Search")
         rightPadding: Material.textFieldHorizontalPadding + 50
-        onTextChanged: text !== "" ? timer.restart() : timer.stop()
+        onTextChanged: if (text === "")
+                       {
+                           timer.stop()
+                           onCleared()
+                       }
+                       else timer.restart()
 
         Timer {
             id: timer

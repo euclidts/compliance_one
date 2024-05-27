@@ -54,5 +54,8 @@
         <file>ui/ExchangeDelegate.qml</file>
         <file>ui/InvisibleCombo.qml</file>
         <file>ui/SearchBar.qml</file>
+        <file>ui/HomePage.qml</file>
+        <file>ui/ListSearchPage.qml</file>
+        <file>ui/HomeStack.qml</file>
     </qresource>
 </RCC>

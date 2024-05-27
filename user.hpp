@@ -38,7 +38,7 @@ struct user
     struct clearance
     {
         static const constexpr auto c_name() { return "clearance"; }
-        clearances value{business_user};
+        clearances value;
     } clearance;
 
     struct session_id

@@ -35,7 +35,7 @@ ItemDelegate {
             visible: dropIndicator.checked
             Layout.fillWidth: true
             columns: portrait ? 2 : 4
-            enabled: !root.model.loading
+            enabled: root.model.loading
 
             LabeledTextField {
                 name: qsTr("Flag")
@@ -117,11 +117,11 @@ ItemDelegate {
             //     }
             // }
 
-            LabeledTextField {
-                name: qsTr("WikiData")
-                textOf: root.model.wikiDataId
-                onEdit: (txt) => { root.model.wikiDataId = txt }
-            }
+        LabeledTextField {
+            name: qsTr("WikiData")
+            textOf: root.model.wikiDataId
+            onEdit: (txt) => { root.model.wikiDataId = txt }
+        }
 
             EnumIntChooser {
                 name: qsTr("Internal Ranking")

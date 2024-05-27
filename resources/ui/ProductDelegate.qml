@@ -16,26 +16,26 @@ ItemDelegate {
     required property var model
 
     contentItem: GridLayout {
-        columns: portrait ? 2 : 4
+        columns: 4
         enabled: !root.model.loading
-
-        EnumValueEditor {
-            name: qsTr("Product group")
-            model: product_groupListModel
-            enumOf: root.model.group_id
-            onEdit: (value) => { root.model.group_id = value }
-            Layout.columnSpan: 4
-            Layout.fillWidth: true
-            valueRole: "id"
-            textRole: "name"
-        }
 
         LabeledTextField {
             name: qsTr("Commodity")
             textOf: root.model.commodity
             onEdit: (txt) => { root.model.commodity = txt }
             placeHolder: qsTr("* Mandatory")
+            Layout.columnSpan: 4
+            Layout.fillWidth: true
+        }
+
+        EnumValueEditor {
+            name: qsTr("Product group")
+            model: product_groupListModel
+            enumOf: root.model.group_id
+            onEdit: (value) => { root.model.group_id = value }
             Layout.columnSpan: 2
+            valueRole: "id"
+            textRole: "name"
         }
 
         IntChooser {
@@ -61,14 +61,14 @@ ItemDelegate {
 
         Item {
             Layout.fillWidth: true
-            visible: !portrait && !root.model.loading
-            Layout.columnSpan: portrait ? 1 : 2
+            visible: !root.model.loading
+            Layout.columnSpan: 2
         }
 
         BusyIndicator {
             visible: root.model.loading
             Layout.fillWidth: true
-            Layout.columnSpan: portrait ? 2 : 4
+            Layout.columnSpan: 4
         }
 
         RoundButton {

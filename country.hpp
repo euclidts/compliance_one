@@ -91,28 +91,28 @@ struct country
     {
         static const constexpr auto c_name() { return "ranking"; }
         // static const constexpr auto name() { return "Internal Ranking"; }
-        ranks value{mid};
+        ranks value;
     } ranking;
 
     struct fatf
     {
         static const constexpr auto c_name() { return "fatf"; }
         // static const constexpr auto name() { return "FATF"; }
-        ranks value{mid};
+        ranks value;
     } fatf;
 
     struct transparency
     {
         static const constexpr auto c_name() { return "transparency"; }
         // static const constexpr auto name() { return "Transparency International"; }
-        uint8_t value{5};
+        uint8_t value;
     } transparency;
 
     struct world_bank
     {
         static const constexpr auto c_name() { return "world_bank"; }
         // static const constexpr auto name() { return "World Bank"; }
-        uint8_t value{5};
+        uint8_t value;
     } world_bank;
 
     struct sovereignty_id
