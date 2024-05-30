@@ -24,7 +24,7 @@ struct user
     {
         static const constexpr auto c_name() { return "password"; }
         std::string value;
-        static const constexpr auto permission() { return write; }
+        // static const constexpr auto permission() { enum p { write }; return p; }
     } password;
     
     enum clearances

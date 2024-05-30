@@ -30,67 +30,72 @@ Page {
                    }
     }
 
-    contentItem: FlickableItem {
-        Layout.fillWidth: true
+    contentItem: ScrollView {
+        ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
 
-        ColumnLayout {
-            spacing: 12
-            width: parent.width
+        FlickableItem {
+            ColumnLayout {
+                spacing: 12
+                width: parent.width
 
-            ListView {
-                Layout.fillWidth: true
-                implicitHeight: contentHeight
-                model: individual_viewListModel
-                delegate: IndividualDelegate {}
-                interactive: false
+                ListView {
+                    Layout.fillWidth: true
+                    implicitHeight: contentHeight
+                    model: individual_viewListModel
+                    delegate: IndividualDelegate {}
+                    interactive: false
+                    reuseItems: true
 
-                footer: Button {
-                    text: qsTr("Add Individual")
-                    width: parent.width
-                    icon.source: "qrc:/icons/user.svg"
-                    onClicked: {
-                        individualPage.current_contact.clear()
-                        individualPage.current_address.clear()
-                        individualPage.current_individual.clear()
-                        rootStack.currentIndex = 1
+                    header: Button {
+                        text: qsTr("Add Individual")
+                        width: parent.width
+                        icon.source: "qrc:/icons/user.svg"
+                        onClicked: {
+                            individualPage.current_contact.clear()
+                            individualPage.current_address.clear()
+                            individualPage.current_individual.clear()
+                            rootStack.currentIndex = 1
+                        }
                     }
                 }
-            }
 
-            ListView {
-                Layout.fillWidth: true
-                implicitHeight: contentHeight
-                model: company_viewListModel
-                delegate: CompanyDelegate {}
-                interactive: false
+                ListView {
+                    Layout.fillWidth: true
+                    implicitHeight: contentHeight
+                    model: company_viewListModel
+                    delegate: CompanyDelegate {}
+                    interactive: false
+                    reuseItems: true
 
-                footer: Button {
-                    text: qsTr("Add Company")
-                    icon.source: "qrc:/icons/industry.svg"
-                    width: parent.width
-                    onClicked: {
-                        companyPage.current_contact.clear()
-                        companyPage.current_address.clear()
-                        companyPage.current_company.clear()
-                        rootStack.currentIndex = 2
+                    header: Button {
+                        text: qsTr("Add Company")
+                        icon.source: "qrc:/icons/industry.svg"
+                        width: parent.width
+                        onClicked: {
+                            companyPage.current_contact.clear()
+                            companyPage.current_address.clear()
+                            companyPage.current_company.clear()
+                            rootStack.currentIndex = 2
+                        }
                     }
                 }
-            }
 
-            ListView {
-                Layout.fillWidth: true
-                implicitHeight: contentHeight
-                model: vesselListModel
-                delegate: VesselDelegate {}
-                interactive: false
+                ListView {
+                    Layout.fillWidth: true
+                    implicitHeight: contentHeight
+                    model: vesselListModel
+                    delegate: VesselDelegate {}
+                    interactive: false
+                    reuseItems: true
 
-                footer: Button {
-                    text: qsTr("Add Vessel")
-                    width: parent.width
-                    icon.source: "qrc:/icons/ship.svg"
-                    onClicked: {
-                        vesselPage.current_vessel.clear()
-                        rootStack.currentIndex = 3
+                    header: Button {
+                        text: qsTr("Add Vessel")
+                        width: parent.width
+                        icon.source: "qrc:/icons/ship.svg"
+                        onClicked: {
+                            vesselPage.current_vessel.clear()
+                            rootStack.currentIndex = 3
+                        }
                     }
                 }
             }

@@ -30,7 +30,6 @@ Page {
     }
 
     contentItem: ScrollView {
-        ScrollBar.vertical.policy: ScrollBar.AlwaysOff
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
 
         FlickableItem {
@@ -97,17 +96,17 @@ Page {
                     countryOf: current_address.country_id
                     onCountryEdit: (value) => {
                                        if (current_address.country_id !== value)
-                                           current_address.country_id = value
+                                        current_address.country_id = value
                                    }
                     addressOf: current_address.address_lines
                     onAddressEdit: (txt) => {
                                        if (current_address.address_lines !== txt)
-                                           current_address.address_lines = txt
+                                        current_address.address_lines = txt
                                    }
                     regionOf: current_address.region
                     onRegionEdit: (txt) => {
                                       if (current_address.region !== txt)
-                                          current_address.region = txt
+                                        current_address.region = txt
                                   }
                     postcodeOf: current_address.postcode
                     onPostcodeEdit: (txt) => {
@@ -126,23 +125,23 @@ Page {
                     familyNameOf: current_contact.family_name
                     onFamilyNameEdit: (txt) => {
                                           if (current_contact.family_name !== txt)
-                                              current_contact.family_name = txt
+                                            current_contact.family_name = txt
                                       }
                     forenamesOf: current_contact.forenames
                     onForenamesEdit: (txt) => {
                                          if (current_contact.forenames !== txt)
-                                             current_contact.forenames = txt
+                                            current_contact.forenames = txt
                                      }
                     emailOf: current_contact.email
                     onEmailEdit: (txt) => {
                                      if (current_contact.email !== txt)
-                                         current_contact.email = txt
+                                        current_contact.email = txt
                                  }
                     phoneOf: current_contact.phone
                     codeOf: current_contact.calling_code
                     onPhoneEdit: (txt) => {
                                      if (current_contact.phone !== txt)
-                                         current_contact.phone = txt
+                                        current_contact.phone = txt
                                  }
                     onCodeEdit: (txt) => {
                                     if (current_contact.calling_code !== txt)
@@ -236,7 +235,7 @@ Page {
                             enumOf: current_company.listing_country_id
                             onEdit: (value) => {
                                         if (current_company.listing_country_id !== value)
-                                        current_company.listing_country_id = value
+                                            current_company.listing_country_id = value
                                     }
                             visible: current_company.is_public
                         }
@@ -260,7 +259,7 @@ Page {
                             enumOf: current_company.exchange
                             onEdit: (value) => {
                                         if (current_company.exchange !== value)
-                                        current_company.exchange = value
+                                            current_company.exchange = value
                                     }
                             visible: current_company.is_public
                         }
@@ -302,11 +301,10 @@ Page {
                 if (current_contact.inserted &&
                     current_address.inserted &&
                     current_company.inserted) {
-                    current_contact.save()
-                    current_address.save()
-                    current_company.save()
-                }
-                else {
+                        current_contact.save()
+                        current_address.save()
+                        current_company.save()
+                } else {
                     onLoaded = () => {
                         onLoaded = () => {
                             onLoaded = () => {}
@@ -349,6 +347,7 @@ Page {
                                              companyPage.current_comapny.remove()
                                          },
                                          true)
+
         }
     }
 

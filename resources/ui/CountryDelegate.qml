@@ -35,7 +35,7 @@ ItemDelegate {
             visible: dropIndicator.checked
             Layout.fillWidth: true
             columns: portrait ? 2 : 4
-            enabled: root.model.loading
+            enabled: !root.model.loading
 
             LabeledTextField {
                 name: qsTr("Flag")

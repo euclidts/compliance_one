@@ -20,6 +20,10 @@ Page {
         clip: true
         boundsBehavior: Flickable.StopAtBounds
         model : QSortFilter { id: sortFilter }
+        reuseItems: true
+
+        ScrollBar.vertical: ScrollBar { }
+
         footer: RoundButton {
             icon.source: "qrc:/icons/plus.svg"
             onClicked: ctp_typeListModel.appendItem()

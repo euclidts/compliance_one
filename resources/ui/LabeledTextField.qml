@@ -6,10 +6,10 @@ import QtQuick.Controls.Material
 ColumnLayout {
     spacing: 12
 
-    property string placeHolder
+    property alias name: label.text
+    property alias placeHolder: field.placeholderText
     property alias validator: field.validator
     property alias readOnly: field.readOnly
-    required property string name
     required property string textOf
     required property var onEdit
     property int inputHint: Qt.ImhNone
@@ -17,7 +17,6 @@ ColumnLayout {
 
     Label {
         id: label
-        text: name
         font.italic: true
     }
 
@@ -31,7 +30,9 @@ ColumnLayout {
         onAccepted: focus = false
         onTextChanged: if (acceptableInput) {
                            color = Material.foreground
-                           onEdit(text)
+                               onEdit(text)
                        } else color = "red"
+
+        Component.onCompleted: text = textOf
     }
 }

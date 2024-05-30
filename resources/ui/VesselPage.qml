@@ -16,7 +16,7 @@ Page {
             id: backButton
             icon.source: "qrc:/icons/arrow-left.svg"
             flat: true
-            onClicked: rootStack.currentIndex = 0
+            onClicked: Qt.callLater(rootStack.currentIndex = 0)
         }
 
         Label {
@@ -26,7 +26,6 @@ Page {
     }
 
     contentItem: ScrollView {
-        ScrollBar.vertical.policy: ScrollBar.AlwaysOff
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
 
         FlickableItem {
@@ -106,7 +105,7 @@ Page {
             icon.source: "qrc:/icons/floppy-disk.svg"
             ToolTip.visible: hovered
             ToolTip.text: qsTr("Save")
-            onClicked: current_vessel.save()
+            onClicked: Qt.callLater(urrent_vessel.save())
             highlighted: true
             enabled: current_vessel.flagged_for_update
         }
@@ -119,10 +118,10 @@ Page {
             ToolTip.visible: hovered
             ToolTip.text: qsTr("Delete")
             Layout.alignment: Qt.AlignRight
-            onClicked: onExceptionAction(ToolTip.text,
-                                         qsTr("The selected vessel will be deleted"),
-                                         () => { vesselPage.current_vessel.remove() },
-                                         true)
+            onClicked: Qt.callLater(onExceptionAction(ToolTip.text,
+                                                      qsTr("The selected vessel will be deleted"),
+                                                      () => { vesselPage.current_vessel.remove() },
+                                                      true))
         }
     }
 
