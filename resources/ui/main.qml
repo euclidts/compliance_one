@@ -8,8 +8,8 @@ import QappUser
 import Qcountry
 import Qproduct_group
 import Qproduct
-import Qctp_group
-import Qctp_type
+import Qcompany_group
+import Qcompany_type
 import Qexchange
 
 ApplicationWindow {
@@ -33,8 +33,8 @@ ApplicationWindow {
     property var countryListModel: QcountryListModel{}
     property var product_groupListModel: Qproduct_groupListModel{}
     property var productListModel: QproductListModel{}
-    property var ctp_groupListModel: Qctp_groupListModel{}
-    property var ctp_typeListModel: Qctp_typeListModel{}
+    property var company_groupListModel: Qcompany_groupListModel{}
+    property var company_typeListModel: Qcompany_typeListModel{}
     property var exchangeListModel: QexchangeListModel{}
 
     LogInDialog { id: loginDialog }

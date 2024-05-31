@@ -3,10 +3,10 @@
 #include <cstdint>
 #include <string>
 
-struct ctp_group
+struct company_group
 {
-    static const constexpr auto table() { return "ctp_group"; }
-    static const constexpr auto primary_key() { return &ctp_group::id; }
+    static const constexpr auto table() { return "company_group"; }
+    static const constexpr auto primary_key() { return &company_group::id; }
 
     struct id
     {

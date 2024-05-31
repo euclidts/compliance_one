@@ -3,7 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Controls.Material
 
-import Qctp_group
+import Qcompany_group
 
 ItemDelegate {
     id: root
@@ -20,7 +20,7 @@ ItemDelegate {
         enabled: !root.model.loading
 
         LabeledTextField {
-            name: qsTr("Counterparty Type")
+            name: qsTr("Company Type")
             textOf: root.model.name
             onEdit: (txt) => { root.model.name = txt }
             placeHolder: qsTr("* Mandatory")
@@ -29,8 +29,8 @@ ItemDelegate {
         }
 
         EnumValueEditor {
-            name: qsTr("Counterparty group")
-            model: ctp_groupListModel
+            name: qsTr("Company group")
+            model: company_groupListModel
             enumOf: root.model.group_id
             onEdit: (value) => { root.model.group_id = value }
             Layout.columnSpan: 2
@@ -62,7 +62,7 @@ ItemDelegate {
             icon.source: "qrc:/icons/floppy-disk.svg"
             ToolTip.visible: hovered
             ToolTip.text: qsTr("Save")
-            onClicked: ctp_typeListModel.save(root.model.index)
+            onClicked: company_typeListModel.save(root.model.index)
             highlighted: true
             enabled: root.model.flagged_for_update
             visible: !root.model.loading
@@ -87,8 +87,8 @@ ItemDelegate {
             Layout.alignment: Qt.AlignRight
             visible: !root.model.loading
             onClicked: onExceptionAction(ToolTip.text,
-                                         qsTr("The selected counterpary type will be deleted"),
-                                         () => { ctp_typeListModel.remove(root.model.index) }, true)
+                                         qsTr("The selected company type will be deleted"),
+                                         () => { company_typeListModel.remove(root.model.index) }, true)
         }
     }
 

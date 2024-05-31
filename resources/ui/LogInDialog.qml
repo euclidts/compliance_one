@@ -18,8 +18,8 @@ Dialog {
         countryListModel.get()
         product_groupListModel.get()
         productListModel.get()
-        ctp_groupListModel.get()
-        ctp_typeListModel.get()
+        company_groupListModel.get()
+        company_typeListModel.get()
         exchangeListModel.get()
         userNameField.focus = true
     }

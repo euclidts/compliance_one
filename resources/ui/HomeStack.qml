@@ -19,8 +19,8 @@ Page {
             delegate: ProductDelegate {}
         }
         ListSearchPage {
-            sourceModel: ctp_typeListModel
-            delegate: CtpTypeDelegate {}
+            sourceModel: company_typeListModel
+            delegate: CompanyTypeDelegate {}
         }
         ListSearchPage {
             sourceModel: exchangeListModel

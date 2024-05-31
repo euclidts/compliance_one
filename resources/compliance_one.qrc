@@ -46,7 +46,7 @@
         <file>ui/LabeledDateField.qml</file>
         <file>icons/calendar-days.svg</file>
         <file>ui/CompanyDelegate.qml</file>
-        <file>ui/CtpTypeDelegate.qml</file>
+        <file>ui/CompanyTypeDelegate.qml</file>
         <file>ui/CompanyPage.qml</file>
         <file>ui/ContatChooser.qml</file>
         <file>ui/VesselPage.qml</file>

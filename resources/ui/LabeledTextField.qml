@@ -30,9 +30,8 @@ ColumnLayout {
         onAccepted: focus = false
         onTextChanged: if (acceptableInput) {
                            color = Material.foreground
+                           if (text !== textOf)
                                onEdit(text)
                        } else color = "red"
-
-        Component.onCompleted: text = textOf
     }
 }

@@ -17,8 +17,8 @@ make_all(
        country
        product_group
        product
-       ctp_group
-       ctp_type
+       company_group
+       company_type
        exchange
        contact
        address

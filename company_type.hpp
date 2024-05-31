@@ -1,11 +1,11 @@
 #pragma once
 
-#include "ctp_group.hpp"
+#include "company_group.hpp"
 
-struct ctp_type
+struct company_type
 {
-    static const constexpr auto table() { return "ctp_type"; }
-    static const constexpr auto primary_key() { return &ctp_type::id; }
+    static const constexpr auto table() { return "company_type"; }
+    static const constexpr auto primary_key() { return &company_type::id; }
 
     struct id
     {
@@ -17,7 +17,7 @@ struct ctp_type
     {
         static const constexpr auto c_name() { return "group_id"; }
         int32_t value;
-        static const constexpr auto foreign_key() { return &ctp_group::id; }
+        static const constexpr auto foreign_key() { return &company_group::id; }
     } group_id;
 
     struct type_name

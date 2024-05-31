@@ -26,7 +26,7 @@ Page {
 
         footer: RoundButton {
             icon.source: "qrc:/icons/plus.svg"
-            onClicked: ctp_typeListModel.appendItem()
+            onClicked: sourceModel.appendItem()
             highlighted: true
         }
     }

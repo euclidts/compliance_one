@@ -139,22 +139,22 @@
 -- -- country.id = address.country_id
 -- WITH CHECK OPTION
 
--- CREATE TABLE ctp_group 
+-- CREATE TABLE company_group 
 -- (
 --     id INT AUTO_INCREMENT,
 --     PRIMARY KEY(id),
---     name VARCHAR(63)
+--     name VARCHAR(63) NOT NULL
 -- )
 
--- CREATE TABLE ctp_type 
+-- CREATE TABLE company_type 
 -- (
 --     id INT AUTO_INCREMENT,
 --     PRIMARY KEY(id),
 --     group_id INT NOT NULL,
---     CONSTRAINT FOREIGN KEY (group_id) REFERENCES ctp_group (id),
---     name VARCHAR(63),
+--     CONSTRAINT FOREIGN KEY (group_id) REFERENCES company_group (id),
+--     name VARCHAR(63) NOT NULL,
 --     notes VARCHAR(255),
---     risk_score TINYINT UNSIGNED
+--     risk_score TINYINT UNSIGNED NOT NULL
 -- )
 
 -- CREATE TABLE company
