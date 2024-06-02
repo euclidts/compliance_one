@@ -4,9 +4,9 @@
 
 struct company_view
 {
-    static const constexpr auto table() { return "company_view"; }
-    // static const constexpr auto view() { return "company_ivew"; }
-    static const constexpr auto primary_key() { return &company_view::id; }
+    static consteval auto table() { return "company_view"; }
+    // static consteval auto view() { return "company_ivew"; }
+    static consteval auto primary_key() { return &company_view::id; }
 
     struct id
     {

@@ -57,5 +57,6 @@
         <file>ui/HomePage.qml</file>
         <file>ui/ListSearchPage.qml</file>
         <file>ui/HomeStack.qml</file>
+        <file>ui/RegulatorDelegate.qml</file>
     </qresource>
 </RCC>

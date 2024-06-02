@@ -23,6 +23,10 @@ Page {
             delegate: CompanyTypeDelegate {}
         }
         ListSearchPage {
+            sourceModel: regulatorListModel
+            delegate: RegulatorDelegate {}
+        }
+        ListSearchPage {
             sourceModel: exchangeListModel
             delegate: ExchangeDelegate {}
         }
@@ -43,13 +47,16 @@ Page {
                 text: "Countries"
             }
             TabButton {
-                text: "Products"
-            }
-            TabButton {
-                text: "Counterparty types"
+                text: "Regulators"
             }
             TabButton {
                 text: "Exchange codes"
+            }
+            TabButton {
+                text: "Products"
+            }
+            TabButton {
+                text: "Company types"
             }
         }
     }

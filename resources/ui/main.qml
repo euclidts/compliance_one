@@ -11,6 +11,8 @@ import Qproduct
 import Qcompany_group
 import Qcompany_type
 import Qexchange
+import Qregulator
+import Qjurisdiction
 
 ApplicationWindow {
     id: window
@@ -36,6 +38,8 @@ ApplicationWindow {
     property var company_groupListModel: Qcompany_groupListModel{}
     property var company_typeListModel: Qcompany_typeListModel{}
     property var exchangeListModel: QexchangeListModel{}
+    property var regulatorListModel: QregulatorListModel{}
+    property var jurisdictionListModel: QjurisdictionListModel{}
 
     LogInDialog { id: loginDialog }
     Component.onCompleted: loginDialog.open()

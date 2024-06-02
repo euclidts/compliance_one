@@ -4,8 +4,8 @@
 
 struct exchange
 {
-    static const constexpr auto table() { return "exchange"; }
-    static const constexpr auto primary_key() { return &exchange::id; }
+    static consteval auto table() { return "exchange"; }
+    static consteval auto primary_key() { return &exchange::id; }
 
     struct id
     {

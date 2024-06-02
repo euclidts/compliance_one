@@ -4,8 +4,8 @@
 
 struct contact
 {
-    static const constexpr auto table() { return "contact"; }
-    static const constexpr auto primary_key() { return &contact::id; }
+    static consteval auto table() { return "contact"; }
+    static consteval auto primary_key() { return &contact::id; }
 
     struct id
     {

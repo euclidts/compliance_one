@@ -4,8 +4,8 @@
 
 struct address
 {
-    static const constexpr auto table() { return "address"; }
-    static const constexpr auto primary_key() { return &address::id; }
+    static consteval auto table() { return "address"; }
+    static consteval auto primary_key() { return &address::id; }
 
     struct id
     {

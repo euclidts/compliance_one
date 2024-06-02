@@ -7,8 +7,8 @@
 
 struct individual
 {
-    static const constexpr auto table() { return "individual"; }
-    static const constexpr auto primary_key() { return &individual::id; }
+    static consteval auto table() { return "individual"; }
+    static consteval auto primary_key() { return &individual::id; }
 
     struct id
     {

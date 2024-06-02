@@ -6,14 +6,14 @@
 
 struct country
 {
-    // static const constexpr int permission(const user* u)
+    // static consteval int permission(const user* u)
     // {
     //     if (u) return user::read;
     //     else return user::read + user::write;
     // }
 
-    static const constexpr auto table() { return "country"; }
-    static const constexpr auto primary_key() { return &country::id; }
+    static consteval auto table() { return "country"; }
+    static consteval auto primary_key() { return &country::id; }
 
     struct id
     {

@@ -20,6 +20,8 @@ make_all(
        company_group
        company_type
        exchange
+       regulator
+       jurisdiction
        contact
        address
        individual

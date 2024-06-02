@@ -48,7 +48,7 @@ Page {
 
                         LabeledTextField {
                             Layout.margins: 12
-                            name: qsTr("Counterparty Name (Latin script)")
+                            name: qsTr("Company Name (Latin script)")
                             textOf: current_company.name
                             onEdit: (txt) => {
                                         if (current_company.name !== txt)
@@ -59,7 +59,7 @@ Page {
 
                         LabeledTextField {
                             Layout.margins: 12
-                            name: qsTr("Counterparty Name (Local Characters)")
+                            name: qsTr("Company Name (Local Characters)")
                             textOf: current_company.local_name
                             onEdit: (txt) => {
                                         if (current_company.local_name !== txt)

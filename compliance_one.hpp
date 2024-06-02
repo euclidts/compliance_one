@@ -7,6 +7,8 @@
 #include "company_group.hpp"
 #include "company_type.hpp"
 #include "exchange.hpp"
+#include "regulator.hpp"
+#include "jurisdiction.hpp"
 #include "contact.hpp"
 #include "address.hpp"
 #include "individual.hpp"

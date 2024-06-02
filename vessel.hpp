@@ -7,8 +7,8 @@
 
 struct vessel
 {
-    static const constexpr auto table() { return "vessel"; }
-    static const constexpr auto primary_key() { return &vessel::id; }
+    static consteval auto table() { return "vessel"; }
+    static consteval auto primary_key() { return &vessel::id; }
 
     struct id
     {

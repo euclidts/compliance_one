@@ -8,8 +8,8 @@
 
 struct company
 {
-    static const constexpr auto table() { return "company"; }
-    static const constexpr auto primary_key() { return &company::id; }
+    static consteval auto table() { return "company"; }
+    static consteval auto primary_key() { return &company::id; }
 
     struct id
     {
@@ -18,7 +18,7 @@ struct company
     } id;
 
     // KYC
-    // counteparty information
+    // company information
     // accesible to all users
 
     struct uuid
@@ -31,14 +31,14 @@ struct company
     struct name
     {
         static const constexpr auto c_name() { return "name"; }
-        // static const constexpr auto name() { return "Counterparty Name (Latin script)"; }
+        // static const constexpr auto name() { return "Company Name (Latin script)"; }
         std::string value;
     } name;
 
     struct local_name
     {
         static const constexpr auto c_name() { return "local_name"; }
-        // static const constexpr auto name() { return "Counterparty Name (Local Characters)"; }
+        // static const constexpr auto name() { return "Company Name (Local Characters)"; }
         std::string value;
     } local_name;
 

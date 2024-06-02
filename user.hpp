@@ -5,8 +5,8 @@
 
 struct user
 {
-    static const constexpr auto table() { return "user"; }
-    static const constexpr auto primary_key() { return &user::id; }
+    static consteval auto table() { return "user"; }
+    static consteval auto primary_key() { return &user::id; }
 
     struct id
     {

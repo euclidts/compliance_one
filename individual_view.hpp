@@ -4,9 +4,9 @@
 
 struct individual_view
 {
-    static const constexpr auto table() { return "individual_view"; }
-    // static const constexpr auto view() { return "individual_ivew"; }
-    static const constexpr auto primary_key() { return &individual_view::id; }
+    static consteval auto table() { return "individual_view"; }
+    // static consteval auto view() { return "individual_ivew"; }
+    static consteval auto primary_key() { return &individual_view::id; }
 
     struct id
     {

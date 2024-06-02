@@ -4,8 +4,8 @@
 
 struct product
 {
-    static const constexpr auto table() { return "product"; }
-    static const constexpr auto primary_key() { return &product::id; }
+    static consteval auto table() { return "product"; }
+    static consteval auto primary_key() { return &product::id; }
 
     struct id
     {

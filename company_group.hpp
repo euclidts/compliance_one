@@ -5,8 +5,8 @@
 
 struct company_group
 {
-    static const constexpr auto table() { return "company_group"; }
-    static const constexpr auto primary_key() { return &company_group::id; }
+    static consteval auto table() { return "company_group"; }
+    static consteval auto primary_key() { return &company_group::id; }
 
     struct id
     {
