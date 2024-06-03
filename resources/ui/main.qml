@@ -72,6 +72,14 @@ ApplicationWindow {
 
     function onLogin (success: bool, error: string) {
         if (success) {
+            countryListModel.get()
+            product_groupListModel.get()
+            productListModel.get()
+            company_groupListModel.get()
+            company_typeListModel.get()
+            exchangeListModel.get()
+            regulatorListModel.get()
+            jurisdictionListModel.get()
             rootStack.currentIndex = 0
             loginDialog.clear()
             busyDialog.close()

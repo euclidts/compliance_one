@@ -11,7 +11,7 @@ Page {
 
     header: SearchBar {
         width: parent.width
-        onTextChanged: (text) => { sortFilter.setFilterFixedString(text) }
+        onTextChanged: (text) => { sortFilter.filter_by_string(text) }
     }
 
     contentItem: ListView {
@@ -22,7 +22,7 @@ Page {
         model : QSortFilter { id: sortFilter }
         reuseItems: true
 
-        ScrollBar.vertical: ScrollBar { }
+        ScrollBar.vertical: ScrollBar {}
 
         footer: RoundButton {
             icon.source: "qrc:/icons/plus.svg"

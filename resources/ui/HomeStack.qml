@@ -15,20 +15,20 @@ Page {
             delegate: CountryDelegate {}
         }
         ListSearchPage {
-            sourceModel: productListModel
-            delegate: ProductDelegate {}
-        }
-        ListSearchPage {
-            sourceModel: company_typeListModel
-            delegate: CompanyTypeDelegate {}
-        }
-        ListSearchPage {
             sourceModel: regulatorListModel
             delegate: RegulatorDelegate {}
         }
         ListSearchPage {
             sourceModel: exchangeListModel
             delegate: ExchangeDelegate {}
+        }
+        ListSearchPage {
+            sourceModel: productListModel
+            delegate: ProductDelegate {}
+        }
+        ListSearchPage {
+            sourceModel: company_typeListModel
+            delegate: CompanyTypeDelegate {}
         }
     }
 

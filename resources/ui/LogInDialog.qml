@@ -15,12 +15,6 @@ Dialog {
     function connect() {
         // if(!EMSCRIPTEN) bridge.setHost(hostField.text)
         if(Qt.platform.os !== "wasm") bridge.setHost(hostField.text)
-        countryListModel.get()
-        product_groupListModel.get()
-        productListModel.get()
-        company_groupListModel.get()
-        company_typeListModel.get()
-        exchangeListModel.get()
         userNameField.focus = true
     }
 
