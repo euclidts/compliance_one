@@ -29,41 +29,75 @@ ItemDelegate {
             Layout.fillWidth: true
         }
 
-        ColumnLayout {
-            spacing: 12
+        Connections {
+            target: root.model
+            function onIdChanged() {
+                jurisdictionFilter.filter_by_variants(["regulator_id", root.model.id])
+            }
+        }
+
+        ListView {
+            interactive: false
             Layout.fillWidth: true
+            implicitHeight: contentHeight
 
-            Label {
-                text: qsTr("Jurisdictions")
-                font.italic: true
-            }
+            header: GridLayout {
+                columns: 2
 
-            Connections {
-                target: root.model
-                function onIdChanged() {
-                    jurisdictionFilter.filter_by_variants(["regulator_id", root.model.id])
+                Label {
+                    text: qsTr("Jurisdictions")
+                    font.italic: true
+                    Layout.columnSpan: jurisdictionChooser.visible ? 2 : 1
+                }
+
+                Button {
+                    flat: true
+                    icon.source: "qrc:/icons/plus.svg"
+                    visible: !jurisdictionChooser.visible
+                    onClicked: jurisdictionChooser.visible = true
+                }
+
+                CountryChooser {
+                    id: jurisdictionChooser
+                    name: ""
+                    visible: false
+                    Layout.columnSpan: 2
+                    onEdit: (value) => {
+                                var txt = '{"'
+                                + "regulator_id"
+                                + '" : '
+                                + root.model.id
+                                + ' , "'
+                                + "country_id"
+                                + '" : '
+                                + value
+                                + '}'
+
+                                jurisdictionListModel.addWith(JSON.parse(txt))
+                                visible = false
+                            }
                 }
             }
 
-            ListView {
-                interactive: false
-                Layout.fillWidth: true
-                implicitHeight: contentHeight
-                model: QSortFilter {
-                    id: jurisdictionFilter
-                    sourceModel: jurisdictionListModel
-                    Component.onCompleted: filter_by_variants(["regulator_id", root.model.id])
-                }
-                delegate: Label {
-                    id: jurisdictionLabel
-                    required property var model
-                    horizontalAlignment: Text.AlignHCenter
+            model: QSortFilter {
+                id: jurisdictionFilter
+                sourceModel: jurisdictionListModel
+                Component.onCompleted: filter_by_variants(["regulator_id", root.model.id])
+            }
+
+            delegate: GroupBox {
+                id: jurisdictionBox
+
+                required property var model
+
+                RowLayout {
+                    anchors.fill: parent
 
                     Connections {
-                        target: jurisdictionLabel.model
+                        target: jurisdictionBox.model
                         function onCountry_idChanged() {
                             iCountryCombo.currentIndex =
-                            iCountryCombo.indexOfValue(jurisdictionLabel.model.country_id)
+                                    iCountryCombo.indexOfValue(jurisdictionBox.model.country_id)
                         }
                     }
 
@@ -73,11 +107,30 @@ ItemDelegate {
                         textRole: "name"
                         valueRole: "id"
                         Component.onCompleted:
-                            currentIndex = indexOfValue(jurisdictionLabel.model.country_id)
+                            currentIndex = indexOfValue(jurisdictionBox.model.country_id)
                     }
 
-                    text: iCountryCombo.currentText
-                    font.bold: true
+                    Label {
+                        horizontalAlignment: Text.AlignHCenter
+                        text: iCountryCombo.currentText
+                        font.bold: true
+                    }
+
+                    Button {
+                        flat: true
+                        icon.source: "qrc:/icons/trash-alt.svg"
+                        onClicked: onExceptionAction(ToolTip.text,
+                                                     qsTr("The selected jurisdiction will be deleted"),
+                                                     () => {
+                                                         var index = jurisdictionFilter.parent_row(
+                                                             jurisdictionBox.model.index)
+
+                                                         console.log(index)
+
+                                                         jurisdictionListModel.remove(index)
+                                                     },
+                                                     true)
+                    }
                 }
             }
         }

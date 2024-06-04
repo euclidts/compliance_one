@@ -14,7 +14,7 @@ ColumnLayout {
     property alias valueRole: combo.valueRole
     property alias name: label.text
     property alias ediatable: combo.editable
-    required property var enumOf
+    property var enumOf
     required property var onEdit
 
     onEnumOfChanged: combo.currentIndex = combo.indexOfValue(enumOf)
@@ -22,6 +22,7 @@ ColumnLayout {
     Label {
         id: label
         font.italic: true
+        visible: text !== ""
     }
 
     ComboBox {

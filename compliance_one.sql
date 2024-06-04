@@ -225,47 +225,16 @@
 --     code CHAR(3),
 --     PRIMARY KEY(code),
 --     description VARCHAR(255) NOT NULL
--- );
+-- )
 
 -- adapted from https://globalexchanges.com/regulator-directory/
 
 -- CREATE TABLE regulator
 -- (
---     id INT AUTO_INCREMENT,
---     PRIMARY KEY(id),
---     name VARCHAR(255) NOT NULL,
+--     code CHAR(3),
+--     PRIMARY KEY(code),
+--     name VARCHAR(127) NOT NULL,
 --     region VARCHAR(63),
 --     jurisdiction VARCHAR(63),
---     website VARCHAR(127) UNIQUE
--- );
-
--- CREATE TABLE jurisdiction
--- (
---     regulator_id INT,
---     country_id MEDIUMINT UNSIGNED,
---     CONSTRAINT FOREIGN KEY (country_id) REFERENCES country (id),
---     PRIMARY KEY(regulator_id, country_id)
--- );
-
--- INSERT INTO jurisdiction
--- SELECT 
--- regulator.id AS regulator_id,  
--- country.id AS country_id
--- FROM
--- regulator,
--- country
--- WHERE country.name = regulator.jurisdiction 
-
--- -- -- Chek that all regulators have a coresponding regulartor_country entry 
--- -- -- except 5 NULL juridictions
--- -- SELECT  *
--- -- FROM    regulator r
--- -- WHERE   NOT EXISTS
--- --         (
--- --         SELECT  null 
--- --         FROM    jurisdiction
--- --         WHERE   regulator_id = r.id
--- --         )
-
--- ALTER TABLE regulator
--- DROP COLUMN jurisdiction
+--     website VARCHAR(127) UNIQUE NOT NULL
+-- )

@@ -5,7 +5,7 @@ import QtQuick.Controls.Material
 Page {
     background: Rectangle { color: "transparent" }
 
-    contentItem: StackLayout {
+    contentItem: SwipeView {
         currentIndex: homeBar.currentIndex
 
         HomePage {}
