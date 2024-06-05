@@ -17,66 +17,66 @@ struct country
 
     struct id
     {
-        static const constexpr auto c_name() { return "id"; }
+        static consteval auto c_name() { return "id"; }
         uint32_t value;
     } id;
 
     struct name
     {
-        static const constexpr auto c_name() { return "name"; }
+        static consteval auto c_name() { return "name"; }
         std::string value;
     } name;
 
     // struct official_state_name
     // {
-    //     static const constexpr auto c_name() { return "official_state_name"; }
-    //     static const constexpr auto name() { return "Official state name"; }
+    //     static consteval auto c_name() { return "official_state_name"; }
+    //     static consteval auto name() { return "Official state name"; }
     //     std::string value;
     // } official_state_name;
 
     struct iso3
     {
-        // static const constexpr auto name() { return "ISO 3"; }
-        static const constexpr auto c_name() { return "iso3"; }
+        // static consteval auto name() { return "ISO 3"; }
+        static consteval auto c_name() { return "iso3"; }
         std::string value;
     } iso3;
 
     struct numeric_code
     {
-        // static const constexpr auto name() { return "Numeric code"; }
-        static const constexpr auto c_name() { return "numeric_code"; }
+        // static consteval auto name() { return "Numeric code"; }
+        static consteval auto c_name() { return "numeric_code"; }
         std::string value;
     } numeric_code;
 
     struct phonecode
     {
-        static const constexpr auto name() { return "Calling code"; }
-        static const constexpr auto c_name() { return "phonecode"; }
+        static consteval auto name() { return "Calling code"; }
+        static consteval auto c_name() { return "phonecode"; }
         std::string value;
     } phonecode;
 
     struct latitude
     {
-        static const constexpr auto c_name() { return "latitude"; }
+        static consteval auto c_name() { return "latitude"; }
         double value;
     } latitude;
 
     struct longitude
     {
-        static const constexpr auto c_name() { return "longitude"; }
+        static consteval auto c_name() { return "longitude"; }
         double value;
     } longitude;
 
     struct emoji
     {
-        static const constexpr auto name() { return "Flag"; }
-        static const constexpr auto c_name() { return "emoji"; }
+        static consteval auto name() { return "Flag"; }
+        static consteval auto c_name() { return "emoji"; }
         std::string value;
     } emoji;
 
     struct wikiDataId
     {
-        static const constexpr auto c_name() { return "wikiDataId"; }
+        static consteval auto c_name() { return "wikiDataId"; }
         std::string value;
     } wikiDataId;
 
@@ -89,38 +89,38 @@ struct country
 
     struct ranking
     {
-        static const constexpr auto c_name() { return "ranking"; }
-        // static const constexpr auto name() { return "Internal Ranking"; }
+        static consteval auto c_name() { return "ranking"; }
+        // static consteval auto name() { return "Internal Ranking"; }
         ranks value;
     } ranking;
 
     struct fatf
     {
-        static const constexpr auto c_name() { return "fatf"; }
-        // static const constexpr auto name() { return "FATF"; }
+        static consteval auto c_name() { return "fatf"; }
+        // static consteval auto name() { return "FATF"; }
         ranks value;
     } fatf;
 
     struct transparency
     {
-        static const constexpr auto c_name() { return "transparency"; }
-        // static const constexpr auto name() { return "Transparency International"; }
+        static consteval auto c_name() { return "transparency"; }
+        // static consteval auto name() { return "Transparency International"; }
         uint8_t value;
     } transparency;
 
     struct world_bank
     {
-        static const constexpr auto c_name() { return "world_bank"; }
-        // static const constexpr auto name() { return "World Bank"; }
+        static consteval auto c_name() { return "world_bank"; }
+        // static consteval auto name() { return "World Bank"; }
         uint8_t value;
     } world_bank;
 
     struct sovereignty_id
     {
-        static const constexpr auto c_name() { return "sovereignty_id"; }
-        // static const constexpr auto name() { return "Sovereignty"; }
+        static consteval auto c_name() { return "sovereignty_id"; }
+        // static consteval auto name() { return "Sovereignty"; }
         uint32_t value;
-        static const constexpr auto foreign_key() { return &country::id; }
+        static consteval auto foreign_key() { return &country::id; }
     } sovereignty_id;
 
     // phone extension

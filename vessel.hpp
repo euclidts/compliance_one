@@ -12,7 +12,7 @@ struct vessel
 
     struct id
     {
-        static const constexpr auto c_name() { return "id"; }
+        static consteval auto c_name() { return "id"; }
         int32_t value;
     } id;
 
@@ -22,29 +22,29 @@ struct vessel
 
     struct vessel_name
     {
-        static const constexpr auto c_name() { return "name"; }
+        static consteval auto c_name() { return "name"; }
         std::string value;
     } vessel_name;
 
     struct imo
     {
-        static const constexpr auto c_name() { return "imo"; }
-        // static const constexpr auto name() { return "IMO"; }
+        static consteval auto c_name() { return "imo"; }
+        // static consteval auto name() { return "IMO"; }
         std::string value;
     } imo;
 
     struct owner_id
     {
-        static const constexpr auto c_name() { return "owner_id"; }
+        static consteval auto c_name() { return "owner_id"; }
         int32_t value;
-        static const constexpr auto references() { return &company::id; }
+        static consteval auto references() { return &company::id; }
     } owner_id;
 
     struct manager_id
     {
-        static const constexpr auto c_name() { return "manager_id"; }
+        static consteval auto c_name() { return "manager_id"; }
         int32_t value;
-        static const constexpr auto references() { return &company::id; }
+        static consteval auto references() { return &company::id; }
     } manager_id;
 
     // restrictions Flag

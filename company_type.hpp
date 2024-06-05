@@ -9,32 +9,32 @@ struct company_type
 
     struct id
     {
-        static const constexpr auto c_name() { return "id"; }
+        static consteval auto c_name() { return "id"; }
         int32_t value;
     } id;
 
     struct group_id
     {
-        static const constexpr auto c_name() { return "group_id"; }
+        static consteval auto c_name() { return "group_id"; }
         int32_t value;
-        static const constexpr auto foreign_key() { return &company_group::id; }
+        static consteval auto foreign_key() { return &company_group::id; }
     } group_id;
 
     struct type_name
     {
-        static const constexpr auto c_name() { return "name"; }
+        static consteval auto c_name() { return "name"; }
         std::string value;
     } type_name;
 
     struct notes
     {
-        static const constexpr auto c_name() { return "notes"; }
+        static consteval auto c_name() { return "notes"; }
         std::string value;
     } notes;
 
     struct risk_score
     {
-        static const constexpr auto c_name() { return "risk_score"; }
+        static consteval auto c_name() { return "risk_score"; }
         int8_t value;
     } risk_score;
 };

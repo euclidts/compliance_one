@@ -13,16 +13,16 @@ struct jurisdiction
 
     struct regulator_id
     {
-        static const constexpr auto c_name() { return "regulator_id"; }
+        static consteval auto c_name() { return "regulator_id"; }
         int32_t value;
-        static const constexpr auto foreign_key() { return &regulator::id; }
+        static consteval auto foreign_key() { return &regulator::id; }
     } regulator_id;
 
 
     struct country_id
     {
-        static const constexpr auto c_name() { return "country_id"; }
+        static consteval auto c_name() { return "country_id"; }
         uint32_t value;
-        static const constexpr auto foreign_key() { return &country::id; }
+        static consteval auto foreign_key() { return &country::id; }
     } country_id;
 };

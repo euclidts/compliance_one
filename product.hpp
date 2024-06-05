@@ -9,28 +9,28 @@ struct product
 
     struct id
     {
-        static const constexpr auto c_name() { return "id"; }
+        static consteval auto c_name() { return "id"; }
         int32_t value;
     } id;
 
     struct group_id
     {
-        static const constexpr auto c_name() { return "group_id"; }
-        // static const constexpr auto nane() { return "Product group"; }
+        static consteval auto c_name() { return "group_id"; }
+        // static consteval auto nane() { return "Product group"; }
         int32_t value;
-        static const constexpr auto foreign_key() { return &product_group::id; }
+        static consteval auto foreign_key() { return &product_group::id; }
     } group_id;
 
     struct commodity
     {
-        static const constexpr auto c_name() { return "commodity"; }
+        static consteval auto c_name() { return "commodity"; }
         std::string value;
     } commodity;
 
     struct risk_score
     {
-        static const constexpr auto c_name() { return "risk_score"; }
-        // static const constexpr auto name() { return "Risk Score"; }
+        static consteval auto c_name() { return "risk_score"; }
+        // static consteval auto name() { return "Risk Score"; }
         int8_t value;
     } risk_score; // 0 -> 10
 };

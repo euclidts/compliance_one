@@ -10,21 +10,21 @@ struct user
 
     struct id
     {
-        static const constexpr auto c_name() { return "id"; }
+        static consteval auto c_name() { return "id"; }
         int32_t value;
     } id;
 
     struct username
     {
-        static const constexpr auto c_name() { return "username"; }
+        static consteval auto c_name() { return "username"; }
         std::string value;
     } username;
 
     struct password
     {
-        static const constexpr auto c_name() { return "password"; }
+        static consteval auto c_name() { return "password"; }
         std::string value;
-        // static const constexpr auto permission() { enum p { write }; return p; }
+        // static consteval auto permission() { enum p { write }; return p; }
     } password;
     
     enum clearances
@@ -37,13 +37,13 @@ struct user
 
     struct clearance
     {
-        static const constexpr auto c_name() { return "clearance"; }
+        static consteval auto c_name() { return "clearance"; }
         clearances value;
     } clearance;
 
     struct session_id
     {
-        static const constexpr auto c_name() { return "session_id"; }
+        static consteval auto c_name() { return "session_id"; }
         std::string value;
     } session_id;
 };
