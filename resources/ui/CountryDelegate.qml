@@ -38,16 +38,19 @@ ItemDelegate {
             enabled: !root.model.loading
 
             LabeledTextField {
-                name: qsTr("Flag")
-                textOf: root.model.emoji
-                onEdit: (txt) => { root.model.emoji = txt }
-            }
-
-            LabeledTextField {
                 name: qsTr("Name")
                 textOf: root.model.name
                 onEdit: (txt) => { root.model.name = txt }
                 placeHolder: qsTr("* Mandatory")
+            }
+
+            EnumValueEditor {
+                name: qsTr("Region")
+                model: regionListModel
+                enumOf: root.model.region_id
+                onEdit: (value) => { root.model.region_id = value }
+                valueRole: "id"
+                textRole: "name"
             }
 
             CheckBox {
@@ -67,13 +70,20 @@ ItemDelegate {
 
             Item { visible: unCheck.checked }
 
-            LabeledTextField {
-                name: qsTr("ISO 3")
-                textOf: root.model.iso3
-                onEdit: (txt) => { root.model.iso3 = txt }
-                placeHolder: qsTr("* Mandatory")
-            }
+            RowLayout {
+                LabeledTextField {
+                    name: qsTr("ISO 3")
+                    textOf: root.model.iso3
+                    onEdit: (txt) => { root.model.iso3 = txt }
+                    placeHolder: qsTr("* Mandatory")
+                }
 
+                LabeledTextField {
+                    name: qsTr("Flag")
+                    textOf: root.model.emoji
+                    onEdit: (txt) => { root.model.emoji = txt }
+                }
+            }
             LabeledTextField {
                 name: qsTr("Numeric code")
                 textOf: root.model.numeric_code
@@ -157,7 +167,10 @@ ItemDelegate {
                 icon.source: "qrc:/icons/floppy-disk.svg"
                 ToolTip.visible: hovered
                 ToolTip.text: qsTr("Save")
-                onClicked: countryListModel.save(root.model.index)
+                onClicked: countryListModel.save(
+                               root.ListView.view.model.parent_row(
+                                   root.model.index)
+                               )
                 highlighted: true
                 enabled: root.model.flagged_for_update
                 visible: !root.model.loading
@@ -183,7 +196,10 @@ ItemDelegate {
                 visible: !root.model.loading
                 onClicked: onExceptionAction(ToolTip.text,
                                              qsTr("The selected country will be deleted"),
-                                             () => { countryListModel.remove(root.model.index) },
+                                             () => { countryListModel.remove(
+                                                     root.ListView.view.model.parent_row(
+                                                         root.model.index)
+                                                     ) },
                                              true)
             }
         }

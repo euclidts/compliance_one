@@ -20,7 +20,7 @@ Page {
             id: backButton
             icon.source: "qrc:/icons/arrow-left.svg"
             flat: true
-            onClicked: rootStack.currentIndex = 0
+            onClicked: rootStack.currentIndex = 1
         }
 
         Label {
@@ -338,7 +338,7 @@ Page {
                                                  onLoaded = () => {
                                                      onLoaded = () => {
                                                          onLoaded = () => {}
-                                                         rootStack.currentIndex = 0
+                                                         rootStack.currentIndex = 1
                                                      }
                                                      companyPage.current_contact.remove()
                                                  }

@@ -53,7 +53,10 @@ ItemDelegate {
             icon.source: "qrc:/icons/floppy-disk.svg"
             ToolTip.visible: hovered
             ToolTip.text: qsTr("Save")
-            onClicked: productListModel.save(root.model.index)
+            onClicked: productListModel.save(
+                           root.ListView.view.model.parent_row(
+                               root.model.index)
+                           )
             highlighted: true
             enabled: root.model.flagged_for_update
             visible: !root.model.loading
@@ -79,7 +82,10 @@ ItemDelegate {
             visible: !root.model.loading
             onClicked: onExceptionAction(ToolTip.text,
                                          qsTr("The selected country will be deleted"),
-                                         () => { productListModel.remove(root.model.index) },
+                                         () => { productListModel.remove(
+                                                 root.ListView.view.model.parent_row(
+                                                     root.model.index)
+                                                 ) },
                                          true)
         }
     }

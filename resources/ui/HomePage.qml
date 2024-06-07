@@ -54,7 +54,7 @@ Page {
                             individualPage.current_contact.clear()
                             individualPage.current_address.clear()
                             individualPage.current_individual.clear()
-                            rootStack.currentIndex = 1
+                            rootStack.currentIndex = 2
                         }
                     }
                 }
@@ -75,7 +75,7 @@ Page {
                             companyPage.current_contact.clear()
                             companyPage.current_address.clear()
                             companyPage.current_company.clear()
-                            rootStack.currentIndex = 2
+                            rootStack.currentIndex = 3
                         }
                     }
                 }
@@ -94,7 +94,7 @@ Page {
                         icon.source: "qrc:/icons/ship.svg"
                         onClicked: {
                             vesselPage.current_vessel.clear()
-                            rootStack.currentIndex = 3
+                            rootStack.currentIndex = 4
                         }
                     }
                 }

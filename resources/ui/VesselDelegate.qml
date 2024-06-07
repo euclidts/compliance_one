@@ -18,7 +18,7 @@ ItemDelegate {
 
     onClicked : {
         vesselPage.current_vessel.from_list(vesselListModel, root.model.index)
-        rootStack.currentIndex = 3
+        rootStack.currentIndex = 4
     }
 
     background: Rectangle {

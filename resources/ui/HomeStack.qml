@@ -2,11 +2,15 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls.Material
 
+import Quser
+
 Page {
     background: Rectangle { color: "transparent" }
 
-    contentItem: SwipeView {
+    contentItem: StackLayout {
         currentIndex: homeBar.currentIndex
+        onCurrentIndexChanged: if (currentIndex !== homeBar.currentIndex)
+                                   homeBar.currentIndex = currentIndex
 
         HomePage {}
 
@@ -33,12 +37,13 @@ Page {
     }
 
     footer: RowLayout {
-        id: footer
+        visible: appUser && appUser.clearance === 3
         height: 48
 
         TabBar {
             id: homeBar
             Layout.fillWidth: true
+            currentIndex: 0
 
             TabButton {
                 text: "Home"

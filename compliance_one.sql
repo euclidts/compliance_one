@@ -25,10 +25,9 @@
 --     risk_score TINYINT UNSIGNED NOT NULL
 -- )
 
--- run sql scripts dowloaded from
--- https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/sql/regions.sql
--- https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/sql/subregions.sql
--- https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/sql/countries.sql
+-- -- run sql scripts dowloaded from
+-- -- https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/sql/regions.sql
+-- -- https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/sql/countries.sql
 
 -- ALTER TABLE countries
 -- DROP COLUMN iso2,
@@ -45,7 +44,7 @@
 -- DROP COLUMN translations,
 -- DROP COLUMN emojiU,
 -- DROP COLUMN created_at,
--- DROP COLUMN deleted_at,
+-- DROP COLUMN updated_at,
 -- DROP COLUMN flag,
 -- DROP CONSTRAINT country_continent_final,
 -- DROP CONSTRAINT country_subregion_final,
@@ -58,7 +57,12 @@
 -- ADD CONSTRAINT FOREIGN KEY (sovereignty_id) REFERENCES countries (id),
 -- RENAME TO country
 
--- ALTER TABLE regions RENAME TO region
+-- ALTER TABLE regions 
+-- DROP COLUMN translations,
+-- DROP COLUMN created_at,
+-- DROP COLUMN updated_at,
+-- DROP COLUMN flag,
+-- RENAME TO region
 
 -- CREATE TABLE address
 -- (
@@ -89,8 +93,6 @@
 -- MODIFY email VARCHAR(127) UNIQUE NOT NULL,
 -- MODIFY calling_code VARCHAR(6) NOT NULL,
 -- MODIFY phone VARCHAR(13) NOT NULL
-
--- DESCRIBE contact
 
 -- CREATE TABLE individual
 -- (
@@ -220,6 +222,9 @@
 --     CONSTRAINT FOREIGN KEY (manager_id) REFERENCES company (id)
 -- )
 
+-- -- adapted from https://community.developers.refinitiv.com/storage/attachments/901-exchange-codes.txt
+-- -- and converted to sql in exchange.sql
+
 -- CREATE TABLE exchange
 -- (
 --     code CHAR(3),
@@ -227,14 +232,53 @@
 --     description VARCHAR(255) NOT NULL
 -- )
 
--- adapted from https://globalexchanges.com/regulator-directory/
+-- -- adapted from https://globalexchanges.com/regulator-directory/
+-- -- and converted to sql in regulator.sql
 
 -- CREATE TABLE regulator
 -- (
 --     code CHAR(3),
 --     PRIMARY KEY(code),
 --     name VARCHAR(127) NOT NULL,
---     region VARCHAR(63),
 --     jurisdiction VARCHAR(63),
 --     website VARCHAR(127) UNIQUE NOT NULL
 -- )
+
+-- CREATE TABLE jurisdiction
+-- (
+--     regulator_id INT,
+--     country_id MEDIUMINT UNSIGNED,
+--     CONSTRAINT FOREIGN KEY (country_id) REFERENCES country (id),
+--     PRIMARY KEY(regulator_id, country_id)
+-- );
+
+-- INSERT INTO jurisdiction
+-- SELECT 
+-- regulator.id AS regulator_id,  
+-- country.id AS country_id
+-- FROM
+-- regulator,
+-- country
+-- WHERE country.name = regulator.jurisdiction 
+
+-- -- -- Chek that all regulators have a coresponding jurisdiction entry 
+-- -- -- except 5 NULL juridictions
+-- -- SELECT  *
+-- -- FROM    regulator r
+-- -- WHERE   NOT EXISTS
+-- --         (
+-- --         SELECT  null 
+-- --         FROM    jurisdiction
+-- --         WHERE   regulator_id = r.id
+-- --         )
+
+-- UPDATE country
+-- INNER JOIN countries
+-- ON country.id = countries.id
+-- SET country.region_id = countries.region_id;
+
+-- SELECT country.region_id, countries.region_id
+-- FROM 
+-- country,
+-- countries
+-- WHERE country.id = countries.id

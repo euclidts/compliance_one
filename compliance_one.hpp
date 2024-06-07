@@ -1,6 +1,7 @@
 #pragma once
 
 #include "user.hpp"
+#include "region.hpp"
 #include "country.hpp"
 #include "product_group.hpp"
 #include "product.hpp"

@@ -65,7 +65,6 @@ ColumnLayout {
                 currentIndex = find(insertText)
                 onEdit(currentValue)
                 inserting = false
-                busyDialog.close()
             }
         }
 
@@ -77,7 +76,6 @@ ColumnLayout {
             x: parent.width - width - padding
             y: parent.topPadding + (parent.availableHeight - height) / 2
             onClicked: {
-                busyDialog.open()
                 combo.inserting = true
                 combo.insertText = combo.editText
 

@@ -16,7 +16,7 @@ Page {
             id: backButton
             icon.source: "qrc:/icons/arrow-left.svg"
             flat: true
-            onClicked: Qt.callLater(rootStack.currentIndex = 0)
+            onClicked: rootStack.currentIndex = 1
         }
 
         Label {
@@ -120,7 +120,13 @@ Page {
             Layout.alignment: Qt.AlignRight
             onClicked: Qt.callLater(onExceptionAction(ToolTip.text,
                                                       qsTr("The selected vessel will be deleted"),
-                                                      () => { vesselPage.current_vessel.remove() },
+                                                      () => {
+                                                          onLoaded = () => {
+                                                              onLoaded = () => {}
+                                                              rootStack.currentIndex = 1
+                                                          }
+                                                          vesselPage.current_vessel.remove()
+                                                      },
                                                       true))
         }
     }

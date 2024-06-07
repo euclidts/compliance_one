@@ -24,7 +24,7 @@ ItemDelegate {
         companyPage.current_company.id = root.model.id
         companyPage.current_company.get()
 
-        rootStack.currentIndex = 2
+        rootStack.currentIndex = 3
     }
 
     background: Rectangle {

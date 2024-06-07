@@ -4,7 +4,7 @@ import QtQuick.Layouts
 import QtQuick.Controls.Material
 
 import Interface
-import QappUser
+import Qregion
 import Qcountry
 import Qproduct_group
 import Qproduct
@@ -28,10 +28,11 @@ ApplicationWindow {
     Material.accent: "#4183a8"
 
     readonly property bool portrait: width < height
-    readonly property var rateModel: [qsTr("Low"), qsTr("Medium"), qsTr("High")]
+    readonly property list<string> rateModel: [qsTr("Low"), qsTr("Medium"), qsTr("High")]
     property bool loading: false
     property var onLoaded: function () {}
 
+    property var regionListModel: QregionListModel{}
     property var countryListModel: QcountryListModel{}
     property var product_groupListModel: Qproduct_groupListModel{}
     property var productListModel: QproductListModel{}
@@ -61,9 +62,10 @@ ApplicationWindow {
 
     StackLayout {
         id: rootStack
-        currentIndex: count
+        currentIndex: 0
         anchors.fill: parent
 
+        Page { background: Rectangle { color: "transparent" } }
         HomeStack {}
         IndividualPage { id: individualPage }
         CompanyPage { id: companyPage }
@@ -72,6 +74,7 @@ ApplicationWindow {
 
     function onLogin (success: bool, error: string) {
         if (success) {
+            regionListModel.get()
             countryListModel.get()
             product_groupListModel.get()
             productListModel.get()
@@ -80,7 +83,7 @@ ApplicationWindow {
             exchangeListModel.get()
             regulatorListModel.get()
             jurisdictionListModel.get()
-            rootStack.currentIndex = 0
+            rootStack.currentIndex = 1
             loginDialog.clear()
             busyDialog.close()
         }

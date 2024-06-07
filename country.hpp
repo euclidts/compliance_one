@@ -2,7 +2,7 @@
 
 #include <chrono>
 
-#include "user.hpp"
+#include "region.hpp"
 
 struct country
 {
@@ -54,6 +54,13 @@ struct country
         static consteval auto c_name() { return "phonecode"; }
         std::string value;
     } phonecode;
+
+    struct region_id
+    {
+        static consteval auto c_name() { return "region_id"; }
+        uint32_t value;
+        static consteval auto foreign_key() { return &region::id; }
+    } region_id;
 
     struct latitude
     {

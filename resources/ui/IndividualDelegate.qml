@@ -26,7 +26,7 @@ ItemDelegate {
         individualPage.current_individual.id = root.model.id
         individualPage.current_individual.get()
 
-        rootStack.currentIndex = 1
+        rootStack.currentIndex = 2
     }
 
     background: Rectangle {

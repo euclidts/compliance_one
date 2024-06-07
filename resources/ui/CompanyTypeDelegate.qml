@@ -62,7 +62,10 @@ ItemDelegate {
             icon.source: "qrc:/icons/floppy-disk.svg"
             ToolTip.visible: hovered
             ToolTip.text: qsTr("Save")
-            onClicked: company_typeListModel.save(root.model.index)
+            onClicked: company_typeListModel.save(
+                           root.ListView.view.model.parent_row(
+                               root.model.index)
+                           )
             highlighted: true
             enabled: root.model.flagged_for_update
             visible: !root.model.loading
@@ -88,7 +91,11 @@ ItemDelegate {
             visible: !root.model.loading
             onClicked: onExceptionAction(ToolTip.text,
                                          qsTr("The selected company type will be deleted"),
-                                         () => { company_typeListModel.remove(root.model.index) }, true)
+                                         () => { company_typeListModel.remove(
+                                                 root.ListView.view.model.parent_row(
+                                                     root.model.index)
+                                                 ) },
+                                         true)
         }
     }
 
