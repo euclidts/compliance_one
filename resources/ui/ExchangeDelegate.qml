@@ -32,44 +32,12 @@ ItemDelegate {
             Layout.columnSpan: 2
         }
 
-        RoundButton {
-            icon.source: "qrc:/icons/floppy-disk.svg"
-            ToolTip.visible: hovered
-            ToolTip.text: qsTr("Save")
-            onClicked: exchangeListModel.save(
-                           root.ListView.view.model.parent_row(
-                               root.model.index)
-                           )
-            highlighted: true
-            enabled: root.model.flagged_for_update
-            visible: !root.model.loading
-        }
-
-        Item {
+        FilterSaveRemove {
+            model: root.model
+            listModel: exchangeListModel
+            listView: root.ListView
             Layout.fillWidth: true
-            visible: !portrait && !root.model.loading
-            Layout.columnSpan: portrait ? 1 : 2
-        }
-
-        BusyIndicator {
-            visible: root.model.loading
-            Layout.fillWidth: true
-            Layout.columnSpan: portrait ? 2 : 4
-        }
-
-        RoundButton {
-            icon.source: "qrc:/icons/trash-alt.svg"
-            ToolTip.visible: hovered
-            ToolTip.text: qsTr("Delete")
-            Layout.alignment: Qt.AlignRight
-            visible: !root.model.loading
-            onClicked: onExceptionAction(ToolTip.text,
-                                         qsTr("The selected country will be deleted"),
-                                         () => { exchangeListModel.remove(
-                                                 root.ListView.view.model.parent_row(
-                                                     root.model.index)
-                                                 ) },
-                                         true)
+            Layout.columnSpan: 2
         }
     }
 

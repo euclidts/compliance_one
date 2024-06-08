@@ -249,7 +249,7 @@ Page {
                             textRole: "description"
                             delegate: MenuItem {
                                 width: ListView.view.width
-                                text: model["code"] + ' ' + model["description"]
+                                text: model["code"] + ' - ' + model["description"]
                                 Material.foreground: exchangeCombo.currentIndex === index ?
                                                          ListView.view.contentItem.Material.accent :
                                                          ListView.view.contentItem.Material.foreground

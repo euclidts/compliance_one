@@ -58,5 +58,6 @@
         <file>ui/ListSearchPage.qml</file>
         <file>ui/HomeStack.qml</file>
         <file>ui/RegulatorDelegate.qml</file>
+        <file>ui/FilterSaveRemove.qml</file>
     </qresource>
 </RCC>

@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Controls.Material
+import QtQuick.Controls.Material.impl
 
 import QSortFilter
 import Qjurisdiction
@@ -17,7 +18,7 @@ ItemDelegate {
     required property var model
 
     contentItem: GridLayout {
-        columns: 2
+        columns: portrait ? 2 : 3
         enabled: !root.model.loading
 
         LabeledTextField {
@@ -26,8 +27,35 @@ ItemDelegate {
             onEdit: (txt) => { root.model.name = txt }
             placeHolder: qsTr("* Mandatory")
             Layout.columnSpan: 2
-            Layout.fillWidth: true
         }
+
+        LabeledTextField {
+            name: qsTr("Website")
+            textOf: root.model.website
+            onEdit: (txt) => { root.model.website = txt }
+            placeHolder: qsTr("* Mandatory")
+            Layout.columnSpan: portrait ? 2 : 1
+        }
+
+        CheckBox {
+            id: regionCheck
+            checked: root.model.region_id === 0
+            onCheckStateChanged: if (root.model.region_id !== 0 && checked)
+                                     root.model.region_id = 0
+            text: qsTr("Supraregional")
+        }
+
+        EnumValueChooser {
+            name: qsTr("Region")
+            model: regionListModel
+            enumOf: root.model.region_id
+            onEdit: (value) => { root.model.region_id = value }
+            visible: !regionCheck.checked
+            valueRole: "id"
+            textRole: "name"
+        }
+
+        Item { visible: regionCheck.checked }
 
         Connections {
             target: root.model
@@ -40,6 +68,8 @@ ItemDelegate {
             interactive: false
             Layout.fillWidth: true
             implicitHeight: contentHeight
+            reuseItems: true
+            spacing: 6
 
             header: GridLayout {
                 columns: 2
@@ -63,17 +93,18 @@ ItemDelegate {
                     visible: false
                     Layout.columnSpan: 2
                     onEdit: (value) => {
-                                var txt = '{"'
-                                + "regulator_id"
-                                + '" : '
-                                + root.model.id
-                                + ' , "'
-                                + "country_id"
-                                + '" : '
-                                + value
-                                + '}'
+                                jurisdictionListModel.addWith(
+                                    JSON.parse('{"'
+                                               + "regulator_id"
+                                               + '" : '
+                                               + root.model.id
+                                               + ' , "'
+                                               + "country_id"
+                                               + '" : '
+                                               + value
+                                               + '}')
+                                    )
 
-                                jurisdictionListModel.addWith(JSON.parse(txt))
                                 visible = false
                             }
                 }
@@ -85,8 +116,14 @@ ItemDelegate {
                 Component.onCompleted: filter_by_variants(["regulator_id", root.model.id])
             }
 
-            delegate: GroupBox {
+            delegate: MaterialTextContainer {
                 id: jurisdictionBox
+                implicitWidth: parent && parent.width
+                implicitHeight: Material.textFieldHeight
+                outlineColor: Material.hintTextColor
+
+                controlHasText: true
+                horizontalPadding: Material.textFieldHorizontalPadding
 
                 required property var model
 
@@ -111,71 +148,38 @@ ItemDelegate {
                     }
 
                     Label {
-                        horizontalAlignment: Text.AlignHCenter
+                        leftPadding: Material.textFieldHorizontalPadding
                         text: iCountryCombo.currentText
-                        font.bold: true
                     }
 
                     Button {
                         flat: true
+                        Layout.alignment: Qt.AlignRight
                         icon.source: "qrc:/icons/trash-alt.svg"
                         onClicked: onExceptionAction(ToolTip.text,
                                                      qsTr("The selected jurisdiction will be deleted"),
                                                      () => {
-                                                         var index = jurisdictionFilter.parent_row(
-                                                             jurisdictionBox.model.index)
-
-                                                         console.log(index)
-
-                                                         jurisdictionListModel.remove(index)
+                                                         jurisdictionListModel.remove(
+                                                             jurisdictionFilter.parent_row(
+                                                                 jurisdictionBox.model.index)
+                                                             )
                                                      },
                                                      true)
                     }
                 }
             }
+
+            footer: Label {
+                visible: parent.count === 0
+                text: qsTr("Supranational")
+            }
         }
 
-        LabeledTextField {
-            name: qsTr("Website")
-            textOf: root.model.website
-            onEdit: (txt) => { root.model.website = txt }
-            placeHolder: qsTr("* Mandatory")
-            Layout.columnSpan: 2
-            Layout.fillWidth: true
-        }
-
-        RoundButton {
-            icon.source: "qrc:/icons/floppy-disk.svg"
-            ToolTip.visible: hovered
-            ToolTip.text: qsTr("Save")
-            onClicked: regulatorListModel.save(
-                           root.ListView.view.model.parent_row(
-                               root.model.index)
-                           )
-            highlighted: true
-            enabled: root.model.flagged_for_update
-            visible: !root.model.loading
-        }
-
-        BusyIndicator {
-            visible: root.model.loading
-            Layout.fillWidth: true
-            Layout.columnSpan: 2
-        }
-
-        RoundButton {
-            icon.source: "qrc:/icons/trash-alt.svg"
-            ToolTip.visible: hovered
-            ToolTip.text: qsTr("Delete")
-            Layout.alignment: Qt.AlignRight
-            visible: !root.model.loading
-            onClicked: onExceptionAction(ToolTip.text,
-                                         qsTr("The selected regulator will be deleted"),
-                                         () => { regulatorListModel.remove(
-                                                 root.ListView.view.model.parent_row(
-                                                     root.model.index)
-                                                 ) },
-                                         true)
+        FilterSaveRemove {
+            model: root.model
+            listModel: regulatorListModel
+            listView: root.ListView
+            Layout.columnSpan: portrait ? 2 : 3
         }
     }
 

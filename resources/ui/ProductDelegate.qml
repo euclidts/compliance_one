@@ -48,45 +48,12 @@ ItemDelegate {
             editable: true
         }
 
-
-        RoundButton {
-            icon.source: "qrc:/icons/floppy-disk.svg"
-            ToolTip.visible: hovered
-            ToolTip.text: qsTr("Save")
-            onClicked: productListModel.save(
-                           root.ListView.view.model.parent_row(
-                               root.model.index)
-                           )
-            highlighted: true
-            enabled: root.model.flagged_for_update
-            visible: !root.model.loading
-        }
-
-        Item {
-            Layout.fillWidth: true
-            visible: !root.model.loading
-            Layout.columnSpan: 2
-        }
-
-        BusyIndicator {
-            visible: root.model.loading
+        FilterSaveRemove {
+            model: root.model
+            listModel: productListModel
+            listView: root.ListView
             Layout.fillWidth: true
             Layout.columnSpan: 4
-        }
-
-        RoundButton {
-            icon.source: "qrc:/icons/trash-alt.svg"
-            ToolTip.visible: hovered
-            ToolTip.text: qsTr("Delete")
-            Layout.alignment: Qt.AlignRight
-            visible: !root.model.loading
-            onClicked: onExceptionAction(ToolTip.text,
-                                         qsTr("The selected country will be deleted"),
-                                         () => { productListModel.remove(
-                                                 root.ListView.view.model.parent_row(
-                                                     root.model.index)
-                                                 ) },
-                                         true)
         }
     }
 

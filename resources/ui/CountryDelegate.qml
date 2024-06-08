@@ -163,44 +163,12 @@ ItemDelegate {
                 onEdit: (val) => { root.model.world_bank = val }
             }
 
-            RoundButton {
-                icon.source: "qrc:/icons/floppy-disk.svg"
-                ToolTip.visible: hovered
-                ToolTip.text: qsTr("Save")
-                onClicked: countryListModel.save(
-                               root.ListView.view.model.parent_row(
-                                   root.model.index)
-                               )
-                highlighted: true
-                enabled: root.model.flagged_for_update
-                visible: !root.model.loading
-            }
-
-            Item {
-                Layout.fillWidth: true
-                visible: !portrait && !root.model.loading
-                Layout.columnSpan: portrait ? 1 : 2
-            }
-
-            BusyIndicator {
-                visible: root.model.loading
+            FilterSaveRemove {
+                model: root.model
+                listModel: countryListModel
+                listView: root.ListView
                 Layout.fillWidth: true
                 Layout.columnSpan: portrait ? 2 : 4
-            }
-
-            RoundButton {
-                icon.source: "qrc:/icons/trash-alt.svg"
-                ToolTip.visible: hovered
-                ToolTip.text: qsTr("Delete")
-                Layout.alignment: Qt.AlignRight
-                visible: !root.model.loading
-                onClicked: onExceptionAction(ToolTip.text,
-                                             qsTr("The selected country will be deleted"),
-                                             () => { countryListModel.remove(
-                                                     root.ListView.view.model.parent_row(
-                                                         root.model.index)
-                                                     ) },
-                                             true)
             }
         }
     }

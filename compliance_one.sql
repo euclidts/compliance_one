@@ -240,7 +240,8 @@
 --     code CHAR(3),
 --     PRIMARY KEY(code),
 --     name VARCHAR(127) NOT NULL,
---     jurisdiction VARCHAR(63),
+--     region_id MEDIUMINT UNSIGNED,
+--     CONSTRAINT FOREIGN KEY (region_id) REFERENCES country (region_id),
 --     website VARCHAR(127) UNIQUE NOT NULL
 -- )
 
@@ -282,3 +283,32 @@
 -- country,
 -- countries
 -- WHERE country.id = countries.id
+
+-- -- SELECT country.region_id, jurisdiction.regulator_id
+-- -- FROM
+-- -- jurisdiction,
+-- -- country
+-- -- WHERE jurisdiction.country_id = country.id
+
+-- -- SELECT regulator.name, country.region_id, region.name
+-- -- FROM regulator
+-- -- INNER JOIN jurisdiction
+-- -- ON regulator.id = jurisdiction.regulator_id
+-- -- INNER JOIN country
+-- -- ON country.id = jurisdiction.country_id
+-- -- INNER JOIN region
+-- -- ON region.id = country.region_id
+
+-- UPDATE regulator
+-- INNER JOIN jurisdiction
+-- ON regulator.id = jurisdiction.regulator_id
+-- INNER JOIN country
+-- ON country.id = jurisdiction.country_id
+-- INNER JOIN region
+-- ON region.id = country.region_id
+-- SET regulator.region_id = country.region_id
+
+-- SELECT regulator.name, region.name
+-- FROM regulator
+-- INNER JOIN region
+-- ON regulator.region_id = region.id
