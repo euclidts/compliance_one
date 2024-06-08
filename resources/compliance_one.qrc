@@ -1,14 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>ui/main.qml</file>
-        <file>ui/SettingsDrawer.qml</file>
-        <file>ui/PwdField.qml</file>
-        <file>ui/MaterialButton.qml</file>
-        <file>ui/LogInDialog.qml</file>
-        <file>ui/FlickableItem.qml</file>
-        <file>ui/ExceptionDialog.qml</file>
-        <file>ui/BusyDialog.qml</file>
-        <file>ui/BackgroundRect.qml</file>
         <file>icons/sun.svg</file>
         <file>icons/square.svg</file>
         <file>icons/moon.svg</file>
@@ -19,10 +11,7 @@
         <file>icons/arrow-right.svg</file>
         <file>icons/arrow-left.svg</file>
         <file>icons/C1_logov1.svg</file>
-        <file>ui/LabeledTextField.qml</file>
-        <file>ui/IntChooser.qml</file>
         <file>icons/trash-alt.svg</file>
-        <file>ui/EnumValueChooser.qml</file>
         <file>icons/plus.svg</file>
         <file>icons/floppy-disk.svg</file>
         <file>icons/users.svg</file>
@@ -30,34 +19,45 @@
         <file>icons/ship.svg</file>
         <file>icons/search.svg</file>
         <file>icons/times-circle.svg</file>
-        <file>ui/CountryDelegate.qml</file>
-        <file>ui/EnumIntChooser.qml</file>
-        <file>ui/ProductDelegate.qml</file>
-        <file>ui/EnumValueEditor.qml</file>
-        <file>ui/IndividualPage.qml</file>
-        <file>ui/PhoneChooser.qml</file>
-        <file>ui/AddressChooser.qml</file>
-        <file>ui/FloatChooser.qml</file>
-        <file>ui/CountryChooser.qml</file>
-        <file>ui/LabeledTextArea.qml</file>
-        <file>ui/IndividualDelegate.qml</file>
         <file>icons/user.svg</file>
-        <file>ui/DateDialog.qml</file>
-        <file>ui/LabeledDateField.qml</file>
         <file>icons/calendar-days.svg</file>
-        <file>ui/CompanyDelegate.qml</file>
-        <file>ui/CompanyTypeDelegate.qml</file>
-        <file>ui/CompanyPage.qml</file>
-        <file>ui/ContatChooser.qml</file>
-        <file>ui/VesselPage.qml</file>
-        <file>ui/VesselDelegate.qml</file>
-        <file>ui/ExchangeDelegate.qml</file>
-        <file>ui/InvisibleCombo.qml</file>
-        <file>ui/SearchBar.qml</file>
-        <file>ui/HomePage.qml</file>
-        <file>ui/ListSearchPage.qml</file>
-        <file>ui/HomeStack.qml</file>
-        <file>ui/RegulatorDelegate.qml</file>
-        <file>ui/FilterSaveRemove.qml</file>
+        <file>ui/choosers/AddressChooser.qml</file>
+        <file>ui/choosers/ContatChooser.qml</file>
+        <file>ui/choosers/CountryChooser.qml</file>
+        <file>ui/choosers/EnumIntChooser.qml</file>
+        <file>ui/choosers/EnumValueChooser.qml</file>
+        <file>ui/choosers/EnumValueEditor.qml</file>
+        <file>ui/choosers/FloatChooser.qml</file>
+        <file>ui/choosers/IntChooser.qml</file>
+        <file>ui/choosers/PhoneChooser.qml</file>
+        <file>ui/delegates/CompanyDelegate.qml</file>
+        <file>ui/delegates/CompanyTypeDelegate.qml</file>
+        <file>ui/delegates/CountryDelegate.qml</file>
+        <file>ui/delegates/ExchangeDelegate.qml</file>
+        <file>ui/delegates/IndividualDelegate.qml</file>
+        <file>ui/delegates/ProductDelegate.qml</file>
+        <file>ui/delegates/RegulatorDelegate.qml</file>
+        <file>ui/delegates/VesselDelegate.qml</file>
+        <file>ui/dialogs/BusyDialog.qml</file>
+        <file>ui/dialogs/DateDialog.qml</file>
+        <file>ui/dialogs/ExceptionDialog.qml</file>
+        <file>ui/dialogs/LogInDialog.qml</file>
+        <file>ui/pages/CompanyPage.qml</file>
+        <file>ui/pages/HomePage.qml</file>
+        <file>ui/pages/HomeStack.qml</file>
+        <file>ui/pages/IndividualPage.qml</file>
+        <file>ui/pages/ListSearchPage.qml</file>
+        <file>ui/pages/VesselPage.qml</file>
+        <file>ui/utils/BackgroundRect.qml</file>
+        <file>ui/utils/FilterSaveRemove.qml</file>
+        <file>ui/utils/FlickableItem.qml</file>
+        <file>ui/utils/InvisibleCombo.qml</file>
+        <file>ui/utils/LabeledDateField.qml</file>
+        <file>ui/utils/LabeledTextArea.qml</file>
+        <file>ui/utils/LabeledTextField.qml</file>
+        <file>ui/utils/MaterialButton.qml</file>
+        <file>ui/utils/PwdField.qml</file>
+        <file>ui/utils/SearchBar.qml</file>
+        <file>ui/utils/SettingsDrawer.qml</file>
     </qresource>
 </RCC>

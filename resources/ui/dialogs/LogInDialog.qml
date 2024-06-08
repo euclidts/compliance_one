@@ -4,6 +4,8 @@ import QtQuick.Controls
 import QtQuick.Controls.Material
 import QtQuick.Controls.Material.impl
 
+import "../utils" as Utils
+
 Dialog {
     modal: true
     closePolicy: Popup.NoAutoClose
@@ -56,7 +58,7 @@ Dialog {
                                                   : passwordField.fieldFocus = true
         }
 
-        PwdField {
+        Utils.PwdField {
             id: passwordField
             onFieldAccepted: function () {
                 userNameField.text !== "" ? validate()

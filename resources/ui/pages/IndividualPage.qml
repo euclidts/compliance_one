@@ -3,6 +3,9 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import QtQuick.Controls.Material
 
+import "../utils" as Utils
+import "../choosers" as Choosers
+
 import Qcontact
 import Qaddress
 import Qindividual
@@ -32,12 +35,12 @@ Page {
     contentItem: ScrollView {
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
 
-        FlickableItem {
+        Utils.FlickableItem {
             ColumnLayout {
                 width: parent.width
                 spacing: 12
 
-                ContatChooser {
+                Choosers.ContatChooser {
                     familyNameOf: current_contact.family_name
                     onFamilyNameEdit: (txt) => {
                                           if (current_contact.family_name !== txt)
@@ -65,7 +68,7 @@ Page {
                                 }
                 }
 
-                AddressChooser {
+                Choosers.AddressChooser {
                     countryOf: current_address.country_id
                     onCountryEdit: (value) => {
                                        if (current_address.country_id !== value)
@@ -93,7 +96,7 @@ Page {
                                     }
                 }
 
-                BackgroundRect {
+                Utils.BackgroundRect {
                     GridLayout {
                         width: parent.width
                         columnSpacing: 0
@@ -101,7 +104,7 @@ Page {
                         columns: portrait ? 1 : 2
                         uniformCellWidths: true
 
-                        LabeledDateField {
+                        Utils.LabeledDateField {
                             Layout.margins: 12
                             name: qsTr("Date of birth")
                             dateOf: current_individual.date_of_birth
@@ -111,7 +114,7 @@ Page {
                                     }
                         }
 
-                        LabeledTextField {
+                        Utils.LabeledTextField {
                             Layout.margins: 12
                             name: qsTr("Passport number")
                             textOf: current_individual.passport
@@ -122,7 +125,7 @@ Page {
                             placeHolder: qsTr("* Mandatory")
                         }
 
-                        CountryChooser {
+                        Choosers.CountryChooser {
                             Layout.margins: 12
                             name: qsTr("Isuing country")
                             enumOf: current_individual.issuing
@@ -132,7 +135,7 @@ Page {
                                     }
                         }
 
-                        LabeledDateField {
+                        Utils.LabeledDateField {
                             Layout.margins: 12
                             name: qsTr("Expiry date")
                             dateOf: current_individual.expiry_date
@@ -142,7 +145,7 @@ Page {
                                     }
                         }
 
-                        LabeledTextField {
+                        Utils.LabeledTextField {
                             Layout.margins: 12
                             name: qsTr("Name (Local Characters)")
                             textOf: current_individual.local_name
@@ -153,7 +156,7 @@ Page {
                             placeHolder: qsTr("* Optional")
                         }
 
-                        LabeledTextField {
+                        Utils.LabeledTextField {
                             Layout.margins: 12
                             name: qsTr("Forenames (Local Characters)")
                             textOf: current_individual.local_forenames
@@ -178,7 +181,7 @@ Page {
                                 Layout.columnSpan: current_individual.pep ? 1 : 2
                             }
 
-                            CountryChooser {
+                            Choosers.CountryChooser {
                                 name: qsTr("PEP country")
                                 visible: current_individual.pep
                                 enumOf: current_individual.pep_country
@@ -189,7 +192,7 @@ Page {
                             }
                         }
 
-                        LabeledTextArea {
+                        Utils.LabeledTextArea {
                             Layout.margins: 12
                             name: qsTr("Additional PEP Notes")
                             visible: current_individual.pep
@@ -204,10 +207,10 @@ Page {
                     }
                 }
 
-                BackgroundRect {
+                Utils.BackgroundRect {
                     implicitHeight: childrenRect.height + 24
 
-                    LabeledTextArea {
+                    Utils.LabeledTextArea {
                         width: parent.width - 24
                         areaHeight: 120
                         x: 12

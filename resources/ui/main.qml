@@ -3,6 +3,10 @@ import QtQuick.Dialogs
 import QtQuick.Layouts
 import QtQuick.Controls.Material
 
+import "dialogs" as Dialogs
+import "utils" as Utils
+import "pages" as Pages
+
 import Interface
 import Qregion
 import Qcountry
@@ -42,10 +46,10 @@ ApplicationWindow {
     property var regulatorListModel: QregulatorListModel{}
     property var jurisdictionListModel: QjurisdictionListModel{}
 
-    LogInDialog { id: loginDialog }
+    Dialogs.LogInDialog { id: loginDialog }
     Component.onCompleted: loginDialog.open()
-    BusyDialog { id: busyDialog }
-    ExceptionDialog { id: exceptionDialog }
+    Dialogs.BusyDialog { id: busyDialog }
+    Dialogs.ExceptionDialog { id: exceptionDialog }
 
     onLoadingChanged: if (loading) { busyDialog.open() }
                       else {
@@ -56,9 +60,9 @@ ApplicationWindow {
                           next()
                       }
 
-    DateDialog { id: dateDialog }
+    Dialogs.DateDialog { id: dateDialog }
 
-    SettingsDrawer { id: settingsDrawer }
+    Utils.SettingsDrawer { id: settingsDrawer }
 
     StackLayout {
         id: rootStack
@@ -66,10 +70,10 @@ ApplicationWindow {
         anchors.fill: parent
 
         Page { background: Rectangle { color: "transparent" } }
-        HomeStack {}
-        IndividualPage { id: individualPage }
-        CompanyPage { id: companyPage }
-        VesselPage { id: vesselPage }
+        Pages.HomeStack {}
+        Pages.IndividualPage { id: individualPage }
+        Pages.CompanyPage { id: companyPage }
+        Pages.VesselPage { id: vesselPage }
     }
 
     function onLogin (success: bool, error: string) {

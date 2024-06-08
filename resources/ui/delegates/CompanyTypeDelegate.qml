@@ -3,7 +3,10 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Controls.Material
 
-import Qproduct_group
+import "../utils" as Utils
+import "../choosers" as Choosers
+
+import Qcompany_group
 
 ItemDelegate {
     id: root
@@ -19,18 +22,18 @@ ItemDelegate {
         columns: 4
         enabled: !root.model.loading
 
-        LabeledTextField {
-            name: qsTr("Commodity")
-            textOf: root.model.commodity
-            onEdit: (txt) => { root.model.commodity = txt }
+        Utils.LabeledTextField {
+            name: qsTr("Company Type")
+            textOf: root.model.name
+            onEdit: (txt) => { root.model.name = txt }
             placeHolder: qsTr("* Mandatory")
             Layout.columnSpan: 4
             Layout.fillWidth: true
         }
 
-        EnumValueEditor {
-            name: qsTr("Product group")
-            model: product_groupListModel
+        Choosers.EnumValueEditor {
+            name: qsTr("Company group")
+            model: company_groupListModel
             enumOf: root.model.group_id
             onEdit: (value) => { root.model.group_id = value }
             Layout.columnSpan: 2
@@ -38,19 +41,29 @@ ItemDelegate {
             textRole: "name"
         }
 
-        IntChooser {
+        Choosers.IntChooser {
             name: qsTr("Risk score")
             minimum: 1
             maximum: 10
-            Layout.columnSpan: 2
             numberOf: root.model.risk_score
             onEdit: (val) => { root.model.risk_score = val }
             editable: true
+            Layout.columnSpan: 2
         }
 
-        FilterSaveRemove {
+        Utils.LabeledTextArea {
+            name: qsTr("Notes")
+            textOf: root.model.notes
+            onEdit: (txt) => { root.model.notes = txt }
+            placeHolder: qsTr("* Optional")
+            Layout.columnSpan: 4
+            Layout.topMargin: 6
+            areaHeight: 120
+        }
+
+        Utils.FilterSaveRemove {
             model: root.model
-            listModel: productListModel
+            listModel: company_typeListModel
             listView: root.ListView
             Layout.fillWidth: true
             Layout.columnSpan: 4

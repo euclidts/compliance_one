@@ -2,6 +2,8 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls.Material
 
+import "../delegates" as Delegates
+
 import Quser
 
 Page {
@@ -16,23 +18,23 @@ Page {
 
         ListSearchPage {
             sourceModel: countryListModel
-            delegate: CountryDelegate {}
+            delegate: Delegates.CountryDelegate {}
         }
         ListSearchPage {
             sourceModel: regulatorListModel
-            delegate: RegulatorDelegate {}
+            delegate: Delegates.RegulatorDelegate {}
         }
         ListSearchPage {
             sourceModel: exchangeListModel
-            delegate: ExchangeDelegate {}
+            delegate: Delegates.ExchangeDelegate {}
         }
         ListSearchPage {
             sourceModel: productListModel
-            delegate: ProductDelegate {}
+            delegate: Delegates.ProductDelegate {}
         }
         ListSearchPage {
             sourceModel: company_typeListModel
-            delegate: CompanyTypeDelegate {}
+            delegate: Delegates.CompanyTypeDelegate {}
         }
     }
 

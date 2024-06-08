@@ -2,6 +2,9 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls.Material
 
+import "../utils" as Utils
+import "../delegates" as Delegates
+
 import Qindividual_view
 import Qcompany_view
 import Qvessel
@@ -13,7 +16,7 @@ Page {
     property var company_viewListModel: Qcompany_viewListModel{}
     property var vesselListModel: QvesselListModel{}
 
-    header: SearchBar {
+    header: Utils.SearchBar {
         width: parent.width
         busy: individual_viewListModel.loading ||
               company_viewListModel.loading ||
@@ -33,7 +36,7 @@ Page {
     contentItem: ScrollView {
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
 
-        FlickableItem {
+        Utils.FlickableItem {
             ColumnLayout {
                 spacing: 12
                 width: parent.width
@@ -42,7 +45,7 @@ Page {
                     Layout.fillWidth: true
                     implicitHeight: contentHeight
                     model: individual_viewListModel
-                    delegate: IndividualDelegate {}
+                    delegate: Delegates.IndividualDelegate {}
                     interactive: false
                     reuseItems: true
 
@@ -63,7 +66,7 @@ Page {
                     Layout.fillWidth: true
                     implicitHeight: contentHeight
                     model: company_viewListModel
-                    delegate: CompanyDelegate {}
+                    delegate: Delegates.CompanyDelegate {}
                     interactive: false
                     reuseItems: true
 
@@ -84,7 +87,7 @@ Page {
                     Layout.fillWidth: true
                     implicitHeight: contentHeight
                     model: vesselListModel
-                    delegate: VesselDelegate {}
+                    delegate: Delegates.VesselDelegate {}
                     interactive: false
                     reuseItems: true
 

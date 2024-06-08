@@ -3,6 +3,8 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import QtQuick.Controls.Material
 
+import "../utils" as Utils
+
 import Qvessel
 
 Page {
@@ -28,12 +30,12 @@ Page {
     contentItem: ScrollView {
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
 
-        FlickableItem {
+        Utils.FlickableItem {
             ColumnLayout {
                 width: parent.width
                 spacing: 12
 
-                BackgroundRect {
+                Utils.BackgroundRect {
                     GridLayout {
                         width: parent.width
                         columnSpacing: 0
@@ -41,7 +43,7 @@ Page {
                         uniformCellWidths: true
                         columns: portrait ? 1 : 2
 
-                        LabeledTextField {
+                        Utils.LabeledTextField {
                             Layout.margins: 12
                             name: qsTr("Name")
                             textOf: current_vessel.name
@@ -52,7 +54,7 @@ Page {
                             placeHolder: qsTr("* Mandatory")
                         }
 
-                        LabeledTextField {
+                        Utils.LabeledTextField {
                             Layout.margins: 12
                             name: qsTr("IMO")
                             textOf: current_vessel.imo

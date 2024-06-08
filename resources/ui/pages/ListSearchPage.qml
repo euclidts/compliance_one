@@ -1,6 +1,8 @@
 import QtQuick
 import QtQuick.Controls.Material
 
+import "../utils" as Utils
+
 import QSortFilter
 
 Page {
@@ -9,7 +11,7 @@ Page {
 
     background: Rectangle { color: "transparent" }
 
-    header: SearchBar {
+    header: Utils.SearchBar {
         width: parent.width
         onTextChanged: (text) => { sortFilter.filter_by_string(text) }
     }

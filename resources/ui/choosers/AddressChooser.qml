@@ -4,7 +4,9 @@ import QtQuick.Layouts
 import QtQuick.Controls.Material
 import QtQuick.Controls.Material.impl
 
-BackgroundRect {
+import "../utils" as Utils
+
+Utils.BackgroundRect {
 
     property string label
     property alias countryOf: country.enumOf
@@ -36,7 +38,7 @@ BackgroundRect {
             Layout.margins: 12
         }
 
-        LabeledTextArea {
+        Utils.LabeledTextArea {
             id: address
             Layout.margins: 12
             name: qsTr("Address")
@@ -44,21 +46,21 @@ BackgroundRect {
             Layout.rowSpan: 4
         }
 
-        LabeledTextField {
+        Utils.LabeledTextField {
             id: locality
             Layout.margins: 12
             name: qsTr("Locality")
             capitalization: Font.MixedCase
         }
 
-        LabeledTextField {
+        Utils.LabeledTextField {
             id: region
             Layout.margins: 12
             name: qsTr("Region")
             capitalization: Font.MixedCase
         }
 
-        LabeledTextField {
+        Utils.LabeledTextField {
             id: postcode
             Layout.margins: 12
             name: qsTr("Postcode")

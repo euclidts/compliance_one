@@ -4,8 +4,9 @@ import QtQuick.Layouts
 import QtQuick.Controls.Material
 import QtQuick.Controls.Material.impl
 
+import "../utils" as Utils
 
-BackgroundRect {
+Utils.BackgroundRect {
 
     property string label
     property alias familyNameOf: familyNameField.textOf
@@ -34,21 +35,21 @@ BackgroundRect {
             Layout.columnSpan: portrait ? 1 : 2
         }
 
-        LabeledTextField {
+        Utils.LabeledTextField {
             id: familyNameField
             Layout.margins: 12
             name: qsTr("Family Name (Latin script)")
             placeHolder: qsTr("* Mandatory")
         }
 
-        LabeledTextField {
+        Utils.LabeledTextField {
             id: forenamesField
             Layout.margins: 12
             name: qsTr("Forenames (Latin script)")
             placeHolder: qsTr("* Mandatory")
         }
 
-        LabeledTextField {
+        Utils.LabeledTextField {
             id: emailField
             Layout.margins: 12
             name: qsTr("Email")

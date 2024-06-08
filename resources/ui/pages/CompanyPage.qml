@@ -3,6 +3,9 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import QtQuick.Controls.Material
 
+import "../utils" as Utils
+import "../choosers" as Choosers
+
 import Qcontact
 import Qaddress
 import Qcompany
@@ -32,12 +35,12 @@ Page {
     contentItem: ScrollView {
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
 
-        FlickableItem {
+        Utils.FlickableItem {
             ColumnLayout {
                 width: parent.width
                 spacing: 12
 
-                BackgroundRect {
+                Utils.BackgroundRect {
                     GridLayout {
                         width: parent.width
                         columnSpacing: 0
@@ -46,7 +49,7 @@ Page {
                         uniformCellHeights: true
                         columns: portrait ? 1 : 2
 
-                        LabeledTextField {
+                        Utils.LabeledTextField {
                             Layout.margins: 12
                             name: qsTr("Company Name (Latin script)")
                             textOf: current_company.name
@@ -57,7 +60,7 @@ Page {
                             placeHolder: qsTr("* Mandatory")
                         }
 
-                        LabeledTextField {
+                        Utils.LabeledTextField {
                             Layout.margins: 12
                             name: qsTr("Company Name (Local Characters)")
                             textOf: current_company.local_name
@@ -68,7 +71,7 @@ Page {
                             placeHolder: qsTr("* Mandatory")
                         }
 
-                        LabeledTextField {
+                        Utils.LabeledTextField {
                             Layout.margins: 12
                             name: qsTr("Website")
                             textOf: current_company.website
@@ -79,7 +82,7 @@ Page {
                             placeHolder: qsTr("* Mandatory")
                         }
 
-                        LabeledTextField {
+                        Utils.LabeledTextField {
                             Layout.margins: 12
                             name: qsTr("Company Unique Identifier")
                             textOf: current_company.uuid
@@ -92,7 +95,7 @@ Page {
                     }
                 }
 
-                AddressChooser {
+                Choosers.AddressChooser {
                     countryOf: current_address.country_id
                     onCountryEdit: (value) => {
                                        if (current_address.country_id !== value)
@@ -120,7 +123,7 @@ Page {
                                     }
                 }
 
-                ContatChooser {
+                Choosers.ContatChooser {
                     label: "Contact person"
                     familyNameOf: current_contact.family_name
                     onFamilyNameEdit: (txt) => {
@@ -149,7 +152,7 @@ Page {
                                 }
                 }
 
-                BackgroundRect {
+                Utils.BackgroundRect {
                     GridLayout {
                         width: parent.width
                         columnSpacing: 0
@@ -157,7 +160,7 @@ Page {
                         columns: portrait ? 1 : 2
                         uniformCellWidths: true
 
-                        LabeledTextField {
+                        Utils.LabeledTextField {
                             Layout.margins: 12
                             name: qsTr("Commercial Registry Number")
                             textOf: current_company.comercial_registery
@@ -198,7 +201,7 @@ Page {
                             text: qsTr("ANCILLARY status")
                         }
 
-                        LabeledTextField {
+                        Utils.LabeledTextField {
                             Layout.margins: 12
                             name: qsTr("Legal Entitiy Identifier (LEI)")
                             textOf: current_company.lei
@@ -209,7 +212,7 @@ Page {
                             placeHolder: qsTr("* Mandatory")
                         }
 
-                        LabeledTextField {
+                        Utils.LabeledTextField {
                             Layout.margins: 12
                             name: qsTr("ACER code")
                             textOf: current_company.acer
@@ -229,7 +232,7 @@ Page {
 
                         Item { visible: !portrait }
 
-                        CountryChooser {
+                        Choosers.CountryChooser {
                             name: qsTr("Country of Listing")
                             Layout.margins: 12
                             enumOf: current_company.listing_country_id
@@ -240,7 +243,7 @@ Page {
                             visible: current_company.is_public
                         }
 
-                        EnumValueChooser {
+                        Choosers.EnumValueChooser {
                             id: exchangeCombo
                             name: qsTr("Exchange")
                             model: exchangeListModel
@@ -273,7 +276,7 @@ Page {
 
                         Item { visible: !current_company.is_branch }
 
-                        LabeledTextField {
+                        Utils.LabeledTextField {
                             Layout.margins: 12
                             name: qsTr("Branch Commercial Registry Number")
                             textOf: current_company.branch_registery

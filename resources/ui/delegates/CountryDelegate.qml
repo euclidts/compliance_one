@@ -3,6 +3,9 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Controls.Material
 
+import "../utils" as Utils
+import "../choosers" as Choosers
+
 ItemDelegate {
     id: root
     width: window.width
@@ -37,14 +40,14 @@ ItemDelegate {
             columns: portrait ? 2 : 4
             enabled: !root.model.loading
 
-            LabeledTextField {
+            Utils.LabeledTextField {
                 name: qsTr("Name")
                 textOf: root.model.name
                 onEdit: (txt) => { root.model.name = txt }
                 placeHolder: qsTr("* Mandatory")
             }
 
-            EnumValueEditor {
+            Choosers.EnumValueEditor {
                 name: qsTr("Region")
                 model: regionListModel
                 enumOf: root.model.region_id
@@ -61,7 +64,7 @@ ItemDelegate {
                 text: qsTr("UN Member State")
             }
 
-            CountryChooser {
+            Choosers.CountryChooser {
                 name: qsTr("Sovereignty")
                 enumOf: root.model.sovereignty_id
                 onEdit: (value) => { root.model.sovereignty_id = value }
@@ -71,27 +74,27 @@ ItemDelegate {
             Item { visible: unCheck.checked }
 
             RowLayout {
-                LabeledTextField {
+                Utils.LabeledTextField {
                     name: qsTr("ISO 3")
                     textOf: root.model.iso3
                     onEdit: (txt) => { root.model.iso3 = txt }
                     placeHolder: qsTr("* Mandatory")
                 }
 
-                LabeledTextField {
+                Utils.LabeledTextField {
                     name: qsTr("Flag")
                     textOf: root.model.emoji
                     onEdit: (txt) => { root.model.emoji = txt }
                 }
             }
-            LabeledTextField {
+            Utils.LabeledTextField {
                 name: qsTr("Numeric code")
                 textOf: root.model.numeric_code
                 onEdit: (txt) => { root.model.numeric_code = txt }
                 placeHolder: qsTr("* Mandatory")
             }
 
-            LabeledTextField {
+            Utils.LabeledTextField {
                 name: qsTr("Calling code")
                 textOf: root.model.phonecode
                 onEdit: (txt) => { root.model.phonecode = txt }
@@ -127,27 +130,27 @@ ItemDelegate {
             //     }
             // }
 
-        LabeledTextField {
+        Utils.LabeledTextField {
             name: qsTr("WikiData")
             textOf: root.model.wikiDataId
             onEdit: (txt) => { root.model.wikiDataId = txt }
         }
 
-            EnumIntChooser {
+            Choosers.EnumIntChooser {
                 name: qsTr("Internal Ranking")
                 model: rateModel
                 enumOf: root.model.ranking
                 onEdit: (index) => { root.model.ranking = index }
             }
 
-            EnumIntChooser {
+            Choosers.EnumIntChooser {
                 name: qsTr("FATF")
                 model: rateModel
                 enumOf: root.model.fatf
                 onEdit: (index) => { root.model.fatf = index }
             }
 
-            IntChooser {
+            Choosers.IntChooser {
                 name: qsTr("Transparency International")
                 minimum: 1
                 maximum: 10
@@ -155,7 +158,7 @@ ItemDelegate {
                 onEdit: (val) => { root.model.transparency = val }
             }
 
-            IntChooser {
+            Choosers.IntChooser {
                 name: qsTr("World Bank")
                 minimum: 1
                 maximum: 10
@@ -163,7 +166,7 @@ ItemDelegate {
                 onEdit: (val) => { root.model.world_bank = val }
             }
 
-            FilterSaveRemove {
+            Utils.FilterSaveRemove {
                 model: root.model
                 listModel: countryListModel
                 listView: root.ListView

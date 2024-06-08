@@ -3,6 +3,8 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Controls.Material
 
+import "../utils" as Utils
+
 ItemDelegate {
     id: root
     width: window.width
@@ -17,7 +19,7 @@ ItemDelegate {
         columns: portrait ? 2 : 4
         enabled: !root.model.loading
 
-        LabeledTextField {
+        Utils.LabeledTextField {
             name: qsTr("Code")
             textOf: root.model.code
             onEdit: (txt) => { root.model.code = txt }
@@ -25,14 +27,14 @@ ItemDelegate {
             Layout.maximumWidth: 90
         }
 
-        LabeledTextField {
+        Utils.LabeledTextField {
             name: qsTr("Description")
             textOf: root.model.description
             onEdit: (txt) => { root.model.description = txt }
             Layout.columnSpan: 2
         }
 
-        FilterSaveRemove {
+        Utils.FilterSaveRemove {
             model: root.model
             listModel: exchangeListModel
             listView: root.ListView

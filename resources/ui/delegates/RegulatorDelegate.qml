@@ -4,6 +4,9 @@ import QtQuick.Layouts
 import QtQuick.Controls.Material
 import QtQuick.Controls.Material.impl
 
+import "../utils" as Utils
+import "../choosers" as Choosers
+
 import QSortFilter
 import Qjurisdiction
 
@@ -21,7 +24,7 @@ ItemDelegate {
         columns: portrait ? 2 : 3
         enabled: !root.model.loading
 
-        LabeledTextField {
+        Utils.LabeledTextField {
             name: qsTr("Name")
             textOf: root.model.name
             onEdit: (txt) => { root.model.name = txt }
@@ -29,7 +32,7 @@ ItemDelegate {
             Layout.columnSpan: 2
         }
 
-        LabeledTextField {
+        Utils.LabeledTextField {
             name: qsTr("Website")
             textOf: root.model.website
             onEdit: (txt) => { root.model.website = txt }
@@ -45,7 +48,7 @@ ItemDelegate {
             text: qsTr("Supraregional")
         }
 
-        EnumValueChooser {
+        Choosers.EnumValueChooser {
             name: qsTr("Region")
             model: regionListModel
             enumOf: root.model.region_id
@@ -87,7 +90,7 @@ ItemDelegate {
                     onClicked: jurisdictionChooser.visible = true
                 }
 
-                CountryChooser {
+                Choosers.CountryChooser {
                     id: jurisdictionChooser
                     name: ""
                     visible: false
@@ -138,7 +141,7 @@ ItemDelegate {
                         }
                     }
 
-                    InvisibleCombo {
+                    Utils.InvisibleCombo {
                         id: iCountryCombo
                         model: countryListModel
                         textRole: "name"
@@ -175,7 +178,7 @@ ItemDelegate {
             }
         }
 
-        FilterSaveRemove {
+        Utils.FilterSaveRemove {
             model: root.model
             listModel: regulatorListModel
             listView: root.ListView
