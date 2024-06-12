@@ -228,85 +228,28 @@ Page {
         }
     }
 
-    footer: RowLayout {
-
-        RoundButton {
-            Layout.margins: 12
-            icon.source: "qrc:/icons/floppy-disk.svg"
-            ToolTip.visible: hovered
-            ToolTip.text: qsTr("Save")
-            onClicked: {
-                if (current_contact.inserted &&
-                    current_address.inserted &&
-                    current_individual.inserted) {
-                    current_contact.save()
-                    current_address.save()
-                    current_individual.save()
-                }
-                else {
-                    onLoaded = () => {
-                        onLoaded = () => {
-                            onLoaded = () => {}
-                            current_individual.address_id = current_address.id
-                            current_individual.save()
-                        }
-                        current_individual.contact_id = current_contact.id
-                        current_address.save()
-                    }
-                    current_contact.save()
-                }
+    footer: Utils.QueuedSaveRemove {
+        enableSave: current_contact.flagged_for_update ||
+                    current_address.flagged_for_update ||
+                    current_individual.flagged_for_update
+        saveSequence: [
+            current_contact.save_queued,
+            current_address.save_queued,
+            () => {
+                current_individual.contact_id = current_contact.id
+                current_individual.address_id = current_address.id
+                dequeue()
+            },
+            current_individual.save
+        ]
+        deleteSequence: [
+            individualPage.current_individual.remove_queued,
+            individualPage.current_contact.remove_queued,
+            individualPage.current_address.remove_queued,
+            () => {
+                individual_viewListModel.clear()
+                rootStack.currentIndex = 1
             }
-            highlighted: true
-            enabled: current_contact.flagged_for_update ||
-                     current_address.flagged_for_update ||
-                     current_individual.flagged_for_update
-        }
-
-        Item { Layout.fillWidth: true }
-
-        RoundButton {
-            Layout.margins: 12
-            icon.source: "qrc:/icons/trash-alt.svg"
-            ToolTip.visible: hovered
-            ToolTip.text: qsTr("Delete")
-            Layout.alignment: Qt.AlignRight
-            onClicked: onExceptionAction(ToolTip.text,
-                                         qsTr("The selected individual will be deleted"),
-                                         () => {
-                                             onLoaded = () => {
-                                                 onLoaded = () => {
-                                                     onLoaded = () => {
-                                                         onLoaded = () => {}
-                                                         rootStack.currentIndex = 1
-                                                     }
-                                                     individualPage.current_contact.remove()
-                                                 }
-                                                 individualPage.current_address.remove()
-                                             }
-                                             individualPage.current_individual.remove()
-                                         },
-                                         true)
-        }
-    }
-
-    Connections {
-        target: current_contact
-        function onLoadingChanged() {
-            current_contact.loading ? loading = true : loading = false
-        }
-    }
-
-    Connections {
-        target: current_address
-        function onLoadingChanged() {
-            current_address.loading ? loading = true : loading = false
-        }
-    }
-
-    Connections {
-        target: current_individual
-        function onLoadingChanged() {
-            current_individual.loading ? loading = true : loading = false
-        }
+        ]
     }
 }

@@ -53,20 +53,11 @@ ColumnLayout {
                 y: parent.topPadding + (parent.availableHeight - height) / 2
                 onClicked: onExceptionAction(ToolTip.text,
                                              qsTr("The selected item will be deleted"),
-                                             () => { combo.model.list.remove(index) }, true)
+                                             () => { combo.model.remove(index) }, true)
             }
         }
 
-        property bool inserting: false
-        property string insertText: ""
-
-        onCountChanged: {
-            if (inserting) {
-                currentIndex = find(insertText)
-                onEdit(currentValue)
-                inserting = false
-            }
-        }
+        property string insertText
 
         Button {
             id: addButton
@@ -76,16 +67,19 @@ ColumnLayout {
             x: parent.width - width - padding
             y: parent.topPadding + (parent.availableHeight - height) / 2
             onClicked: {
-                combo.inserting = true
-                combo.insertText = combo.editText
-
-                var txt = '{"'
-                + textRole
-                + '" : "'
-                + combo.editText
-                + '"}'
-
-                model.list.addWith(JSON.parse(txt))
+                enqueue([() => {
+                             combo.insertText = combo.editText
+                             model.add_with_queued(JSON.parse('{"'
+                                                              + textRole
+                                                              + '" : "'
+                                                              + combo.editText
+                                                              + '"}'))
+                         },
+                         () => {
+                             combo.currentIndex = combo.find(combo.insertText)
+                             onEdit(combo.currentValue)
+                         }])
+                dequeue()
             }
         }
     }

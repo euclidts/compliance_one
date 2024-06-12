@@ -293,85 +293,28 @@ Page {
         }
     }
 
-    footer: RowLayout {
-
-        RoundButton {
-            Layout.margins: 12
-            icon.source: "qrc:/icons/floppy-disk.svg"
-            ToolTip.visible: hovered
-            ToolTip.text: qsTr("Save")
-            onClicked: {
-                if (current_contact.inserted &&
-                    current_address.inserted &&
-                    current_company.inserted) {
-                        current_contact.save()
-                        current_address.save()
-                        current_company.save()
-                } else {
-                    onLoaded = () => {
-                        onLoaded = () => {
-                            onLoaded = () => {}
-                            current_company.address_id = current_address.id
-                            current_company.save()
-                        }
-                        current_company.contact_id = current_contact.id
-                        current_address.save()
-                    }
-                    current_contact.save()
-                }
+    footer: Utils.QueuedSaveRemove {
+        enableSave: current_contact.flagged_for_update ||
+                    current_address.flagged_for_update ||
+                    current_company.flagged_for_update
+        saveSequence: [
+            current_address.save_queued,
+            current_contact.save_queued,
+            () => {
+                current_company.address_id = current_address.id
+                current_company.contact_id = current_contact.id
+                dequeue()
+            },
+            current_company.save_queued
+        ]
+        deleteSequence: [
+            current_company.remove_queued,
+            current_contact.remove_queued,
+            current_address.remove_queued,
+            () => {
+                company_viewListModel.clear()
+                rootStack.currentIndex = 1
             }
-            highlighted: true
-            enabled: current_contact.flagged_for_update ||
-                     current_address.flagged_for_update ||
-                     current_company.flagged_for_update
-        }
-
-        Item { Layout.fillWidth: true }
-
-        RoundButton {
-            Layout.margins: 12
-            icon.source: "qrc:/icons/trash-alt.svg"
-            ToolTip.visible: hovered
-            ToolTip.text: qsTr("Delete")
-            Layout.alignment: Qt.AlignRight
-            onClicked: onExceptionAction(ToolTip.text,
-                                         qsTr("The selected company will be deleted"),
-                                         () => {
-                                             onLoaded = () => {
-                                                 onLoaded = () => {
-                                                     onLoaded = () => {
-                                                         onLoaded = () => {}
-                                                         rootStack.currentIndex = 1
-                                                     }
-                                                     companyPage.current_contact.remove()
-                                                 }
-                                                 companyPage.current_address.remove()
-                                             }
-                                             companyPage.current_comapny.remove()
-                                         },
-                                         true)
-
-        }
-    }
-
-    Connections {
-        target: current_contact
-        function onLoadingChanged() {
-            current_contact.loading ? loading = true : loading = false
-        }
-    }
-
-    Connections {
-        target: current_address
-        function onLoadingChanged() {
-            current_address.loading ? loading = true : loading = false
-        }
-    }
-
-    Connections {
-        target: current_company
-        function onLoadingChanged() {
-            current_company.loading ? loading = true : loading = false
-        }
+        ]
     }
 }

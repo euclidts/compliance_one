@@ -59,5 +59,7 @@
         <file>ui/utils/PwdField.qml</file>
         <file>ui/utils/SearchBar.qml</file>
         <file>ui/utils/SettingsDrawer.qml</file>
+        <file>ui/choosers/JuisdicionChooser.qml</file>
+        <file>ui/utils/QueuedSaveRemove.qml</file>
     </qresource>
 </RCC>

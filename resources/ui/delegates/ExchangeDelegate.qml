@@ -16,14 +16,13 @@ ItemDelegate {
     required property var model
 
     contentItem: GridLayout {
-        columns: portrait ? 2 : 4
+        columns: portrait ? 1 : 2
         enabled: !root.model.loading
 
         Utils.LabeledTextField {
             name: qsTr("Code")
             textOf: root.model.code
             onEdit: (txt) => { root.model.code = txt }
-            Layout.columnSpan: 2
             Layout.maximumWidth: 90
         }
 
@@ -31,7 +30,6 @@ ItemDelegate {
             name: qsTr("Description")
             textOf: root.model.description
             onEdit: (txt) => { root.model.description = txt }
-            Layout.columnSpan: 2
         }
 
         Utils.FilterSaveRemove {
@@ -39,7 +37,7 @@ ItemDelegate {
             listModel: exchangeListModel
             listView: root.ListView
             Layout.fillWidth: true
-            Layout.columnSpan: 2
+            Layout.columnSpan: portrait ? 1 : 2
         }
     }
 

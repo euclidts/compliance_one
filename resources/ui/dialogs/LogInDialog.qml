@@ -13,8 +13,9 @@ Dialog {
     y: 120
     implicitWidth: 270
 
+    onOpened: exceptionDialog.func = () => { loginDialog.open() }
+
     function connect() {
-        // if(!EMSCRIPTEN) bridge.setHost(hostField.text)
         if(Qt.platform.os !== "wasm") bridge.setHost(hostField.text)
         userNameField.focus = true
     }
@@ -22,7 +23,6 @@ Dialog {
     function validate() {
         bridge.authenticate(userNameField.text, passwordField.text)
         loginDialog.close()
-        busyDialog.open()
     }
 
     function clear() { passwordField.text = "" }
@@ -46,7 +46,6 @@ Dialog {
             // text: "http://10.133.2.57:8080"
             // text: "https://complianceonetestrive.euclidtradingsystems.com"
             onAccepted: connect()
-            // visible: !EMSCRIPTEN
             visible: Qt.platform.os !== "wasm"
         }
 

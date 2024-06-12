@@ -227,8 +227,9 @@
 
 -- CREATE TABLE exchange
 -- (
+--     id SMALLINT UNSIGNED AUTO_INCREMENT,
+--     PRIMARY KEY(id),
 --     code CHAR(3),
---     PRIMARY KEY(code),
 --     description VARCHAR(255) NOT NULL
 -- )
 
@@ -237,13 +238,15 @@
 
 -- CREATE TABLE regulator
 -- (
---     code CHAR(3),
---     PRIMARY KEY(code),
+--     id INT AUTO_INCREMENT,
+--     PRIMARY KEY(id),
 --     name VARCHAR(127) NOT NULL,
 --     region_id MEDIUMINT UNSIGNED,
 --     CONSTRAINT FOREIGN KEY (region_id) REFERENCES country (region_id),
 --     website VARCHAR(127) UNIQUE NOT NULL
 -- )
+
+-- DESCRIBE regulator
 
 -- CREATE TABLE jurisdiction
 -- (

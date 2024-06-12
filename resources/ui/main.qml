@@ -33,8 +33,7 @@ ApplicationWindow {
 
     readonly property bool portrait: width < height
     readonly property list<string> rateModel: [qsTr("Low"), qsTr("Medium"), qsTr("High")]
-    property bool loading: false
-    property var onLoaded: function () {}
+    property list<var> queue: []
 
     property var regionListModel: QregionListModel{}
     property var countryListModel: QcountryListModel{}
@@ -46,19 +45,20 @@ ApplicationWindow {
     property var regulatorListModel: QregulatorListModel{}
     property var jurisdictionListModel: QjurisdictionListModel{}
 
-    Dialogs.LogInDialog { id: loginDialog }
-    Component.onCompleted: loginDialog.open()
     Dialogs.BusyDialog { id: busyDialog }
     Dialogs.ExceptionDialog { id: exceptionDialog }
+    Dialogs.LogInDialog { id: loginDialog }
+    Component.onCompleted: loginDialog.open()
 
-    onLoadingChanged: if (loading) { busyDialog.open() }
-                      else {
-                          // set asside for imediate use and cleanup
-                          var next = onLoaded
-                          onLoaded = function () {}
-                          busyDialog.close()
-                          next()
-                      }
+    Connections {
+        target: bridge
+        function onLoadingChanged() {
+            if (bridge.loading)
+                busyDialog.open()
+            else
+                busyDialog.close()
+        }
+    }
 
     Dialogs.DateDialog { id: dateDialog }
 
@@ -76,28 +76,26 @@ ApplicationWindow {
         Pages.VesselPage { id: vesselPage }
     }
 
-    function onLogin (success: bool, error: string) {
-        if (success) {
-            regionListModel.get()
-            countryListModel.get()
-            product_groupListModel.get()
-            productListModel.get()
-            company_groupListModel.get()
-            company_typeListModel.get()
-            exchangeListModel.get()
-            regulatorListModel.get()
-            jurisdictionListModel.get()
-            rootStack.currentIndex = 1
-            loginDialog.clear()
-            busyDialog.close()
-        }
-        else exceptionDialog.func = () => { loginDialog.open() }
+    function onLogin () {
+        exceptionDialog.func = () => {}
+        regionListModel.get()
+        countryListModel.get()
+        product_groupListModel.get()
+        productListModel.get()
+        company_groupListModel.get()
+        company_typeListModel.get()
+        exchangeListModel.get()
+        regulatorListModel.get()
+        jurisdictionListModel.get()
+        rootStack.currentIndex = 1
+        loginDialog.clear()
     }
 
     function onException (prefix: string, error: string) {
         busyDialog.close()
         exceptionDialog.title = prefix
         exceptionDialog.text = error
+        queue.length = 0
         exceptionDialog.open()
     }
 
@@ -107,5 +105,16 @@ ApplicationWindow {
         if (typeof(cancelable) !== 'undefined')
             exceptionDialog.cancelable = cancelable
         onException(prefix, error)
+    }
+
+    function enqueue (funcs) {
+        if (queue.length === 0)
+            queue = funcs
+        else
+            queue = queue.concat(funcs)
+    }
+
+    function dequeue () {
+        if (queue.length > 0) queue.shift()()
     }
 }

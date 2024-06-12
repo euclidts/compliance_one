@@ -57,7 +57,6 @@ Drawer {
                                 onExceptionAction(qsTr("Modification du mot de passe"),
                                                   qsTr("Êtes-vous sûr de vouloir changer votre mot de passe ?"),
                                                   () => {
-                                                      busyDialog.open()
                                                       bridge.updatePwd(newPwd.text)
                                                       settingsDrawer.close()
                                                       newPwd.text = ""

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstdint>
 #include <string>
 
 struct exchange
@@ -9,9 +10,15 @@ struct exchange
 
     struct id
     {
+        static consteval auto c_name() { return "id"; }
+        uint32_t value;
+    } id;
+
+    struct code
+    {
         static consteval auto c_name() { return "code"; }
         std::string value;
-    } id;
+    } code;
 
     struct description
     {

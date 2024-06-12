@@ -100,43 +100,15 @@ Page {
         }
     }
 
-    footer: RowLayout {
-
-        RoundButton {
-            Layout.margins: 12
-            icon.source: "qrc:/icons/floppy-disk.svg"
-            ToolTip.visible: hovered
-            ToolTip.text: qsTr("Save")
-            onClicked: Qt.callLater(urrent_vessel.save())
-            highlighted: true
-            enabled: current_vessel.flagged_for_update
-        }
-
-        Item { Layout.fillWidth: true }
-
-        RoundButton {
-            Layout.margins: 12
-            icon.source: "qrc:/icons/trash-alt.svg"
-            ToolTip.visible: hovered
-            ToolTip.text: qsTr("Delete")
-            Layout.alignment: Qt.AlignRight
-            onClicked: Qt.callLater(onExceptionAction(ToolTip.text,
-                                                      qsTr("The selected vessel will be deleted"),
-                                                      () => {
-                                                          onLoaded = () => {
-                                                              onLoaded = () => {}
-                                                              rootStack.currentIndex = 1
-                                                          }
-                                                          vesselPage.current_vessel.remove()
-                                                      },
-                                                      true))
-        }
-    }
-
-    Connections {
-        target: current_vessel
-        function onLoadingChanged() {
-            current_vessel.loading ? loading = true : loading = false
-        }
+    footer: Utils.QueuedSaveRemove {
+        enableSave: current_vessel.flagged_for_update
+        saveSequence: [ current_vessel.save ]
+        deleteSequence: [
+            vesselPage.current_vessel.remove_queued,
+            () => {
+                vesselListModel.clear()
+                rootStack.currentIndex = 1
+            }
+        ]
     }
 }

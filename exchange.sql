@@ -1,4 +1,5 @@
-INSERT INTO exchange values
+INSERT INTO exchange (code, description)
+values
 ("ASE", "American Stock Exchange"),
 ("NYS", "New York Stock Exchange"),
 ("BOS", "Boston Stock Exchange"),
