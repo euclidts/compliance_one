@@ -38,7 +38,10 @@ Page {
         Utils.FlickableItem {
             ColumnLayout {
                 width: parent.width
-                spacing: 12
+                spacing: 12                
+                enabled: !current_individual.loading &&
+                         !current_contact.loading &&
+                         !current_address.loading
 
                 Choosers.ContatChooser {
                     familyNameOf: current_contact.family_name
@@ -229,6 +232,9 @@ Page {
     }
 
     footer: Utils.QueuedSaveRemove {
+        busy: current_individual.loading ||
+              current_contact.loading ||
+              current_address.loading
         enableSave: current_contact.flagged_for_update ||
                     current_address.flagged_for_update ||
                     current_individual.flagged_for_update
@@ -243,9 +249,9 @@ Page {
             current_individual.save
         ]
         deleteSequence: [
-            individualPage.current_individual.remove_queued,
-            individualPage.current_contact.remove_queued,
-            individualPage.current_address.remove_queued,
+            current_individual.remove_queued,
+            current_contact.remove_queued,
+            current_address.remove_queued,
             () => {
                 individual_viewListModel.clear()
                 rootStack.currentIndex = 1

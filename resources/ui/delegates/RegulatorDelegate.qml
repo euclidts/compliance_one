@@ -56,9 +56,7 @@ ItemDelegate {
 
         Item { visible: regionCheck.checked }
 
-        Choosers.JuisdicionChooser {
-            parentModel: root.model
-        }
+        Choosers.JurisdicionChooser { parentModel: root.model }
 
         Utils.FilterSaveRemove {
             model: root.model

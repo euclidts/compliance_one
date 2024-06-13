@@ -5,6 +5,7 @@ import QtQuick.Controls.Material
 
 import "../utils" as Utils
 import "../choosers" as Choosers
+import "../dialogs" as Dialogs
 
 ItemDelegate {
     id: root

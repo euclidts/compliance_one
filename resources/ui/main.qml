@@ -45,7 +45,7 @@ ApplicationWindow {
     property var regulatorListModel: QregulatorListModel{}
     property var jurisdictionListModel: QjurisdictionListModel{}
 
-    Dialogs.BusyDialog { id: busyDialog }
+    Dialogs.BusyPopup { id: busyPopup }
     Dialogs.ExceptionDialog { id: exceptionDialog }
     Dialogs.LogInDialog { id: loginDialog }
     Component.onCompleted: loginDialog.open()
@@ -54,9 +54,9 @@ ApplicationWindow {
         target: bridge
         function onLoadingChanged() {
             if (bridge.loading)
-                busyDialog.open()
+                busyPopup.open()
             else
-                busyDialog.close()
+                busyPopup.close()
         }
     }
 
@@ -92,7 +92,6 @@ ApplicationWindow {
     }
 
     function onException (prefix: string, error: string) {
-        busyDialog.close()
         exceptionDialog.title = prefix
         exceptionDialog.text = error
         queue.length = 0

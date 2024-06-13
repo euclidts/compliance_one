@@ -48,7 +48,7 @@ ColumnLayout {
             Button {
                 flat: true
                 visible: combo.currentValue !== model[valueRole]
-                icon.source: "qrc:/icons/trash-alt.svg"
+                icon.source: "qrc:/icons/times-circle.svg"
                 x: parent.width - width - padding
                 y: parent.topPadding + (parent.availableHeight - height) / 2
                 onClicked: onExceptionAction(ToolTip.text,

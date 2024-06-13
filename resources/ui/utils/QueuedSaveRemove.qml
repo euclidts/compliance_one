@@ -7,6 +7,7 @@ RowLayout {
     required property list<var> saveSequence
     required property list<var> deleteSequence
     property alias enableSave: saveBtn.enabled
+    property alias busy: busyIndicator.visible
 
     RoundButton {
         id: saveBtn
@@ -14,11 +15,17 @@ RowLayout {
         icon.source: "qrc:/icons/floppy-disk.svg"
         ToolTip.visible: hovered
         ToolTip.text: qsTr("Save")
+        highlighted: true
+        visible: !busyIndicator.visible
         onClicked: {
             enqueue(saveSequence)
             dequeue()
         }
-        highlighted: true
+    }
+
+    BusyIndicator {
+        id: busyIndicator
+        Layout.fillWidth: true
     }
 
     RoundButton {
@@ -27,6 +34,7 @@ RowLayout {
         ToolTip.visible: hovered
         ToolTip.text: qsTr("Delete")
         Layout.alignment: Qt.AlignRight
+        visible: !busyIndicator.visible
         onClicked: onExceptionAction(ToolTip.text,
                                      qsTr("The item will be deleted"),
                                      () => {

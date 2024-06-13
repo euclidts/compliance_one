@@ -12,13 +12,13 @@ RowLayout {
         icon.source: "qrc:/icons/floppy-disk.svg"
         ToolTip.visible: hovered
         ToolTip.text: qsTr("Save")
+        enabled: model.flagged_for_update
+        visible: !model.loading
+        highlighted: true
         onClicked: listModel.save(
                        listView.view.model.parent_row(
                            model.index)
                        )
-        highlighted: true
-        enabled: model.flagged_for_update
-        visible: !model.loading
     }
 
     Item {

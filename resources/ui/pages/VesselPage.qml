@@ -34,6 +34,7 @@ Page {
             ColumnLayout {
                 width: parent.width
                 spacing: 12
+                enabled: !current_vessel.loading
 
                 Utils.BackgroundRect {
                     GridLayout {
@@ -101,6 +102,7 @@ Page {
     }
 
     footer: Utils.QueuedSaveRemove {
+        busy: current_vessel.loading
         enableSave: current_vessel.flagged_for_update
         saveSequence: [ current_vessel.save ]
         deleteSequence: [

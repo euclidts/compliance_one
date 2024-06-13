@@ -39,6 +39,9 @@ Page {
             ColumnLayout {
                 width: parent.width
                 spacing: 12
+                enabled: !current_contact.loading &&
+                         !current_address.loading &&
+                         !current_company.loading
 
                 Utils.BackgroundRect {
                     GridLayout {
@@ -294,6 +297,9 @@ Page {
     }
 
     footer: Utils.QueuedSaveRemove {
+        busy: current_contact.loading ||
+              current_address.loading ||
+              current_company.loading
         enableSave: current_contact.flagged_for_update ||
                     current_address.flagged_for_update ||
                     current_company.flagged_for_update

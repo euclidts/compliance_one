@@ -38,7 +38,7 @@
         <file>ui/delegates/ProductDelegate.qml</file>
         <file>ui/delegates/RegulatorDelegate.qml</file>
         <file>ui/delegates/VesselDelegate.qml</file>
-        <file>ui/dialogs/BusyDialog.qml</file>
+        <file>ui/dialogs/BusyPopup.qml</file>
         <file>ui/dialogs/DateDialog.qml</file>
         <file>ui/dialogs/ExceptionDialog.qml</file>
         <file>ui/dialogs/LogInDialog.qml</file>
@@ -59,7 +59,7 @@
         <file>ui/utils/PwdField.qml</file>
         <file>ui/utils/SearchBar.qml</file>
         <file>ui/utils/SettingsDrawer.qml</file>
-        <file>ui/choosers/JuisdicionChooser.qml</file>
+        <file>ui/choosers/JurisdicionChooser.qml</file>
         <file>ui/utils/QueuedSaveRemove.qml</file>
     </qresource>
 </RCC>

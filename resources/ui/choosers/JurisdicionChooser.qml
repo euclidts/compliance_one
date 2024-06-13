@@ -111,7 +111,7 @@ ListView {
             Button {
                 flat: true
                 Layout.alignment: Qt.AlignRight
-                icon.source: "qrc:/icons/trash-alt.svg"
+                icon.source: "qrc:/icons/times-circle.svg"
                 onClicked: onExceptionAction(ToolTip.text,
                                              qsTr("The selected jurisdiction will be deleted"),
                                              () => {

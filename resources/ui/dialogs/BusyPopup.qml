@@ -4,7 +4,7 @@ import QtQuick.Controls
 import QtQuick.Controls.Material
 import QtQuick.Controls.Material.impl
 
-Dialog {
+Popup {
     modal: true
     closePolicy: Popup.NoAutoClose
     background.opacity: 0
