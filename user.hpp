@@ -8,6 +8,8 @@ struct user
     static consteval auto table() { return "user"; }
     static consteval auto primary_key() { return &user::id; }
 
+    bool permission() { return false; }
+
     struct id
     {
         static consteval auto c_name() { return "id"; }
@@ -24,7 +26,7 @@ struct user
     {
         static consteval auto c_name() { return "password"; }
         std::string value;
-        // static consteval auto permission() { enum p { write }; return p; }
+        enum { writeonly };
     } password;
     
     enum clearances

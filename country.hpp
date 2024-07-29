@@ -2,18 +2,25 @@
 
 #include <chrono>
 
+#include "user.hpp"
 #include "region.hpp"
 
 struct country
 {
-    // static consteval int permission(const user* u)
-    // {
-    //     if (u) return user::read;
-    //     else return user::read + user::write;
-    // }
-
     static consteval auto table() { return "country"; }
     static consteval auto primary_key() { return &country::id; }
+
+    static auto permission(const user* u)
+    {
+        enum { none, readonly, all };
+
+        if (!u)
+            return none;
+        else if (u->clearance.value > user::clearances::manager)
+            return all;
+        else
+            return readonly;
+    }
 
     struct id
     {

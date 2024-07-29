@@ -1,9 +1,9 @@
-cmake_minimum_required(VERSION 3.13 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.30 FATAL_ERROR)
 
 project(compliance_one)
 
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED 20)
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 option(CRUDPP_PATH "Path to the crudpp repository" ${CMAKE_CURRENT_SOURCE_DIR})
 
@@ -12,8 +12,8 @@ add_subdirectory(${CRUDPP_PATH} ${CMAKE_BINARY_DIR}/crudpp)
 
 make_all(
    INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/compliance_one.hpp
-   USER_CLASS user
    CLASSES
+       user
        region
        country
        product_group

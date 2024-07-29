@@ -31,6 +31,7 @@ ColumnLayout {
         Layout.minimumWidth: 160
         Layout.fillWidth: true
         onActivated: onEdit(currentValue)
+        onAccepted: onEdit(currentValue)
         Component.onCompleted: currentIndex = indexOfValue(enumOf)
     }
 }
