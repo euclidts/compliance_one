@@ -34,11 +34,11 @@ ColumnLayout {
             onClicked: openCal()
         }
 
-        IconImage {
+        Image {
             source: "qrc:/icons/calendar-days.svg"
             x: parent.width - width - 12
             y: 12
-            color: Material.accent
+            // color: Material.accent
             height: parent.height - 24
         }
     }
